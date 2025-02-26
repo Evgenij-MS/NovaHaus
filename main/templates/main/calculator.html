@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>Онлайн-калькулятор</h1>
+    <form id="calculator-form">
+        <label for="area">Площадь фасада (м²):</label>
+        <input type="number" id="area" name="area" required>
+        <button type="button" onclick="calculateCost()">Рассчитать</button>
+    </form>
+    <p id="result"></p>
+</div>
+
+<script>
+    function calculateCost() {
+        const area = document.getElementById('area').value;
+        const costPerSquareMeter = 40; // € за м²
+        const totalCost = area * costPerSquareMeter;
+        document.getElementById('result').innerText = `Примерная стоимость: €${totalCost}`;
+    }
+</script>
+{% endblock %}

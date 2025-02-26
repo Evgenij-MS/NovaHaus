@@ -1,0 +1,1 @@
+web: gunicorn NovaHaus.wsgi --log-file -

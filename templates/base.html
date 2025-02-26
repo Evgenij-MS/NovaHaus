@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NovaHaus – Ваш надежный партнер в строительстве и ремонте{% endblock %}</title>
+    <meta name="description" content="{% block description %}NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы и многое другое.{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}ремонт, строительство, утепление, Кельн, NovaHaus{% endblock %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <!-- ВСТАВЬТЕ JSON-LD КОД ЗДЕСЬ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "NovaHaus",
+      "image": "{% static 'images/logo.png' %}",
+      "description": "Строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Musterstraße 123",
+        "addressLocality": "Кельн",
+        "postalCode": "50667",
+        "addressCountry": "Германия"
+      },
+      "telephone": "+49 221 1234567",
+      "url": "https://www.novahaus.de"
+    }
+    </script>
+    <!-- КОНЕЦ JSON-LD КОДА -->
+
+</head>
+<body>
+    <header>
+        <h1>NovaHaus</h1>
+        <nav>
+            <a href="{% url 'home' %}">Главная</a>
+            <a href="{% url 'services' %}">Услуги</a>
+            <a href="{% url 'portfolio' %}">Портфолио</a>
+            <a href="{% url 'contact' %}">Контакты</a>
+            <a href="{% url 'calculator' %}">Калькулятор</a>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Содержимое страницы будет здесь -->
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 NovaHaus. Все права защищены.</p>
+    </footer>
+</body>
+</html>

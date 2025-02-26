@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Портфолио – NovaHaus{% endblock %}
+{% block description %}Примеры наших работ. Ремонт квартир, утепление домов, фасадные работы.{% endblock %}
+{% block keywords %}портфолио, ремонт, утепление, фасадные работы, Кельн, NovaHaus{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Наше портфолио</h1>
+    <div class="portfolio-gallery">
+        <div class="gallery-item">
+            <img src="{% static 'images/portfolio/project1.jpg' %}" alt="Ремонт квартиры в Кельне">
+            <p>Ремонт квартиры в Кельне</p>
+        </div>
+        <div class="gallery-item">
+            <img src="{% static 'images/portfolio/project2.jpg' %}" alt="Утепление фасада">
+            <p>Утепление фасада</p>
+        </div>
+        <div class="gallery-item">
+            <img src="{% static 'images/portfolio/project3.jpg' %}" alt="Фасадные работы">
+            <p>Фасадные работы</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

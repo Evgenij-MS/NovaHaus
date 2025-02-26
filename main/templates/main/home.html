@@ -1,0 +1,137 @@
+ {% load static %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaHaus – Ваш надежный партнер в строительстве и ремонте</title>
+    <meta name="description" content="NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы и многое другое.">
+    <meta name="keywords" content="ремонт, строительство, утепление, Кельн, NovaHaus">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <!-- Логотип и текстовая часть -->
+        <div class="header-content">
+            <div class="logo">
+                <img src="{% static 'images/logo.png' %}" alt="NovaHaus Logo">
+            </div>
+            <div class="text-section">
+                <div class="header-text">
+                    <h1>NovaHaus</h1>
+                    <p>Ваш надежный партнер в строительстве и ремонте</p>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="/">Главная</a></li>
+                        <li><a href="/services/">Услуги</a></li>
+                        <li><a href="/portfolio/">Портфолио</a></li>
+                        <li><a href="/about/">О нас</a></li>
+                        <li><a href="/reviews/">Отзывы</a></li>
+                        <li><a href="/blog/">Блог</a></li>
+                        <li><a href="/contact/">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Переключатель языков -->
+        <div class="language-switcher">
+            <select onchange="changeLanguage(this)">
+                <option value="de">DE</option>
+                <option value="en">EN</option>
+                <option value="ru">RU</option>
+            </select>
+        </div>
+    </header>
+
+    <main>
+        <!-- Слайдер -->
+        <section class="slider">
+            <div class="slides">
+                <img src="{% static 'images/slider/slide1.jpg' %}" alt="Современный ремонт квартир">
+                <img src="{% static 'images/slider/slide2.jpg' %}" alt="Утепление фасадов">
+                <img src="{% static 'images/slider/slide3.jpg' %}" alt="Фасадные работы">
+            </div>
+        </section>
+
+        <!-- Услуги -->
+        <section class="services">
+            <h2>Наши услуги</h2>
+            <div class="service-cards">
+                <div class="card">
+                    <h3>Ремонт квартир</h3>
+                    <p>Качественный ремонт под ключ с использованием современных материалов.</p>
+                    <a href="/services/" class="btn">Подробнее</a>
+                </div>
+                <div class="card">
+                    <h3>Утепление домов</h3>
+                    <p>Энергоэффективные решения для вашего комфорта и экономии.</p>
+                    <a href="/services/" class="btn">Подробнее</a>
+                </div>
+                <div class="card">
+                    <h3>Фасадные работы</h3>
+                    <p>Профессиональная отделка фасадов для эстетики и долговечности.</p>
+                    <a href="/services/" class="btn">Подробнее</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Отзывы -->
+        <section class="reviews">
+            <h2>Отзывы клиентов</h2>
+            <div class="review-cards">
+                <div class="card">
+                    <p>"Отличная работа, спасибо команде NovaHaus! Все сделали быстро и качественно."</p>
+                    <span>– Иван Иванов</span>
+                </div>
+                <div class="card">
+                    <p>"Очень доволен утеплением дома. Теперь зимой тепло, а счета за отопление снизились."</p>
+                    <span>– Мария Петрова</span>
+                </div>
+                <div class="card">
+                    <p>"Профессиональный подход и внимание к деталям. Рекомендую!"</p>
+                    <span>– Алексей Смирнов</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Призыв к действию -->
+        <section class="cta">
+            <h2>Готовы начать проект?</h2>
+            <p>Свяжитесь с нами для бесплатной консультации и расчета стоимости.</p>
+            <a href="/contact/" class="btn">Заказать консультацию</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 NovaHaus. Все права защищены.</p>
+    </footer>
+
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script>
+        // Автоматическая прокрутка слайдера
+        let currentSlide = 0;
+        const slides = document.querySelector('.slides');
+        const totalSlides = slides.children.length;
+
+        function showSlide(index) {
+            const offset = -index * 100;
+            slides.style.transform = `translateX(${offset}%)`;
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
+
+        setInterval(nextSlide, 5000);
+
+        // Переключение языков
+        function changeLanguage(select) {
+            const lang = select.value;
+            window.location.href = `/?lang=${lang}`;
+        }
+    </script>
+</body>
+</html>

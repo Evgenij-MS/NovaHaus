@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h2>Наши услуги</h2>
+    <div class="service-cards">
+        <!-- Ремонт квартир -->
+        <div class="card">
+            <div class="icon">
+                <img src="{% static 'images/icons/repair.png' %}" alt="Ремонт квартир">
+            </div>
+            <h3>Ремонт квартир</h3>
+            <p>Качественный ремонт под ключ с использованием современных материалов. Мы превратим вашу квартиру в уютное и стильное пространство.</p>
+            <a href="/services/repair/" class="btn">Подробнее</a>
+        </div>
+
+        <!-- Утепление домов -->
+        <div class="card">
+            <div class="icon">
+                <img src="{% static 'images/icons/insulation.png' %}" alt="Утепление домов">
+            </div>
+            <h3>Утепление домов</h3>
+            <p>Энергоэффективные решения для вашего комфорта и экономии. Утеплим фасады, кровлю и фундамент, чтобы сохранить тепло в доме.</p>
+            <a href="/services/insulation/" class="btn">Подробнее</a>
+        </div>
+
+        <!-- Демонтажные работы -->
+        <div class="card">
+            <div class="icon">
+                <img src="{% static 'images/icons/demolition.png' %}" alt="Демонтажные работы">
+            </div>
+            <h3>Демонтажные работы</h3>
+            <p>Профессиональный демонтаж стен, перегородок и конструкций. Быстро, аккуратно и с соблюдением всех норм безопасности.</p>
+            <a href="/services/demolition/" class="btn">Подробнее</a>
+        </div>
+
+        <!-- Уборка после ремонта -->
+        <div class="card">
+            <div class="icon">
+                <img src="{% static 'images/icons/cleaning.png' %}" alt="Уборка после ремонта">
+            </div>
+            <h3>Уборка после ремонта</h3>
+            <p>Комплексная уборка после завершения работ. Мы уберем строительный мусор, пыль и грязь, чтобы вы могли наслаждаться чистотой.</p>
+            <a href="/services/cleaning/" class="btn">Подробнее</a>
+        </div>
+
+        <!-- Закупка и доставка материалов -->
+        <div class="card">
+            <div class="icon">
+                <img src="{% static 'images/icons/delivery.png' %}" alt="Закупка и доставка материалов">
+            </div>
+            <h3>Закупка и доставка материалов</h3>
+            <p>Поможем выбрать и доставить качественные строительные материалы. Экономьте время и деньги с нашей помощью.</p>
+            <a href="/services/delivery/" class="btn">Подробнее</a>
+        </div>
+
+        <!-- Подъем материалов на этаж -->
+        <div class="card">
+            <div class="icon">
+                <img src="{% static 'images/icons/lifting.png' %}" alt="Подъем материалов на этаж">
+            </div>
+            <h3>Подъем материалов на этаж</h3>
+            <p>Организуем подъем строительных материалов на любой этаж. Быстро, безопасно и без лишних хлопот для вас.</p>
+            <a href="/services/lifting/" class="btn">Подробнее</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
