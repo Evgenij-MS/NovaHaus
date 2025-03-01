@@ -544,3 +544,26 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 Настройте DNS и SSL на Heroku.
 
 Проверьте работу домена и настройте SEO.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+для ГИТБАШ----
+source novahaus_env/Scripts/activate
+
+Откройте PowerShell с правами администратора:
+Нажмите Windows + X, выберите Windows PowerShell (Admin).
+Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+нажав Y и затем Enter.
+cd C:\Users\Tel-ran.de\PycharmProject\NovaHaus
+.\novahaus_env\Scripts\Activate
