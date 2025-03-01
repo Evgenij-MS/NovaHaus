@@ -1,5 +1,5 @@
 Django==4.2
 Pillow==9.5.0
 whitenoise==6.6.0
-gunicorn
+gunicorn==21.2.0  # Исправленная версия
 dj-database-url==2.1.0
