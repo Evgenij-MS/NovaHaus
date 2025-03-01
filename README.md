@@ -558,6 +558,8 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
+
+
 для ГИТБАШ----
 source novahaus_env/Scripts/activate
 
@@ -567,3 +569,10 @@ Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
 нажав Y и затем Enter.
 cd C:\Users\Tel-ran.de\PycharmProject\NovaHaus
 .\novahaus_env\Scripts\Activate
+ 
+надо включиь позже сбор статистических данных  --   3. Отключите сбор статических файлов (временно)
+Если сбор статических файлов всё ещё вызывает проблемы, временно отключите его:
+
+bash
+Copy
+heroku config:set DISABLE_COLLECTSTATIC=1
