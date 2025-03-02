@@ -52,5 +52,17 @@ function updateIndicators() {
     });
 }
 
+// Переключение на предыдущий слайд
+document.querySelector('.prev').addEventListener('click', () => {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    showSlide(currentSlide);
+});
+
+// Переключение на следующий слайд
+document.querySelector('.next').addEventListener('click', () => {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    showSlide(currentSlide);
+});
+
 // Обновление индикаторов при смене слайда
 slides.addEventListener('transitionend', updateIndicators);

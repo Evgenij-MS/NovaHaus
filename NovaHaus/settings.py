@@ -1,4 +1,5 @@
 import os
+from dotenv import load_dotenv
 from pathlib import Path
 import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
@@ -13,7 +14,8 @@ def get_env_variable(var_name):
         raise ImproperlyConfigured(f"Set the {var_name} environment variable")
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = get_env_variable('SECRET_KEY')
+load_dotenv()
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
@@ -63,9 +65,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'NovaHaus.wsgi.application'
 
-# Database
+# Настройка базы данных
 DATABASES = {
-    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+
 }
 
 # Password validation
@@ -116,3 +119,12 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+print("SECRET_KEY:", os.getenv('SECRET_KEY'))
+print("DEBUG:", os.getenv('DEBUG'))
+print("DATABASE_URL:", os.getenv('DATABASE_URL'))
+print("DB_NAME:", os.getenv('DB_NAME'))
+print("DB_USER:", os.getenv('DB_USER'))
+print("DB_PASSWORD:", os.getenv('DB_PASSWORD'))
+print("DB_HOST:", os.getenv('DB_HOST'))
+print("DB_PORT:", os.getenv('DB_PORT'))

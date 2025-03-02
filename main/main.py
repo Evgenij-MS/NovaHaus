@@ -1,14 +1,59 @@
-import openai
+import requests
+import os
+import logging
+from dotenv import load_dotenv
+from http import HTTPStatus
+from typing import Optional
+from pydantic import BaseSettings, ValidationError
 
-# Установите ваш API ключ
-openai.api_key = 'ваш_api_ключ_здесь'
+load_dotenv()
 
-# Пример запроса к модели
-response = openai.Completion.create(
-  engine="text-davinci-003",  # или другая модель
-  prompt="Привет, как дела?",
-  max_tokens=50
-)
+class Settings(BaseSettings):
+    api_key: str
 
-# Вывод ответа
-print(response.choices[0].text.strip())
+    class Config:
+        env_file = ".env"
+
+try:
+    settings = Settings()
+except ValidationError as e:
+    raise ValueError(f"Configuration error: {e}")
+
+logging.basicConfig(level=logging.INFO)
+
+class DeepSeekClient:
+    def __init__(self):
+        self.api_key = settings.api_key
+        self.api_url = "https://api.deepseek.ai/v1/chat/completions"
+        self.headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "Content-Type": "application/json"
+        }
+        self.session = requests.Session()
+
+    def send_message(self, message: str, model: str = "deepseek-chat-v1", max_tokens: int = 50) -> Optional[str]:
+        data = {
+            "model": model,
+            "messages": [
+                {"role": "user", "content": message}
+            ],
+            "max_tokens": max_tokens,
+            "temperature": 0.7
+        }
+
+        try:
+            response = self.session.post(self.api_url, headers=self.headers, json=data, timeout=30)
+            response.raise_for_status()
+            return response.json()['choices'][0]['message']['content']
+        except requests.exceptions.RequestException as e:
+            logging.error(f"Request error: {e}")
+            return None
+
+def main():
+    client = DeepSeekClient()
+    response = client.send_message("Hello, how are you?")
+    if response:
+        logging.info(response)
+
+if __name__ == "__main__":
+    main()
