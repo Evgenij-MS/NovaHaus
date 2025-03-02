@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main',
+    'modeltranslation',
 ]
 
 MIDDLEWARE = [
@@ -82,6 +83,20 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+
+LANGUAGES = [
+    ('de', 'German'),
+    ('en', 'English'),
+    ('ru', 'Russian'),
+    ('sk', 'Slovak'),
+    ('tr', 'Turkish'),
+]
+
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'de'  # Язык по умолчанию
+MODELTRANSLATION_LANGUAGES = ('de', 'en', 'ru', 'sk', 'tr')  # Поддерживаемые языки
+
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'
