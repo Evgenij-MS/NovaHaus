@@ -52,6 +52,7 @@ pydantic==2.10.6
 pydantic_core==2.27.2
 Pygments==2.19.1
 pyproject_hooks==1.2.0
+python-dotenv==1.0.0
 python-pptx==1.0.2
 rcssmin==1.1.2
 rjsmin==1.2.2
