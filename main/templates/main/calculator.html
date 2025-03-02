@@ -9,11 +9,30 @@
 <div class="container">
     <h1>Онлайн-калькулятор</h1>
     <form id="calculator-form">
+        <!-- Выбор типа работ -->
         <div class="form-group">
-            <label for="area">Площадь фасада (м²):</label>
-            <input type="number" id="area" name="area" required>
+            <label for="work-type">Тип работ:</label>
+            <select id="work-type" name="work-type" required onchange="updateAreaDescription()">
+                <option value="apartment">Ремонт квартир</option>
+                <option value="house">Ремонт домов</option>
+                <option value="office">Ремонт офисов</option>
+                <option value="warehouse">Ремонт складов</option>
+                <option value="facade">Фасадные работы</option>
+                <option value="insulation">Утепление домов</option>
+                <option value="demolition">Демонтажные работы</option>
+                <option value="cleaning">Уборка после ремонта</option>
+            </select>
         </div>
+
+        <!-- Площадь -->
         <div class="form-group">
+            <label for="area">Площадь (м²):</label>
+            <input type="number" id="area" name="area" required>
+            <p id="area-description" class="hint">Введите общую площадь стен, потолков и пола.</p>
+        </div>
+
+        <!-- Тип материала (если применимо) -->
+        <div class="form-group" id="material-group">
             <label for="material">Тип материала:</label>
             <select id="material" name="material">
                 <option value="economy">Эконом</option>
@@ -21,6 +40,17 @@
                 <option value="premium">Премиум</option>
             </select>
         </div>
+
+        <!-- Включение материалов -->
+        <div class="form-group">
+            <label for="include-materials">Включить материалы:</label>
+            <select id="include-materials" name="include-materials">
+                <option value="yes">Да</option>
+                <option value="no">Нет</option>
+            </select>
+        </div>
+
+        <!-- Срочность -->
         <div class="form-group">
             <label for="urgency">Срочность:</label>
             <select id="urgency" name="urgency">
@@ -28,36 +58,94 @@
                 <option value="fast">Срочная</option>
             </select>
         </div>
+
+        <!-- Кнопка расчета -->
         <button type="button" onclick="calculateCost()" class="btn">Рассчитать</button>
     </form>
+
+    <!-- Результат -->
     <p id="result"></p>
 </div>
 
 <script>
+    // Средние цены на услуги в Кельне (€ за м²)
+    const prices = {
+        apartment: { economy: 70, standard: 100, premium: 130 }, // Ремонт квартир
+        house: { economy: 80, standard: 110, premium: 140 },     // Ремонт домов
+        office: { economy: 90, standard: 120, premium: 150 },    // Ремонт офисов
+        warehouse: { economy: 50, standard: 70, premium: 90 },   // Ремонт складов
+        facade: { economy: 40, standard: 50, premium: 60 },      // Фасадные работы
+        insulation: { economy: 45, standard: 55, premium: 65 },  // Утепление домов
+        demolition: 25,                                          // Демонтажные работы (фиксированная цена за м²)
+        cleaning: 8                                              // Уборка после ремонта (фиксированная цена за м²)
+    };
+
+    // Коэффициенты для стоимости без материалов
+    const materialCostRatio = 0.6; // 60% от общей стоимости (40% — материалы, 60% — работа)
+
+    // Описания для площади
+    const areaDescriptions = {
+        apartment: "Введите общую площадь стен, потолков и пола.",
+        house: "Введите общую площадь стен, потолков и пола.",
+        office: "Введите общую площадь стен, потолков и пола.",
+        warehouse: "Введите общую площадь стен, потолков и пола.",
+        facade: "Введите площадь фасада.",
+        insulation: "Введите площадь утепляемых поверхностей (стены, кровля, фундамент).",
+        demolition: "Введите площадь демонтируемых конструкций.",
+        cleaning: "Введите общую площадь уборки."
+    };
+
+    // Обновление описания площади при выборе типа работ
+    function updateAreaDescription() {
+        const workType = document.getElementById('work-type').value;
+        document.getElementById('area-description').innerText = areaDescriptions[workType];
+    }
+
+    // Расчет стоимости
     function calculateCost() {
-        const area = document.getElementById('area').value;
+        const workType = document.getElementById('work-type').value;
+        const area = parseFloat(document.getElementById('area').value);
         const material = document.getElementById('material').value;
+        const includeMaterials = document.getElementById('include-materials').value;
         const urgency = document.getElementById('urgency').value;
 
         let costPerSquareMeter;
-        switch (material) {
-            case 'economy':
-                costPerSquareMeter = 30;
-                break;
-            case 'standard':
-                costPerSquareMeter = 40;
-                break;
-            case 'premium':
-                costPerSquareMeter = 50;
-                break;
+
+        if (workType === 'demolition' || workType === 'cleaning') {
+            // Для демонтажа и уборки цена фиксированная
+            costPerSquareMeter = prices[workType];
+        } else {
+            // Для остальных работ учитываем тип материала
+            costPerSquareMeter = prices[workType][material];
         }
 
+        // Учет срочности (+20% за срочные работы)
         if (urgency === 'fast') {
-            costPerSquareMeter *= 1.2; // +20% за срочность
+            costPerSquareMeter *= 1.2;
+        }
+
+        // Учет стоимости материалов
+        if (includeMaterials === 'no') {
+            costPerSquareMeter *= materialCostRatio; // Только работа (60% от общей стоимости)
         }
 
         const totalCost = area * costPerSquareMeter;
         document.getElementById('result').innerText = `Примерная стоимость: €${totalCost.toFixed(2)}`;
     }
+
+    // Скрываем выбор материала для демонтажа и уборки
+    document.getElementById('work-type').addEventListener('change', function() {
+        const workType = this.value;
+        const materialGroup = document.getElementById('material-group');
+
+        if (workType === 'demolition' || workType === 'cleaning') {
+            materialGroup.style.display = 'none';
+        } else {
+            materialGroup.style.display = 'block';
+        }
+    });
+
+    // Инициализация при загрузке страницы
+    updateAreaDescription();
 </script>
 {% endblock %}
