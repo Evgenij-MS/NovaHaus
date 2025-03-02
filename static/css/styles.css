@@ -1,3 +1,152 @@
+
+
+/* Общие стили для контейнеров (калькулятор и прайс-лист) */
+.calculator-container,
+.price-list-container {
+    max-width: 600px;
+    margin: 50px auto; /* Центрируем и добавляем отступ сверху */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Заголовок калькулятора и прайс-листа */
+.calculator-container h1,
+.price-list-container h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #2c3e50;
+}
+
+/* Группы формы (для калькулятора) */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.form-group .hint {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* Кнопка расчета (для калькулятора) */
+.btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Результат расчета (для калькулятора) */
+.result {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #2c3e50;
+}
+
+/* Кнопка прайс-листа */
+.price-list-button {
+    background-color: #28a745; /* Зеленый цвет */
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.price-list-button:hover {
+    background-color: #218838; /* Темнее при наведении */
+}
+
+/* Модальное окно для прайс-листа */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto; /* Прокрутка для всего модального окна */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto; /* Центрируем и добавляем отступ сверху */
+    padding: 20px;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 800px;
+    position: relative;
+    max-height: 80vh; /* Ограничиваем высоту контента */
+    overflow-y: auto; /* Прокрутка внутри контента */
+}
+
+/* Кнопка закрытия модального окна */
+.close {
+    position: absolute;
+    right: 20px;
+    top: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: #ff0000;
+}
+
+/* Секции прайс-листа */
+.price-list-section {
+    margin-bottom: 20px;
+}
+
+.price-list-section h3 {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.price-list-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.price-list-section li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
 /* Модальное окно */
 .modal {
     display: none;
