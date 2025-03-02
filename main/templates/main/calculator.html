@@ -1,13 +1,34 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}Онлайн-калькулятор – NovaHaus{% endblock %}
+{% block description %}Рассчитайте стоимость ремонта или утепления с помощью нашего онлайн-калькулятора.{% endblock %}
+{% block keywords %}калькулятор, стоимость ремонта, утепление, NovaHaus{% endblock %}
+
 {% block content %}
 <div class="container">
     <h1>Онлайн-калькулятор</h1>
     <form id="calculator-form">
-        <label for="area">Площадь фасада (м²):</label>
-        <input type="number" id="area" name="area" required>
-        <button type="button" onclick="calculateCost()">Рассчитать</button>
+        <div class="form-group">
+            <label for="area">Площадь фасада (м²):</label>
+            <input type="number" id="area" name="area" required>
+        </div>
+        <div class="form-group">
+            <label for="material">Тип материала:</label>
+            <select id="material" name="material">
+                <option value="economy">Эконом</option>
+                <option value="standard">Стандарт</option>
+                <option value="premium">Премиум</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="urgency">Срочность:</label>
+            <select id="urgency" name="urgency">
+                <option value="normal">Обычная</option>
+                <option value="fast">Срочная</option>
+            </select>
+        </div>
+        <button type="button" onclick="calculateCost()" class="btn">Рассчитать</button>
     </form>
     <p id="result"></p>
 </div>
@@ -15,9 +36,28 @@
 <script>
     function calculateCost() {
         const area = document.getElementById('area').value;
-        const costPerSquareMeter = 40; // € за м²
+        const material = document.getElementById('material').value;
+        const urgency = document.getElementById('urgency').value;
+
+        let costPerSquareMeter;
+        switch (material) {
+            case 'economy':
+                costPerSquareMeter = 30;
+                break;
+            case 'standard':
+                costPerSquareMeter = 40;
+                break;
+            case 'premium':
+                costPerSquareMeter = 50;
+                break;
+        }
+
+        if (urgency === 'fast') {
+            costPerSquareMeter *= 1.2; // +20% за срочность
+        }
+
         const totalCost = area * costPerSquareMeter;
-        document.getElementById('result').innerText = `Примерная стоимость: €${totalCost}`;
+        document.getElementById('result').innerText = `Примерная стоимость: €${totalCost.toFixed(2)}`;
     }
 </script>
 {% endblock %}

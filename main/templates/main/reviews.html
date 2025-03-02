@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Отзывы – NovaHaus{% endblock %}
+{% block description %}Читайте отзывы наших клиентов о качестве наших услуг.{% endblock %}
+{% block keywords %}отзывы, клиенты, NovaHaus, ремонт, утепление{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Отзывы клиентов</h1>
+    <section class="reviews-list">
+        <div class="review">
+            <p>"Отличная работа, спасибо команде NovaHaus! Все сделали быстро и качественно."</p>
+            <span>– Иван Иванов</span>
+        </div>
+        <div class="review">
+            <p>"Очень доволен утеплением дома. Теперь зимой тепло, а счета за отопление снизились."</p>
+            <span>– Мария Петрова</span>
+        </div>
+        <div class="review">
+            <p>"Профессиональный подход и внимание к деталям. Рекомендую!"</p>
+            <span>– Алексей Смирнов</span>
+        </div>
+    </section>
+
+    <section class="add-review">
+        <h2>Оставьте свой отзыв</h2>
+        <form action="/submit-review/" method="post">
+            <div class="form-group">
+                <label for="review-name">Имя:</label>
+                <input type="text" id="review-name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="review-message">Сообщение:</label>
+                <textarea id="review-message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn">Отправить</button>
+        </form>
+    </section>
+</div>
+{% endblock %}

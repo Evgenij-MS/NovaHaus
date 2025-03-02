@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Блог – NovaHaus{% endblock %}
+{% block description %}Читайте наши статьи о строительстве, ремонте и энергоэффективных решениях.{% endblock %}
+{% block keywords %}блог, строительство, ремонт, энергоэффективность, NovaHaus{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Блог</h1>
+    <section class="blog-posts">
+        <article class="post">
+            <img src="{% static 'images/blog/post1.jpg' %}" alt="Современные тренды в ремонте">
+            <h2>Современные тренды в ремонте квартир</h2>
+            <p>В этой статье мы расскажем о последних трендах в дизайне интерьеров и ремонте квартир.</p>
+            <a href="/blog/post1/" class="btn">Читать далее</a>
+        </article>
+        <article class="post">
+            <img src="{% static 'images/blog/post2.jpg' %}" alt="Энергоэффективные решения">
+            <h2>Энергоэффективные решения для вашего дома</h2>
+            <p>Узнайте, как сделать ваш дом более энергоэффективным и сэкономить на отоплении.</p>
+            <a href="/blog/post2/" class="btn">Читать далее</a>
+        </article>
+        <article class="post">
+            <img src="{% static 'images/blog/post3.jpg' %}" alt="Утепление фасадов">
+            <h2>Как правильно утеплить фасад дома</h2>
+            <p>В этой статье мы расскажем о преимуществах утепления фасадов и как это сделать правильно.</p>
+            <a href="/blog/post3/" class="btn">Читать далее</a>
+        </article>
+    </section>
+</div>
+{% endblock %}

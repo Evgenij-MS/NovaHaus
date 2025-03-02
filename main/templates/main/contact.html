@@ -1,13 +1,44 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Контакты – NovaHaus{% endblock %}
+{% block description %}Свяжитесь с нами для консультации или расчета стоимости услуг.{% endblock %}
+{% block keywords %}контакты, связь, NovaHaus, Кельн{% endblock %}
 
 {% block content %}
 <div class="container">
     <h1>Контакты</h1>
-    <p>Свяжитесь с нами:</p>
-    <ul>
-        <li>Телефон: +49 123 456 789</li>
-        <li>Email: info@novahaus.de</li>
-        <li>Адрес: Кельн, Германия</li>
-    </ul>
+    <section class="contact-info">
+        <p>Свяжитесь с нами:</p>
+        <ul>
+            <li>Телефон: +49 123 456 789</li>
+            <li>Email: info@novahaus.de</li>
+            <li>Адрес: Кельн, Германия</li>
+        </ul>
+    </section>
+
+    <section class="contact-form">
+        <h2>Форма обратной связи</h2>
+        <form action="/submit-form/" method="post">
+            <div class="form-group">
+                <label for="name">Имя:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Сообщение:</label>
+                <textarea id="message" name="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn">Отправить</button>
+        </form>
+    </section>
+
+    <section class="map">
+        <h2>Мы на карте</h2>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10065.123456789!2d6.987654321!3d50.123456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTDCsDA3JzI0LjQiTiA2wrA1OScxNS4xIkU!5e0!3m2!1sde!2sde!4v1234567890123!5m2!1sde!2sde" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    </section>
 </div>
 {% endblock %}

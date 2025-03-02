@@ -346,3 +346,78 @@ footer p {
     font-size: 16px;
     color: #333;
 }
+
+
+.promo-banner {
+    background-color: #ffcc00; /* Яркий желтый */
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px; /* Отступ от следующего блока */
+}
+
+.promo-banner h2 {
+    color: #333; /* Темно-серый */
+    font-size: 24px;
+    margin: 0;
+}
+
+.promo-banner p {
+    color: #333;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.promo-banner a {
+    background-color: #333; /* Темно-серый */
+    color: #fff; /* Белый */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.promo-banner a:hover {
+    background-color: #555; /* Темнее при наведении */
+}
+
+/* Блок с акцией */
+.promo-banner {
+    background-color: #ffcc00; /* Яркий желтый */
+    padding: 20px 0;
+    text-align: center;
+    margin-bottom: 20px; /* Отступ от следующего блока */
+}
+
+.promo-banner h2 {
+    color: #333; /* Темно-серый */
+    font-size: 24px;
+    margin: 0;
+}
+
+.promo-banner p {
+    color: #333;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.promo-banner .btn {
+    background-color: #333; /* Темно-серый */
+    color: #fff; /* Белый */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.promo-banner .btn:hover {
+    background-color: #555; /* Темнее при наведении */
+}
+
+/* Контейнер для центрирования контента */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
