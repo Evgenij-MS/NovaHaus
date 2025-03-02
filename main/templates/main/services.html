@@ -9,12 +9,17 @@
 <div class="container">
     <h2>Наши услуги</h2>
 
-    <!-- Прайс-лист (синий контейнер) -->
-    <div class="price-list-container">
-        <button class="price-list-button" onclick="openPriceList()">Прайс-лист</button>
+    <!-- Прайс-лист и калькулятор (в одной строке) -->
+    <div class="tools-container">
+        <div class="price-list-container">
+            <button class="price-list-button" onclick="openPriceList()">Прайс-лист</button>
+        </div>
+        <div class="calculator-container">
+            <a href="/calculator/" class="calculator-button">Калькулятор</a>
+        </div>
     </div>
 
-    <!-- Услуги -->
+    <!-- Услуги (3 блока в линию) -->
     <div class="service-cards">
         <!-- Ремонт квартир -->
         <div class="card">
@@ -26,8 +31,55 @@
             <a href="/services/repair/" class="btn">Подробнее</a>
         </div>
 
-        <!-- Остальные услуги (аналогично) -->
-        ...
+        <!-- Ремонт домов -->
+        <div class="card">
+            <div class="icon">
+                <img src="{% static 'images/icons/house.png' %}" alt="Ремонт домов">
+            </div>
+            <h3>Ремонт домов</h3>
+            <p>Полный спектр услуг по ремонту частных домов. От косметического ремонта до полной реконструкции.</p>
+            <a href="/services/house/" class="btn">Подробнее</a>
+        </div>
+
+        <!-- Ремонт офисов -->
+        <div class="card">
+            <div class="icon">
+                <img src="{% static 'images/icons/office.png' %}" alt="Ремонт офисов">
+            </div>
+            <h3>Ремонт офисов</h3>
+            <p>Создаем комфортные и функциональные офисные пространства для вашего бизнеса.</p>
+            <a href="/services/office/" class="btn">Подробнее</a>
+        </div>
+
+        <!-- Ремонт складов -->
+        <div class="card">
+            <div class="icon">
+                <img src="{% static 'images/icons/warehouse.png' %}" alt="Ремонт складов">
+            </div>
+            <h3>Ремонт складов</h3>
+            <p>Профессиональный ремонт и модернизация складских помещений.</p>
+            <a href="/services/warehouse/" class="btn">Подробнее</a>
+        </div>
+
+        <!-- Фасадные работы -->
+        <div class="card">
+            <div class="icon">
+                <img src="{% static 'images/icons/facade.png' %}" alt="Фасадные работы">
+            </div>
+            <h3>Фасадные работы</h3>
+            <p>Профессиональная отделка фасадов для эстетики и долговечности.</p>
+            <a href="/services/facade/" class="btn">Подробнее</a>
+        </div>
+
+        <!-- Утепление домов -->
+        <div class="card">
+            <div class="icon">
+                <img src="{% static 'images/icons/insulation.png' %}" alt="Утепление домов">
+            </div>
+            <h3>Утепление домов</h3>
+            <p>Энергоэффективные решения для вашего комфорта и экономии.</p>
+            <a href="/services/insulation/" class="btn">Подробнее</a>
+        </div>
     </div>
 </div>
 
