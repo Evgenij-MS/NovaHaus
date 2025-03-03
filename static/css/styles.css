@@ -1,4 +1,151 @@
+/* Стили для блока с акцией */
+.promo-banner {
+    background-color: #ffcc00; /* Яркий желтый */
+    padding: 20px 0;
+    text-align: center;
+    margin-bottom: 20px; /* Отступ от следующего блока */
+}
 
+.promo-banner h2 {
+    color: #333; /* Темно-серый */
+    font-size: 24px;
+    margin: 0;
+}
+
+.promo-banner p {
+    color: #333;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.promo-banner .btn {
+    background-color: #333; /* Темно-серый */
+    color: #fff; /* Белый */
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.promo-banner .btn:hover {
+    background-color: #555; /* Темнее при наведении */
+}
+
+/* Стили для индикаторов */
+.indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.indicator {
+    width: 10px;
+    height: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.indicator.active {
+    background-color: #007BFF;
+}
+
+/* Анимации для кнопок и ссылок */
+nav ul li a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s, transform 0.3s;
+}
+
+nav ul li a:hover {
+    color: #1abc9c;
+    transform: translateY(-3px); /* Поднимаем текст при наведении */
+}
+
+/* Анимация для кнопок */
+.btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05); /* Увеличиваем кнопку при наведении */
+}
+
+/* Навигационное меню (для всех страниц, кроме главной) */
+body:not(.home) nav ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end; /* Выравниваем меню по правому краю */
+    gap: 30px;
+    flex-grow: 1; /* Растягиваем меню до правого края */
+    margin-left: 30px; /* Отступ от текста "NovaHaus" */
+}
+
+/* Логотип и текстовая часть */
+.header-content {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+}
+
+/* Текстовая часть (заголовок, подзаголовок, меню) */
+.text-section {
+    flex: 1;
+    margin-left: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; /* Выравниваем текст и меню по левому краю */
+    height: 100%;
+    text-align: left; /* Текст выравниваем по левому краю */
+    background-color: transparent; /* Убираем фоновый цвет */
+}
+
+/* Навигационное меню */
+nav {
+    margin-top: 20px;
+    width: 100%; /* Растягиваем меню на всю ширину */
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 30px;
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    color: #2c3e50; /* Цвет текста */
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #1abc9c; /* Цвет при наведении */
+}
 
 /* Общие стили для контейнеров (калькулятор и прайс-лист) */
 .calculator-container,

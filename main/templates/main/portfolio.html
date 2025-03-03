@@ -34,5 +34,20 @@
             <p>Утепление кровли</p>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
+
+    <script>
+        // Инициализация 360° панорам
+        pannellum.viewer('panorama1', {
+            "type": "equirectangular",
+            "panorama": "{% static 'images/portfolio/panorama1.jpg' %}"
+        });
+
+        pannellum.viewer('panorama2', {
+            "type": "equirectangular",
+            "panorama": "{% static 'images/portfolio/panorama2.jpg' %}"
+        });
+    </script>
 </div>
 {% endblock %}
