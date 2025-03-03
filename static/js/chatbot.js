@@ -1,6 +1,41 @@
 const chatbotMessages = document.getElementById('chatbot-messages');
 const chatbotInput = document.getElementById('chatbot-input');
 
+
+let currentLanguage = 'ru'; // По умолчанию русский
+
+// Функция для смены языка
+function changeLanguage(lang) {
+    currentLanguage = lang;
+    appendMessage('bot', `Язык изменен на ${lang === 'ru' ? 'русский' : lang === 'en' ? 'английский' : 'немецкий'}.`);
+}
+
+// Обновляем функцию sendMessage
+function sendMessage() {
+    const userMessage = chatbotInput.value.trim();
+    if (userMessage === "") return;
+
+    appendMessage('user', userMessage);
+    chatbotInput.value = "";
+
+    fetch('/chatbot/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: userMessage, language: currentLanguage }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        appendMessage('bot', data.response);
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        appendMessage('bot', 'Произошла ошибка. Пожалуйста, попробуйте позже.');
+    });
+}
+
+
 // Функция для отправки сообщения
 function sendMessage() {
     const userMessage = chatbotInput.value.trim();

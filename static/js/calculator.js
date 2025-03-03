@@ -1,3 +1,71 @@
+
+
+// Функция для отображения графика
+function showChart(totalCost, materialCost, laborCost) {
+    const ctx = document.getElementById('cost-chart').getContext('2d');
+    new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Материалы', 'Работа'],
+            datasets: [{
+                data: [materialCost, laborCost],
+                backgroundColor: ['#007bff', '#28a745'],
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Распределение затрат',
+                }
+            }
+        }
+    });
+}
+
+// Обновляем функцию calculateCost
+function calculateCost() {
+    const workType = document.getElementById('work-type').value;
+    const area = parseFloat(document.getElementById('area').value);
+    const material = document.getElementById('material').value;
+    const includeMaterials = document.getElementById('include-materials').value;
+    const urgency = document.getElementById('urgency').value;
+
+    let costPerSquareMeter;
+
+    if (workType === 'demolition' || workType === 'cleaning') {
+        costPerSquareMeter = prices[workType];
+    } else {
+        costPerSquareMeter = prices[workType][material];
+    }
+
+    if (urgency === 'fast') {
+        costPerSquareMeter *= 1.2;
+    }
+
+    let materialCost = 0;
+    let laborCost = 0;
+
+    if (includeMaterials === 'yes') {
+        materialCost = area * costPerSquareMeter * 0.4; // 40% на материалы
+        laborCost = area * costPerSquareMeter * 0.6;   // 60% на работу
+    } else {
+        laborCost = area * costPerSquareMeter; // Только работа
+    }
+
+    const totalCost = materialCost + laborCost;
+
+    // Отображаем результат
+    document.getElementById('result').innerText = `Примерная стоимость: €${totalCost.toFixed(2)}`;
+
+    // Показываем график
+    showChart(totalCost, materialCost, laborCost);
+}
+
 // Средние цены на услуги в Кельне (€ за м²)
 const prices = {
     apartment: { economy: 70, standard: 100, premium: 130 }, // Ремонт квартир

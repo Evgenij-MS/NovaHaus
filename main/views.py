@@ -5,6 +5,32 @@ from django.views.decorators.csrf import csrf_exempt
 import openai
 from django.contrib.auth.forms import UserCreationForm
 
+@csrf_exempt
+def chatbot(request):
+    if request.method == 'POST':
+        user_message = request.POST.get('message', '')
+        language = request.POST.get('language', 'ru')
+
+        # Настройка языка для AI
+        system_message = {
+            'ru': "Вы - помощник строительной компании NovaHaus. Отвечайте на вопросы клиентов.",
+            'en': "You are an assistant for the construction company NovaHaus. Answer customer questions.",
+            'de': "Sie sind ein Assistent für das Bauunternehmen NovaHaus. Beantworten Sie Kundenfragen."
+        }
+
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": system_message[language]},
+                {"role": "user", "content": user_message}
+            ]
+        )
+
+        bot_message = response['choices'][0]['message']['content']
+        return JsonResponse({'response': bot_message})
+
+    return JsonResponse({'error': 'Неподдерживаемый метод запроса'}, status=400)
+
 
 def register(request):
     if request.method == 'POST':

@@ -34,6 +34,37 @@
             <p>Утепление кровли</p>
         </div>
     </div>
+    <div class="filters">
+    <button onclick="filterProjects('all')">Все</button>
+    <button onclick="filterProjects('repair')">Ремонт</button>
+    <button onclick="filterProjects('insulation')">Утепление</button>
+    <button onclick="filterProjects('facade')">Фасадные работы</button>
+</div>
+
+<div class="portfolio-gallery">
+    <div class="gallery-item repair">
+        <img src="{% static 'images/portfolio/project1.jpg' %}" alt="Ремонт квартиры">
+        <p>Ремонт квартиры</p>
+    </div>
+    <div class="gallery-item insulation">
+        <img src="{% static 'images/portfolio/project2.jpg' %}" alt="Утепление фасада">
+        <p>Утепление фасада</p>
+    </div>
+    <!-- Добавьте больше проектов -->
+</div>
+
+<script>
+    function filterProjects(category) {
+        const items = document.querySelectorAll('.gallery-item');
+        items.forEach(item => {
+            if (category === 'all' || item.classList.contains(category)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+</script>
     <script src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css">
 
