@@ -1,8 +1,8 @@
 import requests
-import os
+# import os
 import logging
 from dotenv import load_dotenv
-from http import HTTPStatus
+# from http import HTTPStatus
 from typing import Optional
 from pydantic import BaseSettings, ValidationError
 

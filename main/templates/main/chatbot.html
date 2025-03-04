@@ -7,7 +7,19 @@
         <!-- Сообщения будут добавляться сюда -->
     </div>
     <div class="chatbot-input">
+        <label for="chatbot-input">Сообщение:</label>
         <input type="text" id="chatbot-input" placeholder="Введите ваше сообщение...">
+
+        <label for="chatbot-file">Файл:</label>
+        <input type="file" id="chatbot-file" style="display: none;">
+
+        <button onclick="startRecording()">🎤</button>
         <button onclick="sendMessage()">Отправить</button>
+        <button onclick="document.getElementById('chatbot-file').click()">📎</button>
     </div>
+    <div class="chatbot-voice-controls">
+        <button onclick="stopRecording()">Остановить запись</button>
+        <button onclick="playAudio()">Воспроизвести</button>
+    </div>
+    <audio id="audio-preview" controls style="display: none;"></audio>
 </div>

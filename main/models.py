@@ -1,8 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
 
-# Create your models here.
-
-
+# Модель для услуг
 class Service(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -13,7 +12,7 @@ class Service(models.Model):
     def __str__(self):
         return self.title
 
-
+# Модель для портфолио
 class Portfolio(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -24,4 +23,17 @@ class Portfolio(models.Model):
     def __str__(self):
         return self.title
 
+# Модель для расчетов
+class Calculation(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    work_type = models.CharField(max_length=100)
+    area = models.FloatField()
+    material = models.CharField(max_length=100)
+    include_materials = models.BooleanField(default=False)
+    urgency = models.CharField(max_length=50)
+    total_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    material_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    labor_cost = models.DecimalField(max_digits=10, decimal_places=2)
 
+    def __str__(self):
+        return f"{self.work_type} - {self.total_cost}"

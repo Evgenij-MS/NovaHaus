@@ -1,9 +1,13 @@
 # main/views.py
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 import openai
 from django.contrib.auth.forms import UserCreationForm
+from .models import Calculation
+import json
+from django.core.files.storage import default_storage
+
 
 @csrf_exempt
 def chatbot(request):
@@ -44,25 +48,46 @@ def register(request):
 
 openai.api_key = "ВАШ_API_КЛЮЧ_OPENAI"
 
-@csrf_exempt
-def chatbot(request):
+
+
+
+def save_calculation(request):
     if request.method == 'POST':
-        user_message = request.POST.get('message', '')
-
-        # Отправляем сообщение в OpenAI
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "system", "content": "Вы - помощник строительной компании NovaHaus. Отвечайте на вопросы клиентов."},
-                {"role": "user", "content": user_message}
-            ]
+        data = json.loads(request.body)
+        # Сохраняем расчет в базе данных (пример)
+        calculation = Calculation.objects.create(
+            user=request.user,
+            work_type=data['workType'],
+            area=data['area'],
+            material=data['material'],
+            include_materials=data['includeMaterials'],
+            urgency=data['urgency'],
+            total_cost=data['totalCost'],
+            material_cost=data['materialCost'],
+            labor_cost=data['laborCost']
         )
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
 
-        # Получаем ответ от AI
-        bot_message = response['choices'][0]['message']['content']
-        return JsonResponse({'response': bot_message})
+def upload_document(request):
+    if request.method == 'POST' and request.FILES['document']:
+        document = request.FILES['document']
+        file_name = default_storage.save(document.name, document)
+        # Сохраняем информацию о файле в базе данных (пример)
+        # Document.objects.create(user=request.user, file=file_name)
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
 
-    return JsonResponse({'error': 'Неподдерживаемый метод запроса'}, status=400)
+
+def send_message_to_manager(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        message = data['message']
+        # Сохраняем сообщение в базе данных (пример)
+        # Message.objects.create(user=request.user, message=message, is_manager=False)
+        return JsonResponse({'success': True})
+    return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
+
 
 def home(request):
     return render(request, 'main/home.html')

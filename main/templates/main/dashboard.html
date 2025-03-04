@@ -7,3 +7,84 @@
         <div class="status-step">Завершение</div>
     </div>
 </div>
+<div class="document-upload">
+    <h2>Загрузка документов</h2>
+    <form id="upload-form" enctype="multipart/form-data">
+        <input type="file" name="document" id="document-input" required>
+        <button type="submit">Загрузить</button>
+    </form>
+</div>
+
+
+<div class="chat-with-manager">
+    <h2>Чат с менеджером</h2>
+    <div class="chat-messages" id="chat-messages">
+        <!-- Сообщения будут добавляться сюда -->
+    </div>
+    <div class="chat-input">
+        <input type="text" id="chat-input" placeholder="Введите ваше сообщение...">
+        <button onclick="sendMessageToManager()">Отправить</button>
+    </div>
+</div>
+
+<script>
+    function sendMessageToManager() {
+        const message = document.getElementById('chat-input').value.trim();
+        if (message === "") return;
+
+        fetch('/send-message-to-manager/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify({ message: message })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                appendMessage('user', message);
+                document.getElementById('chat-input').value = "";
+            } else {
+                alert('Ошибка при отправке сообщения.');
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            alert('Произошла ошибка. Пожалуйста, попробуйте позже.');
+        });
+    }
+
+    function appendMessage(sender, message) {
+        const messageElement = document.createElement('div');
+        messageElement.classList.add('message', sender);
+        messageElement.innerText = message;
+        document.getElementById('chat-messages').appendChild(messageElement);
+        document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
+    }
+</script>
+
+
+<script>
+    document.getElementById('upload-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+
+        fetch('/upload-document/', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('Документ успешно загружен!');
+            } else {
+                alert('Ошибка при загрузке документа.');
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+            alert('Произошла ошибка. Пожалуйста, попробуйте позже.');
+        });
+    });
+</script>

@@ -1,5 +1,57 @@
 
 
+function saveCalculation(totalCost, materialCost, laborCost) {
+    const calculation = {
+        workType: document.getElementById('work-type').value,
+        area: document.getElementById('area').value,
+        material: document.getElementById('material').value,
+        includeMaterials: document.getElementById('include-materials').value,
+        urgency: document.getElementById('urgency').value,
+        totalCost: totalCost,
+        materialCost: materialCost,
+        laborCost: laborCost,
+        timestamp: new Date().toLocaleString()
+    };
+
+    // Отправляем данные на сервер
+    fetch('/save-calculation/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken') // Для защиты от CSRF
+        },
+        body: JSON.stringify(calculation)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Расчет успешно сохранен!');
+        } else {
+            alert('Ошибка при сохранении расчета.');
+        }
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        alert('Произошла ошибка. Пожалуйста, попробуйте позже.');
+    });
+}
+
+// Функция для получения CSRF-токена
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
 // Функция для отображения графика
 function showChart(totalCost, materialCost, laborCost) {
     const ctx = document.getElementById('cost-chart').getContext('2d');
@@ -27,13 +79,22 @@ function showChart(totalCost, materialCost, laborCost) {
     });
 }
 
-// Обновляем функцию calculateCost
+
+// Цены на дополнительные услуги
+const additionalServices = {
+    cleaning: 8, // € за м²
+    delivery: 100 // Фиксированная стоимость
+};
+
+
 function calculateCost() {
     const workType = document.getElementById('work-type').value;
     const area = parseFloat(document.getElementById('area').value);
     const material = document.getElementById('material').value;
     const includeMaterials = document.getElementById('include-materials').value;
     const urgency = document.getElementById('urgency').value;
+    const cleaning = document.getElementById('cleaning').checked;
+    const delivery = document.getElementById('delivery').checked;
 
     let costPerSquareMeter;
 
@@ -57,13 +118,17 @@ function calculateCost() {
         laborCost = area * costPerSquareMeter; // Только работа
     }
 
-    const totalCost = materialCost + laborCost;
+    let additionalCost = 0;
+    if (cleaning) additionalCost += area * additionalServices.cleaning;
+    if (delivery) additionalCost += additionalServices.delivery;
+
+    const totalCost = materialCost + laborCost + additionalCost;
 
     // Отображаем результат
     document.getElementById('result').innerText = `Примерная стоимость: €${totalCost.toFixed(2)}`;
 
     // Показываем график
-    showChart(totalCost, materialCost, laborCost);
+    showChart(totalCost, materialCost, laborCost, additionalCost);
 }
 
 // Средние цены на услуги в Кельне (€ за м²)
@@ -99,37 +164,7 @@ function updateAreaDescription() {
     document.getElementById('area-description').innerText = areaDescriptions[workType];
 }
 
-// Расчет стоимости
-function calculateCost() {
-    const workType = document.getElementById('work-type').value;
-    const area = parseFloat(document.getElementById('area').value);
-    const material = document.getElementById('material').value;
-    const includeMaterials = document.getElementById('include-materials').value;
-    const urgency = document.getElementById('urgency').value;
 
-    let costPerSquareMeter;
-
-    if (workType === 'demolition' || workType === 'cleaning') {
-        // Для демонтажа и уборки цена фиксированная
-        costPerSquareMeter = prices[workType];
-    } else {
-        // Для остальных работ учитываем тип материала
-        costPerSquareMeter = prices[workType][material];
-    }
-
-    // Учет срочности (+20% за срочные работы)
-    if (urgency === 'fast') {
-        costPerSquareMeter *= 1.2;
-    }
-
-    // Учет стоимости материалов
-    if (includeMaterials === 'no') {
-        costPerSquareMeter *= materialCostRatio; // Только работа (60% от общей стоимости)
-    }
-
-    const totalCost = area * costPerSquareMeter;
-    document.getElementById('result').innerText = `Примерная стоимость: €${totalCost.toFixed(2)}`;
-}
 
 // Скрываем выбор материала для демонтажа и уборки
 document.getElementById('work-type').addEventListener('change', function() {
