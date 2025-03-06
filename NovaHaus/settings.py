@@ -21,7 +21,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
 ALLOWED_HOSTS = [
-    'novahaus-b0ea52879adf.herokuapp.com',
+    '.herokuapp.com',  # Разрешает все поддомены Heroku
     'localhost',
     '127.0.0.1',
     'novahaus-koeln.de',
