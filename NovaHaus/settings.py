@@ -23,7 +23,7 @@ DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 ALLOWED_HOSTS = [
     'novahaus-b0ea52879adf.herokuapp.com',
     'localhost',
-    '127.0.0.1'
+    '127.0.0.1',
     'novahaus-koeln.de',
 ]
 
