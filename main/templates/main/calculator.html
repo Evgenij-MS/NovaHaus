@@ -74,6 +74,12 @@
 
         <!-- Кнопка расчета -->
         <button type="button" onclick="calculateCost()" class="btn">Рассчитать</button>
+
+        <!-- Кнопка сохранения расчета -->
+        <button type="button" onclick="saveCalculation()" class="btn btn-secondary">Сохранить расчет</button>
+
+        <!-- Кнопка просмотра истории -->
+        <button type="button" onclick="showHistory()" class="btn btn-secondary">История расчетов</button>
     </form>
 
     <!-- Результат -->
@@ -89,6 +95,21 @@
             <!-- Контент модального окна будет здесь -->
         </div>
     </div>
+
+    <!-- Блок рекомендаций от ИИ -->
+    <div id="ai-recommendations" class="ai-recommendations">
+        <h2>Рекомендации от ИИ</h2>
+        <p id="ai-recommendation-text"></p>
+    </div>
+
+    <!-- Блок обратной связи -->
+    <div class="feedback-form">
+        <h3>Обратная связь</h3>
+        <input type="text" id="feedback-name" placeholder="Ваше имя">
+        <input type="email" id="feedback-email" placeholder="Ваш email">
+        <textarea id="feedback-message" placeholder="Ваше сообщение"></textarea>
+        <button onclick="sendFeedback()" class="btn">Отправить отзыв</button>
+    </div>
 </div>
 
 <!-- Подключение JavaScript -->
@@ -100,4 +121,5 @@
 <script src="{% static 'js/language.js' %}"></script>
 <script src="{% static 'js/feedback.js' %}"></script>
 <script src="{% static 'js/email-integration.js' %}"></script>
+<script src="{% static 'js/chart.js' %}"></script>
 {% endblock %}
