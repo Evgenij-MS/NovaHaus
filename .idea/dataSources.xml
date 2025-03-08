@@ -10,11 +10,11 @@
       <jdbc-url>jdbc:sqlite:C:\Users\Tel-ran.de\PycharmProject\NovaHaus\db.sqlite3</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="postgres@localhost" uuid="0e1700c7-9372-4c41-8045-2649b2489bf4">
+    <data-source source="LOCAL" name="ddcvocovc15vo9@c7u1tn6bvvsodf.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com" uuid="031ce16f-c995-4de6-a822-841c912a0521">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://localhost:5432/postgres</jdbc-url>
+      <jdbc-url>jdbc:postgresql://c7u1tn6bvvsodf.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com:5432/ddcvocovc15vo9</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
