@@ -6,10 +6,15 @@ from .models import Calculation
 import json
 from django.core.files.storage import default_storage
 import requests
+import logging
+
+
+logger = logging.getLogger(__name__)
 
 # API-ключ DeepSeek
-DEEPSEEK_API_KEY = "w&01p9g*j+38j4d1z+$i$w&*mcnb7vw24^ux0^jt25j16c&0m6"
-DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
+DEEPSEEK_API_KEY = "sk-0efe6828d940403ba98475c70df6f384"
+DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"  # Убедитесь, что URL правильный
+
 
 # Чат-бот
 @csrf_exempt
@@ -139,6 +144,21 @@ def get_ai_recommendations(request):
             return JsonResponse({'success': False, 'error': str(e)})
 
     return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
+
+
+
+@csrf_exempt
+def get_ai_recommendations(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            logger.info(f"Received data: {data}")
+            # ... ваш код ...
+        except Exception as e:
+            logger.error(f"Error: {e}")
+            return JsonResponse({'success': False, 'error': str(e)})
+
+
 
 # Основные страницы
 def home(request):

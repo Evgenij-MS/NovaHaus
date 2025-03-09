@@ -13,7 +13,7 @@ async function getAIRecommendations(totalCost, materialCost, laborCost, workType
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken') // Для защиты от CSRF
+                'X-CSRFToken': getCookie('csrftoken')  // Для защиты от CSRF
             },
             body: JSON.stringify(data)
         });
