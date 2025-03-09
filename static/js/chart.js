@@ -1,7 +1,13 @@
-// Визуализация данных с помощью Chart.js
+let costChart = null;
+
 function showChart(materialCost, laborCost, additionalCost) {
     const ctx = document.getElementById('cost-chart').getContext('2d');
-    new Chart(ctx, {
+
+    if (costChart) {
+        costChart.destroy();
+    }
+
+    costChart = new Chart(ctx, {
         type: 'pie',
         data: {
             labels: ['Материалы', 'Работа', 'Дополнительные услуги'],
@@ -12,9 +18,22 @@ function showChart(materialCost, laborCost, additionalCost) {
         },
         options: {
             responsive: true,
+            animation: {
+                duration: 1000,
+                easing: 'easeInOutQuad'
+            },
             plugins: {
                 legend: { position: 'top' },
-                title: { display: true, text: 'Распределение затрат' }
+                title: { display: true, text: 'Распределение затрат' },
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            const label = context.label || '';
+                            const value = context.raw || 0;
+                            return `${label}: ${value} руб.`;
+                        }
+                    }
+                }
             }
         }
     });

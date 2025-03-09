@@ -1,0 +1,108 @@
+/*общие стили (шрифты, цвета, базовые элементы)*/
+
+
+/* global.css */
+:root {
+  /* Цвета */
+  --primary-color: #4FD6FF;
+  --secondary-color: #FF78FF;
+  --accent-color: #8B00FF;
+  --background-color: #2B2B36;
+  --text-color: rgba(244, 237, 237, 0.8);
+  --header-bg: rgb(42, 48, 60);
+
+  /* Нейтральные цвета */
+  --neutral-100: #ffffff;
+  --neutral-200: #f4f4f4;
+  --neutral-300: #cccccc;
+  --neutral-400: #666666;
+  --neutral-500: #333333;
+
+  /* Градиенты */
+  --primary-gradient: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--accent-color)
+  );
+  --secondary-gradient: linear-gradient(
+    45deg,
+    var(--secondary-color),
+    var(--accent-color)
+  );
+  --primary-gradient-transparent: linear-gradient(
+    45deg,
+    rgba(79, 214, 255, 0.6),
+    rgba(138, 0, 253, 0.6)
+  );
+
+  /* Тени */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 6px 12px rgba(0, 0, 0, 0.3);
+
+  /* Эффекты */
+  --button-hover-effect: transform 0.3s ease, box-shadow 0.3s ease;
+  --link-hover-effect: color 0.3s ease;
+  --card-hover-effect: transform 0.3s ease, box-shadow 0.3s ease;
+
+  /* Размеры */
+  --max-width: 1400px;
+
+  /* Типографика */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --font-size-xxl: 32px;
+
+  /* Точки перелома */
+  --breakpoint-small-mobile: 480px;
+  --breakpoint-mobile: 640px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-laptop: 1024px;
+  --breakpoint-desktop: 1280px;
+
+  /* Z-индексы */
+  --z-index-header: 100;
+  --z-index-modal: 200;
+  --z-index-overlay: 150;
+}
+
+/* Общие стили */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+
+
+
+
+
+
+/*!* global.css *!*/
+/*body {*/
+/*  font-family: 'Arial', sans-serif;*/
+/*  margin: 0;*/
+/*  padding: 0;*/
+/*  background-color: #f4f4f4;*/
+/*  color: #333;*/
+/*  line-height: 1.6;*/
+/*}*/
+
+/*.container {*/
+/*  max-width: 1200px;*/
+/*  margin: 0 auto;*/
+/*  padding: 0 20px;*/
+/*}*/

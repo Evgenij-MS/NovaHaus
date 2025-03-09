@@ -102,12 +102,29 @@
         <p id="ai-recommendation-text"></p>
     </div>
 
-    <!-- Блок обратной связи -->
+       <!-- Блок обратной связи -->
     <div class="feedback-form">
         <h3>Обратная связь</h3>
-        <input type="text" id="feedback-name" placeholder="Ваше имя">
-        <input type="email" id="feedback-email" placeholder="Ваш email">
-        <textarea id="feedback-message" placeholder="Ваше сообщение"></textarea>
+
+        <!-- Поле для имени -->
+        <div class="form-group">
+            <label for="feedback-name">Ваше имя:</label>
+            <input type="text" id="feedback-name" name="feedback-name" placeholder="Введите ваше имя">
+        </div>
+
+        <!-- Поле для email -->
+        <div class="form-group">
+            <label for="feedback-email">Ваш email:</label>
+            <input type="email" id="feedback-email" name="feedback-email" placeholder="Введите ваш email">
+        </div>
+
+        <!-- Поле для сообщения -->
+        <div class="form-group">
+            <label for="feedback-message">Ваше сообщение:</label>
+            <textarea id="feedback-message" name="feedback-message" placeholder="Введите ваше сообщение"></textarea>
+        </div>
+
+        <!-- Кнопка отправки -->
         <button onclick="sendFeedback()" class="btn">Отправить отзыв</button>
     </div>
 </div>

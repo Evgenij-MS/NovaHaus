@@ -7,9 +7,19 @@
     <title>{% block title %}NovaHaus – Ваш надежный партнер в строительстве и ремонте{% endblock %}</title>
     <meta name="description" content="{% block description %}NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы и многое другое.{% endblock %}">
     <meta name="keywords" content="{% block keywords %}ремонт, строительство, утепление, Кельн, NovaHaus{% endblock %}">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
-    <!-- ВСТАВЬТЕ JSON-LD КОД ЗДЕСЬ -->
+    <!-- Подключение CSS-файлов -->
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}"> <!-- Сброс стилей -->
+    <link rel="stylesheet" href="{% static 'css/global.css' %}"> <!-- Общие стили -->
+    <link rel="stylesheet" href="{% static 'css/header.css' %}"> <!-- Стили для шапки -->
+    <link rel="stylesheet" href="{% static 'css/buttons.css' %}"> <!-- Стили для кнопок -->
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}"> <!-- Стили для форм -->
+    <link rel="stylesheet" href="{% static 'css/cards.css' %}"> <!-- Стили для карточек -->
+    <link rel="stylesheet" href="{% static 'css/slider.css' %}"> <!-- Стили для слайдера -->
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}"> <!-- Стили для подвала -->
+    <link rel="stylesheet" href="{% static 'css/media-queries.css' %}"> <!-- Медиа-запросы -->
+
+    <!-- JSON-LD для структурированных данных -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -28,27 +38,44 @@
       "url": "https://www.novahaus-koeln.de"
     }
     </script>
-    <!-- КОНЕЦ JSON-LD КОДА -->
-
+    <!-- Конец JSON-LD -->
 </head>
 <body>
+    <!-- Шапка сайта -->
     <header>
-        <h1>NovaHaus</h1>
-        <nav>
-            <a href="{% url 'home' %}">Главная</a>
-            <a href="{% url 'services' %}">Услуги</a>
-            <a href="{% url 'portfolio' %}">Портфолио</a>
-            <a href="{% url 'contact' %}">Контакты</a>
-            <a href="{% url 'calculator' %}">Калькулятор</a>
-        </nav>
+        <div class="header-content">
+            <!-- Логотип -->
+            <div class="logo">
+                <img src="{% static 'images/logo.png' %}" alt="NovaHaus Logo">
+            </div>
+            <!-- Текстовая часть (заголовок и подзаголовок) -->
+            <div class="text-section">
+                <div class="header-text">
+                    <h1>NovaHaus</h1>
+                    <p>Ваш надежный партнер в строительстве и ремонте</p>
+                </div>
+                <!-- Навигационное меню -->
+                <nav>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Главная</a></li>
+                        <li><a href="{% url 'services' %}">Услуги</a></li>
+                        <li><a href="{% url 'portfolio' %}">Портфолио</a></li>
+                        <li><a href="{% url 'contact' %}">Контакты</a></li>
+                        <li><a href="{% url 'calculator' %}">Калькулятор</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
     </header>
 
+    <!-- Основное содержимое страницы -->
     <main>
         {% block content %}
         <!-- Содержимое страницы будет здесь -->
         {% endblock %}
     </main>
 
+    <!-- Подвал сайта -->
     <footer>
         <p>&copy; 2025 NovaHaus. Все права защищены.</p>
     </footer>
