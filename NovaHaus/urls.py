@@ -19,7 +19,11 @@ from django.urls import path
 from main import views
 
 
+
 urlpatterns = [
+    path('chatbot/', views.chatbot, name='chatbot'),
+    path('get-ai-recommendations/', views.get_ai_recommendations, name='get_ai_recommendations'),
+    path('save-calculation/', views.save_calculation, name='save_calculation'),
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('services/', views.services, name='services'),

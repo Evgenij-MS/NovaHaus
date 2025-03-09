@@ -1,0 +1,101 @@
+/* Основные стили для контейнера калькулятора */
+.calculator-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовок калькулятора */
+.calculator-container h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Стили для групп форм */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.form-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 10px;
+}
+
+/* Стили для кнопок */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+/* Стили для результата */
+.result {
+    font-size: 18px;
+    font-weight: bold;
+    color: #28a745;
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* Стили для блока рекомендаций */
+.ai-recommendations {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+}
+
+.ai-recommendations h2 {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.ai-recommendations p {
+    color: #555;
+    line-height: 1.5;
+}
+
+/* Стили для графика */
+#cost-chart {
+    margin-top: 20px;
+    max-width: 100%;
+}

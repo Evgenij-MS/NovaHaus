@@ -5,6 +5,13 @@
 {% block description %}Рассчитайте стоимость ремонта или утепления с помощью нашего онлайн-калькулятора.{% endblock %}
 {% block keywords %}калькулятор, стоимость ремонта, утепление, NovaHaus{% endblock %}
 
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/calculator.css' %}">
+{% endblock %}
+
+
+
 {% block content %}
 <div class="calculator-container">
     <h1>Онлайн-калькулятор</h1>
@@ -102,7 +109,7 @@
         <p id="ai-recommendation-text"></p>
     </div>
 
-       <!-- Блок обратной связи -->
+    <!-- Блок обратной связи -->
     <div class="feedback-form">
         <h3>Обратная связь</h3>
 
@@ -129,7 +136,13 @@
     </div>
 </div>
 
+
+
+<!-- Подключение Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <!-- Подключение JavaScript -->
+<script src="{% static 'js/visualization.js' %}"></script>
 <script src="{% static 'js/calculator.js' %}"></script>
 <script src="{% static 'js/modal.js' %}"></script>
 <script src="{% static 'js/animations.js' %}"></script>
@@ -139,4 +152,28 @@
 <script src="{% static 'js/feedback.js' %}"></script>
 <script src="{% static 'js/email-integration.js' %}"></script>
 <script src="{% static 'js/chart.js' %}"></script>
+
+<!-- Скрипт для инициализации калькулятора -->
+<script>
+    // Обновление описания площади при выборе типа работ
+    function updateAreaDescription() {
+        const workType = document.getElementById('work-type').value;
+        const descriptions = {
+            apartment: "Введите общую площадь стен, потолков и пола.",
+            house: "Введите общую площадь стен, потолков и пола.",
+            office: "Введите общую площадь стен, потолков и пола.",
+            warehouse: "Введите общую площадь стен, потолков и пола.",
+            facade: "Введите площадь фасада.",
+            insulation: "Введите площадь утепляемых поверхностей (стены, кровля, фундамент).",
+            demolition: "Введите площадь демонтируемых конструкций.",
+            cleaning: "Введите общую площадь уборки."
+        };
+        document.getElementById('area-description').innerText = descriptions[workType];
+    }
+
+    // Инициализация при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function() {
+        updateAreaDescription();
+    });
+</script>
 {% endblock %}

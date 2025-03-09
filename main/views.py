@@ -1,14 +1,17 @@
-# main/views.py
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
-import openai
 from django.contrib.auth.forms import UserCreationForm
 from .models import Calculation
 import json
 from django.core.files.storage import default_storage
+import requests
 
+# API-ключ DeepSeek
+DEEPSEEK_API_KEY = "w&01p9g*j+38j4d1z+$i$w&*mcnb7vw24^ux0^jt25j16c&0m6"
+DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
 
+# Чат-бот
 @csrf_exempt
 def chatbot(request):
     if request.method == 'POST':
@@ -22,20 +25,29 @@ def chatbot(request):
             'de': "Sie sind ein Assistent für das Bauunternehmen NovaHaus. Beantworten Sie Kundenfragen."
         }
 
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
+        # Формируем запрос к DeepSeek
+        headers = {
+            "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "model": "deepseek-chat",
+            "messages": [
                 {"role": "system", "content": system_message[language]},
                 {"role": "user", "content": user_message}
             ]
-        )
+        }
 
-        bot_message = response['choices'][0]['message']['content']
-        return JsonResponse({'response': bot_message})
+        try:
+            response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload)
+            bot_message = response.json()['choices'][0]['message']['content']
+            return JsonResponse({'response': bot_message})
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
 
     return JsonResponse({'error': 'Неподдерживаемый метод запроса'}, status=400)
 
-
+# Регистрация пользователя
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
@@ -46,15 +58,11 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'main/register.html', {'form': form})
 
-openai.api_key = "ВАШ_API_КЛЮЧ_OPENAI"
-
-
-
-
+# Сохранение расчета
+@csrf_exempt
 def save_calculation(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        # Сохраняем расчет в базе данных (пример)
         calculation = Calculation.objects.create(
             user=request.user,
             work_type=data['workType'],
@@ -69,6 +77,8 @@ def save_calculation(request):
         return JsonResponse({'success': True})
     return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
 
+# Загрузка документов
+@csrf_exempt
 def upload_document(request):
     if request.method == 'POST' and request.FILES['document']:
         document = request.FILES['document']
@@ -78,7 +88,8 @@ def upload_document(request):
         return JsonResponse({'success': True})
     return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
 
-
+# Отправка сообщения менеджеру
+@csrf_exempt
 def send_message_to_manager(request):
     if request.method == 'POST':
         data = json.loads(request.body)
@@ -88,7 +99,48 @@ def send_message_to_manager(request):
         return JsonResponse({'success': True})
     return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
 
+# AI-рекомендации для калькулятора
+@csrf_exempt
+def get_ai_recommendations(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        work_type = data.get('workType')
+        area = data.get('area')
+        total_cost = data.get('totalCost')
+        material_cost = data.get('materialCost')
+        labor_cost = data.get('laborCost')
 
+        prompt = f"""
+        Вы - помощник строительной компании NovaHaus. Клиент рассчитал стоимость работ:
+        - Тип работ: {work_type}
+        - Площадь: {area} м²
+        - Общая стоимость: {total_cost} €
+        - Стоимость материалов: {material_cost} €
+        - Стоимость работы: {labor_cost} €
+
+        Дайте рекомендации по оптимизации затрат или улучшению качества работ.
+        """
+
+        # Формируем запрос к DeepSeek
+        headers = {
+            "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
+            "Content-Type": "application/json"
+        }
+        payload = {
+            "model": "deepseek-chat",
+            "messages": [{"role": "user", "content": prompt}]
+        }
+
+        try:
+            response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload)
+            recommendation = response.json()['choices'][0]['message']['content']
+            return JsonResponse({'success': True, 'recommendation': recommendation})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+
+    return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
+
+# Основные страницы
 def home(request):
     return render(request, 'main/home.html')
 
