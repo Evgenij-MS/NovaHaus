@@ -1,348 +1,698 @@
-/* Общие стили */
 
 
 
 
+/*!* Стили для кнопок *!*/
+/*.btn-secondary {*/
+/*    background-color: #6c757d;*/
+/*    color: #fff;*/
+/*    margin-top: 10px;*/
+/*}*/
+
+/*.btn-secondary:hover {*/
+/*    background-color: #5a6268;*/
+/*}*/
+
+/*!* Блок рекомендаций от ИИ *!*/
+/*.ai-recommendations {*/
+/*    margin-top: 20px;*/
+/*    padding: 15px;*/
+/*    background-color: #f8f9fa;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/*.ai-recommendations h2 {*/
+/*    font-size: 20px;*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+/*!* Форма обратной связи *!*/
+/*.feedback-form {*/
+/*    margin-top: 30px;*/
+/*    padding: 20px;*/
+/*    background-color: #fff;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/*.feedback-form input,*/
+/*.feedback-form textarea {*/
+/*    width: 100%;*/
+/*    padding: 10px;*/
+/*    margin-bottom: 10px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 5px;*/
+/*}*/
+
+/*.feedback-form textarea {*/
+/*    height: 100px;*/
+/*}*/
 
 
-body {
-    font-family: 'Arial', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
-}
+/*!* Стили для статуса проекта *!*/
+/*.status-bar {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    margin-top: 20px;*/
+/*}*/
 
-/* Шапка */
-header {
-    height: 215px; /* Высота шапки */
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    background-color: transparent; /* Убираем фоновый цвет */
-}
+/*.status-step {*/
+/*    flex: 1;*/
+/*    text-align: center;*/
+/*    padding: 10px;*/
+/*    border: 1px solid #ccc;*/
+/*    margin: 0 5px;*/
+/*    background-color: #f4f4f4;*/
+/*}*/
 
-/* Логотип и текстовая часть */
-.header-content {
-    display: flex;
-    align-items: flex-start;
-    width: 100%;
-}
+/*.status-step.active {*/
+/*    background-color: #007bff;*/
+/*    color: white;*/
+/*}*/
 
-/* Логотип */
-.logo img {
-    width: 150px;
-    height: auto;
-    margin-top: 0;
-}
+/*!* Стили для графика *!*/
+/*#cost-chart {*/
+/*    max-width: 400px;*/
+/*    margin: 20px auto;*/
+/*}*/
 
-/* Текстовая часть (заголовок, подзаголовок, меню) */
-.text-section {
-    flex: 1;
-    margin-left: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    text-align: center;
-    background-color: transparent; /* Убираем фоновый цвет */
-}
+/*!* Стили для блока с акцией *!*/
+/*.promo-banner {*/
+/*    background-color: #ffcc00; !* Яркий желтый *!*/
+/*    padding: 20px 0;*/
+/*    text-align: center;*/
+/*    margin-bottom: 20px; !* Отступ от следующего блока *!*/
+/*}*/
 
-/* Заголовок и подзаголовок */
-.header-text h1 {
-    margin: 0;
-    font-size: 36px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    color: #2c3e50; /* Цвет текста */
-}
+/*.promo-banner h2 {*/
+/*    color: #333; !* Темно-серый *!*/
+/*    font-size: 24px;*/
+/*    margin: 0;*/
+/*}*/
 
-.header-text p {
-    margin: 10px 0 0;
-    font-size: 18px;
-    color: #666; /* Цвет текста */
-    font-weight: 300;
-}
+/*.promo-banner p {*/
+/*    color: #333;*/
+/*    font-size: 18px;*/
+/*    margin: 10px 0;*/
+/*}*/
 
-/* Навигационное меню */
-nav {
-    margin-top: 20px;
-}
+/*.promo-banner .btn {*/
+/*    background-color: #333; !* Темно-серый *!*/
+/*    color: #fff; !* Белый *!*/
+/*    padding: 10px 20px;*/
+/*    border-radius: 5px;*/
+/*    text-decoration: none;*/
+/*    display: inline-block;*/
+/*    margin-top: 10px;*/
+/*}*/
 
-nav ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: inline-flex;
-    gap: 30px;
-}
+/*.promo-banner .btn:hover {*/
+/*    background-color: #555; !* Темнее при наведении *!*/
+/*}*/
 
-nav ul li {
-    margin: 0;
-}
+/*!* Стили для индикаторов *!*/
+/*.indicators {*/
+/*    position: absolute;*/
+/*    bottom: 10px;*/
+/*    left: 50%;*/
+/*    transform: translateX(-50%);*/
+/*    display: flex;*/
+/*    gap: 10px;*/
+/*}*/
 
-nav ul li a {
-    color: #2c3e50; /* Цвет текста */
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 500;
-    transition: color 0.3s;
-}
+/*.indicator {*/
+/*    width: 10px;*/
+/*    height: 10px;*/
+/*    background-color: rgba(255, 255, 255, 0.5);*/
+/*    border-radius: 50%;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
 
-nav ul li a:hover {
-    color: #1abc9c; /* Цвет при наведении */
-}
+/*.indicator.active {*/
+/*    background-color: #007BFF;*/
+/*}*/
 
-/* Переключатель языков */
-.language-switcher {
-    align-self: flex-start;
-    padding: 20px;
-}
+/*!* Анимации для кнопок и ссылок *!*/
+/*nav ul li a {*/
+/*    color: #2c3e50;*/
+/*    text-decoration: none;*/
+/*    font-size: 18px;*/
+/*    font-weight: 500;*/
+/*    transition: color 0.3s, transform 0.3s;*/
+/*}*/
 
-.language-switcher select {
-    padding: 8px 12px;
-    font-size: 16px;
-    background-color: #fff; /* Белый фон */
-    color: #2c3e50; /* Цвет текста */
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
+/*nav ul li a:hover {*/
+/*    color: #1abc9c;*/
+/*    transform: translateY(-3px); !* Поднимаем текст при наведении *!*/
+/*}*/
 
-.language-switcher select:hover {
-    background-color: #f4f4f4; /* Цвет при наведении */
-}
+/*!* Анимация для кнопок *!*/
+/*.btn {*/
+/*    background-color: #007bff;*/
+/*    color: #fff;*/
+/*    padding: 10px 20px;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    font-size: 16px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s, transform 0.3s;*/
+/*}*/
 
-/* Основной контент */
-main {
-    padding: 40px 20px;
-}
+/*.btn:hover {*/
+/*    background-color: #0056b3;*/
+/*    transform: scale(1.05); !* Увеличиваем кнопку при наведении *!*/
+/*}*/
 
+/*!* Навигационное меню (для всех страниц, кроме главной) *!*/
+/*body:not(.home) nav ul {*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    display: flex;*/
+/*    justify-content: flex-end; !* Выравниваем меню по правому краю *!*/
+/*    gap: 30px;*/
+/*    flex-grow: 1; !* Растягиваем меню до правого края *!*/
+/*    margin-left: 30px; !* Отступ от текста "NovaHaus" *!*/
+/*}*/
 
-.services, .reviews {
-    margin-top: 40px;
-}
+/*!* Логотип и текстовая часть *!*/
+/*.header-content {*/
+/*    display: flex;*/
+/*    align-items: flex-start;*/
+/*    width: 100%;*/
+/*}*/
 
-.services h2, .reviews h2 {
-    font-size: 28px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #2c3e50;
-}
+/*!* Текстовая часть (заголовок, подзаголовок, меню) *!*/
+/*.text-section {*/
+/*    flex: 1;*/
+/*    margin-left: 30px;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    align-items: flex-start; !* Выравниваем текст и меню по левому краю *!*/
+/*    height: 100%;*/
+/*    text-align: left; !* Текст выравниваем по левому краю *!*/
+/*    background-color: transparent; !* Убираем фоновый цвет *!*/
+/*}*/
 
-.service-cards, .review-cards {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
+/*!* Навигационное меню *!*/
+/*nav {*/
+/*    margin-top: 20px;*/
+/*    width: 100%; !* Растягиваем меню на всю ширину *!*/
+/*}*/
 
-.card {
-    background-color: #fff;
-    padding: 25px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    flex: 1;
-    max-width: 300px;
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
-}
+/*nav ul {*/
+/*    list-style: none;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    display: flex;*/
+/*    gap: 30px;*/
+/*}*/
 
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-}
+/*nav ul li {*/
+/*    margin: 0;*/
+/*}*/
 
-.card h3 {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: #2c3e50;
-}
+/*nav ul li a {*/
+/*    color: #2c3e50; !* Цвет текста *!*/
+/*    text-decoration: none;*/
+/*    font-size: 18px;*/
+/*    font-weight: 500;*/
+/*    transition: color 0.3s;*/
+/*}*/
 
-.card p {
-    font-size: 16px;
-    color: #666;
-}
+/*nav ul li a:hover {*/
+/*    color: #1abc9c; !* Цвет при наведении *!*/
+/*}*/
 
-/* Подвал */
-footer {
-    background-color: #2c3e50;
-    color: #fff;
-    text-align: center;
-    padding: 20px;
-    margin-top: 50px;
-    font-size: 16px;
-}
+/*!* Общие стили для контейнеров (калькулятор и прайс-лист) *!*/
+/*.calculator-container,*/
+/*.price-list-container {*/
+/*    max-width: 600px;*/
+/*    margin: 50px auto; !* Центрируем и добавляем отступ сверху *!*/
+/*    padding: 30px;*/
+/*    background-color: #fff;*/
+/*    border-radius: 12px;*/
+/*    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);*/
+/*    text-align: center;*/
+/*}*/
 
-footer p {
-    margin: 0;
-}
+/*!* Заголовок калькулятора и прайс-листа *!*/
+/*.calculator-container h1,*/
+/*.price-list-container h2 {*/
+/*    font-size: 28px;*/
+/*    margin-bottom: 20px;*/
+/*    color: #2c3e50;*/
+/*}*/
 
+/*!* Группы формы (для калькулятора) *!*/
+/*.form-group {*/
+/*    margin-bottom: 20px;*/
+/*    text-align: left;*/
+/*}*/
 
+/*.form-group label {*/
+/*    display: block;*/
+/*    font-size: 16px;*/
+/*    margin-bottom: 5px;*/
+/*    color: #333;*/
+/*}*/
 
-/* Слайдер */
-.slider {
-    width: 100%;
-    max-width: 800px; /* Ограничиваем ширину слайдера */
-    margin: 0 auto; /* Центрируем слайдер */
-    overflow: hidden;
-    position: relative;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    height: 400px; /* Фиксированная высота слайдера */
-}
+/*.form-group input,*/
+/*.form-group select {*/
+/*    width: 100%;*/
+/*    padding: 12px;*/
+/*    font-size: 16px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 8px;*/
+/*    box-sizing: border-box;*/
+/*    transition: border-color 0.3s ease, box-shadow 0.3s ease;*/
+/*}*/
 
-.slides {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-    height: 100%; /* Занимает всю высоту слайдера */
-}
+/*.form-group input:focus,*/
+/*.form-group select:focus {*/
+/*    border-color: #007bff;*/
+/*    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);*/
+/*}*/
 
-.slides img {
-    width: 100%;
-    height: 100%; /* Занимает всю высоту слайдера */
-    flex-shrink: 0;
-    border-radius: 15px;
-    object-fit: cover; /* Сохраняет пропорции изображения */
-}
+/*.form-group .hint {*/
+/*    font-size: 14px;*/
+/*    color: #666;*/
+/*    margin-top: 5px;*/
+/*}*/
 
-/* Индикаторы (точки) */
-.indicators {
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-}
+/*!* Кнопка расчета (для калькулятора) *!*/
+/*.btn {*/
+/*    background-color: #007bff;*/
+/*    color: #fff;*/
+/*    padding: 12px 24px;*/
+/*    border: none;*/
+/*    border-radius: 8px;*/
+/*    font-size: 16px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease, transform 0.3s ease;*/
+/*}*/
 
-.indicator {
-    width: 10px;
-    height: 10px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
+/*.btn:hover {*/
+/*    background-color: #0056b3;*/
+/*    transform: translateY(-2px);*/
+/*}*/
 
-.indicator.active {
-    background-color: #007BFF;
-}
+/*!* Результат расчета (для калькулятора) *!*/
+/*.result {*/
+/*    font-size: 18px;*/
+/*    font-weight: bold;*/
+/*    margin-top: 20px;*/
+/*    color: #2c3e50;*/
+/*}*/
 
-/* Адаптивность для мобильных устройств */
-@media (max-width: 768px) {
-    .slider {
-        height: 300px; /* Уменьшаем высоту слайдера для мобильных устройств */
-        border-radius: 10px; /* Уменьшаем скругление углов */
-    }
+/*!* Кнопка прайс-листа *!*/
+/*.price-list-button {*/
+/*    background-color: #28a745; !* Зеленый цвет *!*/
+/*    color: #fff;*/
+/*    padding: 10px 20px;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    font-size: 16px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s;*/
+/*}*/
 
-    .slides img {
-        border-radius: 10px; /* Уменьшаем скругление углов изображений */
-    }
+/*.price-list-button:hover {*/
+/*    background-color: #218838; !* Темнее при наведении *!*/
+/*}*/
 
-    .indicators {
-        bottom: 5px; /* Уменьшаем отступ индикаторов */
-    }
+/*!* Модальное окно для прайс-листа *!*/
+/*.modal {*/
+/*    display: none;*/
+/*    position: fixed;*/
+/*    z-index: 1000;*/
+/*    left: 0;*/
+/*    top: 0;*/
+/*    width: 100%;*/
+/*    height: 100%;*/
+/*    background-color: rgba(0, 0, 0, 0.5);*/
+/*    overflow: auto; !* Прокрутка для всего модального окна *!*/
+/*}*/
 
-    .indicator {
-        width: 8px;
-        height: 8px; /* Уменьшаем размер индикаторов */
-    }
-}
+/*.modal-content {*/
+/*    background-color: #fff;*/
+/*    margin: 5% auto; !* Центрируем и добавляем отступ сверху *!*/
+/*    padding: 20px;*/
+/*    border-radius: 10px;*/
+/*    width: 80%;*/
+/*    max-width: 800px;*/
+/*    position: relative;*/
+/*    max-height: 80vh; !* Ограничиваем высоту контента *!*/
+/*    overflow-y: auto; !* Прокрутка внутри контента *!*/
+/*}*/
 
-@media (max-width: 480px) {
-    .slider {
-        height: 200px; /* Еще больше уменьшаем высоту для маленьких экранов */
-    }
+/*!* Кнопка закрытия модального окна *!*/
+/*.close {*/
+/*    position: absolute;*/
+/*    right: 20px;*/
+/*    top: 10px;*/
+/*    font-size: 24px;*/
+/*    cursor: pointer;*/
+/*}*/
 
-    .slides img {
-        border-radius: 5px; /* Минимальное скругление углов */
-    }
+/*.close:hover {*/
+/*    color: #ff0000;*/
+/*}*/
 
-    .indicators {
-        bottom: 2px; /* Минимальный отступ индикаторов */
-    }
+/*!* Секции прайс-листа *!*/
+/*.price-list-section {*/
+/*    margin-bottom: 20px;*/
+/*}*/
 
-    .indicator {
-        width: 6px;
-        height: 6px; /* Минимальный размер индикаторов */
-    }
-}
+/*.price-list-section h3 {*/
+/*    color: #007bff;*/
+/*    margin-bottom: 10px;*/
+/*}*/
 
+/*.price-list-section ul {*/
+/*    list-style-type: none;*/
+/*    padding: 0;*/
+/*}*/
 
+/*.price-list-section li {*/
+/*    margin-bottom: 10px;*/
+/*    font-size: 16px;*/
+/*}*/
 
-/* Стили для стрелок */
-.slider {
-    position: relative;
-}
+/*!* Общие стили *!*/
+/*body {*/
+/*    font-family: 'Arial', sans-serif;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    background-color: #f4f4f4;*/
+/*    color: #333;*/
+/*    line-height: 1.6;*/
+/*}*/
 
-.prev, .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    border-radius: 50%;
-    font-size: 18px;
-    z-index: 10;
-}
+/*!* Шапка *!*/
+/*header {*/
+/*    height: 215px; !* Высота шапки *!*/
+/*    padding: 0;*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    align-items: flex-start;*/
+/*    background-color: transparent; !* Убираем фоновый цвет *!*/
+/*}*/
 
-.prev {
-    left: 10px;
-}
+/*!* Логотип и текстовая часть *!*/
+/*.header-content {*/
+/*    display: flex;*/
+/*    align-items: flex-start;*/
+/*    width: 100%;*/
+/*}*/
 
-.next {
-    right: 10px;
-}
+/*!* Логотип *!*/
+/*.logo img {*/
+/*    width: 150px;*/
+/*    height: auto;*/
+/*    margin-top: 0;*/
+/*}*/
 
-.prev:hover, .next:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-}
-/* Базовые стили */
-.container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
+/*!* Текстовая часть (заголовок, подзаголовок, меню) *!*/
+/*.text-section {*/
+/*    flex: 1;*/
+/*    margin-left: 30px;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: 100%;*/
+/*    text-align: center;*/
+/*    background-color: transparent; !* Убираем фоновый цвет *!*/
+/*}*/
 
-/* Галерея портфолио */
-.portfolio-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-}
+/*!* Заголовок и подзаголовок *!*/
+/*.header-text h1 {*/
+/*    margin: 0;*/
+/*    font-size: 36px;*/
+/*    font-weight: bold;*/
+/*    letter-spacing: 1px;*/
+/*    color: #2c3e50; !* Цвет текста *!*/
+/*}*/
 
-.gallery-item {
-    flex: 1 1 calc(33.333% - 40px);
-    max-width: 300px;
-    text-align: center;
-}
+/*.header-text p {*/
+/*    margin: 10px 0 0;*/
+/*    font-size: 18px;*/
+/*    color: #666; !* Цвет текста *!*/
+/*    font-weight: 300;*/
+/*}*/
 
-.gallery-item img {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+/*!* Навигационное меню *!*/
+/*nav {*/
+/*    margin-top: 20px;*/
+/*}*/
 
-.gallery-item img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
+/*nav ul {*/
+/*    list-style: none;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    display: inline-flex;*/
+/*    gap: 30px;*/
+/*}*/
 
-.gallery-item p {
-    margin-top: 10px;
-    font-size: 16px;
-    color: #333;
-}
+/*nav ul li {*/
+/*    margin: 0;*/
+/*}*/
+
+/*nav ul li a {*/
+/*    color: #2c3e50; !* Цвет текста *!*/
+/*    text-decoration: none;*/
+/*    font-size: 18px;*/
+/*    font-weight: 500;*/
+/*    transition: color 0.3s;*/
+/*}*/
+
+/*nav ul li a:hover {*/
+/*    color: #1abc9c; !* Цвет при наведении *!*/
+/*}*/
+
+/*!* Переключатель языков *!*/
+/*.language-switcher {*/
+/*    align-self: flex-start;*/
+/*    padding: 20px;*/
+/*}*/
+
+/*.language-switcher select {*/
+/*    padding: 8px 12px;*/
+/*    font-size: 16px;*/
+/*    background-color: #fff; !* Белый фон *!*/
+/*    color: #2c3e50; !* Цвет текста *!*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 4px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s;*/
+/*}*/
+
+/*.language-switcher select:hover {*/
+/*    background-color: #f4f4f4; !* Цвет при наведении *!*/
+/*}*/
+
+/*!* Основной контент *!*/
+/*main {*/
+/*    padding: 40px 20px;*/
+/*}*/
+
+/*!* Услуги и отзывы *!*/
+/*.services, .reviews {*/
+/*    margin-top: 40px;*/
+/*}*/
+
+/*.services h2, .reviews h2 {*/
+/*    font-size: 28px;*/
+/*    font-weight: bold;*/
+/*    margin-bottom: 20px;*/
+/*    text-align: center;*/
+/*    color: #2c3e50;*/
+/*}*/
+
+/*.service-cards, .review-cards {*/
+/*    display: flex;*/
+/*    gap: 30px;*/
+/*    justify-content: center;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+
+/*.card {*/
+/*    background-color: #fff;*/
+/*    padding: 25px;*/
+/*    border-radius: 10px;*/
+/*    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
+/*    flex: 1;*/
+/*    max-width: 300px;*/
+/*    text-align: center;*/
+/*    transition: transform 0.3s, box-shadow 0.3s;*/
+/*}*/
+
+/*.card:hover {*/
+/*    transform: translateY(-10px);*/
+/*    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);*/
+/*}*/
+
+/*.card h3 {*/
+/*    font-size: 22px;*/
+/*    font-weight: bold;*/
+/*    margin-bottom: 10px;*/
+/*    color: #2c3e50;*/
+/*}*/
+
+/*.card p {*/
+/*    font-size: 16px;*/
+/*    color: #666;*/
+/*}*/
+
+/*!* Подвал *!*/
+/*footer {*/
+/*    background-color: #2c3e50;*/
+/*    color: #fff;*/
+/*    text-align: center;*/
+/*    padding: 20px;*/
+/*    margin-top: 50px;*/
+/*    font-size: 16px;*/
+/*}*/
+
+/*footer p {*/
+/*    margin: 0;*/
+/*}*/
+
+/*!* Слайдер *!*/
+/*.slider {*/
+/*    width: 100%;*/
+/*    max-width: 800px; !* Ограничиваем ширину слайдера *!*/
+/*    margin: 0 auto; !* Центрируем слайдер *!*/
+/*    overflow: hidden;*/
+/*    position: relative;*/
+/*    border-radius: 15px;*/
+/*    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);*/
+/*    height: 400px; !* Фиксированная высота слайдера *!*/
+/*}*/
+
+/*.slides {*/
+/*    display: flex;*/
+/*    transition: transform 0.5s ease-in-out;*/
+/*    height: 100%; !* Занимает всю высоту слайдера *!*/
+/*}*/
+
+/*.slides img {*/
+/*    width: 100%;*/
+/*    height: 100%; !* Занимает всю высоту слайдера *!*/
+/*    flex-shrink: 0;*/
+/*    border-radius: 15px;*/
+/*    object-fit: cover; !* Сохраняет пропорции изображения *!*/
+/*}*/
+
+/*!* Индикаторы (точки) *!*/
+/*.indicators {*/
+/*    position: absolute;*/
+/*    bottom: 10px;*/
+/*    left: 50%;*/
+/*    transform: translateX(-50%);*/
+/*    display: flex;*/
+/*    gap: 10px;*/
+/*}*/
+
+/*.indicator {*/
+/*    width: 10px;*/
+/*    height: 10px;*/
+/*    background-color: rgba(255, 255, 255, 0.5);*/
+/*    border-radius: 50%;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.3s ease;*/
+/*}*/
+
+/*.indicator.active {*/
+/*    background-color: #007BFF;*/
+/*}*/
+
+/*!* Стили для стрелок *!*/
+/*.prev, .next {*/
+/*    position: absolute;*/
+/*    top: 50%;*/
+/*    transform: translateY(-50%);*/
+/*    background-color: rgba(0, 0, 0, 0.5);*/
+/*    color: white;*/
+/*    border: none;*/
+/*    padding: 10px;*/
+/*    cursor: pointer;*/
+/*    border-radius: 50%;*/
+/*    font-size: 18px;*/
+/*    z-index: 10;*/
+/*}*/
+
+/*.prev {*/
+/*    left: 10px;*/
+/*}*/
+
+/*.next {*/
+/*    right: 10px;*/
+/*}*/
+
+/*.prev:hover, .next:hover {*/
+/*    background-color: rgba(0, 0, 0, 0.8);*/
+/*}*/
+
+/*!* Галерея портфолио *!*/
+/*.portfolio-gallery {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    gap: 20px;*/
+/*    justify-content: center;*/
+/*}*/
+
+/*.gallery-item {*/
+/*    flex: 1 1 calc(33.333% - 40px);*/
+/*    max-width: 300px;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.gallery-item img {*/
+/*    width: 100%;*/
+/*    height: auto;*/
+/*    border-radius: 10px;*/
+/*    transition: transform 0.3s ease, box-shadow 0.3s ease;*/
+/*}*/
+
+/*.gallery-item img:hover {*/
+/*    transform: scale(1.05);*/
+/*    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);*/
+/*}*/
+
+/*.gallery-item p {*/
+/*    margin-top: 10px;*/
+/*    font-size: 16px;*/
+/*    color: #333;*/
+/*}*/
+
+/*!* Блок с акцией *!*/
+/*.promo-banner {*/
+/*    background-color: #ffcc00; !* Яркий желтый *!*/
+/*    padding: 20px 0;*/
+/*    text-align: center;*/
+/*    margin-bottom: 20px; !* Отступ от следующего блока *!*/
+/*}*/
+
+/*.promo-banner h2 {*/
+/*    color: #333; !* Темно-серый *!*/
+/*    font-size: 24px;*/
+/*    margin: 0;*/
+/*}*/
+
+/*.promo-banner p {*/
+/*    color: #333;*/
+/*    font-size: 18px;*/
+/*    margin: 10px 0;*/
+/*}*/
+
+/*.promo-banner .btn {*/
+/*    background-color: #333; !* Темно-серый *!*/
+/*    color: #fff; !* Белый *!*/
+/*    padding: 10px 20px;*/
+/*    border-radius: 5px;*/
+/*    text-decoration: none;*/
+/*}*/

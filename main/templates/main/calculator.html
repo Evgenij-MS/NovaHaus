@@ -5,12 +5,9 @@
 {% block description %}Рассчитайте стоимость ремонта или утепления с помощью нашего онлайн-калькулятора.{% endblock %}
 {% block keywords %}калькулятор, стоимость ремонта, утепление, NovaHaus{% endblock %}
 
-
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/calculator.css' %}">
 {% endblock %}
-
-
 
 {% block content %}
 <div class="calculator-container">
@@ -136,13 +133,10 @@
     </div>
 </div>
 
-
-
 <!-- Подключение Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- Подключение JavaScript -->
-<script src="{% static 'js/visualization.js' %}"></script>
 <script src="{% static 'js/calculator.js' %}"></script>
 <script src="{% static 'js/modal.js' %}"></script>
 <script src="{% static 'js/animations.js' %}"></script>

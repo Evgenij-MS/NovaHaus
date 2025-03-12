@@ -8,13 +8,11 @@ from django.core.files.storage import default_storage
 import requests
 import logging
 
-
 logger = logging.getLogger(__name__)
 
 # API-ключ DeepSeek
 DEEPSEEK_API_KEY = "sk-0efe6828d940403ba98475c70df6f384"
 DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"  # Убедитесь, что URL правильный
-
 
 # Чат-бот
 @csrf_exempt
@@ -88,8 +86,6 @@ def upload_document(request):
     if request.method == 'POST' and request.FILES['document']:
         document = request.FILES['document']
         file_name = default_storage.save(document.name, document)
-        # Сохраняем информацию о файле в базе данных (пример)
-        # Document.objects.create(user=request.user, file=file_name)
         return JsonResponse({'success': True})
     return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
 
@@ -99,8 +95,6 @@ def send_message_to_manager(request):
     if request.method == 'POST':
         data = json.loads(request.body)
         message = data['message']
-        # Сохраняем сообщение в базе данных (пример)
-        # Message.objects.create(user=request.user, message=message, is_manager=False)
         return JsonResponse({'success': True})
     return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
 
@@ -108,57 +102,52 @@ def send_message_to_manager(request):
 @csrf_exempt
 def get_ai_recommendations(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
-        work_type = data.get('workType')
-        area = data.get('area')
-        total_cost = data.get('totalCost')
-        material_cost = data.get('materialCost')
-        labor_cost = data.get('laborCost')
-
-        prompt = f"""
-        Вы - помощник строительной компании NovaHaus. Клиент рассчитал стоимость работ:
-        - Тип работ: {work_type}
-        - Площадь: {area} м²
-        - Общая стоимость: {total_cost} €
-        - Стоимость материалов: {material_cost} €
-        - Стоимость работы: {labor_cost} €
-
-        Дайте рекомендации по оптимизации затрат или улучшению качества работ.
-        """
-
-        # Формируем запрос к DeepSeek
-        headers = {
-            "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
-            "Content-Type": "application/json"
-        }
-        payload = {
-            "model": "deepseek-chat",
-            "messages": [{"role": "user", "content": prompt}]
-        }
-
-        try:
-            response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload)
-            recommendation = response.json()['choices'][0]['message']['content']
-            return JsonResponse({'success': True, 'recommendation': recommendation})
-        except Exception as e:
-            return JsonResponse({'success': False, 'error': str(e)})
-
-    return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
-
-
-
-@csrf_exempt
-def get_ai_recommendations(request):
-    if request.method == 'POST':
         try:
             data = json.loads(request.body)
             logger.info(f"Received data: {data}")
-            # ... ваш код ...
+
+            work_type = data.get('workType')
+            area = data.get('area')
+            total_cost = data.get('totalCost')
+            material_cost = data.get('materialCost')
+            labor_cost = data.get('laborCost')
+
+            prompt = f"""
+            Вы - помощник строительной компании NovaHaus. Клиент рассчитал стоимость работ:
+            - Тип работ: {work_type}
+            - Площадь: {area} м²
+            - Общая стоимость: {total_cost} €
+            - Стоимость материалов: {material_cost} €
+            - Стоимость работы: {labor_cost} €
+
+            Дайте рекомендации по оптимизации затрат или улучшению качества работ.
+            """
+
+            # Формируем запрос к DeepSeek
+            headers = {
+                "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
+                "Content-Type": "application/json"
+            }
+            payload = {
+                "model": "deepseek-chat",
+                "messages": [{"role": "user", "content": prompt}]
+            }
+
+            response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload)
+
+            # Проверяем статус ответа
+            if response.status_code == 200:
+                recommendation = response.json()['choices'][0]['message']['content']
+                return JsonResponse({'success': True, 'recommendation': recommendation})
+            else:
+                logger.error(f"DeepSeek API error: {response.status_code}, {response.text}")
+                return JsonResponse({'success': False, 'error': 'Ошибка при запросе к DeepSeek'})
+
         except Exception as e:
             logger.error(f"Error: {e}")
             return JsonResponse({'success': False, 'error': str(e)})
 
-
+    return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
 
 # Основные страницы
 def home(request):

@@ -19,6 +19,16 @@
     <link rel="stylesheet" href="{% static 'css/footer.css' %}"> <!-- Стили для подвала -->
     <link rel="stylesheet" href="{% static 'css/media-queries.css' %}"> <!-- Медиа-запросы -->
 
+    <!-- Favicon и связанные файлы -->
+    <link rel="shortcut icon" href="{% static 'images/favicon/favicon.ico' %}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}" />
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}" />
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon/favicon.svg' %}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}" />
+    <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}" />
+    <meta name="apple-mobile-web-app-title" content="NovaHaus" />
+
     <!-- JSON-LD для структурированных данных -->
     <script type="application/ld+json">
     {
@@ -42,31 +52,7 @@
 </head>
 <body>
     <!-- Шапка сайта -->
-    <header>
-        <div class="header-content">
-            <!-- Логотип -->
-            <div class="logo">
-                <img src="{% static 'images/logo.png' %}" alt="NovaHaus Logo">
-            </div>
-            <!-- Текстовая часть (заголовок и подзаголовок) -->
-            <div class="text-section">
-                <div class="header-text">
-                    <h1>NovaHaus</h1>
-                    <p>Ваш надежный партнер в строительстве и ремонте</p>
-                </div>
-                <!-- Навигационное меню -->
-                <nav>
-                    <ul>
-                        <li><a href="{% url 'home' %}">Главная</a></li>
-                        <li><a href="{% url 'services' %}">Услуги</a></li>
-                        <li><a href="{% url 'portfolio' %}">Портфолио</a></li>
-                        <li><a href="{% url 'contact' %}">Контакты</a></li>
-                        <li><a href="{% url 'calculator' %}">Калькулятор</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
+    {% include 'includes/header.html' %}
 
     <!-- Основное содержимое страницы -->
     <main>
@@ -76,8 +62,6 @@
     </main>
 
     <!-- Подвал сайта -->
-    <footer>
-        <p>&copy; 2025 NovaHaus. Все права защищены.</p>
-    </footer>
+    {% include 'includes/footer.html' %}
 </body>
 </html>

@@ -1,7 +1,5 @@
 /* buttons.css */
 .btn {
-  background: var(--primary-gradient);
-  color: var(--neutral-100);
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -10,34 +8,15 @@
   transition: var(--button-hover-effect);
 }
 
-.btn:hover {
+.btn-primary {
+  background: var(--primary-gradient);
+  color: var(--neutral-100);
+}
+
+.btn-primary:hover {
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
 }
-
-
-
-
-
-
-/*стили для кнопок*/
-
-/* !* buttons.css *!*/
-/*.btn {*/
-/*  background-color: #007bff;*/
-/*  color: #fff;*/
-/*  padding: 10px 20px;*/
-/*  border: none;*/
-/*  border-radius: 5px;*/
-/*  font-size: 16px;*/
-/*  cursor: pointer;*/
-/*  transition: background-color 0.3s, transform 0.3s;*/
-/*}*/
-
-/*.btn:hover {*/
-/*  background-color: #0056b3;*/
-/*  transform: scale(1.05);*/
-/*}*/
 
 .btn-secondary {
   background-color: #6c757d;
@@ -47,4 +26,6 @@
 
 .btn-secondary:hover {
   background-color: #5a6268;
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
 }
