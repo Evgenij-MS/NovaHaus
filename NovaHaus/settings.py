@@ -23,7 +23,10 @@ API_KEY = os.getenv('API_KEY')
 YOUR_VARIABLE_NAME = os.getenv('YOUR_VARIABLE_NAME')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+# DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+
+DEBUG = True
+
 
 ALLOWED_HOSTS = [
     '.herokuapp.com',  # Разрешает все поддомены Heroku
