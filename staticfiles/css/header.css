@@ -1,119 +1,69 @@
-/* header.css */
 header {
   background-color: var(--header-bg);
   padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 215px;
 }
 
 .header-content {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .logo img {
   width: 150px;
   height: auto;
+  margin-top: 0;
+}
+
+.header-text {
+  flex: 1;
+  margin-left: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .header-text h1 {
   font-size: var(--font-size-xxl);
   color: var(--neutral-100);
+  margin: 0;
+  font-weight: bold;
+  letter-spacing: 1px;
 }
 
 .header-text p {
   font-size: var(--font-size-lg);
   color: var(--neutral-200);
+  margin: 10px 0 0;
+  font-weight: 300;
+}
+
+nav {
+  margin-top: 20px;
+  width: 100%;
 }
 
 nav ul {
   display: flex;
-  gap: 20px;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 nav ul li a {
   color: var(--neutral-100);
   font-size: var(--font-size-md);
-  transition: var(--link-hover-effect);
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
 nav ul li a:hover {
   color: var(--primary-color);
 }
-
-
-
-
-
-/*!*стили для шапки (логотип, заголовок, подзаголовок, меню*!*/
-/*!* header.css *!*/
-/*header {*/
-/*  height: 215px;*/
-/*  padding: 0;*/
-/*  display: flex;*/
-/*  justify-content: space-between;*/
-/*  align-items: flex-start;*/
-/*  background-color: transparent;*/
-/*}*/
-
-/*.header-content {*/
-/*  display: flex;*/
-/*  align-items: flex-start;*/
-/*  width: 100%;*/
-/*}*/
-
-/*.logo img {*/
-/*  width: 150px;*/
-/*  height: auto;*/
-/*  margin-top: 0;*/
-/*}*/
-
-/*.text-section {*/
-/*  flex: 1;*/
-/*  margin-left: 30px;*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  justify-content: center;*/
-/*  align-items: flex-start;*/
-/*  height: 100%;*/
-/*  text-align: left;*/
-/*  background-color: transparent;*/
-/*}*/
-
-/*.header-text h1 {*/
-/*  margin: 0;*/
-/*  font-size: 36px;*/
-/*  font-weight: bold;*/
-/*  letter-spacing: 1px;*/
-/*  color: #2c3e50;*/
-/*}*/
-
-/*.header-text p {*/
-/*  margin: 10px 0 0;*/
-/*  font-size: 18px;*/
-/*  color: #666;*/
-/*  font-weight: 300;*/
-/*}*/
-
-/*nav {*/
-/*  margin-top: 20px;*/
-/*}*/
-
-/*nav ul {*/
-/*  list-style: none;*/
-/*  margin: 0;*/
-/*  padding: 0;*/
-/*  display: flex;*/
-/*  gap: 30px;*/
-/*}*/
-
-/*nav ul li a {*/
-/*  color: #2c3e50;*/
-/*  text-decoration: none;*/
-/*  font-size: 18px;*/
-/*  font-weight: 500;*/
-/*  transition: color 0.3s;*/
-/*}*/
-
-/*nav ul li a:hover {*/
-/*  color: #1abc9c;*/
-/*}*/

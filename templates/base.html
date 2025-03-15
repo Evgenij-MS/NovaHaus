@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}  <!-- Добавьте эту строку -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}NovaHaus – Ваш надежный партнер в строительстве и ремонте{% endblock %}</title>
@@ -61,5 +62,8 @@
 
     <!-- Подвал сайта -->
     {% include 'includes/footer.html' %}
+
+    <!-- Подключение JavaScript -->
+    <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 </html>

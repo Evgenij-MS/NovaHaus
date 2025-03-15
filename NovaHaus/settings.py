@@ -13,8 +13,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key')
 
 # Режим отладки
-DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'  # Используем переменную окружения для DEBUG
 
+# Разрешенные хосты
 ALLOWED_HOSTS = [
     'novahaus-koeln.de',
     'www.novahaus-koeln.de',
@@ -33,18 +34,20 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'whitenoise.runserver_nostatic',
+    'compressor',  # Добавляем django-compressor
 ]
 
 # Промежуточное ПО
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # WhiteNoise должен быть сразу после SecurityMiddleware
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'main.middleware.BlockBadBotsMiddleware',  # Middleware для блокировки ботов
 ]
 
 # Корневой URL
@@ -103,6 +106,13 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# Настройки для статических файлов
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',  # Добавляем CompressorFinder
+]
+
 # Медиафайлы
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
@@ -118,7 +128,28 @@ CACHES = {
     }
 }
 
+# Настройки для django-compressor
+COMPRESS_ENABLED = True
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.cssmin.CSSMinFilter',
+]
+COMPRESS_JS_FILTERS = [
+    'compressor.filters.jsmin.JSMinFilter',
+]
+
 # Настройки для Heroku
 if os.getenv('ON_HEROKU'):
     import django_heroku
     django_heroku.settings(locals())
+
+# Настройки безопасности (только для production)
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True  # Перенаправление HTTP на HTTPS
+    SESSION_COOKIE_SECURE = True  # Безопасные cookies для сессий
+    CSRF_COOKIE_SECURE = True  # Безопасные cookies для CSRF
+    SECURE_BROWSER_XSS_FILTER = True  # Защита от XSS
+    SECURE_CONTENT_TYPE_NOSNIFF = True  # Защита от MIME-типов
+    SECURE_HSTS_SECONDS = 31536000  # Включение HSTS
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Включение HSTS для поддоменов
+    SECURE_HSTS_PRELOAD = True  # Предзагрузка HSTS
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # Для прокси

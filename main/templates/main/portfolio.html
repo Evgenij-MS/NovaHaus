@@ -17,67 +17,31 @@
     <div class="portfolio-gallery">
         <!-- Пример проекта с ремонтом -->
         <div class="gallery-item repair">
-            <img src="{% static 'main/images/portfolio/project1.jpg' %}" alt="Ремонт квартиры в Кельне">
+            <picture>
+                <source srcset="{% static 'main/images/portfolio/project1-large.jpg' %}" media="(min-width: 768px)">
+                <img src="{% static 'main/images/portfolio/project1-small.jpg' %}" alt="Ремонт квартиры в Кельне" loading="lazy">
+            </picture>
             <p>Ремонт квартиры в Кельне</p>
         </div>
-        <!-- Пример проекта с утеплением -->
-        <div class="gallery-item insulation">
-            <img src="{% static 'main/images/portfolio/project2.jpg' %}" alt="Утепление фасада">
-            <p>Утепление фасада</p>
-        </div>
-        <!-- Пример проекта с фасадными работами -->
-        <div class="gallery-item facade">
-            <img src="{% static 'main/images/portfolio/project3.jpg' %}" alt="Фасадные работы">
-            <p>Фасадные работы</p>
-        </div>
-        <!-- Пример проекта с ремонтом офиса -->
-        <div class="gallery-item repair">
-            <img src="{% static 'main/images/portfolio/project4.jpg' %}" alt="Ремонт офиса">
-            <p>Ремонт офиса</p>
-        </div>
-        <!-- Пример проекта с демонтажными работами -->
-        <div class="gallery-item repair">
-            <img src="{% static 'main/images/portfolio/project5.jpg' %}" alt="Демонтажные работы">
-            <p>Демонтажные работы</p>
-        </div>
-        <!-- Пример проекта с утеплением кровли -->
-        <div class="gallery-item insulation">
-            <img src="{% static 'main/images/portfolio/project6.jpg' %}" alt="Утепление кровли">
-            <p>Утепление кровли</p>
-        </div>
-        <!-- Пример проекта с видео -->
-        <div class="gallery-item repair">
-            <video controls>
-                <source src="{% static 'main/videos/project1.mp4' %}" type="video/mp4">
-                Ваш браузер не поддерживает видео.
-            </video>
-            <p>Ремонт квартиры</p>
-        </div>
-        <!-- Пример проекта с 3D-визуализацией -->
-        <div class="gallery-item repair">
-            <iframe src="https://3dviewer.net/embed.html#model=https://example.com/models/project1.glb" width="100%" height="400px" frameborder="0"></iframe>
-            <p>Ремонт квартиры</p>
-        </div>
+        <!-- Остальные проекты -->
     </div>
 </div>
 
 <script>
-    // Функция для фильтрации проектов
     function filterProjects(category) {
         const items = document.querySelectorAll('.gallery-item');
         items.forEach(item => {
             if (category === 'all' || item.classList.contains(category)) {
                 item.style.display = 'block';
-                item.classList.add('fade-in'); // Добавляем анимацию
+                item.classList.add('fade-in');
             } else {
                 item.style.display = 'none';
             }
         });
     }
 
-    // Инициализация фильтра при загрузке страницы
     document.addEventListener('DOMContentLoaded', () => {
-        filterProjects('all'); // Показываем все проекты по умолчанию
+        filterProjects('all');
     });
 </script>
 {% endblock %}

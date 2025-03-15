@@ -1,12 +1,9 @@
-/*стили для форм.*/
-
-/* forms.css */
 .feedback-form {
   margin-top: 30px;
   padding: 20px;
-  background-color: #fff;
+  background-color: var(--background-color);
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .feedback-form input,
@@ -14,8 +11,10 @@
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--neutral-300);
   border-radius: 5px;
+  background-color: var(--background-color);
+  color: var(--text-color);
 }
 
 .feedback-form textarea {

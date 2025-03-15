@@ -7,7 +7,7 @@ let currentLanguage = 'ru'; // По умолчанию русский
 let mediaRecorder;
 let audioChunks = [];
 
-// Функция для смены языка (будет использоваться в будущем)
+// Функция для смены языка
 function changeLanguage(lang) {
     currentLanguage = lang;
     appendMessage('bot', `Язык изменен на ${lang === 'ru' ? 'русский' : lang === 'en' ? 'английский' : 'немецкий'}.`);

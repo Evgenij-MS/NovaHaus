@@ -1,13 +1,10 @@
-/*стили для подвала.*/
-
-/* footer.css */
 footer {
-  background-color: #2c3e50;
-  color: #fff;
+  background-color: var(--header-bg);
+  color: var(--neutral-100);
   text-align: center;
   padding: 20px;
   margin-top: 50px;
-  font-size: 16px;
+  font-size: var(--font-size-md);
 }
 
 footer p {
