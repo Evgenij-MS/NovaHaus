@@ -15,12 +15,12 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key')
 # Режим отладки
 DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
-# Разрешенные хосты
 ALLOWED_HOSTS = [
     'novahaus-koeln.de',
     'www.novahaus-koeln.de',
     'localhost',
     '127.0.0.1',
+    'novahaus-eu-5b21cc3bb91d.herokuapp.com',
 ]
 
 # Установленные приложения
