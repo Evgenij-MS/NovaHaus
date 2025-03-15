@@ -2,11 +2,6 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
-import django_heroku
-
-
-# Настройки для Heroku
-django_heroku.settings(locals())
 
 # Загрузка переменных окружения
 load_dotenv()
@@ -115,16 +110,15 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Ключевое поле по умолчанию
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Настройки для Heroku
-if os.getenv('ON_HEROKU'):
-    import django_heroku
-    django_heroku.settings(locals())
-
-
-
+# Кэширование
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
         'LOCATION': '/var/tmp/django_cache',
     }
 }
+
+# Настройки для Heroku
+if os.getenv('ON_HEROKU'):
+    import django_heroku
+    django_heroku.settings(locals())
