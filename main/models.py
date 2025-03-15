@@ -25,6 +25,12 @@ class Portfolio(models.Model):
 
 # Модель для расчетов
 class Calculation(models.Model):
+    STATUS_CHOICES = [
+        ('new', 'Новый'),
+        ('in_progress', 'В процессе'),
+        ('completed', 'Завершен'),
+    ]
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     work_type = models.CharField(max_length=100)
     area = models.FloatField()
@@ -34,6 +40,19 @@ class Calculation(models.Model):
     total_cost = models.DecimalField(max_digits=10, decimal_places=2)
     material_cost = models.DecimalField(max_digits=10, decimal_places=2)
     labor_cost = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='new')
+    start_date = models.DateField(null=True, blank=True)
+    end_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return f"{self.work_type} - {self.total_cost}"
+
+# Модель для отзывов клиентов
+class Review(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    text = models.TextField()
+    rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)])  # Оценка от 1 до 5
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Отзыв от {self.user.username}"

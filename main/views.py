@@ -7,12 +7,12 @@ import json
 from django.core.files.storage import default_storage
 import requests
 import logging
-
+import os
 logger = logging.getLogger(__name__)
 
 # API-ключ DeepSeek
-DEEPSEEK_API_KEY = "sk-0efe6828d940403ba98475c70df6f384"
-DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"  # Убедитесь, что URL правильный
+DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
+DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
 
 # Чат-бот
 @csrf_exempt

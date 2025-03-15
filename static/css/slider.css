@@ -1,4 +1,3 @@
-/* slider.css */
 .slider {
   width: 100%;
   max-width: 800px;
@@ -27,16 +26,16 @@
 /* Индикаторы */
 .indicators {
   position: absolute;
-  bottom: 20px; /* Увеличен отступ для лучшей видимости */
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   gap: 10px;
-  z-index: 5; /* Убедимся, что индикаторы поверх слайдов */
+  z-index: 5;
 }
 
 .indicator {
-  width: 12px; /* Немного увеличен размер */
+  width: 12px;
   height: 12px;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
@@ -45,8 +44,8 @@
 }
 
 .indicator.active {
-  background-color: #007BFF;
-  transform: scale(1.2); /* Увеличение активного индикатора */
+  background-color: var(--primary-color);
+  transform: scale(1.2);
 }
 
 /* Кнопки навигации */
@@ -57,17 +56,17 @@
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
-  padding: 12px; /* Увеличен размер для удобства */
+  padding: 12px;
   cursor: pointer;
   border-radius: 50%;
-  font-size: 20px; /* Увеличен размер иконки */
+  font-size: 20px;
   z-index: 10;
   transition: background-color 0.3s ease, opacity 0.3s ease;
-  opacity: 0.8; /* Полупрозрачность по умолчанию */
+  opacity: 0.8;
 }
 
 .prev {
-  left: 15px; /* Увеличен отступ от края */
+  left: 15px;
 }
 
 .next {
@@ -76,13 +75,13 @@
 
 .prev:hover, .next:hover {
   background-color: rgba(0, 0, 0, 0.8);
-  opacity: 1; /* Полная видимость при наведении */
+  opacity: 1;
 }
 
 /* Адаптивность */
 @media (max-width: 768px) {
   .slider {
-    height: 300px; /* Уменьшенная высота для мобильных устройств */
+    height: 300px;
   }
 
   .prev, .next {
@@ -98,7 +97,7 @@
 
 @media (max-width: 480px) {
   .slider {
-    height: 200px; /* Еще меньше для маленьких экранов */
+    height: 200px;
   }
 
   .prev, .next {

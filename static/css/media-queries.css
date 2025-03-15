@@ -1,20 +1,89 @@
 /* media-queries.css */
 @media (max-width: var(--breakpoint-mobile)) {
+  header {
+    height: auto;
+    padding: 10px;
+    width: 100%; /* Ограничиваем ширину шапки */
+    box-sizing: border-box; /* Учитываем padding в общей ширине */
+  }
+
+  .header-content {
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* Ограничиваем ширину контейнера */
+  }
+
+  .logo img {
+    width: 100px;
+    height: auto;
+    margin: 10px 0;
+  }
+
+  .header-text {
+    margin-left: 0;
+    text-align: center;
+    align-items: center;
+    width: 100%; /* Ограничиваем ширину текстового блока */
+  }
+
+  .header-text h1 {
+    font-size: var(--font-size-xl);
+    text-align: center;
+    margin: 0;
+  }
+
+  .header-text p {
+    font-size: var(--font-size-md);
+    text-align: center;
+    margin: 10px 0 0;
+  }
+
+  nav {
+    width: 100%; /* Ограничиваем ширину навигации */
+    margin-top: 10px;
+  }
+
+  nav ul {
+    flex-direction: column;
+    gap: 10px;
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ограничиваем ширину меню */
+    box-sizing: border-box; /* Учитываем padding в общей ширине */
+  }
+
+  nav ul li a {
+    font-size: var(--font-size-sm); /* Уменьшаем размер шрифта для мобильных */
+    padding: 8px 0; /* Добавляем отступы для удобства нажатия */
+    display: block; /* Делаем ссылки блочными для лучшего взаимодействия */
+    text-align: center; /* Выравниваем текст по центру */
+  }
+
+  .language-switcher {
+    align-self: center;
+    padding: 10px;
+    width: 100%; /* Ограничиваем ширину переключателя */
+    text-align: center; /* Выравниваем по центру */
+  }
+
+  .language-switcher select {
+    width: 100%; /* Делаем переключатель на всю ширину */
+    max-width: 200px; /* Ограничиваем максимальную ширину */
+    margin: 0 auto; /* Центрируем */
+  }
+}
+
+@media (max-width: 768px) {
   .header-content {
     flex-direction: column;
     align-items: center;
   }
 
-  .logo img {
-    width: 100px;
-  }
-
-  .header-text h1 {
-    font-size: var(--font-size-xl);
-  }
-
-  .header-text p {
-    font-size: var(--font-size-md);
+  .header-text {
+    margin-left: 0;
+    text-align: center;
   }
 
   nav ul {
@@ -23,56 +92,3 @@
   }
 }
 
-
-
-
-
-/*медиа-запросы для адаптации под мобильные устройства.*/
-
-/*!* media-queries.css *!*/
-/*@media (max-width: 768px) {*/
-/*  .logo img {*/
-/*    width: 100px;*/
-/*    height: auto;*/
-/*    margin: 10px 0;*/
-/*  }*/
-
-/*  .header-text h1 {*/
-/*    font-size: 24px;*/
-/*    text-align: center;*/
-/*  }*/
-
-/*  .header-text p {*/
-/*    font-size: 14px;*/
-/*    text-align: center;*/
-/*  }*/
-
-/*  nav ul {*/
-/*    flex-direction: column;*/
-/*    gap: 10px;*/
-/*    background-color: #f8f9fa;*/
-/*    padding: 10px;*/
-/*    border-radius: 8px;*/
-/*    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);*/
-/*  }*/
-
-/*  nav ul.active {*/
-/*    display: flex;*/
-/*  }*/
-
-/*  .menu-toggle {*/
-/*    display: block;*/
-/*    background: none;*/
-/*    border: none;*/
-/*    font-size: 24px;*/
-/*    cursor: pointer;*/
-/*  }*/
-
-/*  .header-content {*/
-/*    padding: 10px;*/
-/*  }*/
-
-/*  .text-section {*/
-/*    margin-left: 15px;*/
-/*  }*/
-/*}*/

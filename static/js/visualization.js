@@ -1,38 +1,12 @@
-// Функция для отображения круговой диаграммы
-function showChart(totalCost, materialCost, laborCost) {
-    const ctx = document.getElementById('cost-chart').getContext('2d');
+// Функция для отображения 3D-модели
+function show3DModel(modelUrl) {
+    const viewer = document.getElementById('3d-viewer');
+    viewer.src = modelUrl;
+    viewer.style.display = 'block';
+}
 
-    // Удаляем предыдущий график, если он существует
-    if (window.myChart) {
-        window.myChart.destroy();
-    }
-
-    // Создаем новый график
-    window.myChart = new Chart(ctx, {
-        type: 'pie',
-        data: {
-            labels: ['Материалы', 'Работа'],
-            datasets: [{
-                data: [materialCost, laborCost],
-                backgroundColor: ['#007bff', '#28a745'], // Цвета для секторов
-                borderColor: '#ffffff', // Цвет границ
-                borderWidth: 2
-            }]
-        },
-        options: {
-            responsive: true, // Адаптивность
-            plugins: {
-                legend: {
-                    position: 'top', // Положение легенды
-                },
-                title: {
-                    display: true,
-                    text: 'Распределение затрат', // Заголовок графика
-                    font: {
-                        size: 16
-                    }
-                }
-            }
-        }
-    });
+// Функция для скрытия 3D-модели
+function hide3DModel() {
+    const viewer = document.getElementById('3d-viewer');
+    viewer.style.display = 'none';
 }

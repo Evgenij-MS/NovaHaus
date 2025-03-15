@@ -1,4 +1,3 @@
-/* buttons.css */
 .btn {
   padding: 10px 20px;
   border: none;
@@ -6,11 +5,11 @@
   font-size: var(--font-size-md);
   cursor: pointer;
   transition: var(--button-hover-effect);
+  color: var(--neutral-100);
 }
 
 .btn-primary {
   background: var(--primary-gradient);
-  color: var(--neutral-100);
 }
 
 .btn-primary:hover {
@@ -19,13 +18,11 @@
 }
 
 .btn-secondary {
-  background-color: #6c757d;
-  color: #fff;
-  margin-top: 10px;
+  background-color: var(--secondary-color);
 }
 
 .btn-secondary:hover {
-  background-color: #5a6268;
+  background-color: var(--accent-color);
   transform: translateY(-3px);
   box-shadow: var(--shadow-md);
 }

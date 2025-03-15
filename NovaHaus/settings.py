@@ -1,42 +1,34 @@
 import os
-from dotenv import load_dotenv
 from pathlib import Path
+from dotenv import load_dotenv
 import dj_database_url
-from django.core.exceptions import ImproperlyConfigured
-from django.core.management.utils import get_random_secret_key
+import django_heroku
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+# Настройки для Heroku
+django_heroku.settings(locals())
+
+# Загрузка переменных окружения
+load_dotenv()
+
+# Базовая директория
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-def get_env_variable(var_name):
-    try:
-        return os.environ[var_name]
-    except KeyError:
-        raise ImproperlyConfigured(f"Set the {var_name} environment variable")
+# Секретный ключ
+SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-load_dotenv()
-SECRET_KEY = os.getenv('SECRET_KEY')
+# Режим отладки
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
-API_KEY = os.getenv('API_KEY')
-
-YOUR_VARIABLE_NAME = os.getenv('YOUR_VARIABLE_NAME')
-
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
-
-DEBUG = True
-
-
+# Разрешенные хосты
 ALLOWED_HOSTS = [
-    '.herokuapp.com',  # Разрешает все поддомены Heroku
-    'localhost',
-    '127.0.0.1',
     'novahaus-koeln.de',
     'www.novahaus-koeln.de',
+    'localhost',
+    '127.0.0.1',
 ]
 
-# Application definition
+# Установленные приложения
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -46,9 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'whitenoise.runserver_nostatic',
-    # 'modeltranslation',
 ]
 
+# Промежуточное ПО
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -60,8 +52,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Корневой URL
 ROOT_URLCONF = 'NovaHaus.urls'
 
+# Шаблоны
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -78,15 +72,15 @@ TEMPLATES = [
     },
 ]
 
+# WSGI-приложение
 WSGI_APPLICATION = 'NovaHaus.wsgi.application'
 
-# Настройка базы данных
+# База данных
 DATABASES = {
     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
-
 }
 
-# Password validation
+# Валидация паролей
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -102,36 +96,35 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# LANGUAGES = [
-#     ('de', 'German'),
-#     ('en', 'English'),
-#     ('ru', 'Russian'),
-#     ('sk', 'Slovak'),
-#     ('tr', 'Turkish'),
-# ]
-
-#
-# MODELTRANSLATION_DEFAULT_LANGUAGE = 'de'  # Язык по умолчанию
-# MODELTRANSLATION_LANGUAGES = ('de', 'en', 'ru', 'sk', 'tr')  # Поддерживаемые языки
-
-
-# Internationalization
+# Локализация
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
+# Статические файлы
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Media files
+# Медиафайлы
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Default primary key field type
+# Ключевое поле по умолчанию
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Настройки для Heroku
+if os.getenv('ON_HEROKU'):
+    import django_heroku
+    django_heroku.settings(locals())
+
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': '/var/tmp/django_cache',
+    }
+}
