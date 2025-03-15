@@ -1,6 +1,9 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from main import views
+
+
+
 
 urlpatterns = [
     path('chatbot/', views.chatbot, name='chatbot'),
@@ -15,4 +18,5 @@ urlpatterns = [
     path('blog/', views.blog, name='blog'),
     path('contact/', views.contact, name='contact'),
     path('calculator/', views.calculator, name='calculator'),
+    re_path(r'^.*$', views.redirect_to_www),  # Переместите редирект в конец
 ]

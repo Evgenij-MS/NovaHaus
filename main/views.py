@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponsePermanentRedirect
 from django.contrib.auth.forms import UserCreationForm
 from .models import Calculation
 import json
@@ -8,6 +8,15 @@ from django.core.files.storage import default_storage
 import requests
 import logging
 import os
+
+
+def redirect_to_www(request):
+    return HttpResponsePermanentRedirect(f"https://www.novahaus-koeln.de{request.path}")
+
+
+
+
+
 logger = logging.getLogger(__name__)
 
 # API-ключ DeepSeek
