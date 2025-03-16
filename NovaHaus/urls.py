@@ -2,9 +2,6 @@ from django.contrib import admin
 from django.urls import path, re_path
 from main import views
 
-
-
-
 urlpatterns = [
     path('chatbot/', views.chatbot, name='chatbot'),
     path('get-ai-recommendations/', views.get_ai_recommendations, name='get_ai_recommendations'),
@@ -18,5 +15,7 @@ urlpatterns = [
     path('blog/', views.blog, name='blog'),
     path('contact/', views.contact, name='contact'),
     path('calculator/', views.calculator, name='calculator'),
-    re_path(r'^.*$', views.redirect_to_www),  # Переместите редирект в конец
+    re_path(r'^.*$', views.redirect_to_www), # Переместите редирект в конец
+    path('register-partner/', views.register_partner, name='register_partner'),
+    path('partner-success/', views.partner_success, name='partner_success'),
 ]

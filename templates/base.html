@@ -1,12 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru"> <!-- Изменено на русский язык, если ваш сайт ориентирован на русскоязычную аудиторию -->
 <head>
-    {% load static %}  <!-- Добавьте эту строку -->
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Для совместимости с IE -->
     <title>{% block title %}NovaHaus – Ваш надежный партнер в строительстве и ремонте{% endblock %}</title>
     <meta name="description" content="{% block description %}NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы и многое другое.{% endblock %}">
     <meta name="keywords" content="{% block keywords %}ремонт, строительство, утепление, Кельн, NovaHaus{% endblock %}">
+    <meta name="author" content="NovaHaus"> <!-- Указание автора сайта -->
+    <meta name="robots" content="index, follow"> <!-- Индексация и следование по ссылкам -->
+    <meta name="revisit-after" content="7 days"> <!-- Рекомендация для поисковых систем переиндексировать страницу через 7 дней -->
+    <meta property="og:title" content="NovaHaus – Ваш надежный партнер в строительстве и ремонте"> <!-- Open Graph для соцсетей -->
+    <meta property="og:description" content="NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы и многое другое.">
+    <meta property="og:image" content="{% static 'images/logo.png' %}">
+    <meta property="og:url" content="https://www.novahaus-koeln.de">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image"> <!-- Для Twitter -->
+    <meta name="twitter:title" content="NovaHaus – Ваш надежный партнер в строительстве и ремонте">
+    <meta name="twitter:description" content="NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы и многое другое.">
+    <meta name="twitter:image" content="{% static 'images/logo.png' %}">
 
     <!-- Подключение CSS-файлов -->
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
@@ -45,7 +58,12 @@
         "addressCountry": "Германия"
       },
       "telephone": "+49 155 100 718 48",
-      "url": "https://www.novahaus-koeln.de"
+      "url": "https://www.novahaus-koeln.de",
+      "sameAs": [
+        "https://www.instagram.com/novahaus",
+        "https://www.facebook.com/novahaus",
+        "https://www.linkedin.com/company/novahaus"
+      ]
     }
     </script>
 </head>

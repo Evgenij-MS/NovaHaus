@@ -12,7 +12,7 @@
     </section>
 
     <!-- Слайдер -->
-    <section class="slider" aria-label="Слайдер с примерами работ"> <!-- Добавлено aria-label -->
+    <section class="slider" aria-label="Слайдер с примерами работ">
         <div class="slides">
             <img src="{% static 'images/slider/slide1.jpg' %}" alt="Современный ремонт квартир">
             <img src="{% static 'images/slider/slide2.jpg' %}" alt="Утепление фасадов">
@@ -30,7 +30,7 @@
         <div class="container">
             <h2>Наши услуги</h2>
             <div class="service-cards">
-                <article class="card"> <!-- Использован <article> для семантики -->
+                <article class="card">
                     <h3>Ремонт квартир</h3>
                     <p>Качественный ремонт под ключ с использованием современных материалов.</p>
                     <a href="/services/" class="btn">Подробнее</a>
@@ -54,7 +54,7 @@
         <div class="container">
             <h2>Отзывы клиентов</h2>
             <div class="review-cards">
-                <article class="card"> <!-- Использован <article> для семантики -->
+                <article class="card">
                     <p>"Отличная работа, спасибо команде NovaHaus! Все сделали быстро и качественно."</p>
                     <span>– Иван Иванов</span>
                 </article>
@@ -67,6 +67,29 @@
                     <span>– Алексей Смирнов</span>
                 </article>
             </div>
+        </div>
+    </section>
+
+    <!-- Партнерская программа -->
+    <section class="partners">
+        <div class="container">
+            <h2>Станьте нашим партнером!</h2>
+            <p>Присоединяйтесь к нашей партнерской программе и получайте вознаграждение за привлечение клиентов.</p>
+            <div class="partner-benefits">
+                <article class="card">
+                    <h3>Высокие комиссии</h3>
+                    <p>Получайте до 10% от суммы каждого заказа, привлеченного вами.</p>
+                </article>
+                <article class="card">
+                    <h3>Поддержка 24/7</h3>
+                    <p>Наша команда всегда готова помочь вам с вопросами и предоставить необходимые материалы.</p>
+                </article>
+                <article class="card">
+                    <h3>Уникальные условия</h3>
+                    <p>Индивидуальные условия для крупных партнеров и агентств.</p>
+                </article>
+            </div>
+            <a href="{% url 'register_partner' %}" class="btn">Зарегистрироваться как партнер</a>
         </div>
     </section>
 

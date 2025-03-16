@@ -2,20 +2,17 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponsePermanentRedirect
 from django.contrib.auth.forms import UserCreationForm
-from .models import Calculation
+from .models import Calculation, Partner  # Импортируем модель Partner
+from .forms import PartnerForm  # Импортируем форму для регистрации партнеров
 import json
 from django.core.files.storage import default_storage
 import requests
 import logging
 import os
-
+import uuid  # Для генерации уникального реферального кода
 
 def redirect_to_www(request):
     return HttpResponsePermanentRedirect(f"https://www.novahaus-koeln.de{request.path}")
-
-
-
-
 
 logger = logging.getLogger(__name__)
 
@@ -69,6 +66,19 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'main/register.html', {'form': form})
+
+# Регистрация партнера
+def register_partner(request):
+    if request.method == 'POST':
+        form = PartnerForm(request.POST)
+        if form.is_valid():
+            partner = form.save(commit=False)
+            partner.referral_code = str(uuid.uuid4())[:8]  # Генерация уникального реферального кода
+            partner.save()
+            return redirect('partner_success')  # Перенаправление на страницу успешной регистрации
+    else:
+        form = PartnerForm()
+    return render(request, 'main/register_partner.html', {'form': form})
 
 # Сохранение расчета
 @csrf_exempt
@@ -182,3 +192,7 @@ def contact(request):
 
 def calculator(request):
     return render(request, 'main/calculator.html')
+
+# Страница успешной регистрации партнера
+def partner_success(request):
+    return render(request, 'main/partner_success.html')

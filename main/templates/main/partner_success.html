@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/partner.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="partner-success">
+    <div class="container">
+        <h2>Регистрация успешно завершена!</h2>
+        <p>Спасибо за регистрацию в качестве партнера NovaHaus. Ваш реферальный код: <strong>{{ partner.referral_code }}</strong></p>
+        <p>Мы свяжемся с вами в ближайшее время для уточнения деталей.</p>
+        <a href="{% url 'home' %}" class="btn">Вернуться на главную</a>
+    </div>
+</section>
+{% endblock %}

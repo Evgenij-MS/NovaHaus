@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
+import tempfile
 
 # Загрузка переменных окружения
 load_dotenv()
@@ -121,10 +122,21 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Кэширование
+# Абсолютный путь к директории кеша
+CACHE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'cache')
+
+# Создаем директорию, если она не существует
+if not os.path.exists(CACHE_DIR):
+    os.makedirs(CACHE_DIR)
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': '/var/tmp/django_cache',
+        'LOCATION': CACHE_DIR,  # Используем абсолютный путь
+        'TIMEOUT': 300,  # Время жизни кеша в секундах (5 минут)
+        'OPTIONS': {
+            'MAX_ENTRIES': 1000,  # Максимальное количество записей в кеше
+        }
     }
 }
 
