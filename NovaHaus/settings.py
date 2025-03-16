@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'main.middleware.BlockBadBotsMiddleware',  # Middleware для блокировки ботов
+    'django.middleware.locale.LocaleMiddleware',
 ]
 
 # Корневой URL
@@ -165,3 +166,16 @@ if not DEBUG:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Включение HSTS для поддоменов
     SECURE_HSTS_PRELOAD = True  # Предзагрузка HSTS
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # Для прокси
+
+
+LANGUAGES = [
+    ('ru', 'Русский'),
+    ('en', 'English'),
+    ('de', 'Deutsch'),
+]
+
+LANGUAGE_CODE = 'ru'
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]

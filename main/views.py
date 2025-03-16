@@ -2,14 +2,14 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponsePermanentRedirect
 from django.contrib.auth.forms import UserCreationForm
-from .models import Calculation, Partner  # Импортируем модель Partner
-from .forms import PartnerForm  # Импортируем форму для регистрации партнеров
+from .models import Calculation, Partner
+from .forms import PartnerForm
 import json
 from django.core.files.storage import default_storage
 import requests
 import logging
 import os
-import uuid  # Для генерации уникального реферального кода
+import uuid
 
 def redirect_to_www(request):
     return HttpResponsePermanentRedirect(f"https://www.novahaus-koeln.de{request.path}")

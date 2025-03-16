@@ -12,7 +12,6 @@ class Service(models.Model):
     def __str__(self):
         return self.title
 
-
 # Модель для портфолио
 class Portfolio(models.Model):
     title = models.CharField(max_length=100)
@@ -23,7 +22,6 @@ class Portfolio(models.Model):
 
     def __str__(self):
         return self.title
-
 
 # Модель для расчетов
 class Calculation(models.Model):
@@ -49,7 +47,6 @@ class Calculation(models.Model):
     def __str__(self):
         return f"{self.work_type} - {self.total_cost}"
 
-
 # Модель для отзывов клиентов
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -60,7 +57,6 @@ class Review(models.Model):
     def __str__(self):
         return f"Отзыв от {self.user.username}"
 
-
 # Модель для партнеров (новая модель для партнерской программы)
 class Partner(models.Model):
     name = models.CharField(max_length=255, verbose_name="Имя партнера")
@@ -68,6 +64,8 @@ class Partner(models.Model):
     referral_code = models.CharField(max_length=50, unique=True, verbose_name="Реферальный код")
     total_referrals = models.IntegerField(default=0, verbose_name="Количество привлеченных клиентов")
     total_earnings = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="Общий заработок")
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата регистрации")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Дата последнего обновления")
 
     def __str__(self):
         return self.name
