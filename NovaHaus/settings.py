@@ -3,6 +3,12 @@ from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
 import tempfile
+import django_heroku
+
+
+# Активировать настройки Heroku
+django_heroku.settings(locals())
+
 
 # Загрузка переменных окружения
 load_dotenv()
@@ -33,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'main',
     'whitenoise.runserver_nostatic',
     'compressor',  # Добавляем django-compressor
+    'django_otp',  # Для двухфакторной аутентификации
+    'django_otp.plugins.otp_totp',  # Для TOTP (Time-Based One-Time Password)
 ]
 
 # Промежуточное ПО
@@ -161,12 +170,11 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = True  # Безопасные cookies для сессий
     CSRF_COOKIE_SECURE = True  # Безопасные cookies для CSRF
     SECURE_BROWSER_XSS_FILTER = True  # Защита от XSS
-    SECURE_CONTENT_TYPE_NOSNIFF = True  # Защита от MIME-типов
+    SECURE_CONTENT_TYPE_NOSNIFF = True
     SECURE_HSTS_SECONDS = 31536000  # Включение HSTS
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Включение HSTS для поддоменов
-    SECURE_HSTS_PRELOAD = True  # Предзагрузка HSTS
+    SECURE_HSTS_PRELOAD = True
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # Для прокси
-
 
 LANGUAGES = [
     ('ru', 'Русский'),
@@ -179,3 +187,7 @@ LANGUAGE_CODE = 'ru'
 LOCALE_PATHS = [
     BASE_DIR / 'locale',
 ]
+
+# Добавьте настройки для двухфакторной аутентификации
+OTP_TOTP_ISSUER = 'NovaHaus'  # Название компании для TOTP
+

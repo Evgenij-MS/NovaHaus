@@ -13,10 +13,12 @@
 <div class="calculator-container fade-in">
     <h1>Онлайн-калькулятор</h1>
     <form id="calculator-form">
+        {% csrf_token %}  <!-- Добавьте CSRF-токен -->
+
         <!-- Выбор типа работ -->
         <div class="form-group">
             <label for="work-type">Тип работ:</label>
-            <select id="work-type" name="work-type" required onchange="updateAreaDescription()">
+            <select id="work-type" name="work-type" required>
                 <option value="apartment">Ремонт квартир</option>
                 <option value="house">Ремонт домов</option>
                 <option value="office">Ремонт офисов</option>
@@ -32,65 +34,32 @@
         <div class="form-group">
             <label for="area">Площадь (м²):</label>
             <input type="number" id="area" name="area" required>
-            <p id="area-description" class="hint">Введите общую площадь стен, потолков и пола.</p>
         </div>
 
-        <!-- Тип материала (если применимо) -->
-        <div class="form-group" id="material-group">
-            <label for="material">Тип материала:</label>
-            <select id="material" name="material">
-                <option value="economy">Эконом</option>
-                <option value="standard">Стандарт</option>
-                <option value="premium">Премиум</option>
-            </select>
-        </div>
-
-        <!-- Включение материалов -->
+        <!-- Общая стоимость -->
         <div class="form-group">
-            <label for="include-materials">Включить материалы:</label>
-            <select id="include-materials" name="include-materials">
-                <option value="yes">Да</option>
-                <option value="no">Нет</option>
-            </select>
+            <label for="total-cost">Общая стоимость:</label>
+            <input type="number" id="total-cost" name="total-cost" required>
         </div>
 
-        <!-- Срочность -->
+        <!-- Стоимость материалов -->
         <div class="form-group">
-            <label for="urgency">Срочность:</label>
-            <select id="urgency" name="urgency">
-                <option value="normal">Обычная</option>
-                <option value="fast">Срочная</option>
-            </select>
+            <label for="material-cost">Стоимость материалов:</label>
+            <input type="number" id="material-cost" name="material-cost" required>
         </div>
 
-        <!-- Дополнительные услуги -->
+        <!-- Стоимость работы -->
         <div class="form-group">
-            <label>Дополнительные услуги:</label>
-            <div>
-                <input type="checkbox" id="cleaning" name="cleaning" value="cleaning">
-                <label for="cleaning">Уборка после ремонта</label>
-            </div>
-            <div>
-                <input type="checkbox" id="delivery" name="delivery" value="delivery">
-                <label for="delivery">Доставка материалов</label>
-            </div>
+            <label for="labor-cost">Стоимость работы:</label>
+            <input type="number" id="labor-cost" name="labor-cost" required>
         </div>
 
         <!-- Кнопка расчета -->
-        <button type="button" onclick="calculateCost()" class="btn">Рассчитать</button>
-
-        <!-- Кнопка сохранения расчета -->
-        <button type="button" onclick="saveCalculation()" class="btn btn-secondary">Сохранить расчет</button>
-
-        <!-- Кнопка просмотра истории -->
-        <button type="button" onclick="showHistory()" class="btn btn-secondary">История расчетов</button>
+        <button type="button" id="calculate-button" class="btn">Рассчитать</button>
     </form>
 
     <!-- Результат -->
     <p id="result" class="result"></p>
-
-    <!-- График -->
-    <canvas id="cost-chart" width="400" height="400"></canvas>
 
     <!-- Блок рекомендаций от ИИ -->
     <div id="ai-recommendations" class="ai-recommendations">
@@ -98,4 +67,6 @@
         <p id="ai-recommendation-text"></p>
     </div>
 </div>
+
+<script src="{% static 'js/ai-integration.js' %}"></script>
 {% endblock %}

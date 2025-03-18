@@ -1,4 +1,4 @@
-{% extends 'main/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
 {% block title %}Портфолио – NovaHaus{% endblock %}
@@ -18,12 +18,28 @@
         <!-- Пример проекта с ремонтом -->
         <div class="gallery-item repair">
             <picture>
-                <source srcset="{% static 'main/images/portfolio/project1-large.jpg' %}" media="(min-width: 768px)">
-                <img src="{% static 'main/images/portfolio/project1-small.jpg' %}" alt="Ремонт квартиры в Кельне" loading="lazy">
+                <source srcset="{% static 'images/portfolio/project1-large.jpg' %}" media="(min-width: 768px)">
+                <img src="{% static 'images/portfolio/project1-small.jpg' %}" alt="Ремонт квартиры в Кельне" loading="lazy">
             </picture>
             <p>Ремонт квартиры в Кельне</p>
         </div>
-        <!-- Остальные проекты -->
+        <!-- Пример проекта с утеплением -->
+        <div class="gallery-item insulation">
+            <picture>
+                <source srcset="{% static 'images/portfolio/project2-large.jpg' %}" media="(min-width: 768px)">
+                <img src="{% static 'images/portfolio/project2-small.jpg' %}" alt="Утепление дома в Кельне" loading="lazy">
+            </picture>
+            <p>Утепление дома в Кельне</p>
+        </div>
+        <!-- Пример проекта с фасадными работами -->
+        <div class="gallery-item facade">
+            <picture>
+                <source srcset="{% static 'images/portfolio/project3-large.jpg' %}" media="(min-width: 768px)">
+                <img src="{% static 'images/portfolio/project3-small.jpg' %}" alt="Фасадные работы в Кельне" loading="lazy">
+            </picture>
+            <p>Фасадные работы в Кельне</p>
+        </div>
+        <!-- Добавьте больше проектов по аналогии -->
     </div>
 </div>
 

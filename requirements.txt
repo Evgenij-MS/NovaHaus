@@ -5,6 +5,7 @@ asttokens==3.0.0
 blinker==1.9.0
 build==1.2.2.post1
 certifi==2025.1.31
+channels==4.2.0
 charset-normalizer==3.4.1
 click==8.1.8
 colorama==0.4.6
@@ -22,6 +23,7 @@ django-environ==0.12.0
 django-extensions==3.2.3
 django-heroku==0.3.1
 django-modeltranslation==0.19.12
+django-otp==1.5.4
 django-seo==0.3.5
 django-storages==1.14.5
 django-widget-tweaks==1.5.0
@@ -59,7 +61,7 @@ Pygments==2.19.1
 pyproject_hooks==1.2.0
 pytest==8.3.5
 python-dotenv==1.0.0
-python-pptx==1.0.2
+python-pptx==1.0.0
 rcssmin==1.1.2
 requests==2.32.3
 rjsmin==1.2.2

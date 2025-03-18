@@ -1,3 +1,4 @@
+/* header.css */
 header {
   background-color: var(--header-bg);
   padding: 20px 0;
@@ -11,6 +12,9 @@ header {
   display: flex;
   align-items: flex-start;
   width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .logo img {
@@ -66,4 +70,39 @@ nav ul li a {
 
 nav ul li a:hover {
   color: var(--primary-color);
+}
+
+/* Стили для переключателя языков */
+.language-switcher {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.language-switcher label {
+  font-size: var(--font-size-md);
+  color: var(--neutral-100);
+}
+
+.language-switcher select {
+  padding: 5px 10px;
+  font-size: var(--font-size-md);
+  color: var(--neutral-100);
+  background-color: var(--background-color);
+  border: 1px solid var(--neutral-300);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: border-color 0.3s, background-color 0.3s;
+}
+
+.language-switcher select:hover {
+  border-color: var(--primary-color);
+}
+
+.language-switcher select:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  background-color: var(--neutral-200);
+  color: var(--background-color);
 }

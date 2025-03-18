@@ -3,14 +3,23 @@ const chatbotInput = document.getElementById('chatbot-input');
 const fileInput = document.getElementById('chatbot-file');
 const audioPreview = document.getElementById('audio-preview');
 
-let currentLanguage = 'ru'; // По умолчанию русский
 let mediaRecorder;
 let audioChunks = [];
 
-// Функция для смены языка
-function changeLanguage(lang) {
-    currentLanguage = lang;
-    appendMessage('bot', `Язык изменен на ${lang === 'ru' ? 'русский' : lang === 'en' ? 'английский' : 'немецкий'}.`);
+// Функция для получения CSRF-токена
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
 
 // Функция для добавления сообщения в чат
@@ -20,6 +29,30 @@ function appendMessage(sender, message) {
     messageElement.innerText = message;
     chatbotMessages.appendChild(messageElement);
     chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Прокрутка вниз
+}
+
+// Общая функция для отправки запросов
+async function sendRequest(url, data) {
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            body: data,
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error('Ошибка сети или сервера');
+        }
+
+        const result = await response.json();
+        return result;
+    } catch (error) {
+        console.error('Ошибка:', error);
+        appendMessage('bot', 'Произошла ошибка. Пожалуйста, попробуйте позже.');
+        return null;
+    }
 }
 
 // Функция для отправки сообщения
@@ -35,18 +68,12 @@ function sendMessage() {
     if (file) formData.append('file', file);
     if (audioBlob) formData.append('audio', audioBlob, 'audio.wav');
 
-    fetch('/chatbot/', {
-        method: 'POST',
-        body: formData,
-    })
-    .then(response => response.json())
-    .then(data => {
-        appendMessage('bot', data.response);
-    })
-    .catch(error => {
-        console.error('Ошибка:', error);
-        appendMessage('bot', 'Произошла ошибка. Пожалуйста, попробуйте позже.');
-    });
+    sendRequest('/chatbot/', formData)
+        .then(data => {
+            if (data && data.response) {
+                appendMessage('bot', data.response);
+            }
+        });
 
     chatbotInput.value = "";
     fileInput.value = "";
@@ -74,12 +101,13 @@ function startRecording() {
 
             mediaRecorder.onstop = () => {
                 const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                audioPreview.src = URL.createObjectURL(audioBlob); // Убрана избыточная переменная audioUrl
+                audioPreview.src = URL.createObjectURL(audioBlob);
                 audioPreview.style.display = 'block';
             };
         })
         .catch(error => {
             console.error('Ошибка доступа к микрофону:', error);
+            appendMessage('bot', 'Не удалось получить доступ к микрофону.');
         });
 }
 

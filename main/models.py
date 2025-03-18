@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 # Модель для услуг
 class Service(models.Model):
@@ -31,7 +32,7 @@ class Calculation(models.Model):
         ('completed', 'Завершен'),
     ]
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='calculations')
     work_type = models.CharField(max_length=100)
     area = models.FloatField()
     material = models.CharField(max_length=100)
@@ -49,7 +50,7 @@ class Calculation(models.Model):
 
 # Модель для отзывов клиентов
 class Review(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
     text = models.TextField()
     rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)])  # Оценка от 1 до 5
     created_at = models.DateTimeField(auto_now_add=True)
@@ -57,8 +58,9 @@ class Review(models.Model):
     def __str__(self):
         return f"Отзыв от {self.user.username}"
 
-# Модель для партнеров (новая модель для партнерской программы)
+# Модель для партнеров
 class Partner(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='partners', null=True, blank=True)
     name = models.CharField(max_length=255, verbose_name="Имя партнера")
     contact_info = models.CharField(max_length=255, verbose_name="Контактная информация")
     referral_code = models.CharField(max_length=50, unique=True, verbose_name="Реферальный код")
@@ -73,3 +75,13 @@ class Partner(models.Model):
     class Meta:
         verbose_name = "Партнер"
         verbose_name_plural = "Партнеры"
+
+# Модель для блога
+class BlogPost(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    published_date = models.DateTimeField(auto_now_add=True)
+    image = models.ImageField(upload_to='blog/')
+
+    def __str__(self):
+        return self.title

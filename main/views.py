@@ -2,23 +2,31 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponsePermanentRedirect
 from django.contrib.auth.forms import UserCreationForm
-from .models import Calculation, Partner
+from .models import Calculation, Partner, BlogPost
 from .forms import PartnerForm
 import json
-from django.core.files.storage import default_storage
 import requests
 import logging
 import os
 import uuid
+from django.utils.translation import LANGUAGE_SESSION_KEY, activate
 
-def redirect_to_www(request):
-    return HttpResponsePermanentRedirect(f"https://www.novahaus-koeln.de{request.path}")
-
+# Настройка
 logger = logging.getLogger(__name__)
 
 # API-ключ DeepSeek
 DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
 DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
+
+# Функция смены языка
+def set_language(request, language):
+    activate(language)
+    request.session[LANGUAGE_SESSION_KEY] = language
+    return redirect(request.META.get('HTTP_REFERER'))
+
+# Редирект на www
+def redirect_to_www(request):
+    return HttpResponsePermanentRedirect(f"https://www.novahaus-koeln.de{request.path}")
 
 # Чат-бот
 @csrf_exempt
@@ -27,14 +35,12 @@ def chatbot(request):
         user_message = request.POST.get('message', '')
         language = request.POST.get('language', 'ru')
 
-        # Настройка языка для AI
         system_message = {
             'ru': "Вы - помощник строительной компании NovaHaus. Отвечайте на вопросы клиентов.",
             'en': "You are an assistant for the construction company NovaHaus. Answer customer questions.",
             'de': "Sie sind ein Assistent für das Bauunternehmen NovaHaus. Beantworten Sie Kundenfragen."
         }
 
-        # Формируем запрос к DeepSeek
         headers = {
             "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
             "Content-Type": "application/json"
@@ -49,12 +55,43 @@ def chatbot(request):
 
         try:
             response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload)
+            response.raise_for_status()
             bot_message = response.json()['choices'][0]['message']['content']
             return JsonResponse({'response': bot_message})
-        except Exception as e:
-            return JsonResponse({'error': str(e)}, status=500)
+        except requests.exceptions.RequestException as e:
+            logger.error(f"Ошибка при запросе к DeepSeek: {e}")
+            return JsonResponse({'error': 'Ошибка при обработке запроса'}, status=500)
+        except KeyError as e:
+            logger.error(f"Ошибка в структуре ответа DeepSeek: {e}")
+            return JsonResponse({'error': 'Ошибка при обработке ответа'}, status=500)
 
     return JsonResponse({'error': 'Неподдерживаемый метод запроса'}, status=400)
+
+# Получение рекомендаций от AI
+@csrf_exempt
+def get_ai_recommendations(request):
+    if request.method == 'POST':
+        try:
+            # Извлечение данных из POST-запроса
+            data = json.loads(request.body)
+            total_cost = data.get('totalCost', 0)
+            material_cost = data.get('materialCost', 0)
+            labor_cost = data.get('laborCost', 0)
+            work_type = data.get('workType', '')
+            area = data.get('area', 0)
+
+            # Пример: формирование рекомендаций
+            recommendation = f"Для типа работы '{work_type}' с площадью {area} м² рекомендуется вложить {total_cost} в проект, где стоимость материалов составляет {material_cost}, а стоимость труда — {labor_cost}."
+
+            return JsonResponse({'success': True, 'recommendation': recommendation}, status=200)
+        except json.JSONDecodeError as e:
+            logger.error(f"Ошибка декодирования JSON: {e}")
+            return JsonResponse({'success': False, 'error': 'Некорректный формат данных'}, status=400)
+        except Exception as e:
+            logger.error(f"Ошибка сервера: {e}")
+            return JsonResponse({'success': False, 'error': 'Ошибка сервера'}, status=500)
+
+    return JsonResponse({'success': False, 'error': 'Метод запроса должен быть POST'}, status=400)
 
 # Регистрация пользователя
 def register(request):
@@ -73,99 +110,37 @@ def register_partner(request):
         form = PartnerForm(request.POST)
         if form.is_valid():
             partner = form.save(commit=False)
-            partner.referral_code = str(uuid.uuid4())[:8]  # Генерация уникального реферального кода
+            partner.referral_code = str(uuid.uuid4())[:8]
             partner.save()
-            return redirect('partner_success')  # Перенаправление на страницу успешной регистрации
+            return redirect('partner_success')
     else:
         form = PartnerForm()
     return render(request, 'main/register_partner.html', {'form': form})
 
-# Сохранение расчета
+# Сохранение расчёта
 @csrf_exempt
 def save_calculation(request):
     if request.method == 'POST':
-        data = json.loads(request.body)
-        calculation = Calculation.objects.create(
-            user=request.user,
-            work_type=data['workType'],
-            area=data['area'],
-            material=data['material'],
-            include_materials=data['includeMaterials'],
-            urgency=data['urgency'],
-            total_cost=data['totalCost'],
-            material_cost=data['materialCost'],
-            labor_cost=data['laborCost']
-        )
-        return JsonResponse({'success': True})
-    return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
-
-# Загрузка документов
-@csrf_exempt
-def upload_document(request):
-    if request.method == 'POST' and request.FILES['document']:
-        document = request.FILES['document']
-        file_name = default_storage.save(document.name, document)
-        return JsonResponse({'success': True})
-    return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
-
-# Отправка сообщения менеджеру
-@csrf_exempt
-def send_message_to_manager(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        message = data['message']
-        return JsonResponse({'success': True})
-    return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
-
-# AI-рекомендации для калькулятора
-@csrf_exempt
-def get_ai_recommendations(request):
-    if request.method == 'POST':
         try:
             data = json.loads(request.body)
-            logger.info(f"Received data: {data}")
-
-            work_type = data.get('workType')
-            area = data.get('area')
-            total_cost = data.get('totalCost')
-            material_cost = data.get('materialCost')
-            labor_cost = data.get('laborCost')
-
-            prompt = f"""
-            Вы - помощник строительной компании NovaHaus. Клиент рассчитал стоимость работ:
-            - Тип работ: {work_type}
-            - Площадь: {area} м²
-            - Общая стоимость: {total_cost} €
-            - Стоимость материалов: {material_cost} €
-            - Стоимость работы: {labor_cost} €
-
-            Дайте рекомендации по оптимизации затрат или улучшению качества работ.
-            """
-
-            # Формируем запрос к DeepSeek
-            headers = {
-                "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
-                "Content-Type": "application/json"
-            }
-            payload = {
-                "model": "deepseek-chat",
-                "messages": [{"role": "user", "content": prompt}]
-            }
-
-            response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload)
-
-            # Проверяем статус ответа
-            if response.status_code == 200:
-                recommendation = response.json()['choices'][0]['message']['content']
-                return JsonResponse({'success': True, 'recommendation': recommendation})
-            else:
-                logger.error(f"DeepSeek API error: {response.status_code}, {response.text}")
-                return JsonResponse({'success': False, 'error': 'Ошибка при запросе к DeepSeek'})
-
+            Calculation.objects.create(
+                user=request.user,
+                work_type=data['workType'],
+                area=data['area'],
+                material=data['material'],
+                include_materials=data['includeMaterials'],
+                urgency=data['urgency'],
+                total_cost=data['totalCost'],
+                material_cost=data['materialCost'],
+                labor_cost=data['laborCost']
+            )
+            return JsonResponse({'success': True})
+        except KeyError as e:
+            logger.error(f"Ошибка в данных: {e}")
+            return JsonResponse({'success': False, 'error': 'Неверные данные'}, status=400)
         except Exception as e:
-            logger.error(f"Error: {e}")
-            return JsonResponse({'success': False, 'error': str(e)})
-
+            logger.error(f"Ошибка при сохранении расчёта: {e}")
+            return JsonResponse({'success': False, 'error': 'Ошибка сервера'}, status=500)
     return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
 
 # Основные страницы
@@ -185,7 +160,8 @@ def reviews(request):
     return render(request, 'main/reviews.html')
 
 def blog(request):
-    return render(request, 'main/blog.html')
+    blog_posts = BlogPost.objects.all()
+    return render(request, 'main/blog.html', {'blog_posts': blog_posts})
 
 def contact(request):
     return render(request, 'main/contact.html')
@@ -193,6 +169,15 @@ def contact(request):
 def calculator(request):
     return render(request, 'main/calculator.html')
 
-# Страница успешной регистрации партнера
+# Страница успешной регистрации партнёра
 def partner_success(request):
     return render(request, 'main/partner_success.html')
+
+# Детальная страница блога
+def blog_post_detail(request, post_id):
+    post = BlogPost.objects.get(id=post_id)
+    return render(request, 'main/blog_post_detail.html', {'post': post})
+
+# Просмотр 3D модели
+def view_3d_model(request):
+    return render(request, 'main/3d_viewer.html')

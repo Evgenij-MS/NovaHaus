@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="ru"> <!-- Изменено на русский язык, если ваш сайт ориентирован на русскоязычную аудиторию -->
+<html lang="ru">
 <head>
     {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Для совместимости с IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>{% block title %}NovaHaus – Ваш надежный партнер в строительстве и ремонте{% endblock %}</title>
     <meta name="description" content="{% block description %}NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы и многое другое.{% endblock %}">
     <meta name="keywords" content="{% block keywords %}ремонт, строительство, утепление, Кельн, NovaHaus{% endblock %}">
-    <meta name="author" content="NovaHaus"> <!-- Указание автора сайта -->
-    <meta name="robots" content="index, follow"> <!-- Индексация и следование по ссылкам -->
-    <meta name="revisit-after" content="7 days"> <!-- Рекомендация для поисковых систем переиндексировать страницу через 7 дней -->
-    <meta property="og:title" content="NovaHaus – Ваш надежный партнер в строительстве и ремонте"> <!-- Open Graph для соцсетей -->
+    <meta name="author" content="NovaHaus">
+    <meta name="robots" content="index, follow">
+    <meta name="revisit-after" content="7 days">
+    <meta property="og:title" content="NovaHaus – Ваш надежный партнер в строительстве и ремонте">
     <meta property="og:description" content="NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы и многое другое.">
     <meta property="og:image" content="{% static 'images/logo.png' %}">
     <meta property="og:url" content="https://www.novahaus-koeln.de">
     <meta property="og:type" content="website">
-    <meta name="twitter:card" content="summary_large_image"> <!-- Для Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="NovaHaus – Ваш надежный партнер в строительстве и ремонте">
     <meta name="twitter:description" content="NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы и многое другое.">
     <meta name="twitter:image" content="{% static 'images/logo.png' %}">
@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="{% static 'css/slider.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/media-queries.css' %}">
+    <link rel="stylesheet" href="{% static 'css/chatbot.css' %}"> <!-- Добавлено подключение chatbot.css -->
 
     <!-- Favicon и связанные файлы -->
     <link rel="shortcut icon" href="{% static 'images/favicon/favicon.ico' %}" />
@@ -68,6 +69,13 @@
     </script>
 </head>
 <body>
+    <!-- Переключатель языка -->
+    <div class="language-switcher">
+        <a href="{% url 'set_language' 'ru' %}">Русский</a>
+        <a href="{% url 'set_language' 'en' %}">English</a>
+        <a href="{% url 'set_language' 'de' %}">Deutsch</a>
+    </div>
+
     <!-- Шапка сайта -->
     {% include 'includes/header.html' %}
 
@@ -80,6 +88,9 @@
 
     <!-- Подвал сайта -->
     {% include 'includes/footer.html' %}
+
+    <!-- Кнопка для переключения темы -->
+    <button id="theme-toggle" class="theme-toggle-btn">Темная тема</button>
 
     <!-- Подключение JavaScript -->
     <script src="{% static 'js/scripts.js' %}"></script>

@@ -81,12 +81,16 @@ slides.addEventListener('transitionend', updateIndicators);
 // Инициализация активного индикатора
 updateIndicators();
 
+// Переключение темы
+const toggleTheme = () => {
+    document.body.classList.toggle('dark-theme');
+    localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
+};
 
+// Восстановление темы при загрузке страницы
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+    document.body.classList.add('dark-theme');
+}
 
-// const changeLanguageButton = document.getElementById('change-language-button');
-// if (changeLanguageButton) {
-//     changeLanguageButton.addEventListener('click', () => {
-//         const newLanguage = currentLanguage === 'ru' ? 'en' : 'ru'; // Переключение между русским и английским
-//         changeLanguage(newLanguage);
-//     });
-// }
+document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
