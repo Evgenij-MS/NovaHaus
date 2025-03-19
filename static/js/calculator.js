@@ -26,11 +26,15 @@ function calculateCost() {
     const cleaning = document.getElementById('cleaning').checked;
     const delivery = document.getElementById('delivery').checked;
 
+
     // Валидация ввода
-    if (isNaN(area) || area <= 0) {
-        alert("Пожалуйста, введите корректную площадь.");
-        return;
-    }
+if (isNaN(area) || area <= 0) {
+    const resultElement = document.getElementById('result');
+    resultElement.innerText = 'Ошибка: Введите корректную площадь!';
+    resultElement.style.color = 'red';
+    return;
+}
+
 
     // Расчет стоимости за м²
     let costPerSquareMeter = prices[workType][material] || prices[workType];
@@ -53,7 +57,9 @@ function calculateCost() {
     // Отображение результата
     const resultElement = document.getElementById('result');
     if (resultElement) {
-        resultElement.innerText = `Примерная стоимость: €${totalCost.toFixed(2)}`;
+        const formattedCost = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'EUR' }).format(totalCost);
+resultElement.innerText = `Примерная стоимость: ${formattedCost}`;
+
     }
 
     // Показ графика
@@ -66,7 +72,13 @@ function calculateCost() {
 
 // Функция для отображения графика
 function showChart(totalCost, materialCost, laborCost) {
-    const ctx = document.getElementById('cost-chart')?.getContext('2d');
+    const chartElement = document.getElementById('cost-chart');
+    if (!chartElement) {
+        console.error('Элемент #cost-chart не найден.');
+        return;
+    }
+    const ctx = chartElement.getContext('2d');
+
     if (ctx) {
         new Chart(ctx, {
             type: 'pie',
@@ -131,6 +143,13 @@ function saveCalculation() {
     })
     .catch(error => {
         console.error('Ошибка:', error);
-        alert('Произошла ошибка. Пожалуйста, попробуйте позже.');
+        const resultElement = document.getElementById('result');
+        resultElement.innerText = 'Ошибка при сохранении. Пожалуйста, попробуйте позже.';
+        resultElement.style.color = 'red';
     });
+
+
+document.getElementById('calculate-button').addEventListener('click', calculateCost);
+document.getElementById('save-button').addEventListener('click', saveCalculation);
+
 }

@@ -12,7 +12,8 @@
 {% block content %}
 <div class="calculator-container fade-in">
     <h1>Онлайн-калькулятор</h1>
-    <form id="calculator-form">
+    <form id="calculator-form" action="#" method="post">
+
         {% csrf_token %}  <!-- Добавьте CSRF-токен -->
 
         <!-- Выбор типа работ -->
@@ -33,7 +34,8 @@
         <!-- Площадь -->
         <div class="form-group">
             <label for="area">Площадь (м²):</label>
-            <input type="number" id="area" name="area" required>
+            <input type="number" id="area" name="area" placeholder="Например: 50" required>
+
         </div>
 
         <!-- Общая стоимость -->
@@ -56,6 +58,7 @@
 
         <!-- Кнопка расчета -->
         <button type="button" id="calculate-button" class="btn">Рассчитать</button>
+
     </form>
 
     <!-- Результат -->
@@ -66,6 +69,9 @@
         <h2>Рекомендации от ИИ</h2>
         <p id="ai-recommendation-text"></p>
     </div>
+
+    <!-- Ссылка назад -->
+    <a href="{% url 'home' %}" class="btn">Вернуться на главную</a>
 </div>
 
 <script src="{% static 'js/ai-integration.js' %}"></script>

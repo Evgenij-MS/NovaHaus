@@ -2,16 +2,26 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 
+
 # Модель для услуг
 class Service(models.Model):
-    title = models.CharField(max_length=100)
-    description = models.TextField()
-    price = models.DecimalField(max_digits=10, decimal_places=2)
-    category = models.CharField(max_length=50)
-    image = models.ImageField(upload_to='services/')
+    CATEGORY_CHOICES = [
+        ('construction', 'Строительство'),
+        ('design', 'Дизайн'),
+    ]
+
+    title = models.CharField(max_length=100, verbose_name="Название")
+    description = models.TextField(verbose_name="Описание")
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена")
+    category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, verbose_name="Категория")
+    image = models.ImageField(upload_to='services/', verbose_name="Изображение")
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        verbose_name = "Услуга"
+        verbose_name_plural = "Услуги"
 
 # Модель для портфолио
 class Portfolio(models.Model):

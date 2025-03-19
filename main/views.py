@@ -4,6 +4,7 @@ from django.http import JsonResponse, HttpResponsePermanentRedirect
 from django.contrib.auth.forms import UserCreationForm
 from .models import Calculation, Partner, BlogPost
 from .forms import PartnerForm
+from django.shortcuts import redirect
 import json
 import requests
 import logging
