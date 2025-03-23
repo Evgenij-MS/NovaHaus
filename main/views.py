@@ -33,9 +33,9 @@ def set_language(request, language):
     return redirect(request.META.get('HTTP_REFERER', '/'))  # Перенаправление на главную, если HTTP_REFERER отсутствует
 
 
-# Редирект на www
-def redirect_to_www(request):
-    return HttpResponsePermanentRedirect(f"https://www.novahaus-koeln.de{request.path or '/'}")
+# # Редирект на www
+# def redirect_to_www(request):
+#     return HttpResponsePermanentRedirect(f"https://www.novahaus-koeln.de{request.path or '/'}")
 
 
 # Чат-бот
