@@ -30,6 +30,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # Режим отладки
 DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
+
+
 # Разрешенные хосты
 ALLOWED_HOSTS = [
     'novahaus-koeln.de',
@@ -97,6 +99,7 @@ DATABASES = {
     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
 
+
 # Валидация паролей
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -122,7 +125,7 @@ USE_TZ = True
 # Статические файлы
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Настройки для статических файлов
@@ -134,7 +137,7 @@ STATICFILES_FINDERS = [
 
 # Медиафайлы
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Ключевое поле по умолчанию
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -197,19 +200,19 @@ OTP_TOTP_ISSUER = 'NovaHaus'  # Название компании для TOTP
 
 
 
-# База данных
-if os.getenv('ON_HEROKU'):
-    DATABASES = {
-        'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME', 'NH'),
-            'USER': os.getenv('DB_USER', 'postgres'),
-            'PASSWORD': os.getenv('DB_PASSWORD', 'Okro.123'),
-            'HOST': os.getenv('DB_HOST', 'localhost'),
-            'PORT': os.getenv('DB_PORT', '5432'),
-        }
-    }
+# # База данных
+# if os.getenv('ON_HEROKU'):
+#     DATABASES = {
+#         'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+#     }
+# else:
+#     DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.postgresql',
+#             'NAME': os.getenv('DB_NAME', 'NH'),
+#             'USER': os.getenv('DB_USER', 'postgres'),
+#             'PASSWORD': os.getenv('DB_PASSWORD', 'Okro.123'),
+#             'HOST': os.getenv('DB_HOST', 'localhost'),
+#             'PORT': os.getenv('DB_PORT', '5432'),
+#         }
+#     }

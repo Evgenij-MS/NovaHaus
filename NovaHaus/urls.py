@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, re_path, include
 from main import views  # Импорт всего файла views
-from main.views import view_3d_model, redirect_to_www  # Импорт конкретной функции
+from main.views import view_3d_model, redirect_to_www, home # Импорт конкретной функции
 from django.conf.urls.i18n import i18n_patterns
 # from django.views.generic.base import RedirectView
 
@@ -43,5 +43,6 @@ urlpatterns += i18n_patterns(
 # Редирект на www (должен быть в конце)
 urlpatterns += [
     re_path(r'^.*$', redirect_to_www),
+    path('', home, name='home'),
 ]
 
