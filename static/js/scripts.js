@@ -1,9 +1,10 @@
 let currentSlide = 0;
 const slides = document.querySelector('.slides');
-const totalSlides = slides.children.length;
+const totalSlides = slides ? slides.children.length : 0;
 
 // Плавный переход между слайдами
 function showSlide(index) {
+    if (!slides || totalSlides === 0 || index < 0 || index >= totalSlides) return; // Проверка на наличие слайдов и корректность индекса
     slides.style.transition = 'transform 0.5s ease-in-out';
     const offset = -index * 100;
     slides.style.transform = `translateX(${offset}%)`;
@@ -12,12 +13,9 @@ function showSlide(index) {
 // Обновление активного индикатора
 function updateIndicators() {
     const indicators = document.querySelectorAll('.indicator');
+    if (!indicators.length) return; // Проверка на наличие индикаторов
     indicators.forEach((indicator, index) => {
-        if (index === currentSlide) {
-            indicator.classList.add('active');
-        } else {
-            indicator.classList.remove('active');
-        }
+        indicator.classList.toggle('active', index === currentSlide); // Упрощенный вариант
     });
 }
 
@@ -35,29 +33,43 @@ function nextSlide() {
 }
 
 // Автоматическая прокрутка каждые 5 секунд
-let slideInterval = setInterval(nextSlide, 5000);
+let slideInterval;
+if (totalSlides > 1) { // Автоматическая прокрутка только если слайдов больше одного
+    slideInterval = setInterval(() => {
+        if (currentSlide === totalSlides - 1) {
+            clearInterval(slideInterval); // Остановить интервал на последнем слайде
+        } else {
+            nextSlide();
+        }
+    }, 5000);
+}
 
 // Остановка автоматической прокрутки при наведении на слайдер
 const slider = document.querySelector('.slider');
-if (slider) {
-    slider.addEventListener('mouseenter', () => clearInterval(slideInterval));
+if (slider && totalSlides > 1) {
+    slider.addEventListener('mouseenter', () => {
+        if (slideInterval) clearInterval(slideInterval); // Проверка на наличие интервала
+    });
     slider.addEventListener('mouseleave', () => {
+        if (slideInterval) clearInterval(slideInterval); // Очистка предыдущего интервала
         slideInterval = setInterval(nextSlide, 5000);
     });
 }
 
 // Добавление индикаторов (точек) для навигации
-const indicatorsContainer = document.createElement('div');
-indicatorsContainer.classList.add('indicators');
-if (slider) {
+if (slider && totalSlides > 0) {
+    const indicatorsContainer = document.createElement('div');
+    indicatorsContainer.classList.add('indicators');
     slider.appendChild(indicatorsContainer);
-}
 
-for (let i = 0; i < totalSlides; i++) {
-    const indicator = document.createElement('div');
-    indicator.classList.add('indicator');
-    indicator.addEventListener('click', () => goToSlide(i));
-    indicatorsContainer.appendChild(indicator);
+    for (let i = 0; i < totalSlides; i++) {
+        const indicator = document.createElement('div');
+        indicator.classList.add('indicator');
+        indicator.setAttribute('role', 'button'); // Улучшение доступности
+        indicator.setAttribute('aria-label', `Перейти к слайду ${i + 1}`); // Улучшение доступности
+        indicator.addEventListener('click', () => goToSlide(i));
+        indicatorsContainer.appendChild(indicator);
+    }
 }
 
 // Переключение на предыдущий слайд
@@ -76,7 +88,9 @@ if (nextButton) {
 }
 
 // Обновление индикаторов при смене слайда
-slides.addEventListener('transitionend', updateIndicators);
+if (slides) {
+    slides.addEventListener('transitionend', updateIndicators);
+}
 
 // Инициализация активного индикатора
 updateIndicators();
@@ -91,6 +105,47 @@ const toggleTheme = () => {
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'dark') {
     document.body.classList.add('dark-theme');
+} else {
+    document.body.classList.remove('dark-theme');
 }
 
-document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+// Обработчик для кнопки переключения темы
+const themeToggleButton = document.getElementById('theme-toggle');
+if (themeToggleButton) {
+    themeToggleButton.addEventListener('click', toggleTheme);
+}
+
+// Добавление клавиатурной навигации для слайдера
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowLeft') {
+        const prevSlideIndex = (currentSlide - 1 + totalSlides) % totalSlides;
+        goToSlide(prevSlideIndex);
+    } else if (event.key === 'ArrowRight') {
+        nextSlide();
+    }
+});
+
+// Добавление touch-событий для мобильных устройств
+if (slider) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slider.addEventListener('touchstart', (event) => {
+        touchStartX = event.touches[0].clientX;
+    });
+
+    slider.addEventListener('touchend', (event) => {
+        touchEndX = event.changedTouches[0].clientX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        const swipeDistance = touchEndX - touchStartX;
+        if (swipeDistance > 50) {
+            const prevSlideIndex = (currentSlide - 1 + totalSlides) % totalSlides;
+            goToSlide(prevSlideIndex);
+        } else if (swipeDistance < -50) {
+            nextSlide();
+        }
+    }
+}

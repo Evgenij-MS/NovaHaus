@@ -736,3 +736,6 @@ class Promotion(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     discount = models.DecimalField(max_digits=5, decimal_places=2)
+
+Если позже потребуется включить сбор статики, вы можете отменить настройку следующим образом:
+heroku config:unset DISABLE_COLLECTSTATIC

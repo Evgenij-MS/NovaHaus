@@ -200,19 +200,4 @@ OTP_TOTP_ISSUER = 'NovaHaus'  # Название компании для TOTP
 
 
 
-# # База данных
-# if os.getenv('ON_HEROKU'):
-#     DATABASES = {
-#         'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
-#     }
-# else:
-#     DATABASES = {
-#         'default': {
-#             'ENGINE': 'django.db.backends.postgresql',
-#             'NAME': os.getenv('DB_NAME', 'NH'),
-#             'USER': os.getenv('DB_USER', 'postgres'),
-#             'PASSWORD': os.getenv('DB_PASSWORD', 'Okro.123'),
-#             'HOST': os.getenv('DB_HOST', 'localhost'),
-#             'PORT': os.getenv('DB_PORT', '5432'),
-#         }
-#     }
+
