@@ -739,3 +739,5 @@ class Promotion(models.Model):
 
 Если позже потребуется включить сбор статики, вы можете отменить настройку следующим образом:
 heroku config:unset DISABLE_COLLECTSTATIC
+
+python manage.py collectstatic --no-input

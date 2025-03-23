@@ -1,12 +1,92 @@
+/* footer.css */
 footer {
   background-color: var(--header-bg);
   color: var(--neutral-100);
   text-align: center;
-  padding: 20px;
+  padding: 40px 20px;
   margin-top: 50px;
   font-size: var(--font-size-md);
 }
 
 footer p {
   margin: 0;
+  line-height: 1.6;
+}
+
+/* Стили для ссылок в подвале */
+footer a {
+  color: var(--neutral-100);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: var(--primary-color);
+}
+
+/* Стили для разделов подвала (если есть) */
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-section {
+  flex: 1 1 200px;
+  text-align: left;
+}
+
+.footer-section h3 {
+  font-size: var(--font-size-lg);
+  margin-bottom: 15px;
+  color: var(--neutral-100);
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+  color: var(--neutral-200);
+  font-size: var(--font-size-sm);
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: var(--primary-color);
+}
+
+/* Стили для социальных иконок (если есть) */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.social-icons a {
+  color: var(--neutral-100);
+  font-size: var(--font-size-lg);
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: var(--primary-color);
+}
+
+/* Стили для копирайта */
+.copyright {
+  margin-top: 30px;
+  font-size: var(--font-size-sm);
+  color: var(--neutral-200);
 }

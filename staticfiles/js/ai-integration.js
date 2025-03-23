@@ -9,21 +9,21 @@ async function getAIRecommendations(totalCost, materialCost, laborCost, workType
     };
 
     try {
-        console.log("Sending data to server:", data); // Логируем данные
+        console.log("Отправка данных на сервер:", data); // Логирование данных
 
         const response = await fetch('/get-ai-recommendations/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
+                'X-CSRFToken': getCookie('csrftoken') // Получение CSRF-токена
             },
-            body: JSON.stringify(data)
+            body: JSON.stringify(data)  // Используем переменную data
         });
 
         const result = await response.json();
-        console.log("Server response:", result); // Логируем ответ сервера
+        console.log("Ответ сервера:", result); // Логирование ответа сервера
 
-        if (result.success) {
+        if (result.success && result.recommendation) {
             document.getElementById('ai-recommendation-text').innerText = result.recommendation;
         } else {
             console.error('Ошибка при получении рекомендаций:', result.error);
@@ -50,3 +50,19 @@ function getCookie(name) {
     }
     return cookieValue;
 }
+
+// Пример вызова функции getAIRecommendations
+document.addEventListener('DOMContentLoaded', () => {
+    const calculateButton = document.getElementById('calculate-button');
+    if (calculateButton) {
+        calculateButton.addEventListener('click', async () => {
+            const totalCost = parseFloat(document.getElementById('total-cost').value);
+            const materialCost = parseFloat(document.getElementById('material-cost').value);
+            const laborCost = parseFloat(document.getElementById('labor-cost').value);
+            const workType = document.getElementById('work-type').value;
+            const area = parseFloat(document.getElementById('area').value);
+
+            await getAIRecommendations(totalCost, materialCost, laborCost, workType, area);
+        });
+    }
+});

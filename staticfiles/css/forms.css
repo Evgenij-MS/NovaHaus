@@ -1,22 +1,76 @@
+/* forms.css */
 .feedback-form {
-  margin-top: 30px;
+  margin: 30px auto 0 auto; /* Исправлено: margin-top и центрирование */
   padding: 20px;
   background-color: var(--background-color);
   border-radius: 8px;
   box-shadow: var(--shadow-sm);
+  max-width: 600px;
 }
 
 .feedback-form input,
 .feedback-form textarea {
   width: 100%;
   padding: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   border: 1px solid var(--neutral-300);
   border-radius: 5px;
   background-color: var(--background-color);
   color: var(--text-color);
+  font-size: var(--font-size-md);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feedback-form input:focus,
+.feedback-form textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 5px rgba(79, 214, 255, 0.5);
 }
 
 .feedback-form textarea {
   height: 100px;
+  resize: vertical; /* Позволяет изменять высоту текстового поля */
+}
+
+/* Стили для кнопок */
+.feedback-form button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--primary-color);
+  color: var(--neutral-100);
+  border: none;
+  border-radius: 5px;
+  font-size: var(--font-size-md);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.feedback-form button:hover {
+  background-color: var(--accent-color);
+}
+
+/* Стили для сообщений об ошибках */
+.feedback-form .error-message {
+  color: #ff4d4d;
+  font-size: var(--font-size-sm);
+  margin-top: 5px;
+  display: none; /* Скрыто по умолчанию */
+}
+
+.feedback-form .error-message.active {
+  display: block; /* Показываем при наличии ошибки */
+}
+
+/* Стили для успешного сообщения */
+.feedback-form .success-message {
+  color: #28a745;
+  font-size: var(--font-size-md);
+  text-align: center;
+  margin-top: 15px;
+  display: none; /* Скрыто по умолчанию */
+}
+
+.feedback-form .success-message.active {
+  display: block; /* Показываем при успешной отправке */
 }
