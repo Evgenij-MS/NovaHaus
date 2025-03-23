@@ -73,6 +73,8 @@ class Partner(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='partners', null=True, blank=True)
     name = models.CharField(max_length=255, verbose_name="Имя партнера")
     contact_info = models.CharField(max_length=255, verbose_name="Контактная информация")
+    phone = models.CharField(max_length=20, verbose_name="Телефон", blank=True, null=True)  # Новое поле
+    email = models.EmailField(verbose_name="Email", blank=True, null=True)  # Новое поле
     referral_code = models.CharField(max_length=50, unique=True, verbose_name="Реферальный код")
     total_referrals = models.IntegerField(default=0, verbose_name="Количество привлеченных клиентов")
     total_earnings = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name="Общий заработок")

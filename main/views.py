@@ -10,10 +10,16 @@ import requests
 import logging
 import os
 import uuid
-from django.utils.translation import LANGUAGE_SESSION_KEY, activate
+from django.utils.translation import activate
+from django.conf import settings
+from django.shortcuts import redirect
+from django.views.decorators.cache import cache_page
+
+
 
 # Настройка
 logger = logging.getLogger(__name__)
+
 
 # API-ключ DeepSeek
 DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
@@ -21,13 +27,16 @@ DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
 
 # Функция смены языка
 def set_language(request, language):
-    activate(language)
-    request.session[LANGUAGE_SESSION_KEY] = language
-    return redirect(request.META.get('HTTP_REFERER'))
+    if language in [lang[0] for lang in settings.LANGUAGES]:
+        activate(language)
+        request.session[settings.LANGUAGE_COOKIE_NAME] = language
+    return redirect(request.META.get('HTTP_REFERER', '/'))  # Перенаправление на главную, если HTTP_REFERER отсутствует
+
 
 # Редирект на www
 def redirect_to_www(request):
-    return HttpResponsePermanentRedirect(f"https://www.novahaus-koeln.de{request.path}")
+    return HttpResponsePermanentRedirect(f"https://www.novahaus-koeln.de{request.path or '/'}")
+
 
 # Чат-бот
 @csrf_exempt
@@ -35,6 +44,9 @@ def chatbot(request):
     if request.method == 'POST':
         user_message = request.POST.get('message', '')
         language = request.POST.get('language', 'ru')
+
+        if language not in [lang[0] for lang in settings.LANGUAGES]:
+            language = 'ru'  # Используем язык по умолчанию
 
         system_message = {
             'ru': "Вы - помощник строительной компании NovaHaus. Отвечайте на вопросы клиентов.",
@@ -68,12 +80,12 @@ def chatbot(request):
 
     return JsonResponse({'error': 'Неподдерживаемый метод запроса'}, status=400)
 
+
 # Получение рекомендаций от AI
 @csrf_exempt
 def get_ai_recommendations(request):
     if request.method == 'POST':
         try:
-            # Извлечение данных из POST-запроса
             data = json.loads(request.body)
             total_cost = data.get('totalCost', 0)
             material_cost = data.get('materialCost', 0)
@@ -81,7 +93,9 @@ def get_ai_recommendations(request):
             work_type = data.get('workType', '')
             area = data.get('area', 0)
 
-            # Пример: формирование рекомендаций
+            if not all([total_cost, material_cost, labor_cost, work_type, area]):
+                return JsonResponse({'success': False, 'error': 'Недостаточно данных'}, status=400)
+
             recommendation = f"Для типа работы '{work_type}' с площадью {area} м² рекомендуется вложить {total_cost} в проект, где стоимость материалов составляет {material_cost}, а стоимость труда — {labor_cost}."
 
             return JsonResponse({'success': True, 'recommendation': recommendation}, status=200)
@@ -94,6 +108,9 @@ def get_ai_recommendations(request):
 
     return JsonResponse({'success': False, 'error': 'Метод запроса должен быть POST'}, status=400)
 
+
+
+
 # Регистрация пользователя
 def register(request):
     if request.method == 'POST':
@@ -105,6 +122,7 @@ def register(request):
         form = UserCreationForm()
     return render(request, 'main/register.html', {'form': form})
 
+
 # Регистрация партнера
 def register_partner(request):
     if request.method == 'POST':
@@ -112,11 +130,15 @@ def register_partner(request):
         if form.is_valid():
             partner = form.save(commit=False)
             partner.referral_code = str(uuid.uuid4())[:8]
+            while Partner.objects.filter(referral_code=partner.referral_code).exists():
+                partner.referral_code = str(uuid.uuid4())[:8]
             partner.save()
             return redirect('partner_success')
     else:
         form = PartnerForm()
     return render(request, 'main/register_partner.html', {'form': form})
+
+
 
 # Сохранение расчёта
 @csrf_exempt
@@ -124,6 +146,9 @@ def save_calculation(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
+            if not all(key in data for key in ['workType', 'area', 'material', 'includeMaterials', 'urgency', 'totalCost', 'materialCost', 'laborCost']):
+                return JsonResponse({'success': False, 'error': 'Неверные данные'}, status=400)
+
             Calculation.objects.create(
                 user=request.user,
                 work_type=data['workType'],
@@ -143,6 +168,10 @@ def save_calculation(request):
             logger.error(f"Ошибка при сохранении расчёта: {e}")
             return JsonResponse({'success': False, 'error': 'Ошибка сервера'}, status=500)
     return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
+
+
+@cache_page(60 * 15)  # Кеширование на 15 минут
+
 
 # Основные страницы
 def home(request):
@@ -178,6 +207,7 @@ def partner_success(request):
 def blog_post_detail(request, post_id):
     post = BlogPost.objects.get(id=post_id)
     return render(request, 'main/blog_post_detail.html', {'post': post})
+
 
 # Просмотр 3D модели
 def view_3d_model(request):

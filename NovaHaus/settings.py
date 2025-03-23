@@ -3,12 +3,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
 import tempfile
-import django_heroku
-
-
-# Активировать настройки Heroku
-django_heroku.settings(locals())
-
+from django.core.exceptions import ImproperlyConfigured
+from django.utils.translation import gettext_lazy as _
 
 # Загрузка переменных окружения
 load_dotenv()
@@ -16,12 +12,23 @@ load_dotenv()
 # Базовая директория
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+# Проверка наличия обязательных переменных окружения
+def get_env_variable(var_name, default=None):
+    value = os.getenv(var_name, default)
+    if value is None:
+        raise ImproperlyConfigured(f"Переменная окружения {var_name} не установлена.")
+    return value
+
+
+# # Секретный ключ
+# SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key')
 # Секретный ключ
-SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key')
+SECRET_KEY = os.getenv('SECRET_KEY')
+
 
 # Режим отладки
-# DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'  # Используем переменную окружения для DEBUG
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
 # Разрешенные хосты
 ALLOWED_HOSTS = [
@@ -133,17 +140,14 @@ MEDIA_ROOT = BASE_DIR / 'media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Кэширование
-# Абсолютный путь к директории кеша
-CACHE_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'cache')
-
-# Создаем директорию, если она не существует
-if not os.path.exists(CACHE_DIR):
-    os.makedirs(CACHE_DIR)
+CACHE_DIR = BASE_DIR / 'cache'
+if not CACHE_DIR.exists():
+    CACHE_DIR.mkdir()
 
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': CACHE_DIR,  # Используем абсолютный путь
+        'LOCATION': str(CACHE_DIR),  # Используем строку
         'TIMEOUT': 300,  # Время жизни кеша в секундах (5 минут)
         'OPTIONS': {
             'MAX_ENTRIES': 1000,  # Максимальное количество записей в кеше
@@ -153,17 +157,16 @@ CACHES = {
 
 # Настройки для django-compressor
 COMPRESS_ENABLED = True
+COMPRESS_URL = STATIC_URL  # Используйте STATIC_URL по умолчанию
+COMPRESS_ROOT = STATIC_ROOT  # Используйте STATIC_ROOT по умолчанию
+COMPRESS_OFFLINE = False  # Отключите оффлайн-компрессию, если она не нужна
+
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.cssmin.CSSMinFilter',
 ]
 COMPRESS_JS_FILTERS = [
     'compressor.filters.jsmin.JSMinFilter',
 ]
-
-# Настройки для Heroku
-if os.getenv('ON_HEROKU'):
-    import django_heroku
-    django_heroku.settings(locals())
 
 # Настройки безопасности (только для production)
 if not DEBUG:
@@ -189,6 +192,24 @@ LOCALE_PATHS = [
     BASE_DIR / 'locale',
 ]
 
-# Добавьте настройки для двухфакторной аутентификации
+# Настройки для двухфакторной аутентификации
 OTP_TOTP_ISSUER = 'NovaHaus'  # Название компании для TOTP
 
+
+
+# База данных
+if os.getenv('ON_HEROKU'):
+    DATABASES = {
+        'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('DB_NAME', 'NH'),
+            'USER': os.getenv('DB_USER', 'postgres'),
+            'PASSWORD': os.getenv('DB_PASSWORD', 'Okro.123'),
+            'HOST': os.getenv('DB_HOST', 'localhost'),
+            'PORT': os.getenv('DB_PORT', '5432'),
+        }
+    }
