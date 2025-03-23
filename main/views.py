@@ -1,10 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse, HttpResponsePermanentRedirect
 from django.contrib.auth.forms import UserCreationForm
 from .models import Calculation, Partner, BlogPost
 from .forms import PartnerForm
-from django.shortcuts import redirect
 import json
 import requests
 import logging
@@ -33,9 +32,14 @@ def set_language(request, language):
     return redirect(request.META.get('HTTP_REFERER', '/'))  # Перенаправление на главную, если HTTP_REFERER отсутствует
 
 
+
 # # Редирект на www
-# def redirect_to_www(request):
-#     return HttpResponsePermanentRedirect(f"https://www.novahaus-koeln.de{request.path or '/'}")
+def redirect_to_www(request):
+    # Проверяем, что запрос уже не идет на www
+    if not request.get_host().startswith('www.'):
+        return HttpResponsePermanentRedirect(f"https://www.novahaus-koeln.de{request.path or '/'}")
+    return None  # Если уже на www, не выполняем редирект
+
 
 
 # Чат-бот
