@@ -28,8 +28,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 # Режим отладки
-# DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
-DEBUG = True
+DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+
 
 
 # Разрешенные хосты

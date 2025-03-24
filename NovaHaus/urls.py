@@ -5,12 +5,14 @@ from main.views import view_3d_model, redirect_to_www, home # Импорт ко�
 from django.conf.urls.i18n import i18n_patterns
 
 
-# Локализованные URL
+
+
 urlpatterns = [
     re_path(r'^.*$', redirect_to_www),  # Редирект на www
-    path('admin/', admin.site.urls),  # Админка
+    path('admin/', admin.site.urls),    # Админка
     path('i18n/', include('django.conf.urls.i18n')),  # Поддержка переключения языка
 ]
+
 
 
 

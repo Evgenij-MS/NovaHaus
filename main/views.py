@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse, HttpResponsePermanentRedirect
+from django.http import JsonResponse, HttpResponse, HttpResponsePermanentRedirect
 from django.contrib.auth.forms import UserCreationForm
 from .models import Calculation, Partner, BlogPost
 from .forms import PartnerForm
@@ -33,12 +33,12 @@ def set_language(request, language):
 
 
 
-# # Редирект на www
 def redirect_to_www(request):
     # Проверяем, что запрос уже не идет на www
     if not request.get_host().startswith('www.'):
         return HttpResponsePermanentRedirect(f"https://www.novahaus-koeln.de{request.path or '/'}")
-    return None  # Если уже на www, не выполняем редирект
+    # Если запрос уже на www, возвращаем простой HttpResponse
+    return HttpResponse("OK")  # или другой ответ, например HttpResponse('')
 
 
 
