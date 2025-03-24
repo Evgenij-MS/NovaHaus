@@ -28,8 +28,8 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 # Режим отладки
-DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
-
+# DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+DEBUG = True
 
 
 # Разрешенные хосты
@@ -67,7 +67,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'main.middleware.BlockBadBotsMiddleware',  # Middleware для блокировки ботов
+    # 'main.middleware.BlockBadBotsMiddleware',  # Middleware для блокировки ботов
     'django.middleware.locale.LocaleMiddleware',
 ]
 
