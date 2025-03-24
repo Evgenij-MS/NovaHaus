@@ -38,7 +38,7 @@ def redirect_to_www(request):
     if not request.get_host().startswith('www.'):
         return HttpResponsePermanentRedirect(f"https://www.novahaus-koeln.de{request.path or '/'}")
     # Если запрос уже на www, возвращаем простой HttpResponse
-    return HttpResponse("OK")  # или другой ответ, например HttpResponse('')
+    return HttpResponse("https://www.novahaus-koeln.de")  # или другой ответ, например HttpResponse('')
 
 
 
