@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse, HttpResponse, HttpResponsePermanentRedirect
+from django.http import JsonResponse
 from django.contrib.auth.forms import UserCreationForm
 from .models import Calculation, Partner, BlogPost
 from .forms import PartnerForm
@@ -14,11 +14,8 @@ from django.conf import settings
 from django.shortcuts import redirect
 from django.views.decorators.cache import cache_page
 
-
-
 # Настройка
 logger = logging.getLogger(__name__)
-
 
 # API-ключ DeepSeek
 DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
@@ -29,18 +26,7 @@ def set_language(request, language):
     if language in [lang[0] for lang in settings.LANGUAGES]:
         activate(language)
         request.session[settings.LANGUAGE_COOKIE_NAME] = language
-    return redirect(request.META.get('HTTP_REFERER', '/'))  # Перенаправление на главную, если HTTP_REFERER отсутствует
-
-
-
-def redirect_to_www(request):
-    # Проверяем, что запрос уже не идет на www
-    if not request.get_host().startswith('www.'):
-        return HttpResponsePermanentRedirect(f"https://www.novahaus-koeln.de{request.path or '/'}")
-    # Если запрос уже на www, возвращаем простой HttpResponse
-    return HttpResponse("https://www.novahaus-koeln.de")  # или другой ответ, например HttpResponse('')
-
-
+    return redirect(request.META.get('HTTP_REFERER', '/'))
 
 # Чат-бот
 @csrf_exempt
@@ -50,7 +36,7 @@ def chatbot(request):
         language = request.POST.get('language', 'ru')
 
         if language not in [lang[0] for lang in settings.LANGUAGES]:
-            language = 'ru'  # Используем язык по умолчанию
+            language = 'ru'
 
         system_message = {
             'ru': "Вы - помощник строительной компании NovaHaus. Отвечайте на вопросы клиентов.",
@@ -84,7 +70,6 @@ def chatbot(request):
 
     return JsonResponse({'error': 'Неподдерживаемый метод запроса'}, status=400)
 
-
 # Получение рекомендаций от AI
 @csrf_exempt
 def get_ai_recommendations(request):
@@ -112,9 +97,6 @@ def get_ai_recommendations(request):
 
     return JsonResponse({'success': False, 'error': 'Метод запроса должен быть POST'}, status=400)
 
-
-
-
 # Регистрация пользователя
 def register(request):
     if request.method == 'POST':
@@ -125,7 +107,6 @@ def register(request):
     else:
         form = UserCreationForm()
     return render(request, 'main/register.html', {'form': form})
-
 
 # Регистрация партнера
 def register_partner(request):
@@ -141,8 +122,6 @@ def register_partner(request):
     else:
         form = PartnerForm()
     return render(request, 'main/register_partner.html', {'form': form})
-
-
 
 # Сохранение расчёта
 @csrf_exempt
@@ -173,10 +152,7 @@ def save_calculation(request):
             return JsonResponse({'success': False, 'error': 'Ошибка сервера'}, status=500)
     return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
 
-
 @cache_page(60 * 15)  # Кеширование на 15 минут
-
-
 # Основные страницы
 def home(request):
     return render(request, 'main/home.html')
@@ -203,16 +179,12 @@ def contact(request):
 def calculator(request):
     return render(request, 'main/calculator.html')
 
-# Страница успешной регистрации партнёра
 def partner_success(request):
     return render(request, 'main/partner_success.html')
 
-# Детальная страница блога
 def blog_post_detail(request, post_id):
     post = BlogPost.objects.get(id=post_id)
     return render(request, 'main/blog_post_detail.html', {'post': post})
 
-
-# Просмотр 3D модели
 def view_3d_model(request):
     return render(request, 'main/3d_viewer.html')

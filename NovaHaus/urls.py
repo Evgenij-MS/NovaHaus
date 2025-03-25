@@ -1,19 +1,14 @@
 from django.contrib import admin
-from django.urls import path, re_path, include
+from django.urls import path, include
 from main import views  # Импорт всего файла views
-from main.views import view_3d_model, redirect_to_www, home # Импорт конкретной функции
+from main.views import view_3d_model, home  # Импорт конкретной функции
 from django.conf.urls.i18n import i18n_patterns
 
 
-
-
 urlpatterns = [
-    re_path(r'^.*$', redirect_to_www),  # Редирект на www
     path('admin/', admin.site.urls),    # Админка
     path('i18n/', include('django.conf.urls.i18n')),  # Поддержка переключения языка
 ]
-
-
 
 
 urlpatterns += i18n_patterns(
