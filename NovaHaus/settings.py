@@ -3,6 +3,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
+from django.utils.translation import gettext as _
+_ = lambda s: s
 
 # Загрузка переменных окружения
 load_dotenv()
@@ -17,10 +19,9 @@ def get_env_variable(var_name, default=None):
         raise ImproperlyConfigured(f"Переменная окружения {var_name} не установлена.")
     return value
 
-
 # Основные настройки
 SECRET_KEY = get_env_variable('SECRET_KEY')
-DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't', 'y', 'yes')
 
 ALLOWED_HOSTS = [
     'novahaus-koeln.de',
@@ -32,7 +33,6 @@ ALLOWED_HOSTS = [
 
 # Приложения
 INSTALLED_APPS = [
-    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -58,7 +58,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -106,33 +105,27 @@ AXES_LOCKOUT_TEMPLATE = 'errors/lockout.html'
 AXES_RESET_ON_SUCCESS = True
 AXES_DISABLE_ACCESS_LOG = True
 
-# База данных
+# Оптимизированная конфигурация базы данных
 DATABASES = {
-    'default': dj_database_url.config(
-        default=get_env_variable('DATABASE_URL'),
-        conn_max_age=600,
-        ssl_require=True
-    )
-}
-
-
-# Для локальной разработки
-if DEBUG:
-    DATABASES['default'] = {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.getenv('DB_NAME', 'novahaus'),
         'USER': os.getenv('DB_USER', 'postgres'),
         'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
         'HOST': os.getenv('DB_HOST', 'localhost'),
         'PORT': os.getenv('DB_PORT', '5432'),
+        'OPTIONS': {
+            'sslmode': 'disable'  # Явно отключаем SSL для локальной разработки
+        }
     }
+}
 
-
-# Альтернатива для Heroku
+# Для Heroku автоматически переопределяем настройки
 if 'DATABASE_URL' in os.environ:
-    import dj_database_url
-    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-
+    DATABASES['default'] = dj_database_url.config(
+        conn_max_age=600,
+        ssl_require=True
+    )
 
 # Шаблоны
 TEMPLATES = [
@@ -228,7 +221,7 @@ CACHES = {
     }
 }
 
-# Настройки для Channels (если используется)
+# Настройки для Channels
 ASGI_APPLICATION = 'NovaHaus.asgi.application'
 CHANNEL_LAYERS = {
     'default': {
@@ -239,27 +232,23 @@ CHANNEL_LAYERS = {
     },
 }
 
-
-# настройки CORS для API
+# Настройки CORS для API
 CORS_ALLOWED_ORIGINS = [
     "https://novahaus-koeln.de",
     "https://www.novahaus-koeln.de",
 ]
 
-
-# настройки для компрессии:
+# Настройки для компрессии
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
 
-
-# Кеширование:
+# Кеширование
 CACHE_TTL = 60 * 15  # 15 минут
 
-
-# Sentry для отслеживания ошибок:
+# Sentry для отслеживания ошибок
 import sentry_sdk
 sentry_sdk.init(
     dsn=os.getenv('SENTRY_DSN'),
@@ -269,11 +258,11 @@ sentry_sdk.init(
 
 
 # Настройки для Heroku
-if 'DATABASE_URL' in os.environ:
+if 'DYNO' in os.environ:
+    # DEBUG остаётся как было установлено из переменных окружения
+    ALLOWED_HOSTS = ['novahaus-koeln.de', 'www.novahaus-koeln.de', 'novahaus-eu.herokuapp.com']
     import django_heroku
-    django_heroku.settings(locals())
-    DEBUG = False
-    ALLOWED_HOSTS = ['novahaus-koeln.de', 'novahaus-eu.herokuapp.com']
+    django_heroku.settings(locals(), staticfiles=False)
 
 
 # Мониторинг
@@ -291,4 +280,12 @@ LOGGING = {
     },
 }
 
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
 
+
+import logging
+logger = logging.getLogger(__name__)
+logger.info(f"Application started in DEBUG={DEBUG} mode")

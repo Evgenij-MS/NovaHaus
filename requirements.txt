@@ -84,3 +84,5 @@ wheel==0.45.1
 whitenoise==6.6.0
 XlsxWriter==3.2.0
 sentry-sdk
+channels-redis>=4.2.0
+asgiref>=3.8.1
