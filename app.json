@@ -1,5 +1,29 @@
- {
+{
+  "name": "NovaHaus",
+  "description": "Django-приложение для NovaHaus",
   "scripts": {
     "postdeploy": "python manage.py migrate"
-  }
+  },
+  "env": {
+    "DEBUG": {
+      "description": "Включить или отключить режим отладки",
+      "value": "false"
+    },
+    "SECRET_KEY": {
+      "description": "Секретный ключ Django",
+      "generator": "secret"
+    },
+    "ALLOWED_HOSTS": {
+      "description": "Список разрешённых хостов через запятую",
+      "value": "novahaus.herokuapp.com"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ],
+  "addons": [
+    "heroku-postgresql"
+  ]
 }
