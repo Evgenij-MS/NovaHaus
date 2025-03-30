@@ -268,3 +268,27 @@ sentry_sdk.init(
 )
 
 
+# Настройки для Heroku
+if 'DATABASE_URL' in os.environ:
+    import django_heroku
+    django_heroku.settings(locals())
+    DEBUG = False
+    ALLOWED_HOSTS = ['novahaus-koeln.de', 'novahaus-eu.herokuapp.com']
+
+
+# Мониторинг
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',
+    },
+}
+
+
