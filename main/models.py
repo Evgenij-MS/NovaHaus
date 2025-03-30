@@ -23,6 +23,8 @@ class Service(models.Model):
         verbose_name = "Услуга"
         verbose_name_plural = "Услуги"
 
+
+
 # Модель для портфолио
 class Portfolio(models.Model):
     title = models.CharField(max_length=100)
@@ -33,6 +35,7 @@ class Portfolio(models.Model):
 
     def __str__(self):
         return self.title
+
 
 # Модель для расчетов
 class Calculation(models.Model):
@@ -58,6 +61,7 @@ class Calculation(models.Model):
     def __str__(self):
         return f"{self.work_type} - {self.total_cost}"
 
+
 # Модель для отзывов клиентов
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reviews')
@@ -67,6 +71,7 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Отзыв от {self.user.username}"
+
 
 # Модель для партнеров
 class Partner(models.Model):
@@ -88,6 +93,7 @@ class Partner(models.Model):
         verbose_name = "Партнер"
         verbose_name_plural = "Партнеры"
 
+
 # Модель для блога
 class BlogPost(models.Model):
     title = models.CharField(max_length=200)
@@ -97,3 +103,17 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return self.title
+
+
+# Новая модель для логов
+class ChatLog(models.Model):
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    message = models.TextField()
+    language = models.CharField(max_length=10, default='ru')
+    file_path = models.CharField(max_length=255, null=True, blank=True)
+    audio_path = models.CharField(max_length=255, null=True, blank=True)
+    ip_address = models.GenericIPAddressField()
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']

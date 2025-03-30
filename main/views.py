@@ -1,159 +1,180 @@
-from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
-from django.contrib.auth.forms import UserCreationForm
-from .models import Calculation, Partner, BlogPost
-from .forms import PartnerForm
-import json
-import requests
-import logging
 import os
+import json
+import logging
 import uuid
+import requests
+from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.cache import cache_page
+from django.contrib.auth.forms import UserCreationForm
+from django.core.files.storage import FileSystemStorage
 from django.utils.translation import activate
 from django.conf import settings
-from django.shortcuts import redirect
-from django.views.decorators.cache import cache_page
+from .models import Calculation, Partner, BlogPost, ChatLog
+from .forms import PartnerForm
 
-# Настройка
 logger = logging.getLogger(__name__)
 
-# API-ключ DeepSeek
+# Конфигурация API
 DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
 DEEPSEEK_API_URL = "https://api.deepseek.com/v1/chat/completions"
+MEDIA_CHATBOT_FILES = 'media/chatbot/files'
+MEDIA_CHATBOT_AUDIO = 'media/chatbot/audio'
 
-# Функция смены языка
-def set_language(request, language):
-    if language in [lang[0] for lang in settings.LANGUAGES]:
-        activate(language)
-        request.session[settings.LANGUAGE_COOKIE_NAME] = language
-    return redirect(request.META.get('HTTP_REFERER', '/'))
 
-# Чат-бот
+# Утилиты
+def get_client_ip(request):
+    """Получение IP клиента с учетом прокси"""
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    return x_forwarded_for.split(',')[0] if x_forwarded_for else request.META.get('REMOTE_ADDR')
+
+
+def save_uploaded_file(file, subfolder):
+    """Сохранение загруженного файла с уникальным именем"""
+    fs = FileSystemStorage(location=subfolder)
+    filename = f"{uuid.uuid4().hex[:8]}_{file.name}"
+    saved_name = fs.save(filename, file)
+    return fs.url(saved_name)
+
+
+# Представления
 @csrf_exempt
 def chatbot(request):
-    if request.method == 'POST':
+    """Обработчик чат-бота с поддержкой файлов и аудио"""
+    if request.method != 'POST':
+        return JsonResponse({'error': 'Метод не разрешен'}, status=405)
+
+    try:
+        # Извлечение данных запроса
         user_message = request.POST.get('message', '')
         language = request.POST.get('language', 'ru')
+        file = request.FILES.get('file')
+        audio = request.FILES.get('audio')
 
-        if language not in [lang[0] for lang in settings.LANGUAGES]:
+        # Валидация языка
+        if language not in dict(settings.LANGUAGES):
             language = 'ru'
 
-        system_message = {
-            'ru': "Вы - помощник строительной компании NovaHaus. Отвечайте на вопросы клиентов.",
-            'en': "You are an assistant for the construction company NovaHaus. Answer customer questions.",
-            'de': "Sie sind ein Assistent für das Bauunternehmen NovaHaus. Beantworten Sie Kundenfragen."
-        }
+        # Обработка медиафайлов
+        file_url = save_uploaded_file(file, MEDIA_CHATBOT_FILES) if file else None
+        audio_url = save_uploaded_file(audio, MEDIA_CHATBOT_AUDIO) if audio else None
+
+        # Логирование в базу данных
+        ChatLog.objects.create(
+            user=request.user if request.user.is_authenticated else None,
+            message=user_message[:500],  # Ограничение длины
+            language=language,
+            file_path=file_url,
+            audio_path=audio_url,
+            ip_address=get_client_ip(request)
+        )
+
+        # Формирование запроса к AI
+        system_prompt = {
+            'ru': "Вы - AI-ассистент строительной компании NovaHaus. Отвечайте профессионально.",
+            'en': "You are an AI assistant for NovaHaus construction company.",
+            'de': "Sie sind ein KI-Assistent für das Bauunternehmen NovaHaus."
+        }.get(language, 'ru')
 
         headers = {
             "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
             "Content-Type": "application/json"
         }
+
         payload = {
             "model": "deepseek-chat",
             "messages": [
-                {"role": "system", "content": system_message[language]},
+                {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_message}
-            ]
+            ],
+            "temperature": 0.7,
+            "max_tokens": 500
         }
 
-        try:
-            response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload)
-            response.raise_for_status()
-            bot_message = response.json()['choices'][0]['message']['content']
-            return JsonResponse({'response': bot_message})
-        except requests.exceptions.RequestException as e:
-            logger.error(f"Ошибка при запросе к DeepSeek: {e}")
-            return JsonResponse({'error': 'Ошибка при обработке запроса'}, status=500)
-        except KeyError as e:
-            logger.error(f"Ошибка в структуре ответа DeepSeek: {e}")
-            return JsonResponse({'error': 'Ошибка при обработке ответа'}, status=500)
+        # Отправка запроса к AI
+        response = requests.post(DEEPSEEK_API_URL, headers=headers, json=payload, timeout=10)
+        response.raise_for_status()
+        bot_response = response.json()['choices'][0]['message']['content']
 
-    return JsonResponse({'error': 'Неподдерживаемый метод запроса'}, status=400)
+        return JsonResponse({
+            'response': bot_response,
+            'file_url': file_url,
+            'audio_url': audio_url
+        })
 
-# Получение рекомендаций от AI
+    except requests.exceptions.RequestException as e:
+        logger.error(f"API Error: {str(e)}", exc_info=True)
+        return JsonResponse({'error': 'Ошибка соединения с AI сервисом'}, status=502)
+    except Exception as e:
+        logger.error(f"Chatbot Error: {str(e)}", exc_info=True)
+        return JsonResponse({'error': 'Внутренняя ошибка сервера'}, status=500)
+
+
 @csrf_exempt
 def get_ai_recommendations(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            total_cost = data.get('totalCost', 0)
-            material_cost = data.get('materialCost', 0)
-            labor_cost = data.get('laborCost', 0)
-            work_type = data.get('workType', '')
-            area = data.get('area', 0)
+    """Генерация AI-рекомендаций для строительных проектов"""
+    if request.method != 'POST':
+        return JsonResponse({'error': 'Требуется POST запрос'}, status=405)
 
-            if not all([total_cost, material_cost, labor_cost, work_type, area]):
-                return JsonResponse({'success': False, 'error': 'Недостаточно данных'}, status=400)
+    try:
+        data = json.loads(request.body)
+        required_fields = ['totalCost', 'materialCost', 'laborCost', 'workType', 'area']
 
-            recommendation = f"Для типа работы '{work_type}' с площадью {area} м² рекомендуется вложить {total_cost} в проект, где стоимость материалов составляет {material_cost}, а стоимость труда — {labor_cost}."
+        if not all(field in data for field in required_fields):
+            return JsonResponse({'success': False, 'error': 'Неполные данные'}, status=400)
 
-            return JsonResponse({'success': True, 'recommendation': recommendation}, status=200)
-        except json.JSONDecodeError as e:
-            logger.error(f"Ошибка декодирования JSON: {e}")
-            return JsonResponse({'success': False, 'error': 'Некорректный формат данных'}, status=400)
-        except Exception as e:
-            logger.error(f"Ошибка сервера: {e}")
-            return JsonResponse({'success': False, 'error': 'Ошибка сервера'}, status=500)
+        recommendation = (
+            f"Рекомендация для проекта '{data['workType']}':\n"
+            f"- Площадь: {data['area']} м²\n"
+            f"- Общий бюджет: €{data['totalCost']}\n"
+            f"- Материалы: €{data['materialCost']}\n"
+            f"- Работа: €{data['laborCost']}"
+        )
 
-    return JsonResponse({'success': False, 'error': 'Метод запроса должен быть POST'}, status=400)
+        return JsonResponse({'success': True, 'recommendation': recommendation})
 
-# Регистрация пользователя
-def register(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login')
-    else:
-        form = UserCreationForm()
-    return render(request, 'main/register.html', {'form': form})
+    except json.JSONDecodeError:
+        return JsonResponse({'success': False, 'error': 'Неверный JSON'}, status=400)
+    except Exception as e:
+        logger.error(f"Recommendation Error: {str(e)}")
+        return JsonResponse({'success': False, 'error': 'Ошибка обработки'}, status=500)
 
-# Регистрация партнера
+
 def register_partner(request):
+    """Регистрация нового партнера"""
     if request.method == 'POST':
         form = PartnerForm(request.POST)
         if form.is_valid():
             partner = form.save(commit=False)
-            partner.referral_code = str(uuid.uuid4())[:8]
-            while Partner.objects.filter(referral_code=partner.referral_code).exists():
-                partner.referral_code = str(uuid.uuid4())[:8]
+            partner.referral_code = generate_unique_referral()
             partner.save()
             return redirect('partner_success')
     else:
         form = PartnerForm()
-    return render(request, 'main/register_partner.html', {'form': form})
 
-# Сохранение расчёта
-@csrf_exempt
-def save_calculation(request):
-    if request.method == 'POST':
-        try:
-            data = json.loads(request.body)
-            if not all(key in data for key in ['workType', 'area', 'material', 'includeMaterials', 'urgency', 'totalCost', 'materialCost', 'laborCost']):
-                return JsonResponse({'success': False, 'error': 'Неверные данные'}, status=400)
+    return render(request, 'main/register_partner.html', {
+        'form': form,
+        'meta_title': 'Регистрация партнера'
+    })
 
-            Calculation.objects.create(
-                user=request.user,
-                work_type=data['workType'],
-                area=data['area'],
-                material=data['material'],
-                include_materials=data['includeMaterials'],
-                urgency=data['urgency'],
-                total_cost=data['totalCost'],
-                material_cost=data['materialCost'],
-                labor_cost=data['laborCost']
-            )
-            return JsonResponse({'success': True})
-        except KeyError as e:
-            logger.error(f"Ошибка в данных: {e}")
-            return JsonResponse({'success': False, 'error': 'Неверные данные'}, status=400)
-        except Exception as e:
-            logger.error(f"Ошибка при сохранении расчёта: {e}")
-            return JsonResponse({'success': False, 'error': 'Ошибка сервера'}, status=500)
-    return JsonResponse({'success': False, 'error': 'Неподдерживаемый метод запроса'}, status=400)
 
-@cache_page(60 * 15)  # Кеширование на 15 минут
-# Основные страницы
+def generate_unique_referral():
+    """Генерация уникального реферального кода"""
+    code = uuid.uuid4().hex[:8].upper()
+    while Partner.objects.filter(referral_code=code).exists():
+        code = uuid.uuid4().hex[:8].upper()
+    return code
+
+
+@cache_page(60 * 15)
+def blog(request):
+    """Список статей блога с кешированием"""
+    posts = BlogPost.objects.all().order_by('-published_date')
+    return render(request, 'main/blog.html', {
+        'blog_posts': posts,
+        'meta_description': 'Статьи о ремонте и строительстве от NovaHaus'
+    })
 def home(request):
     return render(request, 'main/home.html')
 

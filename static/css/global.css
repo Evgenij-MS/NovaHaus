@@ -1,41 +1,23 @@
 :root {
-  /* Цвета */
+  /* Цветовая схема */
   --primary-color: #4FD6FF;
   --secondary-color: #FF78FF;
   --accent-color: #8B00FF;
   --background-color: #2B2B36;
   --text-color: rgba(244, 237, 237, 0.8);
   --header-bg: rgb(42, 48, 60);
-
-  /* Нейтральные цвета */
-  --neutral-100: #ffffff; /* Белый цвет */
-  --neutral-200: #f5f5f5; /* Светло-серый */
-  --neutral-300: #e0e0e0; /* Серый */
+  --neutral-100: #fff;
+  --neutral-200: #f5f5f5;
+  --neutral-300: #e0e0e0;
 
   /* Градиенты */
-  --primary-gradient: linear-gradient(
-    45deg,
-    var(--primary-color),
-    var(--secondary-color),
-    var(--accent-color)
-  );
-  --primary-gradient-transparent: linear-gradient(
-    45deg,
-    rgba(79, 214, 255, 0.8),
-    rgb(253, 119, 253),
-    rgb(138, 0, 253)
-  );
-
-  /* Эффекты */
-  --button-hover-effect: transform 0.3s ease, box-shadow 0.3s ease;
+  --primary-gradient: linear-gradient(45deg, var(--primary-color), var(--secondary-color), var(--accent-color));
+  --primary-gradient-transparent: linear-gradient(45deg, rgba(79, 214, 255, 0.8), rgb(253, 119, 253), rgb(138, 0, 253));
 
   /* Размеры */
   --max-width: 1400px;
-
-  /* Точки перелома */
   --breakpoint-mobile: 640px;
   --breakpoint-tablet: 768px;
-  --breakpoint-small-mobile: 480px;
 
   /* Типографика */
   --font-family: 'Roboto', sans-serif;
@@ -44,21 +26,14 @@
   --font-size-md: 16px;
   --font-size-lg: 20px;
   --font-size-xl: 24px;
-  --font-size-xxl: 32px;
-
-  /* Тени */
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.2);
-  --shadow-lg: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Общие стили */
+/* Базовые стили */
 body {
-  background-color: var(--background-color);
+  background: var(--background-color);
   color: var(--text-color);
   font-family: var(--font-family), sans-serif;
   margin: 0;
-  padding: 0;
   line-height: 1.6;
 }
 
@@ -68,115 +43,77 @@ body {
   padding: 0 20px;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  color: var(--neutral-100);
-  margin: 0;
-  font-weight: bold;
-}
-
-a {
-  color: var(--primary-color);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-a:hover {
-  color: var(--accent-color);
-}
-
-/* Стили для блога */
-.blog-posts {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
-}
-
+/* Общие компоненты */
+[class*="card"],
 .post {
-  background-color: var(--neutral-200);
+  background: var(--neutral-200);
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
+[class*="card"] img,
 .post img {
   width: 100%;
   height: 200px;
   object-fit: cover;
 }
 
+[class*="card"] h3,
 .post h2 {
   padding: 10px;
   font-size: var(--font-size-lg);
+  color: var(--neutral-100);
+  margin: 0;
 }
 
+[class*="card"] p,
 .post p {
   padding: 10px;
   font-size: var(--font-size-md);
+  color: inherit;
 }
 
-.post .btn {
-  display: block;
-  text-align: center;
-  padding: 10px;
-  background-color: var(--primary-color);
+/* Кнопки и ссылки */
+.btn,
+.theme-toggle-btn,
+.language-switcher a {
+  display: inline-block;
+  padding: 10px 20px;
+  background: var(--primary-color);
   color: var(--neutral-100);
-  text-decoration: none;
   border-radius: 5px;
-  margin: 10px;
-  transition: background-color 0.3s ease;
+  text-align: center;
+  transition: background 0.3s ease;
 }
 
-.post .btn:hover {
-  background-color: var(--accent-color);
+.btn:hover,
+.theme-toggle-btn:hover,
+.language-switcher a:hover {
+  background: var(--accent-color);
 }
 
 /* Темная тема */
-body.dark-theme {
-  background-color: #121212;
-  color: #ffffff;
+.dark-theme {
+  background: #121212;
+  color: #fff;
 }
 
+.dark-theme [class*="card"],
 .dark-theme .post {
-  background-color: #1f1f1f;
-  color: #ffffff;
-}
-
-.dark-theme .post h2 {
-  color: #ffffff;
-}
-
-.dark-theme .post p {
+  background: #1f1f1f;
   color: #e0e0e0;
 }
 
-.dark-theme .btn {
-  background-color: var(--accent-color);
-  color: #ffffff;
-}
-
-.dark-theme .btn:hover {
-  background-color: var(--primary-color);
-}
-
-/* Стили для переключателя темы */
+/* Расположение элементов */
 .theme-toggle-btn {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  padding: 10px 20px;
-  background-color: var(--primary-color);
-  color: var(--neutral-100);
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-.theme-toggle-btn:hover {
-  background-color: var(--accent-color);
-}
-
-/* Стили для переключателя языка */
 .language-switcher {
   position: fixed;
   top: 20px;
@@ -185,16 +122,10 @@ body.dark-theme {
   gap: 10px;
 }
 
-.language-switcher a {
-  color: var(--neutral-100);
-  text-decoration: none;
-  font-weight: bold;
-  padding: 5px 10px;
-  border-radius: 5px;
-  background-color: var(--primary-color);
-  transition: background-color 0.3s ease;
-}
-
-.language-switcher a:hover {
-  background-color: var(--accent-color);
+/* Утилиты */
+.no-scroll { overflow: hidden; }
+.grid-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
 }

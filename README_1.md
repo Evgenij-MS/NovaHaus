@@ -741,3 +741,98 @@ class Promotion(models.Model):
 heroku config:unset DISABLE_COLLECTSTATIC
 
 python manage.py collectstatic --no-input
+
+
+
+=============
+2. Что внутри должно быть?
+После создания папки Django автоматически сгенерирует там структуру:
+
+Copy
+locale/
+├── ru/           # Для русского
+│   └── LC_MESSAGES/
+│       ├── django.po   # Файл с переводами
+│       └── django.mo   # Скомпилированный файл (создаётся позже)
+├── en/           # Для английского
+│   └── LC_MESSAGES/
+│       ├── django.po
+│       └── django.mo
+└── de/           # Для немецкого
+    └── LC_MESSAGES/
+        ├── django.po
+        └── django.mo
+3. Как создать эти файлы?
+Активируйте виртуальное окружение (если используете).
+
+Перейдите в корень проекта (где лежит manage.py).
+
+Выполните команды для каждого языка:
+
+bash
+Copy
+django-admin makemessages -l ru  # Русский
+django-admin makemessages -l en  # Английский
+django-admin makemessages -l de  # Немецкий
+После этого в папке locale автоматически создадутся нужные подпапки и файлы .po.
+
+4. Что писать в .po-файлах?
+Пример файла locale/ru/LC_MESSAGES/django.po:
+
+po
+Copy
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+
+#: main/templates/main/home.html:5
+msgid "Welcome to NovaHaus"
+msgstr "Добро пожаловать в NovaHaus"
+
+#: main/views.py:15
+msgid "Services"
+msgstr "Услуги"
+5. Компиляция переводов
+После редактирования .po-файлов выполните:
+
+bash
+Copy
+django-admin compilemessages
+Это создаст .mo-файлы, которые Django использует в работе.
+
+6. Важные нюансы
+Для работы команд makemessages и compilemessages нужно:
+
+Установить gettext (для Windows: скачайте здесь)
+
+Добавить gettext в PATH (чтобы Django мог найти утилиты).
+
+Если папка locale не создаётся:
+
+Создайте её вручную: mkdir -p locale/{ru,en,de}/LC_MESSAGES
+
+Затем запустите makemessages.
+
+**Проверьте LOCALE_PATHS в settings.py:
+
+python
+Copy
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),  # Указывает на корневую папку locale
+]
+7. Как временно отключить переводы?
+Если вы ещё не готовы к переводам:
+
+Удалите LocaleMiddleware из MIDDLEWARE.
+
+Оставьте только русский язык:
+
+python
+Copy
+LANGUAGES = [
+    ('ru', 'Русский'),
+]
+LANGUAGE_CODE = 'ru'
+Уберите i18n_patterns из urls.py (как я показывал ранее).
+
+После настройки переводов вы сможете вернуть эти настройки.

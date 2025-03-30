@@ -1,122 +1,125 @@
 NovaHaus/                     # Корневая папка проекта
+├── locale/                   # Папка для файлов локализации
+│   ├── ru/                   # Для русского
+│   │   └── LC_MESSAGES/
+│   │       ├── django.po     # Файл с переводами
+│   │       └── django.mo     # Скомпилированный файл
+│   ├── en/                   # Для английского
+│   │   └── LC_MESSAGES/
+│   │       ├── django.po
+│   │       └── django.mo
+│   └── de/                   # Для немецкого
+│       └── LC_MESSAGES/
+│           ├── django.po
+│           └── django.mo
+├
 ├── manage.py                 # Управляющий скрипт Django
 ├── NovaHaus/                 # Основная папка проекта (настройки)
-│   ├── __init__.py           # Пустой файл, указывающий, что это пакет Python
-│   ├── asgi.py               # ASGI-конфигурация для асинхронных серверов
-│   ├── settings.py           # Основные настройки проекта
-│   ├── urls.py               # Корневой файл маршрутизации (URL-адреса)
-│   ├── wsgi.py               # WSGI-конфигурация для веб-серверов
-├── main/                     # Приложение "main" (основное приложение)
-│   ├── migrations/           # Папка для миграций базы данных
-│   │   ├── __init__.py       # Пустой файл, указывающий, что это пакет Python
-│   │   ├── 0001_initial.py   # Файл начальной миграции
-│   │   ├── 0002_calculation.py # Миграция для модели Calculation
-│   │   └── 0003_calculation_end_date_calculation_start_date_and_more.py # Миграция для обновления модели Calculation
-│   ├── __init__.py           # Пустой файл, указывающий, что это пакет Python
-│   ├── admin.py              # Регистрация моделей в админке Django
-│   ├── apps.py               # Конфигурация приложения
-│   ├── models.py             # Модели базы данных (обновлена: добавлена модель Partner)
-│   ├── tests.py              # Тесты для приложения
-│   ├── views.py              # Логика представлений (views) (обновлена: добавлен register_partner и partner_success)
-│   ├── middleware.py         # Пользовательские middleware
-│   ├── translation.py        # Логика перевода (локализация)
-│   ├── main.py               # Основной скрипт приложения (если требуется)
-│   ├── templates/            # Папка для шаблонов приложения
-│   │   └── main/             # Шаблоны для приложения "main"
-│   │       ├── home.html     # Главная страница (обновлена)
-│   │       ├── services.html # Страница услуг (обновлена)
-│   │       ├── portfolio.html # Страница портфолио
-│   │       ├── about.html    # Страница "О нас"
-│   │       ├── reviews.html  # Страница отзывов
-│   │       ├── blog.html     # Страница блога
-│   │       ├── contact.html  # Страница контактов
-│   │       ├── calculator.html # Страница калькулятора
-│   │       ├── register.html # Страница регистрации
-│   │       ├── dashboard.html # Личный кабинет пользователя
-│   │       ├── chatbot.html  # Страница чат-бота
-│   │       ├── register_partner.html # Новый шаблон для регистрации партнеров
-│   │       └── partner_success.html # Новый шаблон для страницы успешной регистрации партнера
-│   ├── forms.py              # Новый файл для форм (если требуется)
-├── static/                   # Папка для статических файлов (CSS, JS, изображения)
-│   ├── css/                  # CSS-файлы
-│   │   ├── reset.css         # Сброс стилей по умолчанию
-│   │   ├── global.css        # Общие стили (шрифты, цвета, базовые элементы)
-│   │   ├── header.css        # Стили для шапки
-│   │   ├── buttons.css       # Стили для кнопок
-│   │   ├── forms.css         # Стили для форм (обновлен: добавлены стили для формы регистрации партнеров)
-│   │   ├── cards.css         # Стили для карточек (услуги, отзывы)
-│   │   ├── slider.css        # Стили для слайдера
-│   │   ├── footer.css        # Стили для подвала
-│   │   ├── media-queries.css # Медиа-запросы для адаптации под мобильные устройства
-│   │   ├── calculator.css    # Стили для калькулятора
-│   │   └── partner.css       # Новый файл стилей для страницы успешной регистрации партнера
-│   ├── js/                   # JavaScript-файлы
-│   │   ├── ai-integration.js # Интеграция с AI (чат-бот, калькулятор)
-│   │   ├── animations.js     # Анимации (плавные переходы, hover-эффекты)
-│   │   ├── calculator.js     # Логика онлайн-калькулятора
-│   │   ├── chart.js          # Отрисовка графиков (например, для калькулятора)
-│   │   ├── chatbot.js        # Логика чат-бота
-│   │   ├── email-integration.js # Интеграция с email (отправка писем)
-│   │   ├── feedback.js       # Обработка отзывов и рейтингов
-│   │   ├── history.js        # История расчетов и действий пользователя
-│   │   ├── language.js       # Переключение языков
-│   │   ├── modal.js          # Управление модальными окнами
-│   │   ├── scripts.js        # Основные скрипты
-│   │   ├── slider.js         # Логика слайдера
-│   │   └── visualization.js  # Логика 3D-визуализации
-│   ├── images/               # Изображения
-│   │   ├── logo.png          # Логотип компании
-│   │   ├── background.jpg    # Фоновое изображение
-│   │   ├── slider/           # Изображения для слайдера
-│   │   │   ├── slider1.jpg   # Изображение слайдера 1
-│   │   │   ├── slider2.jpg   # Изображение слайдера 2
-│   │   │   └── ...           # Другие изображения слайдера
-│   │   ├── portfolio/        # Изображения для портфолио
-│   │   │   ├── project1.jpg  # Изображение проекта 1
-│   │   │   ├── project2.jpg  # Изображение проекта 2
-│   │   │   └── ...           # Другие изображения проектов
-│   │   ├── blog/             # Изображения для блога
-│   │   │   ├── post1.jpg     # Изображение для поста 1
-│   │   │   ├── post2.jpg     # Изображение для поста 2
-│   │   │   ├── post3.jpg     # Изображение для поста 3
-│   │   │   └── ...           # Другие изображения для блога
-│   │   ├── icons/            # Иконки для социальных сетей и других элементов
-│   │   │   ├── facebook.png  # Иконка Facebook
-│   │   │   ├── instagram.png # Иконка Instagram
-│   │   │   ├── telegram.png  # Иконка Telegram (добавлена)
-│   │   │   ├── email.png     # Иконка Email
-│   │   │   └── ...           # Другие иконки
-│   │   ├── icon-calculator.png # Иконка калькулятора
-│   │   ├── icon-info.png     # Иконка информации
-│   │   └── favicon/          # Фавиконки
-│   │       ├── android-chrome-192x192.png
-│   │       ├── android-chrome-512x512.png
-│   │       ├── apple-touch-icon.png
-│   │       ├── favicon.ico
-│   │       ├── favicon.svg
-│   │       ├── favicon-16x16.png
-│   │       ├── favicon-32x32.png
-│   │       ├── favicon-96x96.png
-│   │       └── site.webmanifest
-├── media/                    # Папка для медиафайлов (загружаемые пользователями)
-│   ├── services/             # Изображения для услуг
-│   └── portfolio/            # Изображения для портфолио
-├── templates/                # Глобальные шаблоны
-│   ├── base.html             # Базовый шаблон для всех страниц (обновлен)
-│   └── includes/             # Включаемые шаблоны
-│       ├── footer.html       # Шаблон подвала (обновлен)
-│       ├── header.html       # Шаблон шапки
-│       ├── modal.html        # Шаблон модального окна
-│       └── slider.html       # Шаблон слайдера
-├── staticfiles/              # Собранные статические файлы (для продакшена)
-├── .env                      # Файл с переменными окружения
-├── .gitattributes            # Настройки Git
-├── .gitignore                # Игнорируемые файлы для Git
-├── .python-version           # Указание версии Python
-├── latest.dump               # Дамп базы данных
-├── old-config.txt            # Старый конфигурационный файл
-├── Procfile                  # Конфигурация для Heroku
-├── requirements.in           # Список зависимостей (для pip-tools)
-├── requirements.txt          # Список зависимостей проекта
-├── README.md                 # Описание проекта
-└── db.sqlite3                # База данных SQLite (создается автоматически)
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── main/                     # Приложение "main"
+│   ├── migrations/
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── consumers.py          # WebSocket consumers
+│   ├── forms.py
+│   ├── middleware.py
+│   ├── models.py
+│   ├── routing.py            # WebSocket routing
+│   ├── tests.py
+│   ├── translation.py
+│   ├── views.py
+│   ├── templates/
+│   │   └── main/
+│   │       ├── 3d_viewer.html
+│   │       ├── about.html
+│   │       ├── blog.html
+│   │       ├── blog_post_detail.html
+│   │       ├── calculator.html
+│   │       ├── chatbot.html
+│   │       ├── consultation.html
+│   │       ├── contact.html
+│   │       ├── dashboard.html
+│   │       ├── faq.html
+│   │       ├── home.html
+│   │       ├── partner_success.html
+│   │       ├── portfolio.html
+│   │       ├── register.html
+│   │       ├── register_partner.html
+│   │       ├── reviews.html
+│   │       └── services.html
+├── static/                   # Статические файлы
+│   ├── css/
+│   │   ├── 3d-viewer.css
+│   │   ├── buttons.css
+│   │   ├── calculator.css
+│   │   ├── cards.css
+│   │   ├── chatbot.css
+│   │   ├── footer.css
+│   │   ├── forms.css
+│   │   ├── global.css
+│   │   ├── header.css
+│   │   ├── media-queries.css
+│   │   ├── partner.css
+│   │   ├── reset.css
+│   │   ├── services.css
+│   │   ├── slider.css
+│   │   └── visualization.css
+│   ├── icons/
+│   │   ├── email.png
+│   │   ├── facade.png
+│   │   ├── facebook.png
+│   │   ├── house.png
+│   │   ├── insulation.png
+│   │   ├── instagram.png
+│   │   ├── office.png
+│   │   ├── repair.png
+│   │   ├── telegram.png
+│   │   ├── warehouse.png
+│   │   └── ... [другие иконки]
+│   ├── images/
+│   │   ├── background.jpg
+│   │   ├── blog/
+│   │   ├── favicon/
+│   │   ├── logo.png
+│   │   ├── portfolio/
+│   │   ├── slider/
+│   │   └── team/
+│   │       ├── member1.jpg
+│   │       ├── member2.jpg
+│   │       └── member3.jpg
+│   ├── js/
+│   │   ├── 3d-model.js
+│   │   ├── ai-integration.js
+│   │   ├── animations.js
+│   │   ├── calculator.js
+│   │   ├── chart.js
+│   │   ├── chatbot.js
+│   │   ├── email-integration.js
+│   │   ├── feedback.js
+│   │   ├── history.js
+│   │   ├── language.js
+│   │   ├── modal.js
+│   │   ├── scripts.js
+│   │   ├── service-worker.js
+│   │   ├── slider.js
+│   │   └── visualization.js
+│   └── manifest.json
+├── media/
+├── templates/
+├── staticfiles/
+├── .env
+├── .gitattributes
+├── .gitignore
+├── .python-version
+├
+├── old-config.txt
+├── Procfile
+├── requirements.in
+├── requirements.txt
+├── README.md
+└── db.sqlite3

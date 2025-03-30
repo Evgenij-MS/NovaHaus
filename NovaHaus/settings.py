@@ -2,37 +2,26 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
-import tempfile
 from django.core.exceptions import ImproperlyConfigured
-from django.utils.translation import gettext_lazy as _
 
 # Загрузка переменных окружения
 load_dotenv()
 
-# Базовая директория
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Проверка наличия обязательных переменных окружения
 def get_env_variable(var_name, default=None):
+    """Получение переменных окружения с проверкой"""
     value = os.getenv(var_name, default)
     if value is None:
         raise ImproperlyConfigured(f"Переменная окружения {var_name} не установлена.")
     return value
 
 
-# # Секретный ключ
-# SECRET_KEY = os.getenv('SECRET_KEY', 'django-insecure-default-key')
-# Секретный ключ
-SECRET_KEY = os.getenv('SECRET_KEY')
-
-
-# Режим отладки
+# Основные настройки
+SECRET_KEY = get_env_variable('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
 
-
-
-# Разрешенные хосты
 ALLOWED_HOSTS = [
     'novahaus-koeln.de',
     'www.novahaus-koeln.de',
@@ -41,38 +30,109 @@ ALLOWED_HOSTS = [
     'novahaus-eu-5b21cc3bb91d.herokuapp.com',
 ]
 
-# Установленные приложения
+# Приложения
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
+
+    # Сторонние приложения
     'channels',
-    'main',
     'whitenoise.runserver_nostatic',
-    'compressor',  # Добавляем django-compressor
-    'django_otp',  # Для двухфакторной аутентификации
-    'django_otp.plugins.otp_totp',  # Для TOTP (Time-Based One-Time Password)
+    'compressor',
+    'django_otp',
+    'django_otp.plugins.otp_totp',
+    'axes',
+
+    # Локальные приложения
+    'main',
 ]
 
-# Промежуточное ПО
+# Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',  # WhiteNoise должен быть сразу после SecurityMiddleware
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # 'main.middleware.BlockBadBotsMiddleware',  # Middleware для блокировки ботов
-    'django.middleware.locale.LocaleMiddleware',
+    'axes.middleware.AxesMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
 ]
 
-# Корневой URL
-ROOT_URLCONF = 'NovaHaus.urls'
+# Настройки безопасности
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_REFERRER_POLICY = 'same-origin'
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+
+# Блокировка ботов и сканеров
+DISALLOWED_USER_AGENTS = [
+    r'bot', r'scanner', r'curl', r'Chrome/91\.0\.4472\.124',
+    r'python-requests', r'Go-http-client', r'Java/',
+    r'nikto', r'sqlmap', r'wget', r'libwww-perl',
+    r'zgrab', r'okhttp', r'postman'
+]
+
+SENSITIVE_URL_PATTERNS = [
+    r'^\.env', r'^wp-', r'^config', r'^\.git',
+    r'^phpmyadmin', r'^backup', r'\.sql$',
+    r'\.bak$', r'\.log$', r'^\.well-known',
+    r'^\.ht', r'^\.docker', r'^\.npm'
+]
+
+# Настройки django-axes
+AXES_FAILURE_LIMIT = 5
+AXES_COOLOFF_TIME = 1  # 1 час блокировки
+AXES_LOCKOUT_TEMPLATE = 'errors/lockout.html'
+AXES_RESET_ON_SUCCESS = True
+AXES_DISABLE_ACCESS_LOG = True
+
+# База данных
+DATABASES = {
+    'default': dj_database_url.config(
+        default=get_env_variable('DATABASE_URL'),
+        conn_max_age=600,
+        ssl_require=True
+    )
+}
+
+
+# Для локальной разработки
+if DEBUG:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME', 'novahaus'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
+    }
+
+
+# Альтернатива для Heroku
+if 'DATABASE_URL' in os.environ:
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+
 
 # Шаблоны
 TEMPLATES = [
@@ -86,84 +146,70 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
+            ],
+            'builtins': [
+                'django.templatetags.static',
             ],
         },
     },
 ]
 
-# WSGI-приложение
-WSGI_APPLICATION = 'NovaHaus.wsgi.application'
-
-# База данных
-DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
-}
-
-
-# Валидация паролей
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
-    },
-]
-
-# Локализация
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
-USE_I18N = True
-USE_TZ = True
-
 # Статические файлы
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# Настройки для статических файлов
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',  # Добавляем CompressorFinder
-]
 
 # Медиафайлы
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = BASE_DIR / 'media'
 
-# Ключевое поле по умолчанию
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Локализация
+TIME_ZONE = 'Europe/Berlin'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+LANGUAGE_CODE = 'ru'
+LANGUAGES = [
+    ('ru', 'Русский'),
+    ('en', 'English'),
+    ('de', 'Deutsch'),
+]
+LOCALE_PATHS = [BASE_DIR / 'locale']
 
-# Кэширование
-CACHE_DIR = BASE_DIR / 'cache'
-if not CACHE_DIR.exists():
-    CACHE_DIR.mkdir()
+# Двухфакторная аутентификация
+OTP_TOTP_ISSUER = 'NovaHaus'
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
-        'LOCATION': str(CACHE_DIR),  # Используем строку
-        'TIMEOUT': 300,  # Время жизни кеша в секундах (5 минут)
-        'OPTIONS': {
-            'MAX_ENTRIES': 1000,  # Максимальное количество записей в кеше
-        }
-    }
+# Логирование
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+        'axes': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+        },
+    },
 }
 
 # Настройки для django-compressor
-COMPRESS_ENABLED = True
-COMPRESS_URL = STATIC_URL  # Используйте STATIC_URL по умолчанию
-COMPRESS_ROOT = STATIC_ROOT  # Используйте STATIC_ROOT по умолчанию
-COMPRESS_OFFLINE = False  # Отключите оффлайн-компрессию, если она не нужна
-
+COMPRESS_ENABLED = not DEBUG
+COMPRESS_OFFLINE = not DEBUG
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.cssmin.CSSMinFilter',
 ]
@@ -171,33 +217,54 @@ COMPRESS_JS_FILTERS = [
     'compressor.filters.jsmin.JSMinFilter',
 ]
 
-# Настройки безопасности (только для production)
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True  # Перенаправление HTTP на HTTPS
-    SESSION_COOKIE_SECURE = True  # Безопасные cookies для сессий
-    CSRF_COOKIE_SECURE = True  # Безопасные cookies для CSRF
-    SECURE_BROWSER_XSS_FILTER = True  # Защита от XSS
-    SECURE_CONTENT_TYPE_NOSNIFF = True
-    SECURE_HSTS_SECONDS = 31536000  # Включение HSTS
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True  # Включение HSTS для поддоменов
-    SECURE_HSTS_PRELOAD = True
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # Для прокси
+# Настройки кеширования
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': os.getenv('REDIS_URL', 'redis://localhost:6379/0'),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
 
-LANGUAGES = [
-    ('ru', 'Русский'),
-    ('en', 'English'),
-    ('de', 'Deutsch'),
+# Настройки для Channels (если используется)
+ASGI_APPLICATION = 'NovaHaus.asgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [os.getenv('REDIS_URL', 'redis://localhost:6379/0')],
+        },
+    },
+}
+
+
+# настройки CORS для API
+CORS_ALLOWED_ORIGINS = [
+    "https://novahaus-koeln.de",
+    "https://www.novahaus-koeln.de",
 ]
 
-LANGUAGE_CODE = 'ru'
 
-LOCALE_PATHS = [
-    BASE_DIR / 'locale',
-]
+# настройки для компрессии:
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
 
-# Настройки для двухфакторной аутентификации
-OTP_TOTP_ISSUER = 'NovaHaus'  # Название компании для TOTP
+
+# Кеширование:
+CACHE_TTL = 60 * 15  # 15 минут
 
 
+# Sentry для отслеживания ошибок:
+import sentry_sdk
+sentry_sdk.init(
+    dsn=os.getenv('SENTRY_DSN'),
+    traces_sample_rate=1.0,
+    profiles_sample_rate=1.0,
+)
 
 

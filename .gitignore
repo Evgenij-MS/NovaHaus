@@ -1,3 +1,37 @@
+# Конфигурационные файлы
 .env
+*.env*
+config*.php
+web.config
 old-config.txt
+
+# Системные файлы
+*.log
+*.sql
+*.bak
 db.sqlite3
+
+# IDE
+.idea/
+.vscode/
+
+# Статические файлы
+/staticfiles/
+/media/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.pytest_cache/
+
+# Dependency directories
+.nova/
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/

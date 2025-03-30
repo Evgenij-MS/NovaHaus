@@ -1,16 +1,17 @@
 /* media-queries.css */
 @media (max-width: var(--breakpoint-mobile)) {
+  /* Header adjustments */
   header {
     height: auto;
     padding: 10px;
-    width: 100%; /* Ограничиваем ширину шапки */
-    box-sizing: border-box; /* Учитываем padding в общей ширине */
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .header-content {
     flex-direction: column;
     align-items: center;
-    width: 100%; /* Ограничиваем ширину контейнера */
+    width: 100%;
   }
 
   .logo img {
@@ -23,7 +24,7 @@
     margin-left: 0;
     text-align: center;
     align-items: center;
-    width: 100%; /* Ограничиваем ширину текстового блока */
+    width: 100%;
   }
 
   .header-text h1 {
@@ -39,7 +40,7 @@
   }
 
   nav {
-    width: 100%; /* Ограничиваем ширину навигации */
+    width: 100%;
     margin-top: 10px;
   }
 
@@ -50,28 +51,55 @@
     padding: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 100%; /* Ограничиваем ширину меню */
-    box-sizing: border-box; /* Учитываем padding в общей ширине */
+    width: 100%;
+    box-sizing: border-box;
   }
 
   nav ul li a {
-    font-size: var(--font-size-sm); /* Уменьшаем размер шрифта для мобильных */
-    padding: 8px 0; /* Добавляем отступы для удобства нажатия */
-    display: block; /* Делаем ссылки блочными для лучшего взаимодействия */
-    text-align: center; /* Выравниваем текст по центру */
+    font-size: var(--font-size-sm);
+    padding: 8px 0;
+    display: block;
+    text-align: center;
   }
 
   .language-switcher {
     align-self: center;
     padding: 10px;
-    width: 100%; /* Ограничиваем ширину переключателя */
-    text-align: center; /* Выравниваем по центру */
+    width: 100%;
+    text-align: center;
   }
 
   .language-switcher select {
-    width: 100%; /* Делаем переключатель на всю ширину */
-    max-width: 200px; /* Ограничиваем максимальную ширину */
-    margin: 0 auto; /* Центрируем */
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+
+  /* Form improvements */
+  .feedback-form {
+    padding: 15px;
+    margin: 15px auto;
+  }
+
+  .feedback-form input,
+  .feedback-form textarea,
+  .feedback-form button {
+    font-size: 16px;
+    padding: 12px 15px;
+  }
+
+  .feedback-form textarea {
+    height: 120px;
+  }
+
+  /* Container adjustments */
+  .container {
+    padding: 0 15px;
+  }
+
+  section {
+    margin: 25px 0;
+    padding: 15px 0;
   }
 }
 
@@ -90,5 +118,35 @@
     flex-direction: column;
     gap: 10px;
   }
+
+  /* Card adjustments */
+  .service-cards {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .card {
+    padding: 15px;
+  }
 }
 
+/* Small mobile devices */
+@media (max-width: 480px) {
+  .logo img {
+    width: 90px;
+  }
+
+  .header-text h1 {
+    font-size: var(--font-size-lg);
+  }
+
+  .header-text p {
+    font-size: var(--font-size-sm);
+  }
+
+  /* Form adjustments */
+  .feedback-form {
+    margin: 10px;
+    padding: 10px;
+  }
+}
