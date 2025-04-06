@@ -1,14 +1,12 @@
 from django.contrib import admin
 from django.urls import path, include, re_path
 from main import views
-from main.views import view_3d_model
 from django.conf.urls.i18n import i18n_patterns
 from django.conf import settings
 from django.http import HttpResponseForbidden
-from django.views.defaults import page_not_found
 
 
-def block_sensitive_paths(request, *args, **kwargs):
+def block_sensitivity_paths(request):
     """Блокировка доступа к чувствительным путям"""
     return HttpResponseForbidden(
         "<h1>Доступ запрещен</h1><p>Запрос к защищенному ресурсу</p>",
@@ -18,18 +16,18 @@ def block_sensitive_paths(request, *args, **kwargs):
 # Базовые URL-адреса
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('i18n/', include('django.conf.urls.i18n')),
+    path('i18n/', include('django.conf.urls.i18n')),  # Включает set_language
 ]
 
-# Добавление защищенных маршрутов
-for sensitive_path in [
+# Добавление защищенных маршрутов для чувствительных путей
+sensitive_paths = [
     r'^\.env', r'^wp-', r'^config', r'^\.git',
     r'^phpmyadmin', r'^backup', r'\.sql$',
     r'\.bak$', r'\.log$'
-]:
-    urlpatterns += [
-        re_path(sensitive_path, block_sensitive_paths)
-    ]
+]
+
+for sensitive_path in sensitive_paths:
+    urlpatterns += [re_path(sensitive_path, block_sensitivity_paths)]
 
 # URL-адреса с поддержкой языков
 urlpatterns += i18n_patterns(
@@ -46,7 +44,7 @@ urlpatterns += i18n_patterns(
     path('chatbot/', views.chatbot, name='chatbot'),
     path('get-ai-recommendations/', views.get_ai_recommendations, name='get_ai_recommendations'),
     path('save-calculation/', views.save_calculation, name='save_calculation'),
-    path('3d-viewer/', view_3d_model, name='3d_viewer'),
+    path('3d-viewer/', views.view_3d_model, name='3d_viewer'),
     prefix_default_language=False
 )
 
@@ -55,3 +53,5 @@ if settings.DEBUG:
     from django.conf.urls.static import static
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    # Добавляем обработку ошибок для отладки
+    handler404 = 'main.views.page_not_found'

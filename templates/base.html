@@ -32,7 +32,8 @@
     <link rel="stylesheet" href="{% static 'css/slider.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Локальная версия Font Awesome -->
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/media-queries.css' %}">
 
     <!-- Favicon -->
@@ -71,11 +72,27 @@
     </script>
 </head>
 <body>
-    <!-- Переключатель языка -->
-    <div class="language-switcher">
-        <a href="{% url 'set_language' 'ru' %}">Русский</a>
-        <a href="{% url 'set_language' 'en' %}">English</a>
-        <a href="{% url 'set_language' 'de' %}">Deutsch</a>
+    <!-- Переключатель языка (доступная версия) -->
+    <div class="language-switcher-container">
+        <form action="{% url 'set_language' %}" method="post" class="language-switcher">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.get_full_path }}">
+            <label for="language-select" class="sr-only">{% trans "Выберите язык" %}</label>
+            <select name="language" id="language-select" class="language-select" onchange="this.form.submit()" aria-label="{% trans 'Язык сайта' %}">
+                <option value="ru" {% if LANGUAGE_CODE == 'ru' %}selected{% endif %}>
+                    Русский
+                </option>
+                <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>
+                    English
+                </option>
+                <option value="de" {% if LANGUAGE_CODE == 'de' %}selected{% endif %}>
+                    Deutsch
+                </option>
+            </select>
+            <noscript>
+                <button type="submit" class="language-submit-btn">{% trans "Применить" %}</button>
+            </noscript>
+        </form>
     </div>
 
     <!-- Шапка сайта -->
@@ -91,10 +108,15 @@
     {% include 'includes/footer.html' %}
 
     <!-- Кнопка темы -->
-    <button id="theme-toggle" class="theme-toggle-btn">{% trans "Темная тема" %}</button>
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="{% trans 'Переключить тему' %}">
+        <i class="fas fa-moon"></i>
+        <span class="theme-toggle-text">{% trans "Темная тема" %}</span>
+    </button>
 
     <!-- JavaScript -->
     <script src="{% static 'js/scripts.js' %}"></script>
     <script src="{% static 'js/language.js' %}"></script>
+    <!-- Локальная версия Font Awesome JS -->
+    <script src="{% static 'fontawesome/js/all.min.js' %}"></script>
 </body>
 </html>
