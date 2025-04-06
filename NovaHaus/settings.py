@@ -22,6 +22,8 @@ def get_env_variable(var_name, default=None):
 # Основные настройки
 SECRET_KEY = get_env_variable('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't', 'y', 'yes')
+ROOT_URLCONF = 'NovaHaus.urls'
+
 
 ALLOWED_HOSTS = [
     'novahaus-koeln.de',
@@ -124,21 +126,16 @@ AXES_DISABLE_ACCESS_LOG = True
 
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 
-# Для Heroku автоматически переопределяем настройки
-if 'DATABASE_URL' in os.environ:
-    DATABASES['default'] = dj_database_url.config(
-        conn_max_age=600,
-        ssl_require=True
-    )
+
+# # Для Heroku автоматически переопределяем настройки
+# if 'DATABASE_URL' in os.environ:
+#     DATABASES['default'] = dj_database_url.config(
+#         conn_max_age=600,
+#         ssl_require=True
+#     )
 
 # Шаблоны
 TEMPLATES = [

@@ -836,3 +836,20 @@ LANGUAGE_CODE = 'ru'
 Уберите i18n_patterns из urls.py (как я показывал ранее).
 
 После настройки переводов вы сможете вернуть эти настройки.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+fytYLor1OSoPwzNaI9eX1X_baExnhgHgUvCeA5_B
