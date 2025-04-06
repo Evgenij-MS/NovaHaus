@@ -26,6 +26,11 @@ sensitive_paths = [
     r'\.bak$', r'\.log$'
 ]
 
+
+
+
+
+
 for sensitive_path in sensitive_paths:
     urlpatterns += [re_path(sensitive_path, block_sensitivity_paths)]
 

@@ -27,6 +27,11 @@ MEDIA_CHATBOT_FILES = 'media/chatbot/files'
 MEDIA_CHATBOT_AUDIO = 'media/chatbot/audio'
 
 
+def page_not_found(request, _exception):
+    return render(request, '404.html', status=404)
+
+
+
 # Утилиты
 def get_client_ip(request):
     """Получение IP клиента с учетом прокси"""
@@ -210,10 +215,6 @@ def about(request):
 
 def reviews(request):
     return render(request, 'main/reviews.html')
-
-def blog(request):
-    blog_posts = BlogPost.objects.all()
-    return render(request, 'main/blog.html', {'blog_posts': blog_posts})
 
 def contact(request):
     return render(request, 'main/contact.html')
