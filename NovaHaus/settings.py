@@ -27,11 +27,12 @@ ROOT_URLCONF = 'NovaHaus.urls'
 
 
 ALLOWED_HOSTS = [
+    'novahaus-eu.herokuapp.com',
+    'novahaus-eu-5b21cc3bb91d.herokuapp.com',
     'novahaus-koeln.de',
     'www.novahaus-koeln.de',
     'localhost',
-    '127.0.0.1',
-    'novahaus-eu-5b21cc3bb91d.herokuapp.com',
+    '127.0.0.1'
 ]
 
 # Приложения
