@@ -7,14 +7,18 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import cache_page
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 from django.core.files.storage import FileSystemStorage
-from django.utils.translation import activate
+# from django.utils.translation import activate
 from django.conf import settings
 from .models import Calculation, Partner, BlogPost, ChatLog
 from .forms import PartnerForm
 
+
+
 logger = logging.getLogger(__name__)
+
+
 
 # Конфигурация API
 DEEPSEEK_API_KEY = os.getenv('DEEPSEEK_API_KEY')
@@ -36,6 +40,23 @@ def save_uploaded_file(file, subfolder):
     filename = f"{uuid.uuid4().hex[:8]}_{file.name}"
     saved_name = fs.save(filename, file)
     return fs.url(saved_name)
+
+
+@csrf_exempt
+def save_calculation(request):
+    """Сохранение расчетов"""
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            calculation = Calculation.objects.create(
+                user=request.user if request.user.is_authenticated else None,
+                data=data
+            )
+            return JsonResponse({'success': True, 'id': calculation.id})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)}, status=400)
+    return JsonResponse({'error': 'Требуется POST запрос'}, status=405)
+
 
 
 # Представления
