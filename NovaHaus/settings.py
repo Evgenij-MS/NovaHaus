@@ -14,11 +14,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 def get_env_variable(var_name, default=None):
-    """Получение переменных окружения с проверкой"""
     value = os.getenv(var_name, default)
     if value is None:
-        raise ImproperlyConfigured(f"Переменная окружения {var_name} не установлена.")
+        logging.warning(f"Переменная окружения {var_name} отсутствует, используем значение по умолчанию.")
+        return default
     return value
+
 
 # Основные настройки
 SECRET_KEY = get_env_variable('SECRET_KEY')
@@ -87,6 +88,10 @@ if not DEBUG:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
 
+
+ALLOW_CURL = os.getenv("ALLOW_CURL", "False") == "True"
+
+
 # Блокировка ботов и сканеров
 DISALLOWED_USER_AGENTS = [
     re.compile(r'bot'),
@@ -105,21 +110,25 @@ DISALLOWED_USER_AGENTS = [
     re.compile(r'postman')
 ]
 
+if not ALLOW_CURL:
+    DISALLOWED_USER_AGENTS.extend([
+        re.compile(r'curl'),
+        re.compile(r'python-requests'),
+    ])
+
 
 SENSITIVE_URL_PATTERNS = [
-    re.compile(r'^\.env'),
-    re.compile(r'^wp-'),
-    re.compile(r'^config'),
-    re.compile(r'^\.git'),
-    re.compile(r'^phpmyadmin'),
-    re.compile(r'^backup'),
+    re.compile(r'(^|/)\.env$'),
+    re.compile(r'(^|/)wp-'),
+    re.compile(r'(^|/)config'),
+    re.compile(r'(^|/)backup'),
+    re.compile(r'(^|/)\.git$'),
     re.compile(r'\.sql$'),
     re.compile(r'\.bak$'),
     re.compile(r'\.log$'),
-    re.compile(r'^\.well-known'),
-    re.compile(r'^\.ht'),
-    re.compile(r'^\.docker'),
-    re.compile(r'^\.npm')
+    re.compile(r'(^|/)phpmyadmin'),
+    re.compile(r'(^|/)docker'),
+    re.compile(r'(^|/)npm'),
 ]
 
 
