@@ -179,8 +179,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'NovaHaus/templates'),  # Путь к base.html
-            os.path.join(BASE_DIR, 'templates')            # Дополнительный путь (если нужно)
+            os.path.join(BASE_DIR, 'templates'),  # Путь к base.html
         ],
         'APP_DIRS': True,
         'OPTIONS': {
