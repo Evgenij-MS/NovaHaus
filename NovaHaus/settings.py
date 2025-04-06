@@ -7,8 +7,10 @@ from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import gettext as _
 _ = lambda s: s
 
+
 # Загрузка переменных окружения
 load_dotenv()
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -53,6 +55,7 @@ INSTALLED_APPS = [
     'django_otp',
     'django_otp.plugins.otp_totp',
     'axes',
+    'django_extensions'
 
     # Локальные приложения
     'main',
@@ -169,11 +172,16 @@ DATABASES = {
 #         ssl_require=True
 #     )
 
+
+
 # Шаблоны
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'NovaHaus/templates'),  # Путь к base.html
+            os.path.join(BASE_DIR, 'templates')            # Дополнительный путь (если нужно)
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -182,13 +190,16 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'django.template.context_processors.static',
             ],
             'builtins': [
                 'django.templatetags.static',
+                'django.templatetags.i18n',
             ],
         },
     },
 ]
+
 
 # Статические файлы
 STATIC_URL = '/static/'
