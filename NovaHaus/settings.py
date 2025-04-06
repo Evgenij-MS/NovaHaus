@@ -66,6 +66,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -74,6 +75,20 @@ MIDDLEWARE = [
     'axes.middleware.AxesMiddleware',
     'django.middleware.gzip.GZipMiddleware',
 ]
+
+USE_I18N = True
+USE_L10N = True
+
+LANGUAGE_CODE = 'ru'
+LANGUAGES = [
+    ('ru', 'Русский'),
+    ('en', 'English'),
+    ('de', 'Deutsch'),
+]
+
+
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
+
 
 # Настройки безопасности
 SECURE_BROWSER_XSS_FILTER = True

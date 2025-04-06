@@ -87,3 +87,4 @@ sentry-sdk
 channels-redis>=4.2.0
 asgiref>=3.8.1
 django-extensions>=3.2.3
+django-i18n-urls
