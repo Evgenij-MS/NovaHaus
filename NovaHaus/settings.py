@@ -277,27 +277,54 @@ COMPRESS_JS_FILTERS = [
     'compressor.filters.jsmin.JSMinFilter',
 ]
 
+
+REDIS_URL = os.getenv('REDISCLOUD_URL', 'redis://localhost:6379/0')
+
 # Настройки кеширования
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': os.getenv('REDIS_URL', 'redis://localhost:6379/0'),
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': REDIS_URL,
         'OPTIONS': {
             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            'IGNORE_EXCEPTIONS': True,  # Важно для обработки ошибок Redis
         }
     }
 }
 
-# Настройки для Channels
-ASGI_APPLICATION = 'NovaHaus.asgi.application'
+# Настройки Channels
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            'hosts': [os.getenv('REDIS_URL', 'redis://localhost:6379/0')],
+            'hosts': [REDIS_URL],
+            'socket_timeout': 5,  # Таймаут подключения
         },
     },
 }
+
+
+# # Настройки кеширования
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+#         'LOCATION': os.getenv('REDIS_URL', 'redis://localhost:6379/0'),
+#         'OPTIONS': {
+#             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+#         }
+#     }
+# }
+
+# Настройки для Channels
+ASGI_APPLICATION = 'NovaHaus.asgi.application'
+# CHANNEL_LAYERS = {
+#     'default': {
+#         'BACKEND': 'channels_redis.core.RedisChannelLayer',
+#         'CONFIG': {
+#             'hosts': [os.getenv('REDIS_URL', 'redis://localhost:6379/0')],
+#         },
+#     },
+# }
 
 # Настройки CORS для API
 CORS_ALLOWED_ORIGINS = [
