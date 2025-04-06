@@ -1,3 +1,4 @@
+import re
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -87,18 +88,39 @@ if not DEBUG:
 
 # Блокировка ботов и сканеров
 DISALLOWED_USER_AGENTS = [
-    r'bot', r'scanner', r'curl', r'Chrome/91\.0\.4472\.124',
-    r'python-requests', r'Go-http-client', r'Java/',
-    r'nikto', r'sqlmap', r'wget', r'libwww-perl',
-    r'zgrab', r'okhttp', r'postman'
+    re.compile(r'bot'),
+    re.compile(r'scanner'),
+    re.compile(r'curl'),
+    re.compile(r'Chrome/91\.0\.4472\.124'),
+    re.compile(r'python-requests'),
+    re.compile(r'Go-http-client'),
+    re.compile(r'Java/'),
+    re.compile(r'nikto'),
+    re.compile(r'sqlmap'),
+    re.compile(r'wget'),
+    re.compile(r'libwww-perl'),
+    re.compile(r'zgrab'),
+    re.compile(r'okhttp'),
+    re.compile(r'postman')
 ]
 
+
 SENSITIVE_URL_PATTERNS = [
-    r'^\.env', r'^wp-', r'^config', r'^\.git',
-    r'^phpmyadmin', r'^backup', r'\.sql$',
-    r'\.bak$', r'\.log$', r'^\.well-known',
-    r'^\.ht', r'^\.docker', r'^\.npm'
+    re.compile(r'^\.env'),
+    re.compile(r'^wp-'),
+    re.compile(r'^config'),
+    re.compile(r'^\.git'),
+    re.compile(r'^phpmyadmin'),
+    re.compile(r'^backup'),
+    re.compile(r'\.sql$'),
+    re.compile(r'\.bak$'),
+    re.compile(r'\.log$'),
+    re.compile(r'^\.well-known'),
+    re.compile(r'^\.ht'),
+    re.compile(r'^\.docker'),
+    re.compile(r'^\.npm')
 ]
+
 
 # Настройки django-axes
 AXES_FAILURE_LIMIT = 5
@@ -109,20 +131,20 @@ AXES_DISABLE_ACCESS_LOG = True
 
 
 
-# # Оптимизированная конфигурация базы данных
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': os.getenv('DB_NAME', 'novahaus'),
-#         'USER': os.getenv('DB_USER', 'postgres'),
-#         'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
-#         'HOST': os.getenv('DB_HOST', 'localhost'),
-#         'PORT': os.getenv('DB_PORT', '5432'),
-#         'OPTIONS': {
-#             'sslmode': 'disable'  # Явно отключаем SSL для локальной разработки
-#         }
-#     }
-# }
+# Оптимизированная конфигурация базы данных
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME', 'novahaus'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'postgres'),
+        'HOST': os.getenv('DB_HOST', 'localhost'),
+        'PORT': os.getenv('DB_PORT', '5432'),
+        'OPTIONS': {
+            'sslmode': 'disable'  # Явно отключаем SSL для локальной разработки
+        }
+    }
+}
 
 
 
