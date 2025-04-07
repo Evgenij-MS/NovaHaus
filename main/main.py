@@ -2,7 +2,10 @@ import requests
 import logging
 from dotenv import load_dotenv
 from typing import Optional
-from pydantic import BaseSettings, ValidationError
+from pydantic import BaseSettings
+
+# Явно объявляем экспортируемые символы
+__all__ = ['Settings', 'DeepSeekClient', 'main']
 
 # Загрузка переменных окружения
 load_dotenv()
@@ -15,8 +18,8 @@ class Settings(BaseSettings):
 
 try:
     settings = Settings()
-except ValidationError as e:
-    raise ValueError(f"Configuration error: {e}")
+except Exception as config_error:
+    raise ValueError(f"Ошибка конфигурации: {config_error}")
 
 logging.basicConfig(level=logging.INFO)
 
@@ -41,26 +44,31 @@ class DeepSeekClient:
         }
 
         try:
-            response = self.session.post(self.api_url, headers=self.headers, json=data, timeout=30)
+            response = self.session.post(
+                self.api_url,
+                headers=self.headers,
+                json=data,
+                timeout=30
+            )
             response.raise_for_status()
             return response.json()['choices'][0]['message']['content']
         except requests.exceptions.Timeout:
-            logging.error("Request timed out")
+            logging.error("Таймаут запроса")
             return None
-        except requests.exceptions.HTTPError as e:
-            logging.error(f"HTTP error occurred: {e.response.status_code}")
+        except requests.exceptions.HTTPError as http_err:
+            logging.error(f"HTTP ошибка: {http_err.response.status_code}")
             return None
-        except requests.exceptions.RequestException as e:
-            logging.error(f"Request error: {e}")
+        except requests.exceptions.RequestException as req_err:
+            logging.error(f"Ошибка запроса: {req_err}")
             return None
 
 def main():
     client = DeepSeekClient()
-    response = client.send_message("Hello, how are you?")
+    response = client.send_message("Привет, как дела?")
     if response:
-        logging.info(f"DeepSeek response: {response}")
+        logging.info(f"Ответ DeepSeek: {response}")
     else:
-        logging.error("Failed to get a response from DeepSeek API")
+        logging.error("Не удалось получить ответ от DeepSeek API")
 
 if __name__ == "__main__":
     main()

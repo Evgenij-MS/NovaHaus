@@ -12,7 +12,7 @@
     <h2>Загрузка документов</h2>
     <form id="upload-form" enctype="multipart/form-data">
         <label for="document-input">Выберите файл:</label>
-        <input type="file" name="document" id="document-input" required>
+        <input type="file" name="document" id="document-input" required aria-label="Выбор файла для загрузки">
         <button type="submit">Загрузить</button>
     </form>
 </div>
@@ -23,7 +23,7 @@
         <!-- Сообщения будут добавляться сюда -->
     </div>
     <div class="chat-input">
-        <input type="text" id="chat-input" placeholder="Введите ваше сообщение...">
+        <input type="text" id="chat-input" placeholder="Введите ваше сообщение..." aria-label="Поле ввода сообщения">
         <button onclick="sendMessageToManager()">Отправить</button>
     </div>
 </div>
@@ -54,7 +54,7 @@
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken') // Исправлено: правильное написание 'csrftoken'
+                'X-CSRFToken': getCookie('csrftoken')
             },
             body: JSON.stringify({ message: message })
         })
@@ -93,7 +93,7 @@
             method: 'POST',
             body: formData,
             headers: {
-                'X-CSRFToken': getCookie('csrftoken') // Добавлен CSRF-токен
+                'X-CSRFToken': getCookie('csrftoken')
             }
         })
         .then(response => response.json())

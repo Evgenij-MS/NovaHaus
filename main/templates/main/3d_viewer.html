@@ -10,11 +10,13 @@
     <h1>3D Модели</h1>
 
     <!-- Контейнер для показа 3D-модели -->
-    <iframe id="3d-viewer" style="display: none; width: 100%; height: 500px;" frameborder="0"></iframe>
+    <iframe id="3d-viewer" style="display: none; width: 100%; height: 500px;"></iframe>
 
     <!-- Кнопки -->
-    <button onclick="show3DModel('https://example.com/model.glb')">Показать 3D-модель</button>
-    <button onclick="hide3DModel()">Скрыть 3D-модель</button>
+    <div class="button-container">
+        <button class="model-button" onclick="show3DModel('https://example.com/model.glb')">Показать 3D-модель</button>
+        <button class="model-button" onclick="hide3DModel()">Скрыть 3D-модель</button>
+    </div>
 
     <!-- Подключение JavaScript -->
     <script src="{% static 'js/3d-model.js' %}"></script>

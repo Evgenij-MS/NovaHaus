@@ -5,7 +5,7 @@ header {
     color: var(--neutral-100);
     padding: 15px 0;
     position: relative;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .header-content {
@@ -19,12 +19,12 @@ header {
 }
 
 .logo img {
-    height: 50px;
+    height: 150px;
     width: auto;
     transition: all 0.3s ease;
 }
 
-/* Десктопное меню */
+/* Навигация для компьютеров */
 .desktop-nav ul {
     display: flex;
     gap: 25px;
@@ -33,21 +33,25 @@ header {
     padding: 0;
 }
 
-.desktop-nav a {
+/* Общие стили для ссылок */
+.nav-link {
     color: var(--neutral-100);
-    font-size: var(--font-size-md);
     text-decoration: none;
-    padding: 5px 0;
-    position: relative;
     transition: color 0.3s ease;
 }
 
-.desktop-nav a:hover,
-.desktop-nav a.active {
+.desktop-nav .nav-link {
+    font-size: var(--font-size-md);
+    padding: 5px 0;
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
     color: var(--primary-color);
 }
 
-.desktop-nav a.active::after {
+.desktop-nav .nav-link.active::after {
     content: '';
     position: absolute;
     bottom: 0;
@@ -72,6 +76,11 @@ header {
     cursor: pointer;
 }
 
+.language-switcher select:focus {
+    outline: 2px solid var(--primary-color);
+}
+
+/* Скрытые элементы для доступности */
 .sr-only {
     position: absolute;
     width: 1px;
@@ -101,19 +110,32 @@ header {
     background-color: var(--neutral-100);
     margin: 4px 0;
     transition: all 0.3s ease;
+    will-change: transform, opacity;
 }
 
+/* Стили для мобильной навигации */
 .mobile-nav {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 80%;
-    height: 100vh;
-    background-color: var(--header-bg);
-    z-index: 999;
-    padding: 80px 20px 20px;
-    transition: left 0.3s ease;
-    overflow-y: auto;
+    --mobile-nav-position: fixed;
+    --mobile-nav-top: 0;
+    --mobile-nav-left: -100%;
+    --mobile-nav-width: 80%;
+    --mobile-nav-height: 100vh;
+    --mobile-nav-bg: var(--header-bg);
+    --mobile-nav-z-index: 999;
+    --mobile-nav-padding: 80px 20px 20px;
+    --mobile-nav-transition: left 0.3s ease;
+    --mobile-nav-overflow: auto;
+
+    position: var(--mobile-nav-position);
+    top: var(--mobile-nav-top);
+    left: var(--mobile-nav-left);
+    width: var(--mobile-nav-width);
+    height: var(--mobile-nav-height);
+    background-color: var(--mobile-nav-bg);
+    z-index: var(--mobile-nav-z-index);
+    padding: var(--mobile-nav-padding);
+    transition: var(--mobile-nav-transition);
+    overflow-y: var(--mobile-nav-overflow);
 }
 
 .mobile-nav ul {
@@ -122,17 +144,11 @@ header {
     margin: 0;
 }
 
-.mobile-nav a {
+.mobile-nav .nav-link {
     display: block;
     padding: 12px 0;
-    color: var(--neutral-100);
-    text-decoration: none;
     font-size: 18px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-.mobile-nav a.active {
-    color: var(--primary-color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* Адаптивные стили */
@@ -152,7 +168,7 @@ header {
     }
 
     .logo img {
-        height: 40px;
+        height: 100px;
     }
 }
 
