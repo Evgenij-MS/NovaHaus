@@ -34,8 +34,11 @@ ALLOWED_HOSTS = [
     'novahaus-eu-5b21cc3bb91d.herokuapp.com',
     'novahaus-koeln.de',
     'www.novahaus-koeln.de',
+    'novahaus-hamburg.de',
+    'www.novahaus-hamburg.de',
     'localhost',
     '127.0.0.1'
+
 ]
 
 # Приложения
@@ -313,6 +316,8 @@ ASGI_APPLICATION = 'NovaHaus.asgi.application'
 CORS_ALLOWED_ORIGINS = [
     "https://novahaus-koeln.de",
     "https://www.novahaus-koeln.de",
+    "https://novahaus-hamburg.de",
+    "https://www.novahaus-hamburg.de",
 ]
 
 # Настройки для компрессии

@@ -1,8 +1,17 @@
 NovaHaus/
 ├── locale/
-│   ├── ru/LC_MESSAGES/{django.po,django.mo}
-│   ├── en/LC_MESSAGES/{django.po,django.mo}
-│   └── de/LC_MESSAGES/{django.po,django.mo}
+│   ├── ru/
+│   │   └── LC_MESSAGES/
+│   │       ├── django.po
+│   │       └── django.mo
+│   ├── en/
+│   │   └── LC_MESSAGES/
+│   │       ├── django.po
+│   │       └── django.mo
+│   └── de/
+│       └── LC_MESSAGES/
+│           ├── django.po
+│           └── django.mo
 ├── manage.py
 ├── NovaHaus/
 │   ├── __init__.py
@@ -10,8 +19,6 @@ NovaHaus/
 │   ├── settings.py
 │   ├── urls.py
 │   └── wsgi.py
-│   └── templates/           # Новое расположение base.html
-│       └── base.html        # Главный шаблон перенесён сюда
 ├── main/
 │   ├── migrations/
 │   ├── __init__.py
@@ -19,22 +26,55 @@ NovaHaus/
 │   ├── apps.py
 │   ├── consumers.py
 │   ├── forms.py
+│   ├── main.py
 │   ├── middleware.py
 │   ├── models.py
 │   ├── routing.py
 │   ├── tests.py
 │   ├── translation.py
 │   ├── views.py
-│   └── templates/main/
-│       ├── 3d_viewer.html
-│       ├── about.html
-│       ├── blog.html
-│       ├── [...остальные шаблоны...]
-│       └── services.html
+│   └── templates/
+│       └── main/
+│           ├── 3d_viewer.html
+│           ├── 404.html
+│           ├── about.html
+│           ├── blog.html
+│           ├── blog_post_detail.html
+│           ├── calculator.html
+│           ├── chatbot.html
+│           ├── consultation.html
+│           ├── contact.html
+│           ├── dashboard.html
+│           ├── faq.html
+│           ├── home.html
+│           ├── partner_success.html
+│           ├── portfolio.html
+│           ├── register.html
+│           ├── register_partner.html
+│           ├── reviews.html
+│           └── services.html
 ├── static/
-│   ├── fontawesome/         # Все новые файлы Font Awesome
-│   │   ├── css/all.min.css
-│   │   ├── js/all.min.js
+│   ├── css/
+│   │   ├── 3d-viewer.css
+│   │   ├── buttons.css
+│   │   ├── calculator.css
+│   │   ├── cards.css
+│   │   ├── chatbot.css
+│   │   ├── footer.css
+│   │   ├── forms.css
+│   │   ├── global.css
+│   │   ├── header.css
+│   │   ├── media-queries.css
+│   │   ├── partner.css
+│   │   ├── reset.css
+│   │   ├── services.css
+│   │   ├── slider.css
+│   │   └── visualization.css
+│   ├── fontawesome/
+│   │   ├── css/
+│   │   │   └── all.min.css
+│   │   ├── js/
+│   │   │   └── all.min.js
 │   │   └── webfonts/
 │   │       ├── fa-brands-400.ttf
 │   │       ├── fa-brands-400.woff2
@@ -44,16 +84,89 @@ NovaHaus/
 │   │       ├── fa-solid-900.woff2
 │   │       ├── fa-v4compatibility.ttf
 │   │       └── fa-v4compatibility.woff2
-│   ├── css/[все ваши CSS-файлы]
-│   ├── icons/[все иконки]
-│   ├── images/[все изображения]
-│   └── js/[все JS-файлы]
+│   ├── images/
+│   │   ├── background.jpg
+│   │   ├── blog/
+│   │   │   ├── post1.jpg
+│   │   │   ├── post2.jpg
+│   │   │   └── post3.jpg
+│   │   ├── favicon/
+│   │   │   ├── android-chrome-192x192.png
+│   │   │   ├── android-chrome-512x512.png
+│   │   │   ├── apple-touch-icon.png
+│   │   │   ├── favicon.ico
+│   │   │   ├── favicon-16x16.png
+│   │   │   ├── favicon-32x32.png
+│   │   │   ├── favicon-96x96.png
+│   │   │   ├── favicon.svg
+│   │   │   └── site.webmanifest
+│   │   ├── icons/
+│   │   │   ├── email.png
+│   │   │   ├── facade.png
+│   │   │   ├── facebook.png
+│   │   │   ├── house.png
+│   │   │   ├── instagram.png
+│   │   │   ├── insulation.png
+│   │   │   ├── office.png
+│   │   │   ├── repair.png
+│   │   │   ├── telegram.png
+│   │   │   └── warehouse.png
+│   │   ├── icon-calculator.png
+│   │   ├── icon-info.png
+│   │   ├── logo.png
+│   │   ├── portfolio/
+│   │   │   ├── project1.jpg
+│   │   │   ├── project1-large.jpg
+│   │   │   ├── project1-small.jpg
+│   │   │   ├── project2.jpg
+│   │   │   ├── project2-large.jpg
+│   │   │   ├── project2-small.jpg
+│   │   │   ├── project3.jpg
+│   │   │   ├── project3-large.jpg
+│   │   │   └── project3-small.jpg
+│   │   ├── slider/
+│   │   │   ├── slide1.jpg
+│   │   │   ├── slide2.jpg
+│   │   │   └── slide3.jpg
+│   │   └── team/
+│   │       ├── member1.jpg
+│   │       ├── member2.jpg
+│   │       └── member3.jpg
+│   ├── js/
+│   │   ├── 3d-model.js
+│   │   ├── ai-integration.js
+│   │   ├── animations.js
+│   │   ├── calculator.js
+│   │   ├── chart.js
+│   │   ├── chatbot.js
+│   │   ├── email-integration.js
+│   │   ├── feedback.js
+│   │   ├── history.js
+│   │   ├── language.js
+│   │   ├── modal.js
+│   │   ├── scripts.js
+│   │   ├── service-worker.js
+│   │   ├── slider.js
+│   │   └── visualization.js
+│   └── manifest.json
 ├── media/
+│   ├── portpolio/
+│   └── services/
+├── templates/
+│   ├── base.html
+│   ├── errors/
+│   │   └── lockout.html
+│   └── includes/
+│       ├── footer.html
+│       ├── header.html
+│       ├── modal.html
+│       └── slider.html
 ├── staticfiles/
 ├── .env
 ├── .gitattributes
 ├── .gitignore
 ├── .python-version
+├── app.json
 ├── old-config.txt
 ├── Procfile
 ├── requirements.in
