@@ -6,12 +6,14 @@ from .models import Service, Portfolio, Partner, Calculation, Review
 class ServiceAdmin(admin.ModelAdmin):
     list_display = ('title', 'category', 'price')
     search_fields = ('title', 'category')
+    list_filter = ('category',)
 
 # Регистрация модели Portfolio
 @admin.register(Portfolio)
 class PortfolioAdmin(admin.ModelAdmin):
     list_display = ('title', 'category')
     search_fields = ('title', 'category')
+    list_filter = ('category',)
 
 # Регистрация модели Partner
 @admin.register(Partner)

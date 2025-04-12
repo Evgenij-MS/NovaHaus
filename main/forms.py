@@ -5,7 +5,7 @@ from .models import Partner
 class PartnerForm(forms.ModelForm):
     class Meta:
         model = Partner
-        fields = ['name', 'contact_info', 'email', 'phone']  # Добавлены новые поля
+        fields = ['name', 'contact_info', 'email', 'phone']
 
     def clean_contact_info(self):
         contact_info = self.cleaned_data['contact_info']

@@ -157,11 +157,3 @@
     }
 }
 
-
-/* В media-queries.css */
-@media (max-width: 768px) and (min-width: 641px) {
-    .service-cards {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-    }
-}

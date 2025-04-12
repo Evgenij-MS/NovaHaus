@@ -1,133 +1,49 @@
-/* chatbot.css */
-.chatbot-container {
-    width: 300px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 10px;
-    background-color: #f9f9f9;
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.chatbot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
 }
-
-.chatbot-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+.chatbot-window {
+  width: 300px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
 }
-
-.close-btn {
-    background: none;
-    border: none;
-    font-size: 20px;
-    cursor: pointer;
-}
-
 .chatbot-messages {
-    height: 200px;
-    overflow-y: auto;
-    border: 1px solid #ddd;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #fff;
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
 }
-
-.message {
-    margin-bottom: 10px;
-    padding: 5px;
-    background-color: #e1f5fe;
-    border-radius: 5px;
+.chatbot-messages p {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 5px;
 }
-
+.chatbot-messages .user {
+  background: var(--primary-color);
+  color: white;
+  text-align: right;
+}
+.chatbot-messages .bot {
+  background: var(--accent-color);
+}
 .chatbot-input {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--accent-color);
+  border-radius: 5px;
 }
-
-.chatbot-input input {
-    padding: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+.chatbot-toggle {
+  background: var(--secondary-color);
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
 }
-
-.chatbot-input button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.chatbot-input button:hover {
-    background-color: #0056b3;
-}
-
-/* Пример стилей для статуса проекта */
-.status-bar {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-
-.status-step {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-align: center;
-    flex: 1;
-    margin: 0 5px;
-}
-
-.status-step.active {
-    background-color: #007bff;
-    color: white;
-}
-
-/* Пример стилей для чата */
-.chat-messages {
-    height: 200px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.message {
-    margin-bottom: 10px;
-    padding: 5px;
-    border-radius: 5px;
-}
-
-.message.user {
-    background-color: #e1f5fe;
-    align-self: flex-end;
-}
-
-.chat-input {
-    display: flex;
-    gap: 10px;
-}
-
-.chat-input input {
-    flex: 1;
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.chat-input button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.chat-input button:hover {
-    background-color: #0056b3;
+@media (max-width: 768px) {
+  .chatbot-window {
+    width: 250px;
+  }
 }

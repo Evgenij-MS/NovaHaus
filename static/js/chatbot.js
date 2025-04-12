@@ -1,119 +1,45 @@
-const chatbotMessages = document.getElementById('chatbot-messages');
-const chatbotInput = document.getElementById('chatbot-input');
-const fileInput = document.getElementById('chatbot-file');
-const audioPreview = document.getElementById('audio-preview');
+document.addEventListener('DOMContentLoaded', () => {
+  const chatbot = document.createElement('div');
+  chatbot.className = 'chatbot';
+  chatbot.innerHTML = `
+    <div class="chatbot-window" style="display: none;">
+      <div class="chatbot-messages"></div>
+      <input type="text" class="chatbot-input" placeholder="{% trans 'Задайте вопрос' %}">
+    </div>
+    <button class="chatbot-toggle">{% trans 'Чат' %}</button>
+  `;
+  document.body.appendChild(chatbot);
 
-let mediaRecorder;
-let audioChunks = [];
+  const messages = {
+    ru: 'Привет! Чем могу помочь с ремонтом?',
+    de: 'Hallo! Wie kann ich bei Ihrer Renovierung helfen?',
+    en: 'Hi! How can I assist with your renovation?'
+  };
+  const lang = document.documentElement.lang || 'ru';
+  const chatbotMessages = document.querySelector('.chatbot-messages');
+  chatbotMessages.innerHTML = `<p class="bot">${messages[lang]}</p>`;
 
-// Функция для получения CSRF-токена
-function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
+  document.querySelector('.chatbot-toggle').addEventListener('click', () => {
+    document.querySelector('.chatbot-window').style.display = 'block';
+  });
 
-// Функция для добавления сообщения в чат
-function appendMessage(sender, message) {
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('message', sender);
-    messageElement.innerText = message;
-    chatbotMessages.appendChild(messageElement);
-    chatbotMessages.scrollTop = chatbotMessages.scrollHeight; // Прокрутка вниз
-}
-
-// Общая функция для отправки запросов
-async function sendRequest(url, data) {
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            body: data,
-            headers: {
-                'X-CSRFToken': getCookie('csrftoken')
-            }
-        });
-
-        if (!response.ok) {
-            throw new Error('Ошибка сети или сервера');
-        }
-
-        const result = await response.json();
-        return result;
-    } catch (error) {
-        console.error('Ошибка:', error);
-        appendMessage('bot', 'Произошла ошибка. Пожалуйста, попробуйте позже.');
-        return null;
-    }
-}
-
-// Функция для отправки сообщения
-function sendMessage() {
-    const userMessage = chatbotInput.value.trim();
-    const file = fileInput.files[0];
-    const audioBlob = audioChunks.length > 0 ? new Blob(audioChunks, { type: 'audio/wav' }) : null;
-
-    if (userMessage === "" && !file && !audioBlob) return;
-
-    const formData = new FormData();
-    if (userMessage) formData.append('message', userMessage);
-    if (file) formData.append('file', file);
-    if (audioBlob) formData.append('audio', audioBlob, 'audio.wav');
-
-    sendRequest('/chatbot/', formData)
-        .then(data => {
-            if (data && data.response) {
-                appendMessage('bot', data.response);
-            }
-        });
-
-    chatbotInput.value = "";
-    fileInput.value = "";
-    audioPreview.style.display = 'none';
-    audioChunks = []; // Очистка аудио-данных
-}
-
-// Обработка нажатия Enter
-chatbotInput.addEventListener('keypress', function(e) {
+  document.querySelector('.chatbot-input').addEventListener('keypress', async (e) => {
     if (e.key === 'Enter') {
-        sendMessage();
+      const input = e.target.value.trim();
+      if (!input) return;
+      chatbotMessages.innerHTML += `<p class="user">${input}</p>`;
+      const response = await fetch('/chatbot/', {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message: input, language: lang })
+      });
+      const data = await response.json();
+      chatbotMessages.innerHTML += `<p class="bot">${data.response}</p>`;
+      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+      e.target.value = '';
     }
+  });
 });
-
-// Функция для начала записи аудио
-function startRecording() {
-    navigator.mediaDevices.getUserMedia({ audio: true })
-        .then(stream => {
-            mediaRecorder = new MediaRecorder(stream);
-            mediaRecorder.start();
-
-            mediaRecorder.ondataavailable = event => {
-                audioChunks.push(event.data);
-            };
-
-            mediaRecorder.onstop = () => {
-                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-                audioPreview.src = URL.createObjectURL(audioBlob);
-                audioPreview.style.display = 'block';
-            };
-        })
-        .catch(error => {
-            console.error('Ошибка доступа к микрофону:', error);
-            appendMessage('bot', 'Не удалось получить доступ к микрофону.');
-        });
-}
-
-// Функция для остановки записи аудио
-function stopRecording() {
-    if (mediaRecorder) {
-        mediaRecorder.stop();
-    }
-}
