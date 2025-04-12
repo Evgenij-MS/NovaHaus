@@ -2,15 +2,15 @@ NovaHaus/
 ├── locale/
 │   ├── ru/
 │   │   └── LC_MESSAGES/
-│   │       ├── django.po
+│   │       ├── django.po  # Обновлён
 │   │       └── django.mo
 │   ├── en/
 │   │   └── LC_MESSAGES/
-│   │       ├── django.po
+│   │       ├── django.po  # Обновлён
 │   │       └── django.mo
 │   └── de/
 │       └── LC_MESSAGES/
-│           ├── django.po
+│           ├── django.po  # Обновлён
 │           └── django.mo
 ├── manage.py
 ├── NovaHaus/
@@ -52,7 +52,7 @@ NovaHaus/
 │           ├── register.html
 │           ├── register_partner.html
 │           ├── reviews.html
-│           └── services.html
+│           └── services.html  # Обновлён
 ├── static/
 │   ├── css/
 │   │   ├── 3d-viewer.css
@@ -67,7 +67,7 @@ NovaHaus/
 │   │   ├── media-queries.css
 │   │   ├── partner.css
 │   │   ├── reset.css
-│   │   ├── services.css
+│   │   ├── services.css  # Обновлён (был пустой)
 │   │   ├── slider.css
 │   │   └── visualization.css
 │   ├── fontawesome/
@@ -124,6 +124,12 @@ NovaHaus/
 │   │   │   ├── project3.jpg
 │   │   │   ├── project3-large.jpg
 │   │   │   └── project3-small.jpg
+│   │   ├── services/  # Новая папка
+│   │   │   ├── renovation.jpg  # Новое
+│   │   │   ├── facade.jpg  # Новое
+│   │   │   ├── bathroom.jpg  # Новое
+│   │   │   ├── electrical.jpg  # Новое
+│   │   │   └── demolition.jpg  # Новое
 │   │   ├── slider/
 │   │   │   ├── slide1.jpg
 │   │   │   ├── slide2.jpg
@@ -146,6 +152,7 @@ NovaHaus/
 │   │   ├── modal.js
 │   │   ├── scripts.js
 │   │   ├── service-worker.js
+│   │   ├── services.js  # Новый
 │   │   ├── slider.js
 │   │   └── visualization.js
 │   └── manifest.json
@@ -157,10 +164,10 @@ NovaHaus/
 │   ├── errors/
 │   │   └── lockout.html
 │   └── includes/
-│       ├── footer.html
+│       ├── footer.html  # Обновлён
 │       ├── header.html
 │       ├── modal.html
-│       └── slider.html
+│       └── slider.html  # Обновлён
 ├── staticfiles/
 ├── .env
 ├── .gitattributes

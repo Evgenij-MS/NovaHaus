@@ -58,6 +58,22 @@ msgstr "Show slide 2"
 msgid "Показать слайд 3"
 msgstr "Show slide 3"
 
+#: .\main\templates\main\home.html:25
+msgid "renovation.jpg"
+msgstr "renovation.jpg"
+
+#: .\main\templates\main\home.html:26
+msgid "Современная гостиная после ремонта в минималистичном стиле"
+msgstr "Modern living room after renovation in a minimalist style"
+
+#: .\main\templates\main\home.html:27
+msgid "facade.jpg"
+msgstr "facade.jpg"
+
+#: .\main\templates\main\home.html:28
+msgid "Фасад здания: половина утеплена, половина полностью завершена"
+msgstr "Building facade: half insulated, half fully completed"
+
 #: .\main\templates\main\home.html:31
 msgid "Наши услуги"
 msgstr "Our services"

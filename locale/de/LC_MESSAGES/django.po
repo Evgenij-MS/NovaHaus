@@ -58,6 +58,22 @@ msgstr "Slide 2 anzeigen"
 msgid "Показать слайд 3"
 msgstr "Slide 3 anzeigen"
 
+#: .\main\templates\main\home.html:25
+msgid "renovation.jpg"
+msgstr "renovation.jpg"
+
+#: .\main\templates\main\home.html:26
+msgid "Современная гостиная после ремонта в минималистичном стиле"
+msgstr "Modernes Wohnzimmer nach Renovierung im minimalistischen Stil"
+
+#: .\main\templates\main\home.html:27
+msgid "facade.jpg"
+msgstr "facade.jpg"
+
+#: .\main\templates\main\home.html:28
+msgid "Фасад здания: половина утеплена, половина полностью завершена"
+msgstr "Fassade des Gebäudes: eine Hälfte gedämmt, die andere Hälfte vollständig fertiggestellt"
+
 #: .\main\templates\main\home.html:31
 msgid "Наши услуги"
 msgstr "Unsere Dienstleistungen"
@@ -247,7 +263,7 @@ msgstr "Partner werden"
 msgid "Контакты"
 msgstr "Kontakt"
 
-# Russian translations for NovaHaus
+# German translations for NovaHaus
 msgid ""
 msgstr ""
 "Project-Id-Version: NovaHaus 1.0\n"
@@ -255,41 +271,41 @@ msgstr ""
 "POT-Creation-Date: 2025-04-12 14:00+0200\n"
 "PO-Revision-Date: 2025-04-12 14:00+0200\n"
 "Last-Translator: NovaHaus Team <info@novahaus.de>\n"
-"Language-Team: Russian <ru@novahaus.de>\n"
-"Language: ru\n"
+"Language-Team: German <de@novahaus.de>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 # Menu items (from header.html)
 msgid "Главная"
-msgstr "Главная"
+msgstr "Startseite"
 
 msgid "Услуги"
-msgstr "Услуги"
+msgstr "Dienstleistungen"
 
 msgid "Портфолио"
-msgstr "Портфолио"
+msgstr "Portfolio"
 
 msgid "Блог"
-msgstr "Блог"
+msgstr "Blog"
 
 msgid "О нас"
-msgstr "О нас"
+msgstr "Über uns"
 
 msgid "Контакты"
-msgstr "Контакты"
+msgstr "Kontakt"
 
 msgid "Стать партнером"
-msgstr "Стать партнером"
+msgstr "Partner werden"
 
 # Header (from header.html)
 msgid "Меню"
-msgstr "Меню"
+msgstr "Menü"
 
 msgid "NovaHaus - Главная"
-msgstr "NovaHaus - Главная"
+msgstr "NovaHaus - Startseite"
 
 # Page title fallback (from header.html)
 msgid "NovaHaus"
@@ -297,34 +313,34 @@ msgstr "NovaHaus"
 
 # Language switcher (from header.html)
 msgid "Язык сайта"
-msgstr "Язык сайта"
+msgstr "Website-Sprache"
 
 msgid "Применить"
-msgstr "Применить"
+msgstr "Anwenden"
 
 # Meta tags and title (from base.html)
 msgid "NovaHaus – Ваш надежный партнер в строительстве и ремонте"
-msgstr "NovaHaus – Ваш надежный партнер в строительстве и ремонте"
+msgstr "NovaHaus – Ihr zuverlässiger Partner für Bau und Renovierung"
 
 msgid "NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы и многое другое."
-msgstr "NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы и многое другое."
+msgstr "NovaHaus – ein Bauunternehmen in Köln. Wohnungsrenovierung, Hausdämmung, Fassadenarbeiten und mehr."
 
 msgid "ремонт, строительство, утепление, Кельн, NovaHaus"
-msgstr "ремонт, строительство, утепление, Кельн, NovaHaus"
+msgstr "Renovierung, Bau, Dämmung, Köln, NovaHaus"
 
 # JSON-LD (from base.html)
 msgid "Строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы."
-msgstr "Строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы."
+msgstr "Bauunternehmen in Köln. Wohnungsrenovierung, Hausdämmung, Fassadenarbeiten."
 
 msgid "Кельн"
-msgstr "Кельн"
+msgstr "Köln"
 
 msgid "Германия"
-msgstr "Германия"
+msgstr "Deutschland"
 
 # Theme toggle (from base.html)
 msgid "Переключить тему"
-msgstr "Переключить тему"
+msgstr "Thema wechseln"
 
 msgid "Темная тема"
-msgstr "Темная тема"
+msgstr "Dunkles Thema"
