@@ -246,3 +246,85 @@ msgstr "Become a partner"
 #: .\templates\main\contact.html
 msgid "Контакты"
 msgstr "Contact"
+
+# English translations for NovaHaus
+msgid ""
+msgstr ""
+"Project-Id-Version: NovaHaus 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-12 14:00+0200\n"
+"PO-Revision-Date: 2025-04-12 14:00+0200\n"
+"Last-Translator: NovaHaus Team <info@novahaus.de>\n"
+"Language-Team: English <en@novahaus.de>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+# Menu items (from header.html)
+msgid "Главная"
+msgstr "Home"
+
+msgid "Услуги"
+msgstr "Services"
+
+msgid "Портфолио"
+msgstr "Portfolio"
+
+msgid "Блог"
+msgstr "Blog"
+
+msgid "О нас"
+msgstr "About"
+
+msgid "Контакты"
+msgstr "Contact"
+
+msgid "Стать партнером"
+msgstr "Become a Partner"
+
+# Header (from header.html)
+msgid "Меню"
+msgstr "Menu"
+
+msgid "NovaHaus - Главная"
+msgstr "NovaHaus - Home"
+
+# Page title fallback (from header.html)
+msgid "NovaHaus"
+msgstr "NovaHaus"
+
+# Language switcher (from header.html)
+msgid "Язык сайта"
+msgstr "Site Language"
+
+msgid "Применить"
+msgstr "Apply"
+
+# Meta tags and title (from base.html)
+msgid "NovaHaus – Ваш надежный партнер в строительстве и ремонте"
+msgstr "NovaHaus – Your Reliable Partner in Construction and Renovation"
+
+msgid "NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы и многое другое."
+msgstr "NovaHaus – a construction company in Cologne. Apartment renovations, home insulation, facade work, and more."
+
+msgid "ремонт, строительство, утепление, Кельн, NovaHaus"
+msgstr "renovation, construction, insulation, Cologne, NovaHaus"
+
+# JSON-LD (from base.html)
+msgid "Строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы."
+msgstr "Construction company in Cologne. Apartment renovations, home insulation, facade work."
+
+msgid "Кельн"
+msgstr "Cologne"
+
+msgid "Германия"
+msgstr "Germany"
+
+# Theme toggle (from base.html)
+msgid "Переключить тему"
+msgstr "Toggle Theme"
+
+msgid "Темная тема"
+msgstr "Dark Theme"

@@ -1,3 +1,5 @@
+/* static/css/header.css */
+
 /* Основные стили шапки */
 header {
     background-color: var(--header-bg, #2a303c);
@@ -19,9 +21,18 @@ header {
 }
 
 .logo img {
-    height: 150px;
+    height: 50px;
     width: auto;
     transition: all 0.3s ease;
+}
+
+/* Заголовок страницы */
+.page-title {
+    font-size: 24px;
+    color: var(--neutral-100, #ffffff);
+    margin: 0 20px;
+    flex: 1;
+    text-align: center;
 }
 
 /* Навигация для компьютеров */
@@ -46,9 +57,13 @@ header {
     position: relative;
 }
 
-.nav-link:hover,
-.nav-link.active {
+.nav-link:hover {
     color: var(--primary-color, #007bff);
+}
+
+.nav-link.active {
+    color: #ff4500; /* Оранжевый для активной страницы */
+    font-weight: 700;
 }
 
 .desktop-nav .nav-link.active::after {
@@ -58,16 +73,26 @@ header {
     left: 0;
     width: 100%;
     height: 2px;
-    background-color: var(--primary-color, #007bff);
+    background-color: #ff4500;
 }
 
 .partner-link {
-    font-weight: bold;
-    color: var(--secondary-color, #28a745) !important;
+    background-color: var(--primary-color, #007bff);
+    color: var(--neutral-100, #ffffff);
+    padding: 8px 16px;
+    border-radius: 4px;
+}
+
+.partner-link.active {
+    background-color: #ff4500;
 }
 
 /* Переключатель языка */
-.language-switcher select {
+.language-switcher {
+    margin-left: 20px;
+}
+
+.language-select {
     padding: 8px 12px;
     border-radius: 4px;
     border: 1px solid var(--neutral-300, #ccc);
@@ -76,8 +101,18 @@ header {
     cursor: pointer;
 }
 
-.language-switcher select:focus {
+.language-select:focus {
     outline: 2px solid var(--primary-color, #007bff);
+}
+
+.language-submit-btn {
+    padding: 8px 12px;
+    background-color: var(--primary-color, #007bff);
+    color: var(--neutral-100, #ffffff);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 5px;
 }
 
 /* Скрытые элементы для доступности */
@@ -113,7 +148,6 @@ header {
     will-change: transform, opacity;
 }
 
-/* Стили для мобильной навигации */
 .mobile-nav {
     --mobile-nav-position: fixed;
     --mobile-nav-top: 0;
@@ -156,19 +190,32 @@ header {
     .desktop-nav ul {
         gap: 15px;
     }
+    .page-title {
+        font-size: 20px;
+    }
 }
 
 @media (max-width: 768px) {
+    .header-content {
+        flex-wrap: wrap;
+    }
     .mobile-menu-toggle {
         display: block;
     }
-
     .desktop-nav {
         display: none;
     }
-
     .logo img {
-        height: 100px;
+        height: 40px;
+    }
+    .page-title {
+        font-size: 18px;
+        margin: 10px 0;
+        width: 100%;
+        text-align: left;
+    }
+    .language-switcher {
+        margin: 10px 0;
     }
 }
 
@@ -176,8 +223,7 @@ header {
     .header-content {
         padding: 0 15px;
     }
-
-    .language-switcher select {
+    .language-select {
         padding: 6px 8px;
         font-size: 14px;
     }

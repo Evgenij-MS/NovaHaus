@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{% block title %}{% trans "NovaHaus – Ваш надежный партнер в строительстве и ремонте" %}{% endblock %}</title>
+    <title>{% block title %}{% trans "NovaHaus – Ваш надежный партнер в строительстве и ремонTRIMте" %}{% endblock %}</title>
     <meta name="description" content="{% block description %}{% trans "NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы и многое другое." %}{% endblock %}">
     <meta name="keywords" content="{% block keywords %}{% trans "ремонт, строительство, утепление, Кельн, NovaHaus" %}{% endblock %}">
     <meta name="author" content="NovaHaus">
@@ -71,26 +71,16 @@
     </script>
 </head>
 <body>
-    <!-- Переключатель языка -->
-    <div class="language-switcher-container">
-        <form action="{% url 'set_language' %}" method="post" class="language-switcher">
-            {% csrf_token %}
-            <input name="next" type="hidden" value="{{ request.get_full_path|default:'/' }}">
-            <label for="language-select" class="sr-only">{% trans "Выберите язык" %}</label>
-            <select name="language" id="language-select" class="language-select" onchange="this.form.submit()" aria-label="{% trans 'Язык сайта' %}">
-                {% get_available_languages as LANGUAGES %}
-                {% get_current_language as LANGUAGE_CODE %}
-                {% for lang in LANGUAGES %}
-                    <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
-                        {{ lang.1 }}
-                    </option>
-                {% endfor %}
-            </select>
-            <noscript>
-                <button type="submit" class="language-submit-btn">{% trans "Применить" %}</button>
-            </noscript>
-        </form>
-    </div>
+    <!-- URL для меню -->
+    {% block extra_context %}
+        {% url 'home' as url_home %}
+        {% url 'services' as url_services %}
+        {% url 'portfolio' as url_portfolio %}
+        {% url 'blog' as url_blog %}
+        {% url 'about' as url_about %}
+        {% url 'contact' as url_contact %}
+        {% url 'register_partner' as url_register_partner %}
+    {% endblock %}
 
     <!-- Шапка сайта -->
     {% include 'includes/header.html' %}

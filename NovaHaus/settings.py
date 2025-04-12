@@ -320,6 +320,16 @@ CORS_ALLOWED_ORIGINS = [
     "https://www.novahaus-hamburg.de",
 ]
 
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://novahaus-koeln.de',
+    'https://www.novahaus-koeln.de',
+    'https://novahaus-eu.herokuapp.com',
+    'https://novahaus-hamburg.de',
+    'https://www.novahaus-hamburg.de',
+]
+
+
 # Настройки для компрессии
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
