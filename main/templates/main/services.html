@@ -20,9 +20,6 @@
 {% block content %}
     <section class="services-section">
         <div class="container">
-            <!-- Слайдер -->
-            {% include 'includes/slider.html' %}
-
             <!-- Заголовок -->
             <h2 class="section-title">Наши услуги</h2>
 
@@ -51,7 +48,6 @@
             <div class="services-grid">
                 <!-- Ремонт -->
                 <div class="service-card">
-                    <img src="{% static 'images/services/renovation.jpg' %}" alt="Ремонт" class="service-image">
                     <h3 class="service-title large-title">Ремонт</h3>
                     <div class="service-content" style="background-image: url('{% static 'images/services/renovation.jpg' %}');">
                         <p class="service-description">
@@ -63,13 +59,12 @@
                             <li><i class="fas fa-briefcase"></i> Офисы</li>
                             <li><i class="fas fa-warehouse"></i> Склады</li>
                         </ul>
+                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
                     </div>
-                    <a href="{% url 'contact' %}" class="service-button">Связаться</a>
                 </div>
 
                 <!-- Фасадные работы -->
                 <div class="service-card">
-                    <img src="{% static 'images/services/facade.jpg' %}" alt="Фасадные работы" class="service-image">
                     <h3 class="service-title">Фасадные работы</h3>
                     <div class="service-content" style="background-image: url('{% static 'images/services/facade.jpg' %}');">
                         <p class="service-description">
@@ -80,13 +75,12 @@
                             <li><i class="fas fa-shield-alt"></i> Утепление</li>
                             <li><i class="fas fa-hammer"></i> Монтаж</li>
                         </ul>
+                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
                     </div>
-                    <a href="{% url 'contact' %}" class="service-button">Связаться</a>
                 </div>
 
                 <!-- Ремонт ванных комнат -->
                 <div class="service-card">
-                    <img src="{% static 'images/services/bathroom.jpg' %}" alt="Ремонт ванных комнат" class="service-image">
                     <h3 class="service-title">Ремонт ванных комнат</h3>
                     <div class="service-content" style="background-image: url('{% static 'images/services/bathroom.jpg' %}');">
                         <p class="service-description">
@@ -95,13 +89,12 @@
                         <ul class="service-list">
                             <li><i class="fas fa-th"></i> Монтаж и поклейка плитки</li>
                         </ul>
+                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
                     </div>
-                    <a href="{% url 'contact' %}" class="service-button">Связаться</a>
                 </div>
 
                 <!-- Электромонтажные работы -->
                 <div class="service-card">
-                    <img src="{% static 'images/services/electrical.jpg' %}" alt="Электромонтажные работы" class="service-image">
                     <h3 class="service-title">Электромонтажные работы</h3>
                     <div class="service-content" style="background-image: url('{% static 'images/services/electrical.jpg' %}');">
                         <p class="service-description">
@@ -113,13 +106,12 @@
                             <li><i class="fas fa-briefcase"></i> Офисы</li>
                             <li><i class="fas fa-warehouse"></i> Склады</li>
                         </ul>
+                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
                     </div>
-                    <a href="{% url 'contact' %}" class="service-button">Связаться</a>
                 </div>
 
                 <!-- Демонтажные работы -->
                 <div class="service-card">
-                    <img src="{% static 'images/services/demolition.jpg' %}" alt="Демонтажные работы" class="service-image">
                     <h3 class="service-title">Демонтажные работы</h3>
                     <div class="service-content" style="background-image: url('{% static 'images/services/demolition.jpg' %}');">
                         <p class="service-description">
@@ -128,13 +120,12 @@
                         <ul class="service-list">
                             <li><i class="fas fa-tools"></i> Любой сложности</li>
                         </ul>
+                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
                     </div>
-                    <a href="{% url 'contact' %}" class="service-button">Связаться</a>
                 </div>
 
                 <!-- Материалы и уборка -->
                 <div class="service-card">
-                    <img src="{% static 'images/services/materials_cleaning.jpg' %}" alt="Материалы и уборка" class="service-image">
                     <h3 class="service-title">Материалы и уборка</h3>
                     <div class="service-content" style="background-image: url('{% static 'images/services/materials_cleaning.jpg' %}');">
                         <p class="service-description">
@@ -146,8 +137,8 @@
                             <li><i class="fas fa-ladder"></i> Подъем в квартиру</li>
                             <li><i class="fas fa-broom"></i> Уборка после ремонта</li>
                         </ul>
+                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
                     </div>
-                    <a href="{% url 'contact' %}" class="service-button">Связаться</a>
                 </div>
             </div>
         </div>
