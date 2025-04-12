@@ -124,7 +124,7 @@ NovaHaus/
 │   │   │   ├── project3.jpg
 │   │   │   ├── project3-large.jpg
 │   │   │   └── project3-small.jpg
-│   │   ├── services/  # Новая папка
+│   │   ├── services/  # Новая папка еще один файл в этой папке materials_cleaning.jpg
 │   │   │   ├── renovation.jpg  # Новое
 │   │   │   ├── facade.jpg  # Новое
 │   │   │   ├── bathroom.jpg  # Новое
