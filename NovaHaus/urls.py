@@ -5,7 +5,6 @@ from django.conf.urls.i18n import i18n_patterns
 from django.conf import settings
 from django.http import HttpResponseForbidden
 
-
 def block_sensitivity_paths(request):
     """Блокировка доступа к чувствительным путям"""
     return HttpResponseForbidden(
@@ -16,20 +15,15 @@ def block_sensitivity_paths(request):
 # Базовые URL-адреса
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('i18n/', include('django.conf.urls.i18n')),  # Включает set_language
+    path('i18n/', include('django.conf.urls.i18n')),
 ]
 
-# Добавление защищенных маршрутов для чувствительных путей
+# Защищённые маршруты
 sensitive_paths = [
     r'^\.env', r'^wp-', r'^config', r'^\.git',
     r'^phpmyadmin', r'^backup', r'\.sql$',
     r'\.bak$', r'\.log$'
 ]
-
-
-
-
-
 
 for sensitive_path in sensitive_paths:
     urlpatterns += [re_path(sensitive_path, block_sensitivity_paths)]
@@ -50,7 +44,7 @@ urlpatterns += i18n_patterns(
     path('get-ai-recommendations/', views.get_ai_recommendations, name='get_ai_recommendations'),
     path('save-calculation/', views.save_calculation, name='save_calculation'),
     path('3d-viewer/', views.view_3d_model, name='3d_viewer'),
-    prefix_default_language=False
+    prefix_default_language=True  # Изменено на True
 )
 
 # Отладка - только для разработки

@@ -283,17 +283,17 @@ COMPRESS_JS_FILTERS = [
 
 REDIS_URL = os.getenv('REDISCLOUD_URL', 'redis://localhost:6379/0')
 
-# Настройки кеширования
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': REDIS_URL,
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            'IGNORE_EXCEPTIONS': True,  # Важно для обработки ошибок Redis
-        }
-    }
-}
+# # Настройки кеширования
+# CACHES = {
+#     'default': {
+#         'BACKEND': 'django_redis.cache.RedisCache',
+#         'LOCATION': REDIS_URL,
+#         'OPTIONS': {
+#             'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+#             'IGNORE_EXCEPTIONS': True,  # Важно для обработки ошибок Redis
+#         }
+#     }
+# }
 
 # Настройки Channels
 CHANNEL_LAYERS = {

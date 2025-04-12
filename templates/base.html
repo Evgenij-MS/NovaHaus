@@ -32,7 +32,6 @@
     <link rel="stylesheet" href="{% static 'css/slider.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
-    <!-- Локальная версия Font Awesome -->
     <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/media-queries.css' %}">
 
@@ -72,22 +71,20 @@
     </script>
 </head>
 <body>
-    <!-- Переключатель языка (доступная версия) -->
+    <!-- Переключатель языка -->
     <div class="language-switcher-container">
         <form action="{% url 'set_language' %}" method="post" class="language-switcher">
             {% csrf_token %}
-            <input name="next" type="hidden" value="{{ request.get_full_path }}">
+            <input name="next" type="hidden" value="{{ request.get_full_path|default:'/' }}">
             <label for="language-select" class="sr-only">{% trans "Выберите язык" %}</label>
             <select name="language" id="language-select" class="language-select" onchange="this.form.submit()" aria-label="{% trans 'Язык сайта' %}">
-                <option value="ru" {% if LANGUAGE_CODE == 'ru' %}selected{% endif %}>
-                    Русский
-                </option>
-                <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>
-                    English
-                </option>
-                <option value="de" {% if LANGUAGE_CODE == 'de' %}selected{% endif %}>
-                    Deutsch
-                </option>
+                {% get_available_languages as LANGUAGES %}
+                {% get_current_language as LANGUAGE_CODE %}
+                {% for lang in LANGUAGES %}
+                    <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
+                        {{ lang.1 }}
+                    </option>
+                {% endfor %}
             </select>
             <noscript>
                 <button type="submit" class="language-submit-btn">{% trans "Применить" %}</button>
@@ -115,8 +112,6 @@
 
     <!-- JavaScript -->
     <script src="{% static 'js/scripts.js' %}"></script>
-    <script src="{% static 'js/language.js' %}"></script>
-    <!-- Локальная версия Font Awesome JS -->
     <script src="{% static 'fontawesome/js/all.min.js' %}"></script>
 </body>
 </html>
