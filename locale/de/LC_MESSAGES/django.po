@@ -1,220 +1,248 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# German translations for NovaHaus project.
+# Copyright (C) 2025 NovaHaus
+# This file is distributed under the same license as the NovaHaus package.
+# Grok <support@x.ai>, 2025.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: NovaHaus 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-06 18:09+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2025-04-12 12:00+0200\n"
+"Last-Translator: Grok <support@x.ai>\n"
+"Language-Team: German <de@li.org>\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: .\main\templates\main\home.html:8
 msgid "Специальное предложение для новых клиентов!"
-msgstr ""
+msgstr "Sonderangebot für Neukunden!"
 
 #: .\main\templates\main\home.html:9
 #, python-format
 msgid "Получите скидку <strong>%(discount)s</strong> на первый заказ!"
-msgstr ""
+msgstr "Erhalten Sie <strong>%(discount)s</strong> Rabatt auf Ihre erste Bestellung!"
 
 #: .\main\templates\main\home.html:10
 msgid "Заказать сейчас"
-msgstr ""
+msgstr "Jetzt bestellen"
 
 #: .\main\templates\main\home.html:15
 msgid "Слайдер с примерами работ"
-msgstr ""
+msgstr "Slider mit Arbeitsbeispielen"
 
 #: .\main\templates\main\home.html:17
 msgid "Современный ремонт квартир"
-msgstr ""
+msgstr "Moderne Wohnungsrenovierung"
 
 #: .\main\templates\main\home.html:18
 msgid "Утепление фасадов"
-msgstr ""
+msgstr "Fassadendämmung"
 
 #: .\main\templates\main\home.html:19 .\main\templates\main\home.html:44
 msgid "Фасадные работы"
-msgstr ""
+msgstr "Fassadenarbeiten"
 
 #: .\main\templates\main\home.html:22
 msgid "Показать слайд 1"
-msgstr ""
+msgstr "Slide 1 anzeigen"
 
 #: .\main\templates\main\home.html:23
 msgid "Показать слайд 2"
-msgstr ""
+msgstr "Slide 2 anzeigen"
 
 #: .\main\templates\main\home.html:24
 msgid "Показать слайд 3"
-msgstr ""
+msgstr "Slide 3 anzeigen"
 
 #: .\main\templates\main\home.html:31
 msgid "Наши услуги"
-msgstr ""
+msgstr "Unsere Dienstleistungen"
 
 #: .\main\templates\main\home.html:34
 msgid "Ремонт квартир"
-msgstr ""
+msgstr "Wohnungsrenovierung"
 
 #: .\main\templates\main\home.html:35
 msgid "Качественный ремонт под ключ с использованием современных материалов."
-msgstr ""
+msgstr "Hochwertige Komplettsanierung mit modernen Materialien."
 
 #: .\main\templates\main\home.html:36 .\main\templates\main\home.html:41
 #: .\main\templates\main\home.html:46
 msgid "Подробнее"
-msgstr ""
+msgstr "Mehr erfahren"
 
 #: .\main\templates\main\home.html:39
 msgid "Утепление домов"
-msgstr ""
+msgstr "Hausdämmung"
 
 #: .\main\templates\main\home.html:40
 msgid "Энергоэффективные решения для вашего комфорта и экономии."
-msgstr ""
+msgstr "Energieeffiziente Lösungen für Ihren Komfort und Einsparungen."
 
 #: .\main\templates\main\home.html:45
 msgid "Профессиональная отделка фасадов для эстетики и долговечности."
-msgstr ""
+msgstr "Professionelle Fassadengestaltung für Ästhetik und Langlebigkeit."
 
 #: .\main\templates\main\home.html:55
 msgid "Отзывы клиентов"
-msgstr ""
+msgstr "Kundenbewertungen"
 
 #: .\main\templates\main\home.html:58
 msgid ""
 "Отличная работа, спасибо команде NovaHaus! Все сделали быстро и качественно."
-msgstr ""
+msgstr "Tolle Arbeit, danke an das NovaHaus-Team! Alles wurde schnell und professionell erledigt."
 
 #: .\main\templates\main\home.html:59
 msgid "Иван Иванов"
-msgstr ""
+msgstr "Ivan Ivanov"
 
 #: .\main\templates\main\home.html:62
 msgid ""
 "Очень доволен утеплением дома. Теперь зимой тепло, а счета за отопление "
 "снизились."
-msgstr ""
+msgstr "Sehr zufrieden mit der Hausdämmung. Jetzt ist es im Winter warm, und die Heizkosten sind gesunken."
 
 #: .\main\templates\main\home.html:63
 msgid "Мария Петрова"
-msgstr ""
+msgstr "Maria Petrova"
 
 #: .\main\templates\main\home.html:66
 msgid "Профессиональный подход и внимание к деталям. Рекомендую!"
-msgstr ""
+msgstr "Professioneller Ansatz und Liebe zum Detail. Sehr empfehlenswert!"
 
 #: .\main\templates\main\home.html:67
 msgid "Алексей Смирнов"
-msgstr ""
+msgstr "Alexey Smirnov"
 
 #: .\main\templates\main\home.html:76
 msgid "Станьте нашим партнером!"
-msgstr ""
+msgstr "Werden Sie unser Partner!"
 
 #: .\main\templates\main\home.html:77
 msgid ""
 "Присоединяйтесь к нашей партнерской программе и получайте вознаграждение за "
 "привлечение клиентов."
-msgstr ""
+msgstr "Schließen Sie sich unserem Partnerprogramm an und erhalten Sie Belohnungen für die Kundenwerbung."
 
 #: .\main\templates\main\home.html:80
 msgid "Высокие комиссии"
-msgstr ""
+msgstr "Hohe Provisionen"
 
 #: .\main\templates\main\home.html:81
 #, python-format
 msgid "Получайте до 10%% от суммы каждого заказа, привлеченного вами."
-msgstr ""
+msgstr "Verdienen Sie bis zu 10%% des Wertes jeder von Ihnen vermittelten Bestellung."
 
 #: .\main\templates\main\home.html:84
 msgid "Поддержка 24/7"
-msgstr ""
+msgstr "24/7 Unterstützung"
 
 #: .\main\templates\main\home.html:85
 msgid ""
 "Наша команда всегда готова помочь вам с вопросами и предоставить необходимые "
 "материалы."
-msgstr ""
+msgstr "Unser Team steht Ihnen jederzeit für Fragen zur Verfügung und stellt die notwendigen Materialien bereit."
 
 #: .\main\templates\main\home.html:88
 msgid "Уникальные условия"
-msgstr ""
+msgstr "Einzigartige Konditionen"
 
 #: .\main\templates\main\home.html:89
 msgid "Индивидуальные условия для крупных партнеров и агентств."
-msgstr ""
+msgstr "Individuelle Konditionen für große Partner und Agenturen."
 
 #: .\main\templates\main\home.html:92
 msgid "Зарегистрироваться как партнер"
-msgstr ""
+msgstr "Als Partner registrieren"
 
 #: .\main\templates\main\home.html:99
 msgid "Готовы начать проект?"
-msgstr ""
+msgstr "Bereit, ein Projekt zu starten?"
 
 #: .\main\templates\main\home.html:100
 msgid "Свяжитесь с нами для бесплатной консультации и расчета стоимости."
-msgstr ""
+msgstr "Kontaktieren Sie uns für eine kostenlose Beratung und Kostenschätzung."
 
 #: .\main\templates\main\home.html:101
 msgid "Заказать консультацию"
-msgstr ""
+msgstr "Beratung anfordern"
 
 #: .\templates\base.html:9 .\templates\base.html:15 .\templates\base.html:21
 msgid "NovaHaus – Ваш надежный партнер в строительстве и ремонте"
-msgstr ""
+msgstr "NovaHaus – Ihr zuverlässiger Partner für Bau und Renovierung"
 
 #: .\templates\base.html:10 .\templates\base.html:16 .\templates\base.html:22
 msgid ""
 "NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, "
 "фасадные работы и многое другое."
-msgstr ""
+msgstr "NovaHaus – ein Bauunternehmen in Köln. Wohnungsrenovierung, Hausdämmung, Fassadenarbeiten und mehr."
 
 #: .\templates\base.html:11
 msgid "ремонт, строительство, утепление, Кельн, NovaHaus"
-msgstr ""
+msgstr "Renovierung, Bau, Dämmung, Köln, NovaHaus"
 
 #: .\templates\base.html:56
 msgid ""
 "Строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные "
 "работы."
-msgstr ""
+msgstr "Bauunternehmen in Köln. Wohnungsrenovierung, Hausdämmung, Fassadenarbeiten."
 
 #: .\templates\base.html:60
 msgid "Кельн"
-msgstr ""
+msgstr "Köln"
 
 #: .\templates\base.html:62
 msgid "Германия"
-msgstr ""
+msgstr "Deutschland"
 
 #: .\templates\base.html:80
 msgid "Выберите язык"
-msgstr ""
+msgstr "Sprache auswählen"
 
 #: .\templates\base.html:81
 msgid "Язык сайта"
-msgstr ""
+msgstr "Website-Sprache"
 
 #: .\templates\base.html:93
 msgid "Применить"
-msgstr ""
+msgstr "Anwenden"
 
 #: .\templates\base.html:111
 msgid "Переключить тему"
-msgstr ""
+msgstr "Thema wechseln"
 
 #: .\templates\base.html:113
 msgid "Темная тема"
-msgstr ""
+msgstr "Dunkles Thema"
+
+#: .\templates\header.html
+msgid "Главная"
+msgstr "Startseite"
+
+#: .\templates\header.html
+msgid "Услуги"
+msgstr "Dienstleistungen"
+
+#: .\templates\header.html
+msgid "Портфолио"
+msgstr "Portfolio"
+
+#: .\templates\header.html
+msgid "Блог"
+msgstr "Blog"
+
+#: .\templates\header.html
+msgid "О нас"
+msgstr "Über uns"
+
+#: .\templates\header.html
+msgid "Стать партнером"
+msgstr "Partner werden"
+
+#: .\templates\main\contact.html
+msgid "Контакты"
+msgstr "Kontakt"
