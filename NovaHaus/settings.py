@@ -7,7 +7,6 @@ from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import gettext as _
 _ = lambda s: s
 
-# Загрузка переменных окружения
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,7 +18,6 @@ def get_env_variable(var_name, default=None):
         return default
     return value
 
-# Основные настройки
 SECRET_KEY = get_env_variable('SECRET_KEY')
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't', 'y', 'yes')
 ROOT_URLCONF = 'NovaHaus.urls'
@@ -35,7 +33,6 @@ ALLOWED_HOSTS = [
     '127.0.0.1'
 ]
 
-# Приложения
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -52,9 +49,9 @@ INSTALLED_APPS = [
     'axes',
     'django_extensions',
     'main',
+    'pwa',  # Добавлено для PWA
 ]
 
-# Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -72,16 +69,19 @@ MIDDLEWARE = [
 USE_I18N = True
 USE_L10N = True
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'de'  # Основной язык — немецкий
 LANGUAGES = [
-    ('ru', 'Русский'),
-    ('en', 'English'),
     ('de', 'Deutsch'),
+    ('en', 'English'),
+    ('tr', 'Türkçe'),
+    ('ru', 'Русский'),
 ]
 
 LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
-# Настройки безопасности
+LANGUAGE_COOKIE_NAME = 'django_language'
+LANGUAGE_COOKIE_AGE = 365 * 24 * 60 * 60  # 1 год
+
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = 'DENY'
@@ -99,7 +99,6 @@ if not DEBUG:
 
 ALLOW_CURL = os.getenv("ALLOW_CURL", "False") == "True"
 
-# Блокировка ботов и сканеров
 DISALLOWED_USER_AGENTS = [
     re.compile(r'bot'),
     re.compile(r'scanner'),
@@ -137,14 +136,12 @@ SENSITIVE_URL_PATTERNS = [
     re.compile(r'(^|/)npm'),
 ]
 
-# Настройки django-axes
 AXES_FAILURE_LIMIT = 5
-AXES_COOLOFF_TIME = 1  # 1 час блокировки
+AXES_COOLOFF_TIME = 1
 AXES_LOCKOUT_TEMPLATE = 'errors/lockout.html'
 AXES_RESET_ON_SUCCESS = True
 AXES_DISABLE_ACCESS_LOG = True
 
-# Оптимизированная конфигурация базы данных
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -154,12 +151,11 @@ DATABASES = {
         'HOST': os.getenv('DB_HOST', 'localhost'),
         'PORT': os.getenv('DB_PORT', '5432'),
         'OPTIONS': {
-            'sslmode': 'disable'  # Явно отключаем SSL для локальной разработки
+            'sslmode': 'disable'
         }
     }
 }
 
-# Шаблоны
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -184,33 +180,21 @@ TEMPLATES = [
     },
 ]
 
-# Статические файлы
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Медиафайлы
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# Локализация
 TIME_ZONE = 'Europe/Berlin'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
-LANGUAGE_CODE = 'ru'
-LANGUAGES = [
-    ('ru', 'Русский'),
-    ('en', 'English'),
-    ('de', 'Deutsch'),
-]
-LOCALE_PATHS = [BASE_DIR / 'locale']
 
-# Двухфакторная аутентификация
 OTP_TOTP_ISSUER = 'NovaHaus'
 
-# Логирование
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -236,7 +220,6 @@ LOGGING = {
     },
 }
 
-# Настройки для django-compressor
 COMPRESS_ENABLED = not DEBUG
 COMPRESS_OFFLINE = not DEBUG
 COMPRESS_CSS_FILTERS = [
@@ -248,7 +231,6 @@ COMPRESS_JS_FILTERS = [
 
 REDIS_URL = os.getenv('REDISCLOUD_URL', 'redis://localhost:6379/0')
 
-# Настройки Channels
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
@@ -259,10 +241,8 @@ CHANNEL_LAYERS = {
     },
 }
 
-# Настройки для Channels
 ASGI_APPLICATION = 'NovaHaus.asgi.application'
 
-# Настройки CORS для API
 CORS_ALLOWED_ORIGINS = [
     "https://novahaus-koeln.de",
     "https://www.novahaus-koeln.de",
@@ -278,17 +258,14 @@ CSRF_TRUSTED_ORIGINS = [
     'https://www.novahaus-hamburg.de',
 ]
 
-# Настройки для компрессии
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
 )
 
-# Кеширование
-CACHE_TTL = 60 * 15  # 15 минут
+CACHE_TTL = 60 * 15
 
-# Sentry для отслеживания ошибок
 import sentry_sdk
 sentry_sdk.init(
     dsn=os.getenv('SENTRY_DSN'),
@@ -296,14 +273,11 @@ sentry_sdk.init(
     profiles_sample_rate=1.0,
 )
 
-# Настройки для Heroku
 if 'DYNO' in os.environ:
-    # DEBUG остаётся как было установлено из переменных окружения
     ALLOWED_HOSTS = ['novahaus-koeln.de', 'www.novahaus-koeln.de', 'novahaus-eu.herokuapp.com']
     import django_heroku
     django_heroku.settings(locals(), staticfiles=False)
 
-# Мониторинг
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -326,3 +300,34 @@ AUTHENTICATION_BACKENDS = [
 import logging
 logger = logging.getLogger(__name__)
 logger.info(f"Application started in DEBUG={DEBUG} mode")
+
+# PWA
+PWA_APP_NAME = 'NovaHaus'
+PWA_APP_DESCRIPTION = "Renovation services in Cologne and Hamburg"
+PWA_APP_THEME_COLOR = '#005B99'
+PWA_APP_BACKGROUND_COLOR = '#FFFFFF'
+PWA_APP_DISPLAY = 'standalone'
+PWA_APP_SCOPE = '/'
+PWA_APP_ORIENTATION = 'any'
+PWA_APP_START_URL = '/'
+PWA_APP_STATUS_BAR_COLOR = 'default'
+PWA_APP_ICONS = [
+    {
+        'src': '/static/images/favicon/favicon-192x192.png',
+        'sizes': '192x192',
+        'type': 'image/png'
+    },
+    {
+        'src': '/static/images/favicon/favicon-512x512.png',
+        'sizes': '512x512',
+        'type': 'image/png'
+    }
+]
+PWA_APP_SPLASH_SCREEN = [
+    {
+        'src': '/static/images/splash.png',
+        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
+    }
+]
+PWA_APP_DIR = 'ltr'
+PWA_APP_LANG = 'de'

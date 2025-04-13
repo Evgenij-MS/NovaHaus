@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const slides = document.querySelectorAll('.slider img');
+  const slides = document.querySelectorAll('#hero-slider video, #hero-slider img');
   const indicators = document.querySelectorAll('.slider-indicators button');
   let currentSlide = 0;
 
@@ -23,5 +23,5 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   showSlide(currentSlide);
-  setInterval(nextSlide, 5000);
+  setInterval(nextSlide, 2000);
 });

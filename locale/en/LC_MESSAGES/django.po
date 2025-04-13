@@ -1,346 +1,132 @@
-# English translations for NovaHaus project.
-# Copyright (C) 2025 NovaHaus
-# This file is distributed under the same license as the NovaHaus package.
-# Grok <support@x.ai>, 2025.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: NovaHaus 1.0\n"
+"Project-Id-Version: NovaHaus\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-06 18:09+0200\n"
-"PO-Revision-Date: 2025-04-12 12:00+0200\n"
-"Last-Translator: Grok <support@x.ai>\n"
-"Language-Team: English <en@li.org>\n"
+"POT-Creation-Date: 2025-04-13 12:00+0200\n"
+"PO-Revision-Date: 2025-04-13 12:00+0200\n"
+"Last-Translator: \n"
+"Language-Team: English\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#: .\main\templates\main\home.html:8
-msgid "Специальное предложение для новых клиентов!"
-msgstr "Special offer for new clients!"
-
-#: .\main\templates\main\home.html:9
-#, python-format
-msgid "Получите скидку <strong>%(discount)s</strong> на первый заказ!"
-msgstr "Get a <strong>%(discount)s</strong> discount on your first order!"
-
-#: .\main\templates\main\home.html:10
-msgid "Заказать сейчас"
-msgstr "Order now"
-
-#: .\main\templates\main\home.html:15
-msgid "Слайдер с примерами работ"
-msgstr "Slider with work examples"
-
-#: .\main\templates\main\home.html:17
-msgid "Современный ремонт квартир"
-msgstr "Modern apartment renovation"
-
-#: .\main\templates\main\home.html:18
-msgid "Утепление фасадов"
-msgstr "Facade insulation"
-
-#: .\main\templates\main\home.html:19 .\main\templates\main\home.html:44
-msgid "Фасадные работы"
-msgstr "Facade works"
-
-#: .\main\templates\main\home.html:22
-msgid "Показать слайд 1"
-msgstr "Show slide 1"
-
-#: .\main\templates\main\home.html:23
-msgid "Показать слайд 2"
-msgstr "Show slide 2"
-
-#: .\main\templates\main\home.html:24
-msgid "Показать слайд 3"
-msgstr "Show slide 3"
-
-#: .\main\templates\main\home.html:25
-msgid "renovation.jpg"
-msgstr "renovation.jpg"
-
-#: .\main\templates\main\home.html:26
-msgid "Современная гостиная после ремонта в минималистичном стиле"
-msgstr "Modern living room after renovation in a minimalist style"
-
-#: .\main\templates\main\home.html:27
-msgid "facade.jpg"
-msgstr "facade.jpg"
-
-#: .\main\templates\main\home.html:28
-msgid "Фасад здания: половина утеплена, половина полностью завершена"
-msgstr "Building facade: half insulated, half fully completed"
-
-#: .\main\templates\main\home.html:31
-msgid "Наши услуги"
-msgstr "Our services"
-
-#: .\main\templates\main\home.html:34
-msgid "Ремонт квартир"
-msgstr "Apartment renovation"
-
-#: .\main\templates\main\home.html:35
-msgid "Качественный ремонт под ключ с использованием современных материалов."
-msgstr "High-quality turnkey renovation using modern materials."
-
-#: .\main\templates\main\home.html:36 .\main\templates\main\home.html:41
-#: .\main\templates\main\home.html:46
-msgid "Подробнее"
-msgstr "Learn more"
-
-#: .\main\templates\main\home.html:39
-msgid "Утепление домов"
-msgstr "Home insulation"
-
-#: .\main\templates\main\home.html:40
-msgid "Энергоэффективные решения для вашего комфорта и экономии."
-msgstr "Energy-efficient solutions for your comfort and savings."
-
-#: .\main\templates\main\home.html:45
-msgid "Профессиональная отделка фасадов для эстетики и долговечности."
-msgstr "Professional facade finishing for aesthetics and durability."
-
-#: .\main\templates\main\home.html:55
-msgid "Отзывы клиентов"
-msgstr "Customer reviews"
-
-#: .\main\templates\main\home.html:58
-msgid ""
-"Отличная работа, спасибо команде NovaHaus! Все сделали быстро и качественно."
-msgstr "Great job, thanks to the NovaHaus team! Everything was done quickly and professionally."
-
-#: .\main\templates\main\home.html:59
-msgid "Иван Иванов"
-msgstr "Ivan Ivanov"
-
-#: .\main\templates\main\home.html:62
-msgid ""
-"Очень доволен утеплением дома. Теперь зимой тепло, а счета за отопление "
-"снизились."
-msgstr "Very satisfied with home insulation. Now it's warm in winter, and heating bills are lower."
-
-#: .\main\templates\main\home.html:63
-msgid "Мария Петрова"
-msgstr "Maria Petrova"
-
-#: .\main\templates\main\home.html:66
-msgid "Профессиональный подход и внимание к деталям. Рекомендую!"
-msgstr "Professional approach and attention to detail. Highly recommend!"
-
-#: .\main\templates\main\home.html:67
-msgid "Алексей Смирнов"
-msgstr "Alexey Smirnov"
-
-#: .\main\templates\main\home.html:76
-msgid "Станьте нашим партнером!"
-msgstr "Become our partner!"
-
-#: .\main\templates\main\home.html:77
-msgid ""
-"Присоединяйтесь к нашей партнерской программе и получайте вознаграждение за "
-"привлечение клиентов."
-msgstr "Join our partner program and earn rewards for referring clients."
-
-#: .\main\templates\main\home.html:80
-msgid "Высокие комиссии"
-msgstr "High commissions"
-
-#: .\main\templates\main\home.html:81
-#, python-format
-msgid "Получайте до 10%% от суммы каждого заказа, привлеченного вами."
-msgstr "Earn up to 10%% of each order you refer."
-
-#: .\main\templates\main\home.html:84
-msgid "Поддержка 24/7"
-msgstr "24/7 support"
-
-#: .\main\templates\main\home.html:85
-msgid ""
-"Наша команда всегда готова помочь вам с вопросами и предоставить необходимые "
-"материалы."
-msgstr "Our team is always ready to help with questions and provide necessary materials."
-
-#: .\main\templates\main\home.html:88
-msgid "Уникальные условия"
-msgstr "Unique conditions"
-
-#: .\main\templates\main\home.html:89
-msgid "Индивидуальные условия для крупных партнеров и агентств."
-msgstr "Individual conditions for large partners and agencies."
-
-#: .\main\templates\main\home.html:92
-msgid "Зарегистрироваться как партнер"
-msgstr "Register as a partner"
-
-#: .\main\templates\main\home.html:99
-msgid "Готовы начать проект?"
-msgstr "Ready to start a project?"
-
-#: .\main\templates\main\home.html:100
-msgid "Свяжитесь с нами для бесплатной консультации и расчета стоимости."
-msgstr "Contact us for a free consultation and cost estimate."
-
-#: .\main\templates\main\home.html:101
-msgid "Заказать консультацию"
-msgstr "Request a consultation"
-
-#: .\templates\base.html:9 .\templates\base.html:15 .\templates\base.html:21
-msgid "NovaHaus – Ваш надежный партнер в строительстве и ремонте"
-msgstr "NovaHaus – Your reliable partner in construction and renovation"
-
-#: .\templates\base.html:10 .\templates\base.html:16 .\templates\base.html:22
-msgid ""
-"NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, "
-"фасадные работы и многое другое."
-msgstr "NovaHaus – a construction company in Cologne. Apartment renovation, home insulation, facade works, and more."
-
-#: .\templates\base.html:11
-msgid "ремонт, строительство, утепление, Кельн, NovaHaus"
-msgstr "renovation, construction, insulation, Cologne, NovaHaus"
-
-#: .\templates\base.html:56
-msgid ""
-"Строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные "
-"работы."
-msgstr "Construction company in Cologne. Apartment renovation, home insulation, facade works."
-
-#: .\templates\base.html:60
-msgid "Кельн"
-msgstr "Cologne"
-
-#: .\templates\base.html:62
-msgid "Германия"
-msgstr "Germany"
-
-#: .\templates\base.html:80
-msgid "Выберите язык"
-msgstr "Select language"
-
-#: .\templates\base.html:81
-msgid "Язык сайта"
-msgstr "Website language"
-
-#: .\templates\base.html:93
-msgid "Применить"
-msgstr "Apply"
-
-#: .\templates\base.html:111
-msgid "Переключить тему"
-msgstr "Toggle theme"
-
-#: .\templates\base.html:113
-msgid "Темная тема"
-msgstr "Dark theme"
-
-#: .\templates\header.html
-msgid "Главная"
-msgstr "Home"
-
-#: .\templates\header.html
-msgid "Услуги"
-msgstr "Services"
-
-#: .\templates\header.html
-msgid "Портфолио"
-msgstr "Portfolio"
-
-#: .\templates\header.html
-msgid "Блог"
-msgstr "Blog"
-
-#: .\templates\header.html
-msgid "О нас"
-msgstr "About us"
-
-#: .\templates\header.html
-msgid "Стать партнером"
-msgstr "Become a partner"
-
-#: .\templates\main\contact.html
-msgid "Контакты"
-msgstr "Contact"
-
-# English translations for NovaHaus
-msgid ""
-msgstr ""
-"Project-Id-Version: NovaHaus 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-12 14:00+0200\n"
-"PO-Revision-Date: 2025-04-12 14:00+0200\n"
-"Last-Translator: NovaHaus Team <info@novahaus.de>\n"
-"Language-Team: English <en@novahaus.de>\n"
-"Language: en\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-# Menu items (from header.html)
-msgid "Главная"
-msgstr "Home"
-
-msgid "Услуги"
-msgstr "Services"
-
-msgid "Портфолио"
-msgstr "Portfolio"
-
-msgid "Блог"
-msgstr "Blog"
-
-msgid "О нас"
-msgstr "About"
-
-msgid "Контакты"
-msgstr "Contact"
-
-msgid "Стать партнером"
-msgstr "Become a Partner"
-
-# Header (from header.html)
-msgid "Меню"
-msgstr "Menu"
-
-msgid "NovaHaus - Главная"
-msgstr "NovaHaus - Home"
-
-# Page title fallback (from header.html)
-msgid "NovaHaus"
-msgstr "NovaHaus"
-
-# Language switcher (from header.html)
-msgid "Язык сайта"
-msgstr "Site Language"
-
-msgid "Применить"
-msgstr "Apply"
-
-# Meta tags and title (from base.html)
-msgid "NovaHaus – Ваш надежный партнер в строительстве и ремонте"
-msgstr "NovaHaus – Your Reliable Partner in Construction and Renovation"
-
-msgid "NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы и многое другое."
-msgstr "NovaHaus – a construction company in Cologne. Apartment renovations, home insulation, facade work, and more."
-
-msgid "ремонт, строительство, утепление, Кельн, NovaHaus"
-msgstr "renovation, construction, insulation, Cologne, NovaHaus"
-
-# JSON-LD (from base.html)
-msgid "Строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы."
-msgstr "Construction company in Cologne. Apartment renovations, home insulation, facade work."
-
-msgid "Кельн"
-msgstr "Cologne"
-
-msgid "Германия"
-msgstr "Germany"
-
-# Theme toggle (from base.html)
-msgid "Переключить тему"
-msgstr "Toggle Theme"
-
-msgid "Темная тема"
-msgstr "Dark Theme"
+
+msgid "NovaHaus – Your Trusted Renovation Partner"
+msgstr "NovaHaus – Your Trusted Renovation Partner"
+
+msgid "Quality, Timeliness, Eco-Friendliness – From Idea to Cleanup"
+msgstr "Quality, Timeliness, Eco-Friendliness – From Idea to Cleanup"
+
+msgid "Calculate Cost"
+msgstr "Calculate Cost"
+
+msgid "Our Projects"
+msgstr "Our Projects"
+
+msgid "10% Discount for New Clients!"
+msgstr "10% Discount for New Clients!"
+
+msgid "Only until the end of the month! Order now and save."
+msgstr "Only until the end of the month! Order now and save."
+
+msgid "Order Now"
+msgstr "Order Now"
+
+msgid "Our Services"
+msgstr "Our Services"
+
+msgid "No services added yet."
+msgstr "No services added yet."
+
+msgid "Learn More"
+msgstr "Learn More"
+
+msgid "Why Choose Us"
+msgstr "Why Choose Us"
+
+msgid "High Quality"
+msgstr "High Quality"
+
+msgid "ISO and LEED certified"
+msgstr "ISO and LEED certified"
+
+msgid "On-Time Delivery"
+msgstr "On-Time Delivery"
+
+msgid "We finish projects on schedule"
+msgstr "We finish projects on schedule"
+
+msgid "Eco-Friendly"
+msgstr "Eco-Friendly"
+
+msgid "Sustainable materials"
+msgstr "Sustainable materials"
+
+msgid "Transparent Pricing"
+msgstr "Transparent Pricing"
+
+msgid "Clear and honest estimates"
+msgstr "Clear and honest estimates"
+
+msgid "Projects Completed"
+msgstr "Projects Completed"
+
+msgid "Client Satisfaction"
+msgstr "Client Satisfaction"
+
+msgid "Years of Experience"
+msgstr "Years of Experience"
+
+msgid "View All Projects"
+msgstr "View All Projects"
+
+msgid "Eco-Friendly Solutions"
+msgstr "Eco-Friendly Solutions"
+
+msgid "We use LEED-certified materials to create sustainable spaces for your home and the planet."
+msgstr "We use LEED-certified materials to create sustainable spaces for your home and the planet."
+
+msgid "We Know Your City"
+msgstr "We Know Your City"
+
+msgid "Cologne – Ehrenfeld & Beyond"
+msgstr "Cologne – Ehrenfeld & Beyond"
+
+msgid "From trendy lofts in Ehrenfeld to classic apartments in the city center, we bring quality to every corner of Cologne."
+msgstr "From trendy lofts in Ehrenfeld to classic apartments in the city center, we bring quality to every corner of Cologne."
+
+msgid "See Cologne Projects"
+msgstr "See Cologne Projects"
+
+msgid "Hamburg – St. Pauli & More"
+msgstr "Hamburg – St. Pauli & More"
+
+msgid "Modern offices in St. Pauli or warehouses in the port – we transform Hamburg spaces with precision."
+msgstr "Modern offices in St. Pauli or warehouses in the port – we transform Hamburg spaces with precision."
+
+msgid "See Hamburg Projects"
+msgstr "See Hamburg Projects"
+
+msgid "Get in Touch"
+msgstr "Get in Touch"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Phone"
+msgstr "Phone"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Send"
+msgstr "Send"
+
+msgid "Chat"
+msgstr "Chat"
+
+msgid "Ask a question"
+msgstr "Ask a question"

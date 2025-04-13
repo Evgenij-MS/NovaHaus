@@ -1,161 +1,209 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 
-{% block title %}{% trans "NovaHaus – Ремонт в Кёльне и Гамбурге" %}{% endblock %}
-{% block description %}{% trans "Профессиональный ремонт квартир, домов, офисов и фасадов в Кёльне и Гамбурге." %}{% endblock %}
-{% block keywords %}{% trans "ремонт, Кёльн, Гамбург, экологичность, NovaHaus" %}{% endblock %}
+{% block title %}{% trans "NovaHaus – Renovation in Cologne and Hamburg" %}{% endblock %}
+{% block description %}{% trans "Professional renovation of apartments, houses, offices, and facades in Cologne and Hamburg." %}{% endblock %}
+{% block keywords %}{% trans "renovation, Cologne, Hamburg, eco-friendly, NovaHaus" %}{% endblock %}
 
 {% block content %}
-  <!-- Герой-баннер -->
-  <section class="hero fade-in">
+  <!-- Hero Banner -->
+  <section class="hero relative h-screen overflow-hidden">
     <div class="slider" id="hero-slider">
-      <img src="{% static 'images/slider/slide1.jpg' %}" alt="{% trans 'Современная квартира' %}" class="slide">
-      <img src="{% static 'images/slider/slide2.jpg' %}" alt="{% trans 'Офисный ремонт' %}" class="slide">
-      <img src="{% static 'images/slider/slide3.jpg' %}" alt="{% trans 'Экологичный фасад' %}" class="slide">
+      <!-- Видео или изображения -->
+      <video autoplay muted loop class="w-full h-full object-cover absolute opacity-0 active" id="hero-video">
+        <source src="{% static 'media/hero-video.mp4' %}" type="video/mp4">
+      </video>
+      <img src="{% static 'images/slider/slide1.jpg' %}" alt="{% trans 'Modern Apartment' %}" class="w-full h-full object-cover absolute opacity-0">
+      <img src="{% static 'images/slider/slide2.jpg' %}" alt="{% trans 'Office Renovation' %}" class="w-full h-full object-cover absolute opacity-0">
+      <img src="{% static 'images/slider/slide3.jpg' %}" alt="{% trans 'Eco Facade' %}" class="w-full h-full object-cover absolute opacity-0">
     </div>
-    <div class="hero-text slide-up">
-      <h1>{% trans "Ваш надежный партнер по ремонту в Кёльне и Гамбурге" %}</h1>
-      <p>{% trans "Качество, сроки, экологичность — от идеи до уборки" %}</p>
-      <a href="{% url 'calculator' %}" class="cta-button pulse">{% trans "Рассчитать стоимость за минуту" %}</a>
+    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-center text-white">
+      <div class="hero-text slide-up">
+        <h1 class="text-5xl md:text-6xl font-bold mb-4">{% trans "NovaHaus – Your Trusted Renovation Partner" %}</h1>
+        <p class="text-xl md:text-2xl mb-6">{% trans "Quality, Timeliness, Eco-Friendliness – From Idea to Cleanup" %}</p>
+        <div class="flex gap-4 justify-center">
+          <a href="{% url 'calculator' %}" class="cta-button pulse bg-secondary text-white px-6 py-3 rounded-lg">{% trans "Calculate Cost" %}</a>
+          <a href="{% url 'portfolio' %}" class="cta-button bg-primary text-white px-6 py-3 rounded-lg">{% trans "Our Projects" %}</a>
+        </div>
+      </div>
     </div>
-    <div class="language-toggle">
-      <a href="?lang=ru" {% if LANGUAGE_CODE == 'ru' %}class="active"{% endif %}>RU</a>
-      <a href="?lang=de" {% if LANGUAGE_CODE == 'de' %}class="active"{% endif %}>DE</a>
-      <a href="?lang=en" {% if LANGUAGE_CODE == 'en' %}class="active"{% endif %}>EN</a>
+    <div class="slider-indicators absolute bottom-10 left-50 transform -translate-x-50 flex gap-2">
+      <button class="indicator active" data-slide="0"></button>
+      <button class="indicator" data-slide="1"></button>
+      <button class="indicator" data-slide="2"></button>
+      <button class="indicator" data-slide="3"></button>
     </div>
   </section>
 
-  <!-- Акция -->
-  <section class="promo-banner slide-up">
+  <!-- Promo Banner -->
+  <section class="promo-banner py-8 bg-gradient-to-r from-primary to-secondary text-white text-center">
     <div class="container">
-      <h2>🎉 {% trans "Скидка 10% для новых клиентов!" %} 🎉</h2>
-      <p>{% trans "Только до конца месяца! Закажите сейчас и сэкономьте." %}</p>
-      <a href="{% url 'contact' %}" class="btn">{% trans "Заказать сейчас" %}</a>
+      <h2 class="text-3xl font-bold">🎉 {% trans "10% Discount for New Clients!" %} 🎉</h2>
+      <p class="text-lg mb-4">{% trans "Only until the end of the month! Order now and save." %}</p>
+      <a href="{% url 'contact' %}" class="btn bg-white text-primary px-6 py-3 rounded-lg">{% trans "Order Now" %}</a>
     </div>
   </section>
 
-  <!-- Услуги -->
-  <section class="services fade-in">
+  <!-- Services -->
+  <section class="services py-16 bg-white">
     <div class="container">
-      <h2>{% trans "Наши услуги" %}</h2>
-      <div class="service-cards grid-layout">
+      <h2 class="text-4xl font-bold text-center mb-12">{% trans "Our Services" %}</h2>
+      <div class="service-cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {% for service in services %}
-          <article class="card">
+          <article class="card bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-transform duration-300">
             {% if service.image %}
-              <img src="{{ service.image.url }}" alt="{{ service.title }}">
+              <img src="{{ service.image.url }}" alt="{{ service.title }}" class="w-full h-40 object-cover rounded-t-lg mb-4">
             {% else %}
-              <img src="{% static 'images/placeholder.jpg' %}" alt="Placeholder">
+              <img src="{% static 'images/placeholder.jpg' %}" alt="{% trans 'Placeholder' %}" class="w-full h-40 object-cover rounded-t-lg mb-4">
             {% endif %}
-            <h3>{{ service.title }}</h3>
-            <p>{{ service.description|truncatewords:10 }}</p>
-            <a href="{% url 'services' %}#{{ service.category }}" class="btn">{% trans "Подробнее" %}</a>
+            <h3 class="text-xl font-semibold mb-2">{{ service.title }}</h3>
+            <p class="text-gray-600 mb-4">{{ service.description|truncatewords:15 }}</p>
+            <a href="{% url 'services' %}#{{ service.category }}" class="btn bg-primary text-white px-4 py-2 rounded-lg">{% trans "Learn More" %}</a>
           </article>
         {% empty %}
-          <p>{% trans "Услуги пока не добавлены." %}</p>
+          <p class="text-center col-span-full">{% trans "No services added yet." %}</p>
         {% endfor %}
       </div>
     </div>
   </section>
 
-  <!-- Почему мы -->
-  <section class="why-us fade-in">
+  <!-- Why Us -->
+  <section class="why-us py-16 bg-gray-100">
     <div class="container">
-      <h2>{% trans "Почему выбирают нас" %}</h2>
-      <div class="advantages grid-layout">
-        <div class="advantage">
-          <img src="{% static 'images/icons/quality.png' %}" alt="{% trans 'Качество' %}" class="ec-img">
-          <h3>{% trans "Высокое качество" %}</h3>
-          <p>{% trans "Сертификаты ISO и LEED" %}</p>
+      <h2 class="text-4xl font-bold text-center mb-12">{% trans "Why Choose Us" %}</h2>
+      <div class="advantages grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+        <div class="advantage text-center">
+          <img src="{% static 'images/icons/quality.png' %}" alt="{% trans 'Quality' %}" class="w-16 h-16 mx-auto mb-4">
+          <h3 class="text-xl font-semibold">{% trans "High Quality" %}</h3>
+          <p>{% trans "ISO and LEED certified" %}</p>
         </div>
-        <div class="advantage">
-          <img src="{% static 'images/icons/time.png' %}" alt="{% trans 'Сроки' %}" class="ec-img">
-          <h3>{% trans "Соблюдение сроков" %}</h3>
-          <p>{% trans "Завершаем проекты вовремя" %}</p>
+        <div class="advantage text-center">
+          <img src="{% static 'images/icons/time.png' %}" alt="{% trans 'Timeliness' %}" class="w-16 h-16 mx-auto mb-4">
+          <h3 class="text-xl font-semibold">{% trans "On-Time Delivery" %}</h3>
+          <p>{% trans "We finish projects on schedule" %}</p>
         </div>
-        <div class="advantage">
-          <img src="{% static 'images/icons/eco.png' %}" alt="{% trans 'Экологичность' %}" class="ec-img">
-          <h3>{% trans "Экологичность" %}</h3>
-          <p>{% trans "Зеленые материалы" %}</p>
+        <div class="advantage text-center">
+          <img src="{% static 'images/icons/eco.png' %}" alt="{% trans 'Eco-Friendly' %}" class="w-16 h-16 mx-auto mb-4">
+          <h3 class="text-xl font-semibold">{% trans "Eco-Friendly" %}</h3>
+          <p>{% trans "Sustainable materials" %}</p>
         </div>
-        <div class="advantage">
-          <img src="{% static 'images/icons/price.png' %}" alt="{% trans 'Прозрачность' %}" class="ec-img">
-          <h3>{% trans "Прозрачные цены" %}</h3>
-          <p>{% trans "Честные расчеты" %}</p>
+        <div class="advantage text-center">
+          <img src="{% static 'images/icons/price.png' %}" alt="{% trans 'Transparency' %}" class="w-16 h-16 mx-auto mb-4">
+          <h3 class="text-xl font-semibold">{% trans "Transparent Pricing" %}</h3>
+          <p>{% trans "Clear and honest estimates" %}</p>
         </div>
       </div>
-      <div class="testimonials-slider">
-        {% for review in reviews %}
-          <article class="card">
-            <p>{{ review.text|truncatewords:20 }}</p>
-            <span>{{ review.user.username }} – {{ review.rating }} ★</span>
-          </article>
-        {% empty %}
-          <p>{% trans "Отзывы пока не добавлены." %}</p>
-        {% endfor %}
+      <!-- Counters -->
+      <div class="counters grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+        <div>
+          <span class="counter text-4xl font-bold text-primary" data-target="600">0</span>
+          <p>{% trans "Projects Completed" %}</p>
+        </div>
+        <div>
+          <span class="counter text-4xl font-bold text-primary" data-target="98">0</span>
+          <p>{% trans "Client Satisfaction" %}%</p>
+        </div>
+        <div>
+          <span class="counter text-4xl font-bold text-primary" data-target="10">0</span>
+          <p>{% trans "Years of Experience" %}</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Портфолио -->
-  <section class="portfolio fade-in">
+  <!-- Portfolio -->
+  <section class="portfolio py-16 bg-white">
     <div class="container">
-      <h2>{% trans "Наши работы" %}</h2>
-      <div class="portfolio-grid grid-layout">
+      <h2 class="text-4xl font-bold text-center mb-12">{% trans "Our Projects" %}</h2>
+      <div class="portfolio-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {% for project in projects %}
-          <div class="portfolio-item">
+          <div class="portfolio-item relative">
             <div class="before-after-slider">
               {% if project.image_before %}
-                <img src="{{ project.image_before.url }}" alt="{% trans 'До' %}">
+                <img src="{{ project.image_before.url }}" alt="{% trans 'Before' %}" class="w-full h-48 object-cover">
               {% else %}
-                <img src="{% static 'images/placeholder.jpg' %}" alt="Placeholder">
+                <img src="{% static 'images/placeholder.jpg' %}" alt="{% trans 'Before' %}" class="w-full h-48 object-cover">
               {% endif %}
               {% if project.image_after %}
-                <img src="{{ project.image_after.url }}" alt="{% trans 'После' %}">
+                <img src="{{ project.image_after.url }}" alt="{% trans 'After' %}" class="w-full h-48 object-cover">
               {% else %}
-                <img src="{% static 'images/placeholder.jpg' %}" alt="Placeholder">
+                <img src="{% static 'images/placeholder.jpg' %}" alt="{% trans 'After' %}" class="w-full h-48 object-cover">
               {% endif %}
             </div>
-            <h3>{{ project.title }}</h3>
+            <h3 class="text-lg font-semibold mt-2">{{ project.title }}</h3>
+            <a href="{% url 'portfolio' %}#{{ project.category }}" class="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-50 transition-opacity flex items-center justify-center text-white opacity-0 hover:opacity-100">
+              <span>{% trans "View 360° Tour" %}</span>
+            </a>
           </div>
         {% empty %}
-          <p>{% trans "Проекты пока не добавлены." %}</p>
+          <p class="text-center col-span-full">{% trans "No projects added yet." %}</p>
         {% endfor %}
       </div>
-      <a href="{% url 'portfolio' %}" class="btn">{% trans "Смотреть все проекты" %}</a>
-    </div>
-  </section>
-
-  <!-- Экологичность -->
-  <section class="eco fade-in">
-    <div class="container">
-      <h2>{% trans "Экологичные решения" %}</h2>
-      <p>{% trans "Мы используем LEED-сертифицированные материалы для вашего дома и планеты." %}</p>
-      <div class="eco-icons">
-        <img src="{% static 'images/icons/leaf.png' %}" alt="{% trans 'Экология' %}" class="ec-img">
-        <img src="{% static 'images/icons/energy.png' %}" alt="{% trans 'Энергоэффективность' %}" class="ec-img">
-        <img src="{% static 'images/icons/recycle.png' %}" alt="{% trans 'Переработка' %}" class="ec-img">
+      <div class="text-center mt-8">
+        <a href="{% url 'portfolio' %}" class="btn bg-primary text-white px-6 py-3 rounded-lg">{% trans "View All Projects" %}</a>
       </div>
-      <a href="{% url 'blog' %}#eco" class="btn">{% trans "Узнать больше" %}</a>
     </div>
   </section>
 
-  <!-- Контакты -->
-  <section class="contact fade-in">
+  <!-- Eco Section -->
+  <section class="eco py-16 bg-secondary text-white text-center">
     <div class="container">
-      <h2>{% trans "Свяжитесь с нами" %}</h2>
-      <div class="contact-grid">
-        <form method="post" action="{% url 'contact' %}">
-          {% csrf_token %}
-          <input type="text" name="name" placeholder="{% trans 'Имя' %}" required>
-          <input type="email" name="email" placeholder="{% trans 'Email' %}" required>
-          <input type="tel" name="phone" placeholder="{% trans 'Телефон' %}" required>
-          <textarea name="message" placeholder="{% trans 'Сообщение' %}" required></textarea>
-          <button type="submit" class="btn">{% trans 'Отправить' %}</button>
-        </form>
-        <div class="map">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d6.959974!3d50.937531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTHCsDU2JzE1LjEiTiA2wrA1NSc0OC4zIkU!5e0!3m2!1sen!2sde!4v1631234567890" allowfullscreen loading="lazy"></iframe>
+      <h2 class="text-4xl font-bold mb-6">{% trans "Eco-Friendly Solutions" %}</h2>
+      <p class="text-lg mb-6">{% trans "We use LEED-certified materials to create sustainable spaces for your home and the planet." %}</p>
+      <div class="eco-icons flex justify-center gap-6 mb-6">
+        <img src="{% static 'images/icons/leaf.png' %}" alt="{% trans 'Ecology' %}" class="w-12 h-12">
+        <img src="{% static 'images/icons/energy.png' %}" alt="{% trans 'Energy Efficiency' %}" class="w-12 h-12">
+        <img src="{% static 'images/icons/recycle.png' %}" alt="{% trans 'Recycling' %}" class="w-12 h-12">
+      </div>
+      <a href="{% url 'blog' %}#eco" class="btn bg-white text-secondary px-6 py-3 rounded-lg">{% trans "Learn More" %}</a>
+    </div>
+  </section>
+
+  <!-- Local Accent -->
+  <section class="local-accent py-16 bg-gray-100">
+    <div class="container">
+      <h2 class="text-4xl font-bold text-center mb-12">{% trans "We Know Your City" %}</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="city-card p-6 bg-white rounded-lg shadow-lg">
+          <h3 class="text-2xl font-semibold mb-4">{% trans "Cologne – Ehrenfeld & Beyond" %}</h3>
+          <p>{% trans "From trendy lofts in Ehrenfeld to classic apartments in the city center, we bring quality to every corner of Cologne." %}</p>
+          <a href="{% url 'portfolio' %}#cologne" class="btn bg-primary text-white px-4 py-2 rounded-lg mt-4">{% trans "See Cologne Projects" %}</a>
+        </div>
+        <div class="city-card p-6 bg-white rounded-lg shadow-lg">
+          <h3 class="text-2xl font-semibold mb-4">{% trans "Hamburg – St. Pauli & More" %}</h3>
+          <p>{% trans "Modern offices in St. Pauli or warehouses in the port – we transform Hamburg spaces with precision." %}</p>
+          <a href="{% url 'portfolio' %}#hamburg" class="btn bg-primary text-white px-4 py-2 rounded-lg mt-4">{% trans "See Hamburg Projects" %}</a>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- Contact -->
+  <section class="contact py-16 bg-white">
+    <div class="container">
+      <h2 class="text-4xl font-bold text-center mb-12">{% trans "Get in Touch" %}</h2>
+      <div class="contact-grid grid grid-cols-1 md:grid-cols-2 gap-8">
+        <form method="post" action="{% url 'contact' %}" class="flex flex-col gap-4">
+          {% csrf_token %}
+          <input type="text" name="name" placeholder="{% trans 'Name' %}" required class="p-3 border rounded-lg">
+          <input type="email" name="email" placeholder="{% trans 'Email' %}" required class="p-3 border rounded-lg">
+          <input type="tel" name="phone" placeholder="{% trans 'Phone' %}" required class="p-3 border rounded-lg">
+          <textarea name="message" placeholder="{% trans 'Message' %}" required class="p-3 border rounded-lg h-32"></textarea>
+          <button type="submit" class="btn bg-primary text-white px-6 py-3 rounded-lg">{% trans "Send" %}</button>
+        </form>
+        <div class="map">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d6.959974!3d50.937531!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTHCsDU2JzE1LjEiTiA2wrA1NSc0OC4zIkU!5e0!3m2!1sen!2sde!4v1631234567890" allowfullscreen loading="lazy" class="w-full h-full rounded-lg"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chatbot -->
+  <div class="chatbot fixed bottom-4 right-4 z-50">
+    <div class="chatbot-window bg-white shadow-lg rounded-lg p-4 w-80 h-96 overflow-y-auto hidden">
+      <div class="chatbot-messages"></div>
+      <input type="text" class="chatbot-input w-full p-2 border rounded-lg" placeholder="{% trans 'Ask a question' %}">
+    </div>
+    <button class="chatbot-toggle bg-primary text-white p-4 rounded-full">{% trans 'Chat' %}</button>
+  </div>
 {% endblock %}

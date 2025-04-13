@@ -1,12 +1,36 @@
-{% load i18n %}
-<footer>
-    <div class="container">
-        <p>{% trans "© 2025 NovaHaus. Все права защищены." %}</p>
-        <p>
-            <a href="https://facebook.com/novahaus" target="_blank" rel="noopener noreferrer">Facebook</a> |
-            <a href="https://instagram.com/novahaus" target="_blank" rel="noopener noreferrer">Instagram</a> |
-            <a href="https://t.me/novahaus" target="_blank" rel="noopener noreferrer">Telegram</a> |
-            <a href="mailto:info@novahaus.de">info@novahaus.de</a>
-        </p>
+{% load static i18n %}
+<footer class="bg-header-bg text-neutral-100 py-12">
+    <div class="container grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+            <img src="{% static 'images/logo.png' %}" alt="{% trans 'NovaHaus' %}" class="h-12 mb-4">
+            <p>{% trans "Transforming spaces in Cologne and Hamburg with quality and eco-friendliness." %}</p>
+        </div>
+        <div>
+            <h3 class="text-lg font-semibold mb-4">{% trans "Quick Links" %}</h3>
+            <ul>
+                <li><a href="{% url 'services' %}">{% trans "Services" %}</a></li>
+                <li><a href="{% url 'portfolio' %}">{% trans "Portfolio" %}</a></li>
+                <li><a href="{% url 'blog' %}">{% trans "Blog" %}</a></li>
+                <li><a href="{% url 'contact' %}">{% trans "Contact" %}</a></li>
+            </ul>
+        </div>
+        <div>
+            <h3 class="text-lg font-semibold mb-4">{% trans "Contact Us" %}</h3>
+            <p>{% trans "Cologne: Musterstraße 123, 50667" %}</p>
+            <p>{% trans "Hamburg: Beispielweg 456, 20354" %}</p>
+            <p>{% trans "Phone: +49 155 100 718 48" %}</p>
+            <p><a href="mailto:info@novahaus.de">info@novahaus.de</a></p>
+        </div>
+        <div>
+            <h3 class="text-lg font-semibold mb-4">{% trans "Follow Us" %}</h3>
+            <div class="social-icons flex gap-4">
+                <a href="https://facebook.com/novahaus" target="_blank" rel="noopener"><i class="fab fa-facebook"></i></a>
+                <a href="https://instagram.com/novahaus" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com/company/novahaus" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-8 text-center">
+        <p>{% trans "© 2025 NovaHaus. All rights reserved." %}</p>
     </div>
 </footer>

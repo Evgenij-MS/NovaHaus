@@ -1,346 +1,132 @@
-# Russian translations for NovaHaus project.
-# Copyright (C) 2025 NovaHaus
-# This file is distributed under the same license as the NovaHaus package.
-# Grok <support@x.ai>, 2025.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: NovaHaus 1.0\n"
+"Project-Id-Version: NovaHaus\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-06 18:09+0200\n"
-"PO-Revision-Date: 2025-04-12 12:00+0200\n"
-"Last-Translator: Grok <support@x.ai>\n"
-"Language-Team: Russian <ru@li.org>\n"
+"POT-Creation-Date: 2025-04-13 12:00+0200\n"
+"PO-Revision-Date: 2025-04-13 12:00+0200\n"
+"Last-Translator: \n"
+"Language-Team: Russian\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: .\main\templates\main\home.html:8
-msgid "Специальное предложение для новых клиентов!"
-msgstr "Специальное предложение для новых клиентов!"
+msgid "NovaHaus – Your Trusted Renovation Partner"
+msgstr "NovaHaus – Ваш надёжный партнёр по ремонту"
 
-#: .\main\templates\main\home.html:9
-#, python-format
-msgid "Получите скидку <strong>%(discount)s</strong> на первый заказ!"
-msgstr "Получите скидку <strong>%(discount)s</strong> на первый заказ!"
+msgid "Quality, Timeliness, Eco-Friendliness – From Idea to Cleanup"
+msgstr "Качество, своевременность, экологичность – от идеи до уборки"
 
-#: .\main\templates\main\home.html:10
-msgid "Заказать сейчас"
+msgid "Calculate Cost"
+msgstr "Рассчитать стоимость"
+
+msgid "Our Projects"
+msgstr "Наши проекты"
+
+msgid "10% Discount for New Clients!"
+msgstr "Скидка 10% для новых клиентов!"
+
+msgid "Only until the end of the month! Order now and save."
+msgstr "Только до конца месяца! Закажите сейчас и сэкономьте."
+
+msgid "Order Now"
 msgstr "Заказать сейчас"
 
-#: .\main\templates\main\home.html:15
-msgid "Слайдер с примерами работ"
-msgstr "Слайдер с примерами работ"
-
-#: .\main\templates\main\home.html:17
-msgid "Современный ремонт квартир"
-msgstr "Современный ремонт квартир"
-
-#: .\main\templates\main\home.html:18
-msgid "Утепление фасадов"
-msgstr "Утепление фасадов"
-
-#: .\main\templates\main\home.html:19 .\main\templates\main\home.html:44
-msgid "Фасадные работы"
-msgstr "Фасадные работы"
-
-#: .\main\templates\main\home.html:22
-msgid "Показать слайд 1"
-msgstr "Показать слайд 1"
-
-#: .\main\templates\main\home.html:23
-msgid "Показать слайд 2"
-msgstr "Показать слайд 2"
-
-#: .\main\templates\main\home.html:24
-msgid "Показать слайд 3"
-msgstr "Показать слайд 3"
-
-#: .\main\templates\main\home.html:25
-msgid "renovation.jpg"
-msgstr "renovation.jpg"
-
-#: .\main\templates\main\home.html:26
-msgid "Современная гостиная после ремонта в минималистичном стиле"
-msgstr "Современная гостиная после ремонта в минималистичном стиле"
-
-#: .\main\templates\main\home.html:27
-msgid "facade.jpg"
-msgstr "facade.jpg"
-
-#: .\main\templates\main\home.html:28
-msgid "Фасад здания: половина утеплена, половина полностью завершена"
-msgstr "Фасад здания: половина утеплена, половина полностью завершена"
-
-#: .\main\templates\main\home.html:31
-msgid "Наши услуги"
+msgid "Our Services"
 msgstr "Наши услуги"
 
-#: .\main\templates\main\home.html:34
-msgid "Ремонт квартир"
-msgstr "Ремонт квартир"
+msgid "No services added yet."
+msgstr "Услуги пока не добавлены."
 
-#: .\main\templates\main\home.html:35
-msgid "Качественный ремонт под ключ с использованием современных материалов."
-msgstr "Качественный ремонт под ключ с использованием современных материалов."
+msgid "Learn More"
+msgstr "Узнать больше"
 
-#: .\main\templates\main\home.html:36 .\main\templates\main\home.html:41
-#: .\main\templates\main\home.html:46
-msgid "Подробнее"
-msgstr "Подробнее"
+msgid "Why Choose Us"
+msgstr "Почему выбирают нас"
 
-#: .\main\templates\main\home.html:39
-msgid "Утепление домов"
-msgstr "Утепление домов"
+msgid "High Quality"
+msgstr "Высокое качество"
 
-#: .\main\templates\main\home.html:40
-msgid "Энергоэффективные решения для вашего комфорта и экономии."
-msgstr "Энергоэффективные решения для вашего комфорта и экономии."
+msgid "ISO and LEED certified"
+msgstr "Сертифицировано ISO и LEED"
 
-#: .\main\templates\main\home.html:45
-msgid "Профессиональная отделка фасадов для эстетики и долговечности."
-msgstr "Профессиональная отделка фасадов для эстетики и долговечности."
+msgid "On-Time Delivery"
+msgstr "Своевременная сдача"
 
-#: .\main\templates\main\home.html:55
-msgid "Отзывы клиентов"
-msgstr "Отзывы клиентов"
+msgid "We finish projects on schedule"
+msgstr "Мы завершаем проекты по графику"
 
-#: .\main\templates\main\home.html:58
-msgid ""
-"Отличная работа, спасибо команде NovaHaus! Все сделали быстро и качественно."
-msgstr "Отличная работа, спасибо команде NovaHaus! Все сделали быстро и качественно."
+msgid "Eco-Friendly"
+msgstr "Экологичность"
 
-#: .\main\templates\main\home.html:59
-msgid "Иван Иванов"
-msgstr "Иван Иванов"
+msgid "Sustainable materials"
+msgstr "Экологичные материалы"
 
-#: .\main\templates\main\home.html:62
-msgid ""
-"Очень доволен утеплением дома. Теперь зимой тепло, а счета за отопление "
-"снизились."
-msgstr "Очень доволен утеплением дома. Теперь зимой тепло, а счета за отопление снизились."
+msgid "Transparent Pricing"
+msgstr "Прозрачное ценообразование"
 
-#: .\main\templates\main\home.html:63
-msgid "Мария Петрова"
-msgstr "Мария Петрова"
+msgid "Clear and honest estimates"
+msgstr "Чёткие и честные сметы"
 
-#: .\main\templates\main\home.html:66
-msgid "Профессиональный подход и внимание к деталям. Рекомендую!"
-msgstr "Профессиональный подход и внимание к деталям. Рекомендую!"
+msgid "Projects Completed"
+msgstr "Завершённых проектов"
 
-#: .\main\templates\main\home.html:67
-msgid "Алексей Смирнов"
-msgstr "Алексей Смирнов"
+msgid "Client Satisfaction"
+msgstr "Удовлетворённость клиентов"
 
-#: .\main\templates\main\home.html:76
-msgid "Станьте нашим партнером!"
-msgstr "Станьте нашим партнером!"
+msgid "Years of Experience"
+msgstr "Лет опыта"
 
-#: .\main\templates\main\home.html:77
-msgid ""
-"Присоединяйтесь к нашей партнерской программе и получайте вознаграждение за "
-"привлечение клиентов."
-msgstr "Присоединяйтесь к нашей партнерской программе и получайте вознаграждение за привлечение клиентов."
+msgid "View All Projects"
+msgstr "Посмотреть все проекты"
 
-#: .\main\templates\main\home.html:80
-msgid "Высокие комиссии"
-msgstr "Высокие комиссии"
+msgid "Eco-Friendly Solutions"
+msgstr "Экологичные решения"
 
-#: .\main\templates\main\home.html:81
-#, python-format
-msgid "Получайте до 10%% от суммы каждого заказа, привлеченного вами."
-msgstr "Получайте до 10%% от суммы каждого заказа, привлеченного вами."
+msgid "We use LEED-certified materials to create sustainable spaces for your home and the planet."
+msgstr "Мы используем материалы с сертификацией LEED, чтобы создавать устойчивые пространства для вашего дома и планеты."
 
-#: .\main\templates\main\home.html:84
-msgid "Поддержка 24/7"
-msgstr "Поддержка 24/7"
+msgid "We Know Your City"
+msgstr "Мы знаем ваш город"
 
-#: .\main\templates\main\home.html:85
-msgid ""
-"Наша команда всегда готова помочь вам с вопросами и предоставить необходимые "
-"материалы."
-msgstr "Наша команда всегда готова помочь вам с вопросами и предоставить необходимые материалы."
+msgid "Cologne – Ehrenfeld & Beyond"
+msgstr "Кёльн – Эренфельд и не только"
 
-#: .\main\templates\main\home.html:88
-msgid "Уникальные условия"
-msgstr "Уникальные условия"
+msgid "From trendy lofts in Ehrenfeld to classic apartments in the city center, we bring quality to every corner of Cologne."
+msgstr "От модных лофтов в Эренфельде до классических квартир в центре — мы приносим качество в каждый уголок Кёльна."
 
-#: .\main\templates\main\home.html:89
-msgid "Индивидуальные условия для крупных партнеров и агентств."
-msgstr "Индивидуальные условия для крупных партнеров и агентств."
+msgid "See Cologne Projects"
+msgstr "Посмотреть проекты в Кёльне"
 
-#: .\main\templates\main\home.html:92
-msgid "Зарегистрироваться как партнер"
-msgstr "Зарегистрироваться как партнер"
+msgid "Hamburg – St. Pauli & More"
+msgstr "Гамбург – Санкт-Паули и не только"
 
-#: .\main\templates\main\home.html:99
-msgid "Готовы начать проект?"
-msgstr "Готовы начать проект?"
+msgid "Modern offices in St. Pauli or warehouses in the port – we transform Hamburg spaces with precision."
+msgstr "Современные офисы в Санкт-Паули или склады в порту — мы преображаем пространства Гамбурга с точностью."
 
-#: .\main\templates\main\home.html:100
-msgid "Свяжитесь с нами для бесплатной консультации и расчета стоимости."
-msgstr "Свяжитесь с нами для бесплатной консультации и расчета стоимости."
+msgid "See Hamburg Projects"
+msgstr "Посмотреть проекты в Гамбурге"
 
-#: .\main\templates\main\home.html:101
-msgid "Заказать консультацию"
-msgstr "Заказать консультацию"
+msgid "Get in Touch"
+msgstr "Связаться с нами"
 
-#: .\templates\base.html:9 .\templates\base.html:15 .\templates\base.html:21
-msgid "NovaHaus – Ваш надежный партнер в строительстве и ремонте"
-msgstr "NovaHaus – Ваш надежный партнер в строительстве и ремонте"
+msgid "Name"
+msgstr "Имя"
 
-#: .\templates\base.html:10 .\templates\base.html:16 .\templates\base.html:22
-msgid ""
-"NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, "
-"фасадные работы и многое другое."
-msgstr "NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы и многое другое."
+msgid "Email"
+msgstr "Электронная почта"
 
-#: .\templates\base.html:11
-msgid "ремонт, строительство, утепление, Кельн, NovaHaus"
-msgstr "ремонт, строительство, утепление, Кельн, NovaHaus"
+msgid "Phone"
+msgstr "Телефон"
 
-#: .\templates\base.html:56
-msgid ""
-"Строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные "
-"работы."
-msgstr "Строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы."
+msgid "Message"
+msgstr "Сообщение"
 
-#: .\templates\base.html:60
-msgid "Кельн"
-msgstr "Кельн"
+msgid "Send"
+msgstr "Отправить"
 
-#: .\templates\base.html:62
-msgid "Германия"
-msgstr "Германия"
+msgid "Chat"
+msgstr "Чат"
 
-#: .\templates\base.html:80
-msgid "Выберите язык"
-msgstr "Выберите язык"
-
-#: .\templates\base.html:81
-msgid "Язык сайта"
-msgstr "Язык сайта"
-
-#: .\templates\base.html:93
-msgid "Применить"
-msgstr "Применить"
-
-#: .\templates\base.html:111
-msgid "Переключить тему"
-msgstr "Переключить тему"
-
-#: .\templates\base.html:113
-msgid "Темная тема"
-msgstr "Темная тема"
-
-#: .\templates\header.html
-msgid "Главная"
-msgstr "Главная"
-
-#: .\templates\header.html
-msgid "Услуги"
-msgstr "Услуги"
-
-#: .\templates\header.html
-msgid "Портфолио"
-msgstr "Портфолио"
-
-#: .\templates\header.html
-msgid "Блог"
-msgstr "Блог"
-
-#: .\templates\header.html
-msgid "О нас"
-msgstr "О нас"
-
-#: .\templates\header.html
-msgid "Стать партнером"
-msgstr "Стать партнером"
-
-#: .\templates\main\contact.html
-msgid "Контакты"
-msgstr "Контакты"
-
-# Russian translations for NovaHaus
-msgid ""
-msgstr ""
-"Project-Id-Version: NovaHaus 1.0\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-12 14:00+0200\n"
-"PO-Revision-Date: 2025-04-12 14:00+0200\n"
-"Last-Translator: NovaHaus Team <info@novahaus.de>\n"
-"Language-Team: Russian <ru@novahaus.de>\n"
-"Language: ru\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-
-# Menu items (from header.html)
-msgid "Главная"
-msgstr "Главная"
-
-msgid "Услуги"
-msgstr "Услуги"
-
-msgid "Портфолио"
-msgstr "Портфолио"
-
-msgid "Блог"
-msgstr "Блог"
-
-msgid "О нас"
-msgstr "О нас"
-
-msgid "Контакты"
-msgstr "Контакты"
-
-msgid "Стать партнером"
-msgstr "Стать партнером"
-
-# Header (from header.html)
-msgid "Меню"
-msgstr "Меню"
-
-msgid "NovaHaus - Главная"
-msgstr "NovaHaus - Главная"
-
-# Page title fallback (from header.html)
-msgid "NovaHaus"
-msgstr "NovaHaus"
-
-# Language switcher (from header.html)
-msgid "Язык сайта"
-msgstr "Язык сайта"
-
-msgid "Применить"
-msgstr "Применить"
-
-# Meta tags and title (from base.html)
-msgid "NovaHaus – Ваш надежный партнер в строительстве и ремонте"
-msgstr "NovaHaus – Ваш надежный партнер в строительстве и ремонте"
-
-msgid "NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы и многое другое."
-msgstr "NovaHaus – строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы и многое другое."
-
-msgid "ремонт, строительство, утепление, Кельн, NovaHaus"
-msgstr "ремонт, строительство, утепление, Кельн, NovaHaus"
-
-# JSON-LD (from base.html)
-msgid "Строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы."
-msgstr "Строительная компания в Кельне. Ремонт квартир, утепление домов, фасадные работы."
-
-msgid "Кельн"
-msgstr "Кельн"
-
-msgid "Германия"
-msgstr "Германия"
-
-# Theme toggle (from base.html)
-msgid "Переключить тему"
-msgstr "Переключить тему"
-
-msgid "Темная тема"
-msgstr "Темная тема"
+msgid "Ask a question"
+msgstr "Задать вопрос"

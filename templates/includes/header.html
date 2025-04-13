@@ -1,78 +1,63 @@
-<!-- templates/includes/header.html -->
 {% load static i18n %}
 <header>
     <div class="header-content">
-        <!-- Бургер-иконка -->
-        <button class="mobile-menu-toggle" aria-label="{% trans 'Меню' %}" aria-expanded="false">
+        <button class="mobile-menu-toggle" aria-label="{% trans 'Menu' %}" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
         </button>
 
-        <!-- Логотип -->
         <div class="logo">
             <a href="{% url 'home' %}">
-                <img src="{% static 'images/logo.png' %}" alt="{% trans 'NovaHaus - Главная' %}" width="150" height="50">
+                <img src="{% static 'images/logo.png' %}" alt="{% trans 'NovaHaus - Home' %}" width="150" height="50">
             </a>
         </div>
 
-        <!-- Заголовок страницы -->
         <h1 class="page-title">
-            {% if request.path == url_home %}{% trans "Главная" %}
-            {% elif request.path == url_services %}{% trans "Услуги" %}
-            {% elif 'portfolio' in request.path %}{% trans "Портфолио" %}
-            {% elif 'blog' in request.path %}{% trans "Блог" %}
-            {% elif 'about' in request.path %}{% trans "О нас" %}
-            {% elif request.path == url_contact %}{% trans "Контакты" %}
-            {% elif request.path == url_register_partner %}{% trans "Стать партнером" %}
+            {% if request.path == url_home %}{% trans "Home" %}
+            {% elif request.path == url_services %}{% trans "Services" %}
+            {% elif 'portfolio' in request.path %}{% trans "Portfolio" %}
+            {% elif 'blog' in request.path %}{% trans "Blog" %}
+            {% elif 'about' in request.path %}{% trans "About Us" %}
+            {% elif request.path == url_contact %}{% trans "Contact" %}
+            {% elif request.path == url_register_partner %}{% trans "Become a Partner" %}
             {% else %}{% trans "NovaHaus" %}{% endif %}
         </h1>
 
-        <!-- Основное меню -->
         <nav class="desktop-nav">
             <ul>
-                <li><a href="{% url 'home' %}" class="nav-link {% if request.path == url_home %}active{% endif %}">{% trans "Главная" %}</a></li>
-                <li><a href="{% url 'services' %}" class="nav-link {% if request.path == url_services %}active{% endif %}">{% trans "Услуги" %}</a></li>
-                <li><a href="{% url 'portfolio' %}" class="nav-link {% if 'portfolio' in request.path %}active{% endif %}">{% trans "Портфолио" %}</a></li>
-                <li><a href="{% url 'blog' %}" class="nav-link {% if 'blog' in request.path %}active{% endif %}">{% trans "Блог" %}</a></li>
-                <li><a href="{% url 'about' %}" class="nav-link {% if 'about' in request.path %}active{% endif %}">{% trans "О нас" %}</a></li>
-                <li><a href="{% url 'contact' %}" class="nav-link {% if request.path == url_contact %}active{% endif %}">{% trans "Контакты" %}</a></li>
-                <li><a href="{% url 'register_partner' %}" class="nav-link partner-link {% if request.path == url_register_partner %}active{% endif %}">{% trans "Стать партнером" %}</a></li>
+                <li><a href="{% url 'home' %}" class="nav-link {% if request.path == url_home %}active{% endif %}">{% trans "Home" %}</a></li>
+                <li><a href="{% url 'services' %}" class="nav-link {% if request.path == url_services %}active{% endif %}">{% trans "Services" %}</a></li>
+                <li><a href="{% url 'portfolio' %}" class="nav-link {% if 'portfolio' in request.path %}active{% endif %}">{% trans "Portfolio" %}</a></li>
+                <li><a href="{% url 'blog' %}" class="nav-link {% if 'blog' in request.path %}active{% endif %}">{% trans "Blog" %}</a></li>
+                <li><a href="{% url 'about' %}" class="nav-link {% if 'about' in request.path %}active{% endif %}">{% trans "About Us" %}</a></li>
+                <li><a href="{% url 'contact' %}" class="nav-link {% if request.path == url_contact %}active{% endif %}">{% trans "Contact" %}</a></li>
+                <li><a href="{% url 'register_partner' %}" class="nav-link partner-link {% if request.path == url_register_partner %}active{% endif %}">{% trans "Become a Partner" %}</a></li>
             </ul>
         </nav>
 
-        <!-- Переключатель языка -->
         <div class="language-switcher">
-            <form method="post" action="{% url 'set_language' %}">
-                {% csrf_token %}
-                <input name="next" type="hidden" value="{{ request.get_full_path|default:'/' }}">
-                <label for="language" class="sr-only">{% trans "Язык сайта" %}</label>
-                <select id="language" name="language" class="language-select" onchange="this.form.submit()" aria-label="{% trans 'Язык сайта' %}">
-                    {% get_available_languages as LANGUAGES %}
-                    {% get_current_language as LANGUAGE_CODE %}
-                    {% for lang in LANGUAGES %}
-                        <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
-                            {{ lang.1 }}
-                        </option>
-                    {% endfor %}
-                </select>
-                <noscript>
-                    <button type="submit" class="language-submit-btn">{% trans "Применить" %}</button>
-                </noscript>
-            </form>
+            <select id="language" class="language-select" aria-label="{% trans 'Site Language' %}">
+                {% get_available_languages as LANGUAGES %}
+                {% get_current_language as LANGUAGE_CODE %}
+                {% for lang in LANGUAGES %}
+                    <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
+                        {{ lang.1 }}
+                    </option>
+                {% endfor %}
+            </select>
         </div>
     </div>
 
-    <!-- Мобильное меню -->
     <nav class="mobile-nav" aria-hidden="true">
         <ul>
-            <li><a href="{% url 'home' %}" class="nav-link {% if request.path == url_home %}active{% endif %}">{% trans "Главная" %}</a></li>
-            <li><a href="{% url 'services' %}" class="nav-link {% if request.path == url_services %}active{% endif %}">{% trans "Услуги" %}</a></li>
-            <li><a href="{% url 'portfolio' %}" class="nav-link {% if 'portfolio' in request.path %}active{% endif %}">{% trans "Портфолио" %}</a></li>
-            <li><a href="{% url 'blog' %}" class="nav-link {% if 'blog' in request.path %}active{% endif %}">{% trans "Блог" %}</a></li>
-            <li><a href="{% url 'about' %}" class="nav-link {% if 'about' in request.path %}active{% endif %}">{% trans "О нас" %}</a></li>
-            <li><a href="{% url 'contact' %}" class="nav-link {% if request.path == url_contact %}active{% endif %}">{% trans "Контакты" %}</a></li>
-            <li><a href="{% url 'register_partner' %}" class="nav-link partner-link {% if request.path == url_register_partner %}active{% endif %}">{% trans "Стать партнером" %}</a></li>
+            <li><a href="{% url 'home' %}" class="nav-link {% if request.path == url_home %}active{% endif %}">{% trans "Home" %}</a></li>
+            <li><a href="{% url 'services' %}" class="nav-link {% if request.path == url_services %}active{% endif %}">{% trans "Services" %}</a></li>
+            <li><a href="{% url 'portfolio' %}" class="nav-link {% if 'portfolio' in request.path %}active{% endif %}">{% trans "Portfolio" %}</a></li>
+            <li><a href="{% url 'blog' %}" class="nav-link {% if 'blog' in request.path %}active{% endif %}">{% trans "Blog" %}</a></li>
+            <li><a href="{% url 'about' %}" class="nav-link {% if 'about' in request.path %}active{% endif %}">{% trans "About Us" %}</a></li>
+            <li><a href="{% url 'contact' %}" class="nav-link {% if request.path == url_contact %}active{% endif %}">{% trans "Contact" %}</a></li>
+            <li><a href="{% url 'register_partner' %}" class="nav-link partner-link {% if request.path == url_register_partner %}active{% endif %}">{% trans "Become a Partner" %}</a></li>
         </ul>
     </nav>
 </header>
