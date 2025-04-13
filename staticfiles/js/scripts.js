@@ -1,100 +1,59 @@
-// static/js/scripts.js
-
-// ===== ПЕРЕКЛЮЧЕНИЕ ТЕМЫ =====
-function toggleTheme() {
-    document.body.classList.toggle('dark-theme');
-    localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
-}
-
-// Применение сохранённой темы
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') {
-    document.body.classList.add('dark-theme');
-} else if (savedTheme === 'light') {
-    document.body.classList.remove('dark-theme');
-}
-
-document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
-
-// ===== МОБИЛЬНОЕ МЕНЮ =====
-document.addEventListener('DOMContentLoaded', () => {
-    console.log('Scripts.js loaded');
-    const mobileToggle = document.querySelector('.mobile-menu-toggle');
-    const mobileNav = document.querySelector('.mobile-nav');
-
-    if (!mobileToggle || !mobileNav) {
-        console.warn('Mobile menu elements not found');
-        return;
+// Функция для проверки загрузки Google Analytics
+function checkGoogleAnalytics() {
+    if (typeof gtag === 'undefined') {
+        console.error('Google Analytics: gtag.js не загружен. Проверьте подключение скрипта.');
+        return false;
     }
+    console.log('Google Analytics: gtag.js загружен успешно.');
+    return true;
+}
 
-    // Переключение состояния меню
-    function toggleMenu(shouldOpen) {
-        const isOpen = shouldOpen ?? !mobileNav.classList.contains('active');
-        const spans = mobileToggle.querySelectorAll('span');
+// Отправка тестового события для отладки
+function sendTestEvent() {
+    if (checkGoogleAnalytics()) {
+        try {
+            gtag('event', 'test_event', {
+                'event_category': 'Debug',
+                'event_label': 'Test GA4',
+                'value': 1
+            });
+            console.log('Google Analytics: Тестовое событие отправлено.');
+        } catch (e) {
+            console.error('Google Analytics: Ошибка при отправке события:', e);
+        }
+    }
+}
 
-        // Анимация бургер-иконки
-        if (isOpen) {
-            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-            spans[1].style.opacity = '0';
-            spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+// Проверка междоменного отслеживания
+function checkCrossDomain() {
+    if (checkGoogleAnalytics()) {
+        const domains = ['novahaus-hamburg.de', 'novahaus-koeln.de'];
+        const currentDomain = window.location.hostname;
+        if (domains.includes(currentDomain)) {
+            console.log('Google Analytics: Текущий домен поддерживает междоменное отслеживание:', currentDomain);
         } else {
-            spans[0].style.transform = '';
-            spans[1].style.opacity = '';
-            spans[2].style.transform = '';
+            console.warn('Google Analytics: Текущий домен не в списке междоменного отслеживания:', currentDomain);
         }
-
-        // Управление классами
-        mobileToggle.classList.toggle('active', isOpen);
-        mobileNav.classList.toggle('active', isOpen);
-        document.body.classList.toggle('no-scroll', isOpen);
-
-        // ARIA-атрибуты
-        mobileToggle.setAttribute('aria-expanded', String(isOpen));
-        mobileNav.setAttribute('aria-hidden', String(!isOpen));
-    }
-
-    // Обработчики событий
-    mobileToggle.addEventListener('click', () => toggleMenu());
-
-    // Закрытие при клике на ссылку
-    document.querySelectorAll('.mobile-nav a').forEach(link => {
-        link.addEventListener('click', () => toggleMenu(false));
-    });
-
-    // Закрытие при клике вне меню
-    document.addEventListener('click', e => {
-        if (!e.target.closest('.header-content') && !e.target.closest('.mobile-nav')) {
-            toggleMenu(false);
-        }
-    });
-
-    // Подсветка активного пункта меню
-    const currentPath = window.location.pathname;
-    document.querySelectorAll('nav a').forEach(link => {
-        if (link.getAttribute('href') === currentPath) {
-            link.classList.add('active');
-        }
-    });
-});
-
-// ===== МОДАЛЬНОЕ ОКНО =====
-function openPriceList() {
-    const modal = document.getElementById('price-list-modal');
-    if (modal) {
-        modal.style.display = 'block';
     }
 }
 
-function closePriceList() {
-    const modal = document.getElementById('price-list-modal');
-    if (modal) {
-        modal.style.display = 'none';
+// Проверка текущего GA ID
+function checkGAId() {
+    const host = window.location.hostname;
+    if (host === 'novahaus-hamburg.de' || host === 'www.novahaus-hamburg.de') {
+        console.log('Google Analytics: Ожидается ID G-19RQG7TDMC для Hamburg');
+    } else if (host === 'novahaus-koeln.de' || host === 'www.novahaus-koeln.de') {
+        console.log('Google Analytics: Ожидается ID G-BS4J4PD0WF для Köln');
+    } else {
+        console.warn('Google Analytics: Неизвестный домен:', host);
     }
 }
 
-window.addEventListener('click', function(event) {
-    const modal = document.getElementById('price-list-modal');
-    if (modal && event.target === modal) {
-        modal.style.display = 'none';
-    }
+// Запуск проверок после загрузки страницы
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Запуск отладки Google Analytics...');
+    checkGoogleAnalytics();
+    checkGAId();
+    sendTestEvent();
+    checkCrossDomain();
 });

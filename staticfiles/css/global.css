@@ -1,9 +1,13 @@
+
 :root {
-  --primary-color: #005B99; /* Синий для доверия */
-  --secondary-color: #4CAF50; /* Зеленый для экологичности */
-  --accent-color: #E5E7EB; /* Серый для баланса */
-  --background-color: #FFFFFF; /* Белый фон */
-  --text-color: #333333; /* Темный текст */
+  --primary-color: #005B99;
+  --secondary-color: #4CAF50;
+  --accent-color: #E5E7EB;
+  --background-color: #FFFFFF;
+  --text-color: #333333;
+  --header-bg: #2a303c;
+  --neutral-100: #ffffff;
+  --neutral-200: #cccccc;
   --font-family: 'Montserrat', 'Open Sans', sans-serif;
   --max-width: 1400px;
 }
@@ -22,13 +26,13 @@ body {
   padding: 0 20px;
 }
 
-/* Герой-баннер */
+/* Hero */
 .hero {
   position: relative;
   height: 100vh;
   overflow: hidden;
 }
-.slider img {
+.slider video, .slider img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -36,223 +40,68 @@ body {
   opacity: 0;
   transition: opacity 1s ease-in-out;
 }
-.slider img.active {
+.slider video.active, .slider img.active {
   opacity: 1;
 }
 .hero-text {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  color: white;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
-.hero-text h1 {
-  font-size: 3.5rem;
-  font-weight: bold;
-}
-.hero-text p {
-  font-size: 1.5rem;
-  margin: 1rem 0;
-}
 .cta-button {
-  background: var(--secondary-color);
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: 5px;
-  text-decoration: none;
-  font-size: 1.2rem;
+  transition: transform 0.3s, background 0.3s;
 }
 .cta-button:hover {
-  background: #388E3C;
+  transform: scale(1.05);
 }
-.language-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-}
-.language-toggle a {
-  color: white;
-  margin: 0 10px;
-  text-decoration: none;
-}
-.language-toggle a.active {
-  font-weight: bold;
+.cta-button.pulse {
+  animation: pulse 2s infinite;
 }
 
-/* Акция */
+/* Promo */
 .promo-banner {
   background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-  color: white;
-  text-align: center;
-  padding: 2rem;
-}
-.promo-banner h2 {
-  font-size: 2rem;
-}
-.promo-banner .btn {
-  background: white;
-  color: var(--primary-color);
-  padding: 0.8rem 1.5rem;
-  border-radius: 5px;
-}
-.promo-banner .btn:hover {
-  background: var(--accent-color);
 }
 
-/* Услуги */
-.services {
-  padding: 4rem 0;
+/* Services */
+.services .card {
+  border: none;
 }
-.services h2 {
-  text-align: center;
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-}
-.service-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
-}
-.card {
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  padding: 1.5rem;
-  transition: transform 0.3s, border 0.3s;
-}
-.card:hover {
-  transform: translateY(-5px);
-  border: 2px solid var(--secondary-color);
-}
-.card img {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-.card h3 {
-  font-size: 1.5rem;
-  margin: 1rem 0;
-}
-.card .btn {
-  background: var(--primary-color);
-  color: white;
-}
-.card .btn:hover {
-  background: var(--secondary-color);
-}
-
-/* Почему мы */
-.why-us {
-  background: var(--accent-color);
-  padding: 4rem 0;
-}
-.why-us h2 {
-  text-align: center;
-  font-size: 2.5rem;
-}
-.advantages {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
-  margin-bottom: 2rem;
-}
-.advantage img {
-  width: 50px;
-  height: 50px;
-}
-.advantage h3 {
-  font-size: 1.3rem;
-}
-.testimonials-slider {
-  display: flex;
-  overflow-x: auto;
-  gap: 1rem;
-}
-.testimonials-slider .card {
-  min-width: 300px;
-}
-
-/* Портфолио */
-.portfolio {
-  padding: 4rem 0;
-}
-.portfolio h2 {
-  text-align: center;
-  font-size: 2.5rem;
-}
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-.before-after-slider {
-  position: relative;
-}
-.before-after-slider img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-/* Экологичность */
-.eco {
-  background: var(--secondary-color);
-  color: white;
-  padding: 4rem 0;
-  text-align: center;
-}
-.eco h2 {
-  font-size: 2.5rem;
-}
-.eco-icons {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin: 1rem 0;
-}
-.ec-img {
-  width: 60px;
-  height: 60px;
-}
-
-/* Контакты */
-.contact {
-  padding: 4rem 0;
-}
-.contact h2 {
-  text-align: center;
-  font-size: 2.5rem;
-}
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-}
-.contact form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-.contact input, .contact textarea {
-  padding: 0.8rem;
-  border: 1px solid var(--accent-color);
-  border-radius: 5px;
-}
-.contact .btn {
-  background: var(--primary-color);
-  color: white;
-}
-.contact .map iframe {
-  width: 100%;
-  height: 400px;
+.services .card:hover {
+  transform: translateY(-10px);
   border: none;
 }
 
-/* Анимации */
+/* Why Us */
+.why-us .counters .counter {
+  display: block;
+}
+
+/* Portfolio */
+.portfolio-item:hover img {
+  filter: brightness(0.8);
+}
+
+/* Eco */
+.eco {
+  background: var(--secondary-color);
+}
+
+/* Local Accent */
+.local-accent .city-card {
+  transition: transform 0.3s;
+}
+.local-accent .city-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Contact */
+.contact input, .contact textarea {
+  border-color: var(--accent-color);
+}
+.contact .btn:hover {
+  background: var(--secondary-color);
+}
+
+/* Animations */
 .fade-in {
   opacity: 0;
   animation: fadeIn 1s forwards;
@@ -277,12 +126,34 @@ body {
   100% { transform: scale(1); }
 }
 
-/* Адаптивность */
-@media (max-width: 768px) {
+/* Responsive */
+@media (max-width: 1024px) {
   .hero-text h1 {
-    font-size: 2rem;
+    font-size: 3rem;
+  }
+  .services .service-cards {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+@media (max-width: 768px) {
+  .hero {
+    height: 70vh;
+  }
+  .hero-text h1 {
+    font-size: 2.5rem;
   }
   .contact-grid {
     grid-template-columns: 1fr;
+  }
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 480px) {
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+  .hero-text p {
+    font-size: 1rem;
   }
 }

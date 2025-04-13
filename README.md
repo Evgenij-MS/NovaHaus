@@ -180,3 +180,6 @@ NovaHaus/
 ├── requirements.txt
 ├── README.md
 └── db.sqlite3
+
+static/js/pannellum-custom.js (новый файл):
+static/css/pannellum.css    (новый файл)

@@ -37,10 +37,23 @@ function checkCrossDomain() {
     }
 }
 
+// Проверка текущего GA ID
+function checkGAId() {
+    const host = window.location.hostname;
+    if (host === 'novahaus-hamburg.de' || host === 'www.novahaus-hamburg.de') {
+        console.log('Google Analytics: Ожидается ID G-19RQG7TDMC для Hamburg');
+    } else if (host === 'novahaus-koeln.de' || host === 'www.novahaus-koeln.de') {
+        console.log('Google Analytics: Ожидается ID G-BS4J4PD0WF для Köln');
+    } else {
+        console.warn('Google Analytics: Неизвестный домен:', host);
+    }
+}
+
 // Запуск проверок после загрузки страницы
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Запуск отладки Google Analytics...');
     checkGoogleAnalytics();
+    checkGAId();
     sendTestEvent();
     checkCrossDomain();
 });

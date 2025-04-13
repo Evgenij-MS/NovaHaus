@@ -6,6 +6,7 @@ from django.conf import settings
 from django.http import HttpResponseForbidden
 
 def block_sensitivity_paths(request):
+    """Блокирует доступ к чувствительным путям (.env, .git и т.д.)"""
     return HttpResponseForbidden(
         "<h1>Доступ запрещён</h1><p>Запрос к защищённому ресурсу</p>",
         content_type="text/html"
@@ -46,6 +47,9 @@ urlpatterns += i18n_patterns(
 
 if settings.DEBUG:
     from django.conf.urls.static import static
+    # Обслуживание статических и медиафайлов в режиме отладки
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    handler404 = 'main.views.page_not_found'
+
+# Кастомная страница 404
+handler404 = 'main.views.page_not_found'
