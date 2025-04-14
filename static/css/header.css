@@ -21,9 +21,14 @@ header {
 }
 
 .logo img {
-    height: 50px;
+    height: 100px;
     width: auto;
     transition: all 0.3s ease;
+       margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    /* Убираем внутренние отступы для точного позиционирования */
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
 }
 
 /* Заголовок страницы */

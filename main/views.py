@@ -13,6 +13,7 @@ from django.utils import translation
 from .forms import PartnerForm
 from .models import Service, Portfolio, Review, Calculation, Partner, BlogPost, ChatLog
 
+
 logger = logging.getLogger(__name__)
 
 # Конфигурация API
@@ -113,6 +114,7 @@ def save_calculation(request):
     return JsonResponse({'error': 'Требуется POST-запрос'}, status=405)
 
 def home(request):
+    # Запрашиваем до 8 услуг, 4 проекта и 5 отзывов для главной страницы
     service_list = Service.objects.all()[:8]
     project_list = Portfolio.objects.all()[:4]
     review_list = Review.objects.all()[:5]

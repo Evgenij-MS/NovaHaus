@@ -144,11 +144,16 @@ AXES_DISABLE_ACCESS_LOG = True
 
 # NovaHaus/settings.py
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'C:/Users/Tel-ran.de/PycharmProject/NovaHaus/db.sqlite3',
-    }
+         'default': {
+             'ENGINE': 'django.db.backends.postgresql',
+             'NAME': 'NH',
+             'USER': 'postgres',
+             'PASSWORD': 'Okro.123',
+             'HOST': 'localhost',
+             'PORT': '5432',
+         }
 }
+
 
 TEMPLATES = [
     {
