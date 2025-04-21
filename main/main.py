@@ -5,13 +5,13 @@ from typing import Optional
 from pydantic import BaseSettings
 
 # Явно объявляем экспортируемые символы
-__all__ = ['Settings', 'DeepSeekClient', 'main']
+__all__ = ['Settings', 'GrokClient', 'main']
 
 # Загрузка переменных окружения
 load_dotenv()
 
 class Settings(BaseSettings):
-    api_key: str
+    grok_api_key: str
 
     class Config:
         env_file = ".env"
@@ -23,17 +23,17 @@ except Exception as config_error:
 
 logging.basicConfig(level=logging.INFO)
 
-class DeepSeekClient:
+class GrokClient:
     def __init__(self):
-        self.api_key = settings.api_key
-        self.api_url = "https://api.deepseek.ai/v1/chat/completions"
+        self.api_key = settings.grok_api_key
+        self.api_url = "https://api.x.ai/v1/grok"  # Уточните реальный URL
         self.headers = {
             "Authorization": f"Bearer {self.api_key}",
             "Content-Type": "application/json"
         }
         self.session = requests.Session()
 
-    def send_message(self, message: str, model: str = "deepseek-chat-v1", max_tokens: int = 50) -> Optional[str]:
+    def send_message(self, message: str, model: str = "grok-3", max_tokens: int = 50) -> Optional[str]:
         data = {
             "model": model,
             "messages": [
@@ -63,12 +63,12 @@ class DeepSeekClient:
             return None
 
 def main():
-    client = DeepSeekClient()
+    client = GrokClient()
     response = client.send_message("Привет, как дела?")
     if response:
-        logging.info(f"Ответ DeepSeek: {response}")
+        logging.info(f"Ответ Grok: {response}")
     else:
-        logging.error("Не удалось получить ответ от DeepSeek API")
+        logging.error("Не удалось получить ответ от Grok API")
 
 if __name__ == "__main__":
     main()

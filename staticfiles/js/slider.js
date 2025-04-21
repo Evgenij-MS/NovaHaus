@@ -1,29 +1,51 @@
-let currentSlide = 0;
-const slides = document.querySelector('.slides');
-const totalSlides = slides.children.length;
+document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.querySelector('#hero-slider');
+    const slides = slider.querySelectorAll('video, img');
+    const indicators = slider.querySelectorAll('.indicator');
+    let currentIndex = 0;
+    const slideInterval = 5000;
 
-function showSlide(index) {
-  const offset = -index * 100;
-  slides.style.transform = `translateX(${offset}%)`;
-  updateIndicators(index);
-}
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('active', i === index);
+            slide.classList.toggle('opacity-0', i !== index);
+        });
+        indicators.forEach((indicator, i) => {
+            indicator.classList.toggle('active', i === index);
+        });
+        currentIndex = index;
+    }
 
-function nextSlide() {
-  currentSlide = (currentSlide + 1) % totalSlides;
-  showSlide(currentSlide);
-}
+    function nextSlide() {
+        const nextIndex = (currentIndex + 1) % slides.length;
+        showSlide(nextIndex);
+    }
 
-function updateIndicators(index) {
-  const indicators = document.querySelectorAll('.slider-indicators button');
-  indicators.forEach((indicator, i) => {
-    indicator.classList.toggle('active', i === index);
-  });
-}
+    indicators.forEach(indicator => {
+        indicator.addEventListener('click', () => {
+            const index = parseInt(indicator.getAttribute('data-slide'));
+            showSlide(index);
+            clearInterval(autoSlide);
+            autoSlide = setInterval(nextSlide, slideInterval);
+        });
+    });
 
-// Автоматическая прокрутка
-setInterval(nextSlide, 5000);
+    slides.forEach(slide => {
+        if (slide.tagName === 'VIDEO') {
+            slide.addEventListener('play', () => {
+                if (!slide.classList.contains('active')) {
+                    slide.pause();
+                }
+            });
+        }
+    });
 
-// Обработка кликов на индикаторы
-document.querySelectorAll('.slider-indicators button').forEach((button, index) => {
-  button.addEventListener('click', () => showSlide(index));
+    let autoSlide = setInterval(nextSlide, slideInterval);
+
+    slider.addEventListener('mouseenter', () => clearInterval(autoSlide));
+    slider.addEventListener('mouseleave', () => {
+        autoSlide = setInterval(nextSlide, slideInterval);
+    });
+
+    showSlide(0);
 });

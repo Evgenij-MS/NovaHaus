@@ -1,14 +1,12 @@
-{% load static %}
+{% load static i18n %}
 <div class="slider">
     <div class="slides">
-        <img src="{% static 'images/slider/slide1.jpg' %}" alt="Современный ремонт квартир">
-        <img src="{% static 'images/slider/slide2.jpg' %}" alt="Утепление фасадов">
-        <img src="{% static 'images/slider/slide3.jpg' %}" alt="Фасадные работы">
+        <img src="{% static 'images/slider/slide1.jpg' %}" alt="{% trans 'Современный ремонт квартир' %}">
+        <img src="{% static 'images/slider/slide2.jpg' %}" alt="{% trans 'Утепление фасадов' %}">
+        <img src="{% static 'images/slider/slide3.jpg' %}" alt="{% trans 'Фасадные работы' %}">
     </div>
-    <!-- Стрелки для переключения -->
-    <button class="prev">&#10094;</button>
-    <button class="next">&#10095;</button>
-    <!-- Индикаторы -->
+    <button class="prev">❮</button>
+    <button class="next">❯</button>
     <div class="indicators">
         <button class="indicator active"></button>
         <button class="indicator"></button>

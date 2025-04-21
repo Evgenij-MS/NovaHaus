@@ -1,152 +1,204 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
+
+{% block title %}
+    Услуги – NovaHaus
+{% endblock %}
+
+{% block description %}
+    Профессиональные услуги по ремонту, фасадным работам, электромонтажу и демонтажу в Кёльне.
+{% endblock %}
+
+{% block keywords %}
+    ремонт, фасадные работы, электромонтаж, демонтаж, Кёльн, NovaHaus
+{% endblock %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/services.css' %}">
+    <link rel="stylesheet" href="{% static 'css/services.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <!-- Заголовок "Наши услуги" -->
-    <h2 class="services-title">Наши услуги</h2>
+    <section class="services-section">
+        <div class="container">
+            <!-- Заголовок -->
+            <h2 class="section-title">Наши услуги</h2>
 
-    <!-- Прайс-лист и калькулятор (в одной строке) -->
-    <div class="tools-container">
-        <div class="price-list-container">
-            <button class="price-list-button" onclick="openPriceList()">Прайс-лист</button>
-        </div>
-        <div class="calculator-container">
-            <a href="/calculator/" class="calculator-button">Калькулятор</a>
-        </div>
-    </div>
-
-    <!-- Услуги (3 блока в линию) -->
-    <div class="service-cards">
-        <!-- Ремонт квартир -->
-        <div class="card">
-            <div class="icon">
-                <img src="{% static 'images/icons/repair.png' %}" alt="Ремонт квартир">
+            <!-- Блок: Рекомендации ИИ -->
+            <div class="ai-recommendations">
+                <h3 class="ai-title">Рекомендации ИИ от Grok 3</h3>
+                <p class="ai-description">
+                    Не уверены, какие технологии или материалы выбрать для вашего проекта? Наш партнер, Grok 3 от xAI, поможет найти оптимальные решения – от энергоэффективных фасадов до современных систем освещения.
+                </p>
+                <a href="{% url 'get_ai_recommendations' %}" class="ai-button">
+                    Получить рекомендации
+                </a>
             </div>
-            <h3>Ремонт квартир</h3>
-            <p>Качественный ремонт под ключ с использованием современных материалов. Мы предлагаем полный спектр услуг — от косметического ремонта до полной перепланировки.</p>
-            <a href="/services/repair/" class="btn">Подробнее</a>
-        </div>
 
-        <!-- Ремонт домов -->
-        <div class="card">
-            <div class="icon">
-                <img src="{% static 'images/icons/house.png' %}" alt="Ремонт домов">
+            <!-- Прайс-лист и калькулятор -->
+            <div class="tools-container">
+                <div class="price-list-container">
+                    <button class="price-list-button" onclick="openPriceList()">Прайс-лист</button>
+                </div>
+                <div class="calculator-container">
+                    <a href="{% url 'calculator' %}" class="calculator-button">Калькулятор</a>
+                </div>
             </div>
-            <h3>Ремонт домов</h3>
-            <p>Полный спектр услуг по ремонту частных домов. От косметического ремонта до полной реконструкции. Учитываем все пожелания клиента.</p>
-            <a href="/services/house/" class="btn">Подробнее</a>
-        </div>
 
-        <!-- Ремонт офисов -->
-        <div class="card">
-            <div class="icon">
-                <img src="{% static 'images/icons/office.png' %}" alt="Ремонт офисов">
+            <!-- Карточки услуг -->
+            <div class="services-grid">
+                <!-- Ремонт -->
+                <div class="service-card">
+                    <h3 class="service-title large-title">Ремонт</h3>
+                    <div class="service-content" style="background-image: url('{% static 'images/services/renovation.jpg' %}');">
+                        <p class="service-description">
+                            Мы преображаем ваше пространство с заботой о каждой детали. Качественный ремонт для комфортной жизни и работы.
+                        </p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-building"></i> Квартиры</li>
+                            <li><i class="fas fa-home"></i> Дома</li>
+                            <li><i class="fas fa-briefcase"></i> Офисы</li>
+                            <li><i class="fas fa-warehouse"></i> Склады</li>
+                        </ul>
+                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
+                    </div>
+                </div>
+
+                <!-- Фасадные работы -->
+                <div class="service-card">
+                    <h3 class="service-title">Фасадные работы</h3>
+                    <div class="service-content" style="background-image: url('{% static 'images/services/facade.jpg' %}');">
+                        <p class="service-description">
+                            Создаем долговечные и эстетичные фасады, повышая энергоэффективность и внешний вид зданий.
+                        </p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-tools"></i> Демонтаж</li>
+                            <li><i class="fas fa-shield-alt"></i> Утепление</li>
+                            <li><i class="fas fa-hammer"></i> Монтаж</li>
+                        </ul>
+                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
+                    </div>
+                </div>
+
+                <!-- Ремонт ванных комнат -->
+                <div class="service-card">
+                    <h3 class="service-title">Ремонт ванных комнат</h3>
+                    <div class="service-content" style="background-image: url('{% static 'images/services/bathroom.jpg' %}');">
+                        <p class="service-description">
+                            Современные решения для ванных комнат – от укладки плитки до полной реконструкции.
+                        </p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-th"></i> Монтаж и поклейка плитки</li>
+                        </ul>
+                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
+                    </div>
+                </div>
+
+                <!-- Электромонтажные работы -->
+                <div class="service-card">
+                    <h3 class="service-title">Электромонтажные работы</h3>
+                    <div class="service-content" style="background-image: url('{% static 'images/services/electrical.jpg' %}');">
+                        <p class="service-description">
+                            Безопасные и профессиональные электромонтажные услуги для любых объектов.
+                        </p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-building"></i> Квартиры</li>
+                            <li><i class="fas fa-home"></i> Дома</li>
+                            <li><i class="fas fa-briefcase"></i> Офисы</li>
+                            <li><i class="fas fa-warehouse"></i> Склады</li>
+                        </ul>
+                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
+                    </div>
+                </div>
+
+                <!-- Демонтажные работы -->
+                <div class="service-card">
+                    <h3 class="service-title">Демонтажные работы</h3>
+                    <div class="service-content" style="background-image: url('{% static 'images/services/demolition.jpg' %}');">
+                        <p class="service-description">
+                            Выполняем демонтаж любой сложности быстро, безопасно и с учетом всех требований.
+                        </p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-tools"></i> Любой сложности</li>
+                        </ul>
+                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
+                    </div>
+                </div>
+
+                <!-- Материалы и уборка -->
+                <div class="service-card">
+                    <h3 class="service-title">Материалы и уборка</h3>
+                    <div class="service-content" style="background-image: url('{% static 'images/services/materials_cleaning.jpg' %}');">
+                        <p class="service-description">
+                            Организуем закупку и доставку материалов, а также уборку после ремонта для вашего удобства.
+                        </p>
+                        <ul class="service-list">
+                            <li><i class="fas fa-shopping-cart"></i> Закупка материалов</li>
+                            <li><i class="fas fa-truck"></i> Доставка</li>
+                            <li><i class="fas fa-ladder"></i> Подъем в квартиру</li>
+                            <li><i class="fas fa-broom"></i> Уборка после ремонта</li>
+                        </ul>
+                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
+                    </div>
+                </div>
             </div>
-            <h3>Ремонт офисов</h3>
-            <p>Создаем комфортные и функциональные офисные пространства для вашего бизнеса. Минимизируем простои и соблюдаем сроки.</p>
-            <a href="/services/office/" class="btn">Подробнее</a>
         </div>
 
-        <!-- Ремонт складов -->
-        <div class="card">
-            <div class="icon">
-                <img src="{% static 'images/icons/warehouse.png' %}" alt="Ремонт складов">
+        <!-- Модальное окно с прайс-листом -->
+        <div id="price-list-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closePriceList()">×</span>
+                <h2>Прайс-лист</h2>
+
+                <!-- Демонтажные работы -->
+                <section class="price-list-section">
+                    <h3>Демонтажные работы</h3>
+                    <ul>
+                        <li>Демонтаж стен и перегородок: <strong>€15–25/м²</strong></li>
+                        <li>Демонтаж напольных покрытий: <strong>€5–10/м²</strong></li>
+                        <li>Демонтаж потолков: <strong>€10–20/м²</strong></li>
+                        <li>Демонтаж сантехники: <strong>€50–150/ед.</strong></li>
+                        <li>Демонтаж электропроводки: <strong>€3–5/м.п.</strong></li>
+                    </ul>
+                </section>
+
+                <!-- Монтажные работы -->
+                <section class="price-list-section">
+                    <h3>Монтажные работы</h3>
+                    <ul>
+                        <li>Монтаж гипсокартонных стен: <strong>€20–35/м²</strong></li>
+                        <li>Укладка напольных покрытий: <strong>€15–30/м²</strong></li>
+                        <li>Монтаж натяжных потолков: <strong>€25–40/м²</strong></li>
+                        <li>Установка сантехники: <strong>€100–300/ед.</strong></li>
+                        <li>Монтаж электропроводки: <strong>€5–10/м.п.</strong></li>
+                    </ul>
+                </section>
+
+                <!-- Ремонтные работы -->
+                <section class="price-list-section">
+                    <h3>Ремонтные работы</h3>
+                    <ul>
+                        <li>Штукатурка стен: <strong>€10–20/м²</strong></li>
+                        <li>Шпаклевка и покраска стен: <strong>€8–15/м²</strong></li>
+                        <li>Укладка плитки: <strong>€30–50/м²</strong></li>
+                        <li>Утепление стен: <strong>€35–55/м²</strong></li>
+                        <li>Утепление фасада: <strong>€40–60/м²</strong></li>
+                        <li>Установка дверей: <strong>€100–200/ед.</strong></li>
+                        <li>Установка окон: <strong>€300–500/ед.</strong></li>
+                    </ul>
+                </section>
+
+                <!-- Материалы и уборка -->
+                <section class="price-list-section">
+                    <h3>Материалы и уборка</h3>
+                    <ul>
+                        <li>Закупка и доставка материалов: <strong>По договоренности</strong></li>
+                        <li>Подъем материалов в квартиру: <strong>€50–150/заказ</strong></li>
+                        <li>Уборка после ремонта: <strong>€10–20/м²</strong></li>
+                    </ul>
+                </section>
             </div>
-            <h3>Ремонт складов</h3>
-            <p>Профессиональный ремонт и модернизация складских помещений. Повышаем эффективность и безопасность ваших складов.</p>
-            <a href="/services/warehouse/" class="btn">Подробнее</a>
         </div>
+    </section>
 
-        <!-- Фасадные работы -->
-        <div class="card">
-            <div class="icon">
-                <img src="{% static 'images/icons/facade.png' %}" alt="Фасадные работы">
-            </div>
-            <h3>Фасадные работы</h3>
-            <p>Профессиональная отделка фасадов для эстетики и долговечности. Используем современные материалы и технологии.</p>
-            <a href="/services/facade/" class="btn">Подробнее</a>
-        </div>
-
-        <!-- Утепление домов -->
-        <div class="card">
-            <div class="icon">
-                <img src="{% static 'images/icons/insulation.png' %}" alt="Утепление домов">
-            </div>
-            <h3>Утепление домов</h3>
-            <p>Энергоэффективные решения для вашего комфорта и экономии. Утепляем стены, крыши и полы с использованием экологически чистых материалов.</p>
-            <a href="/services/insulation/" class="btn">Подробнее</a>
-        </div>
-    </div>
-</div>
-
-<!-- Модальное окно с прайс-листом -->
-<div id="price-list-modal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closePriceList()">&times;</span>
-        <h2>Прайс-лист</h2>
-
-        <!-- Демонтажные работы -->
-        <section class="price-list-section">
-            <h3>Демонтажные работы</h3>
-            <ul>
-                <li>Демонтаж стен и перегородок: <strong>€15–25/м²</strong></li>
-                <li>Демонтаж напольных покрытий: <strong>€5–10/м²</strong></li>
-                <li>Демонтаж потолков: <strong>€10–20/м²</strong></li>
-                <li>Демонтаж сантехники: <strong>€50–150/ед.</strong></li>
-                <li>Демонтаж электропроводки: <strong>€3–5/м.п.</strong></li>
-            </ul>
-        </section>
-
-        <!-- Монтажные работы -->
-        <section class="price-list-section">
-            <h3>Монтажные работы</h3>
-            <ul>
-                <li>Монтаж гипсокартонных стен: <strong>€20–35/м²</strong></li>
-                <li>Укладка напольных покрытий: <strong>€15–30/м²</strong></li>
-                <li>Монтаж натяжных потолков: <strong>€25–40/м²</strong></li>
-                <li>Установка сантехники: <strong>€100–300/ед.</strong></li>
-                <li>Монтаж электропроводки: <strong>€5–10/м.п.</strong></li>
-            </ul>
-        </section>
-
-        <!-- Ремонтные работы -->
-        <section class="price-list-section">
-            <h3>Ремонтные работы</h3>
-            <ul>
-                <li>Штукатурка стен: <strong>€10–20/м²</strong></li>
-                <li>Шпаклевка и покраска стен: <strong>€8–15/м²</strong></li>
-                <li>Укладка плитки: <strong>€30–50/м²</strong></li>
-                <li>Утепление стен: <strong>€35–55/м²</strong></li>
-                <li>Утепление фасада: <strong>€40–60/м²</strong></li>
-                <li>Установка дверей: <strong>€100–200/ед.</strong></li>
-                <li>Установка окон: <strong>€300–500/ед.</strong></li>
-            </ul>
-        </section>
-    </div>
-</div>
-
-<script>
-    // Открытие модального окна
-    function openPriceList() {
-        document.getElementById('price-list-modal').style.display = 'block';
-    }
-
-    // Закрытие модального окна
-    function closePriceList() {
-        document.getElementById('price-list-modal').style.display = 'none';
-    }
-
-    // Закрытие модального окна при клике вне его
-    window.onclick = function(event) {
-        const modal = document.getElementById('price-list-modal');
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    };
-</script>
+    <script src="{% static 'js/services.js' %}"></script>
 {% endblock %}

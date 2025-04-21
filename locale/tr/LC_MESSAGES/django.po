@@ -1,0 +1,132 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: NovaHaus\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-13 12:00+0200\n"
+"PO-Revision-Date: 2025-04-13 12:00+0200\n"
+"Last-Translator: \n"
+"Language-Team: Turkish\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "NovaHaus – Your Trusted Renovation Partner"
+msgstr "NovaHaus – Güvenilir Tadilat Ortağınız"
+
+msgid "Quality, Timeliness, Eco-Friendliness – From Idea to Cleanup"
+msgstr "Kalite, Zamanında Teslim, Çevre Dostu – Fikirden Temizliğe"
+
+msgid "Calculate Cost"
+msgstr "Maliyet Hesapla"
+
+msgid "Our Projects"
+msgstr "Projelerimiz"
+
+msgid "10% Discount for New Clients!"
+msgstr "Yeni Müşterilere %10 İndirim!"
+
+msgid "Only until the end of the month! Order now and save."
+msgstr "Ay sonuna kadar geçerli! Şimdi sipariş verin ve tasarruf edin."
+
+msgid "Order Now"
+msgstr "Şimdi Sipariş Ver"
+
+msgid "Our Services"
+msgstr "Hizmetlerimiz"
+
+msgid "No services added yet."
+msgstr "Henüz hizmet eklenmedi."
+
+msgid "Learn More"
+msgstr "Daha Fazla Bilgi"
+
+msgid "Why Choose Us"
+msgstr "Neden Bizi Seçmelisiniz"
+
+msgid "High Quality"
+msgstr "Yüksek Kalite"
+
+msgid "ISO and LEED certified"
+msgstr "ISO ve LEED sertifikalı"
+
+msgid "On-Time Delivery"
+msgstr "Zamanında Teslim"
+
+msgid "We finish projects on schedule"
+msgstr "Projeleri zamanında tamamlarız"
+
+msgid "Eco-Friendly"
+msgstr "Çevre Dostu"
+
+msgid "Sustainable materials"
+msgstr "Sürdürülebilir malzemeler"
+
+msgid "Transparent Pricing"
+msgstr "Şeffaf Fiyatlandırma"
+
+msgid "Clear and honest estimates"
+msgstr "Açık ve dürüst fiyat tahminleri"
+
+msgid "Projects Completed"
+msgstr "Tamamlanan Projeler"
+
+msgid "Client Satisfaction"
+msgstr "Müşteri Memnuniyeti"
+
+msgid "Years of Experience"
+msgstr "Yıl Deneyim"
+
+msgid "View All Projects"
+msgstr "Tüm Projeleri Görüntüle"
+
+msgid "Eco-Friendly Solutions"
+msgstr "Çevre Dostu Çözümler"
+
+msgid "We use LEED-certified materials to create sustainable spaces for your home and the planet."
+msgstr "Ev ve gezegen için sürdürülebilir alanlar yaratmak için LEED sertifikalı malzemeler kullanıyoruz."
+
+msgid "We Know Your City"
+msgstr "Şehrinizi Tanıyoruz"
+
+msgid "Cologne – Ehrenfeld & Beyond"
+msgstr "Köln – Ehrenfeld ve Ötesi"
+
+msgid "From trendy lofts in Ehrenfeld to classic apartments in the city center, we bring quality to every corner of Cologne."
+msgstr "Ehrenfeld'deki trend çatı katlarından şehir merkezindeki klasik dairelere kadar, Köln'ün her köşesine kalite getiriyoruz."
+
+msgid "See Cologne Projects"
+msgstr "Köln Projelerini Gör"
+
+msgid "Hamburg – St. Pauli & More"
+msgstr "Hamburg – St. Pauli ve Daha Fazlası"
+
+msgid "Modern offices in St. Pauli or warehouses in the port – we transform Hamburg spaces with precision."
+msgstr "St. Pauli'deki modern ofislerden limandaki depolara kadar, Hamburg alanlarını hassasiyetle dönüştürüyoruz."
+
+msgid "See Hamburg Projects"
+msgstr "Hamburg Projelerini Gör"
+
+msgid "Get in Touch"
+msgstr "İletişime Geç"
+
+msgid "Name"
+msgstr "İsim"
+
+msgid "Email"
+msgstr "E-posta"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Message"
+msgstr "Mesaj"
+
+msgid "Send"
+msgstr "Gönder"
+
+msgid "Chat"
+msgstr "Sohbet"
+
+msgid "Ask a question"
+msgstr "Soru sor"

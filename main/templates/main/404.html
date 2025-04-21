@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <title>Страница не найдена</title>
-</head>
-<body>
-    <h1>Ошибка 404</h1>
-    <p>Запрашиваемая страница не существует.</p>
-    <a href="/">Вернуться на главную</a>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans "Страница не найдена" %}{% endblock %}
+{% block description %}{% trans "Запрашиваемая страница не существует." %}{% endblock %}
+
+{% block content %}
+    <section class="container fade-in">
+        <h1>{% trans "404 - Страница не найдена" %}</h1>
+        <p>{% trans "К сожалению, запрашиваемая страница не существует. Возможно, вы ввели неверный адрес или страница была удалена." %}</p>
+        <a href="{% url 'home' %}" class="btn">{% trans "Вернуться на главную" %}</a>
+    </section>
+{% endblock %}
