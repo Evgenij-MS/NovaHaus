@@ -198,31 +198,6 @@ USE_TZ = True
 
 OTP_TOTP_ISSUER = 'NovaHaus'
 
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'root': {
-        'handlers': ['console'],
-        'level': 'WARNING',
-    },
-    'loggers': {
-        'django': {
-            'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
-            'propagate': False,
-        },
-        'axes': {
-            'handlers': ['console'],
-            'level': 'WARNING',
-        },
-    },
-}
-
 COMPRESS_ENABLED = not DEBUG
 COMPRESS_OFFLINE = not DEBUG
 COMPRESS_CSS_FILTERS = [
@@ -288,6 +263,17 @@ LOGGING = {
         'handlers': ['console'],
         'level': 'INFO',
     },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'propagate': False,
+        },
+        'axes': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+        },
+    },
 }
 
 AUTHENTICATION_BACKENDS = [
@@ -329,3 +315,7 @@ PWA_APP_SPLASH_SCREEN = [
 ]
 PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'de'
+
+# Временно закомментировано для выполнения миграций на Heroku
+# import django_heroku
+# django_heroku.settings(locals())
