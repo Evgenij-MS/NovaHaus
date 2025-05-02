@@ -1,4 +1,21 @@
 NovaHaus/
+├── .env
+├── .gitattributes
+├── .gitignore
+├── .python-version
+├── .github/
+│   └── CODEOWNERS
+├── app.json
+├── db.sqlite3
+├── manage.py
+├── old-config.txt
+├── Procfile
+├── requirements.in
+├── requirements.txt
+├── README.md
+├── robots.txt
+├── test.txt
+├── compress_images.py
 ├── locale/
 │   ├── ru/
 │   │   └── LC_MESSAGES/
@@ -8,11 +25,14 @@ NovaHaus/
 │   │   └── LC_MESSAGES/
 │   │       ├── django.po  # Обновлён
 │   │       └── django.mo
-│   └── de/
+│   ├── de/
+│   │   └── LC_MESSAGES/
+│   │       ├── django.po  # Обновлён
+│   │       └── django.mo
+│   └── tr/
 │       └── LC_MESSAGES/
-│           ├── django.po  # Обновлён
+│           ├── django.po  
 │           └── django.mo
-├── manage.py
 ├── NovaHaus/
 │   ├── __init__.py
 │   ├── asgi.py
@@ -21,6 +41,8 @@ NovaHaus/
 │   └── wsgi.py
 ├── main/
 │   ├── migrations/
+│   │   ├── 0001_initial.py
+│   │   └── __init__.py
 │   ├── __init__.py
 │   ├── admin.py
 │   ├── apps.py
@@ -54,7 +76,11 @@ NovaHaus/
 │           ├── reviews.html
 │           └── services.html  # Обновлён
 ├── static/
+│   ├── media/
+│   │   └── hero-video.mp4
 │   ├── css/
+│   │   ├── pannellum.css
+│   │   ├── panorama.css
 │   │   ├── 3d-viewer.css
 │   │   ├── buttons.css
 │   │   ├── calculator.css
@@ -67,9 +93,9 @@ NovaHaus/
 │   │   ├── media-queries.css
 │   │   ├── partner.css
 │   │   ├── reset.css
-│   │   ├── services.css  # Обновлён (был пустой)
+│   │   ├── services.css  
 │   │   ├── slider.css
-│   │   └── visualization.css
+│   │   └── styles.css
 │   ├── fontawesome/
 │   │   ├── css/
 │   │   │   └── all.min.css
@@ -85,22 +111,49 @@ NovaHaus/
 │   │       ├── fa-v4compatibility.ttf
 │   │       └── fa-v4compatibility.woff2
 │   ├── images/
+│   │   ├── compress_images.py
+│   │   ├── panorama1.jpg
 │   │   ├── background.jpg
 │   │   ├── blog/
+│   │   │   ├── post1.webp
+│   │   │   ├── post2.webp
+│   │   │   ├── post3.webp
 │   │   │   ├── post1.jpg
 │   │   │   ├── post2.jpg
 │   │   │   └── post3.jpg
 │   │   ├── favicon/
 │   │   │   ├── android-chrome-192x192.png
+│   │   │   ├── android-chrome-192x192.webp
 │   │   │   ├── android-chrome-512x512.png
+│   │   │   ├── android-chrome-512x512.webp
 │   │   │   ├── apple-touch-icon.png
+│   │   │   ├── apple-touch-icon.webp
 │   │   │   ├── favicon.ico
 │   │   │   ├── favicon-16x16.png
+│   │   │   ├── favicon-16x16.webp
 │   │   │   ├── favicon-32x32.png
+│   │   │   ├── favicon-32x32.webp
 │   │   │   ├── favicon-96x96.png
+│   │   │   ├── favicon-96x96.webp
 │   │   │   ├── favicon.svg
 │   │   │   └── site.webmanifest
 │   │   ├── icons/
+│   │   │   ├── eco.png
+│   │   │   ├── email.webp
+│   │   │   ├── energy.png
+│   │   │   ├── facade.webp
+│   │   │   ├── facebook.webp
+│   │   │   ├── house.webp
+│   │   │   ├── instagram.webp
+│   │   │   ├── leaf.png
+│   │   │   ├── office.webp
+│   │   │   ├── price.png
+│   │   │   ├── quality.png
+│   │   │   ├── recycle.png
+│   │   │   ├── repair.webp
+│   │   │   ├── telegram.webp
+│   │   │   ├── time.png
+│   │   │   ├── warehouse.webp
 │   │   │   ├── email.png
 │   │   │   ├── facade.png
 │   │   │   ├── facebook.png
@@ -112,8 +165,11 @@ NovaHaus/
 │   │   │   ├── telegram.png
 │   │   │   └── warehouse.png
 │   │   ├── icon-calculator.png
+│   │   ├── icon-calculator.webp
 │   │   ├── icon-info.png
+│   │   ├── icon-info.webp
 │   │   ├── logo.png
+│   │   ├── logo.webp
 │   │   ├── portfolio/
 │   │   │   ├── project1.jpg
 │   │   │   ├── project1-large.jpg
@@ -124,12 +180,13 @@ NovaHaus/
 │   │   │   ├── project3.jpg
 │   │   │   ├── project3-large.jpg
 │   │   │   └── project3-small.jpg
-│   │   ├── services/  # Новая папка еще один файл в этой папке materials_cleaning.jpg
-│   │   │   ├── renovation.jpg  # Новое
-│   │   │   ├── facade.jpg  # Новое
-│   │   │   ├── bathroom.jpg  # Новое
-│   │   │   ├── electrical.jpg  # Новое
-│   │   │   └── demolition.jpg  # Новое
+│   │   ├── services/
+│   │   │   ├── materials_cleaning.jpg
+│   │   │   ├── renovation.jpg
+│   │   │   ├── facade.jpg
+│   │   │   ├── bathroom.jpg
+│   │   │   ├── electrical.jpg
+│   │   │   └── demolition.jpg
 │   │   ├── slider/
 │   │   │   ├── slide1.jpg
 │   │   │   ├── slide2.jpg
@@ -139,6 +196,9 @@ NovaHaus/
 │   │       ├── member2.jpg
 │   │       └── member3.jpg
 │   ├── js/
+│   │   ├── pannellum.js
+│   │   ├── pannellum-custom.js
+│   │   ├── testimonials.js
 │   │   ├── 3d-model.js
 │   │   ├── ai-integration.js
 │   │   ├── animations.js
@@ -152,34 +212,21 @@ NovaHaus/
 │   │   ├── modal.js
 │   │   ├── scripts.js
 │   │   ├── service-worker.js
-│   │   ├── services.js  # Новый
+│   │   ├── services.js
 │   │   ├── slider.js
 │   │   └── visualization.js
 │   └── manifest.json
 ├── media/
+│   ├── panoramas/
 │   ├── portpolio/
 │   └── services/
-├── templates/
-│   ├── base.html
-│   ├── errors/
-│   │   └── lockout.html
-│   └── includes/
-│       ├── footer.html  # Обновлён
-│       ├── header.html
-│       ├── modal.html
-│       └── slider.html  # Обновлён
 ├── staticfiles/
-├── .env
-├── .gitattributes
-├── .gitignore
-├── .python-version
-├── app.json
-├── old-config.txt
-├── Procfile
-├── requirements.in
-├── requirements.txt
-├── README.md
-└── db.sqlite3
-
-static/js/pannellum-custom.js (новый файл):
-static/css/pannellum.css    (новый файл)
+└── templates/
+    ├── base.html
+    ├── errors/
+    │   └── lockout.html
+    └── includes/
+        ├── footer.html  # Обновлён
+        ├── header.html
+        ├── modal.html
+        └── slider.html  # Обновлён
