@@ -142,18 +142,22 @@ AXES_LOCKOUT_TEMPLATE = 'errors/lockout.html'
 AXES_RESET_ON_SUCCESS = True
 AXES_DISABLE_ACCESS_LOG = True
 
-# NovaHaus/settings.py
-DATABASES = {
-         'default': {
-             'ENGINE': 'django.db.backends.postgresql',
-             'NAME': 'NH',
-             'USER': 'postgres',
-             'PASSWORD': 'Okro.123',
-             'HOST': 'localhost',
-             'PORT': '5432',
-         }
-}
-
+# Настройка базы данных
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'NH',
+            'USER': 'postgres',
+            'PASSWORD': 'Okro.123',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }
 
 TEMPLATES = [
     {
@@ -272,11 +276,6 @@ sentry_sdk.init(
     profiles_sample_rate=1.0,
 )
 
-if 'DYNO' in os.environ:
-    ALLOWED_HOSTS = ['novahaus-koeln.de', 'www.novahaus-koeln.de', 'novahaus-eu.herokuapp.com']
-    import django_heroku
-    django_heroku.settings(locals(), staticfiles=False)
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -330,4 +329,3 @@ PWA_APP_SPLASH_SCREEN = [
 ]
 PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'de'
-

@@ -18,6 +18,11 @@
       <excludeFolder url="file://$MODULE_DIR$/.novahaus_env" />
       <excludeFolder url="file://$MODULE_DIR$/.venv" />
       <excludeFolder url="file://$MODULE_DIR$/media" />
+      <excludeFolder url="file://$MODULE_DIR$/staticfiles/django_extensions" />
+      <excludeFolder url="file://$MODULE_DIR$/staticfiles/fontawesome" />
+      <excludeFolder url="file://$MODULE_DIR$/staticfiles/fonts" />
+      <excludeFolder url="file://$MODULE_DIR$/staticfiles/images/services" />
+      <excludeFolder url="file://$MODULE_DIR$/staticfiles/media" />
     </content>
     <orderEntry type="jdk" jdkName="Python 3.12" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
