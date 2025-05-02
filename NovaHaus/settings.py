@@ -317,5 +317,5 @@ PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'de'
 
 # Временно закомментировано для выполнения миграций на Heroku
-# import django_heroku
-# django_heroku.settings(locals())
+import django_heroku
+django_heroku.settings(locals())
