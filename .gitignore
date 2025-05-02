@@ -35,4 +35,5 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.novahaus_env/
 *.pyc

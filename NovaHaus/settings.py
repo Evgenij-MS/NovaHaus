@@ -143,21 +143,9 @@ AXES_RESET_ON_SUCCESS = True
 AXES_DISABLE_ACCESS_LOG = True
 
 # Настройка базы данных
-if 'DATABASE_URL' in os.environ:
-    DATABASES = {
-        'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'NH',
-            'USER': 'postgres',
-            'PASSWORD': 'Okro.123',
-            'HOST': 'localhost',
-            'PORT': '5432',
-        }
-    }
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+}
 
 TEMPLATES = [
     {
@@ -297,12 +285,12 @@ PWA_APP_START_URL = '/'
 PWA_APP_STATUS_BAR_COLOR = 'default'
 PWA_APP_ICONS = [
     {
-        'src': '/static/images/favicon/favicon-192x192.png',
+        'src': '/static/images/logo.png',
         'sizes': '192x192',
         'type': 'image/png'
     },
     {
-        'src': '/static/images/favicon/favicon-512x512.png',
+        'src': '/static/images/logo.png',
         'sizes': '512x512',
         'type': 'image/png'
     }
