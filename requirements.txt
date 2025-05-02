@@ -8,7 +8,7 @@ django-appconf==1.1.0
 django-axes==7.0.2
 django-compressor==4.5.1
 django-extensions==4.1
-django-heroku==0.3.1
+django-heroku>=0.3.1
 django-otp==1.6.0
 django-pwa==2.0.1
 django-requests==0.0.2
