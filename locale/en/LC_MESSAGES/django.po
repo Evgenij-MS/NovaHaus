@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: NovaHaus\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-13 12:00+0200\n"
+"POT-Creation-Date: 2025-05-04 13:33+0200\n"
 "PO-Revision-Date: 2025-04-13 12:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: English\n"
@@ -11,122 +11,931 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: .\main\models.py:8
+msgid "Строительство"
+msgstr ""
+
+#: .\main\models.py:9
+msgid "Дизайн"
+msgstr ""
+
+#: .\main\models.py:10
+msgid "Ремонт"
+msgstr ""
+
+#: .\main\models.py:11
+msgid "Ванные комнаты"
+msgstr ""
+
+#: .\main\models.py:12
+msgid "Электрика"
+msgstr ""
+
+#: .\main\models.py:13
+msgid "Фасады"
+msgstr ""
+
+#: .\main\models.py:14
+msgid "Демонтаж"
+msgstr ""
+
+#: .\main\models.py:15
+msgid "Уборка"
+msgstr ""
+
+#: .\main\models.py:18 .\main\models.py:33 .\main\models.py:113
+msgid "Название"
+msgstr ""
+
+#: .\main\models.py:19 .\main\models.py:34
+msgid "Описание"
+msgstr ""
+
+#: .\main\models.py:20
+msgid "Цена"
+msgstr ""
+
+#: .\main\models.py:21 .\main\models.py:38
+msgid "Категория"
+msgstr ""
+
+#: .\main\models.py:22 .\main\models.py:116
+msgid "Изображение"
+msgstr ""
+
+#: .\main\models.py:28
+msgid "Услуга"
+msgstr ""
+
+#: .\main\models.py:29
+msgid "Услуги"
+msgstr ""
+
+#: .\main\models.py:35
+msgid "Изображение до"
+msgstr ""
+
+#: .\main\models.py:36
+msgid "Изображение после"
+msgstr ""
+
+#: .\main\models.py:37
+msgid "Панорамное изображение"
+msgstr ""
+
+#: .\main\models.py:44
+msgid "Проект портфолио"
+msgstr ""
+
+#: .\main\models.py:45
+msgid "Проекты портфолио"
+msgstr ""
+
+#: .\main\models.py:50
+msgid "Новый"
+msgstr ""
+
+#: .\main\models.py:51
+msgid "В процессе"
+msgstr ""
+
+#: .\main\models.py:52
+msgid "Завершен"
+msgstr ""
+
+#: .\main\models.py:55 .\main\models.py:78 .\main\models.py:93
+#: .\main\models.py:127
+msgid "Пользователь"
+msgstr ""
+
+#: .\main\models.py:56
+msgid "Тип работы"
+msgstr ""
+
+#: .\main\models.py:57
+msgid "Площадь"
+msgstr ""
+
+#: .\main\models.py:58
+msgid "Материал"
+msgstr ""
+
+#: .\main\models.py:59
+msgid "Включить материалы"
+msgstr ""
+
+#: .\main\models.py:60
+msgid "Срочность"
+msgstr ""
+
+#: .\main\models.py:61
+msgid "Общая стоимость"
+msgstr ""
+
+#: .\main\models.py:62
+msgid "Стоимость материалов"
+msgstr ""
+
+#: .\main\models.py:63
+msgid "Стоимость работы"
+msgstr ""
+
+#: .\main\models.py:64
+msgid "Статус"
+msgstr ""
+
+#: .\main\models.py:65
+msgid "Дата начала"
+msgstr ""
+
+#: .\main\models.py:66
+msgid "Дата окончания"
+msgstr ""
+
+#: .\main\models.py:67
+msgid "Дополнительные данные расчёта"
+msgstr ""
+
+#: .\main\models.py:73
+msgid "Расчёт"
+msgstr ""
+
+#: .\main\models.py:74
+msgid "Расчёты"
+msgstr ""
+
+#: .\main\models.py:79
+msgid "Автор"
+msgstr ""
+
+#: .\main\models.py:80
+msgid "Текст отзыва"
+msgstr ""
+
+#: .\main\models.py:81
+msgid "Оценка"
+msgstr ""
+
+#: .\main\models.py:82 .\main\models.py:134
+msgid "Дата создания"
+msgstr ""
+
+#: .\main\models.py:88
+msgid "Отзыв"
+msgstr ""
+
+#: .\main\models.py:89
+msgid "Отзывы"
+msgstr ""
+
+#: .\main\models.py:94
+msgid "Имя партнёра"
+msgstr ""
+
+#: .\main\models.py:95
+msgid "Контактная информация"
+msgstr ""
+
+#: .\main\models.py:96 .\main\templates\main\home.html:263
+msgid "Телефон"
+msgstr ""
+
+#: .\main\models.py:97 .\main\templates\main\home.html:262
+msgid "Электронная почта"
+msgstr ""
+
+#: .\main\models.py:98
+msgid "Реферальный код"
+msgstr ""
+
+#: .\main\models.py:99
+msgid "Количество привлеченных клиентов"
+msgstr ""
+
+#: .\main\models.py:100
+msgid "Общий заработок"
+msgstr ""
+
+#: .\main\models.py:101
+msgid "Дата регистрации"
+msgstr ""
+
+#: .\main\models.py:102
+msgid "Дата последнего обновления"
+msgstr ""
+
+#: .\main\models.py:108
+msgid "Партнёр"
+msgstr ""
+
+#: .\main\models.py:109
+msgid "Партнёры"
+msgstr ""
+
+#: .\main\models.py:114
+msgid "Содержание"
+msgstr ""
+
+#: .\main\models.py:115
+msgid "Дата публикации"
+msgstr ""
+
+#: .\main\models.py:122
+msgid "Статья блога"
+msgstr ""
+
+#: .\main\models.py:123
+msgid "Статьи блога"
+msgstr ""
+
+#: .\main\models.py:128 .\main\templates\main\home.html:264
+msgid "Сообщение"
+msgstr ""
+
+#: .\main\models.py:129
+msgid "Ответ"
+msgstr ""
+
+#: .\main\models.py:130
+msgid "Язык"
+msgstr ""
+
+#: .\main\models.py:131
+msgid "Путь к файлу"
+msgstr ""
+
+#: .\main\models.py:132
+msgid "Путь к аудио"
+msgstr ""
+
+#: .\main\models.py:133
+msgid "IP-адрес"
+msgstr ""
+
+#: .\main\models.py:141
+msgid "Лог чата"
+msgstr ""
+
+#: .\main\models.py:142
+msgid "Логи чата"
+msgstr ""
+
+#: .\main\templates\main\404.html:4
+msgid "Страница не найдена"
+msgstr ""
+
+#: .\main\templates\main\404.html:5
+msgid "Запрашиваемая страница не существует."
+msgstr ""
+
+#: .\main\templates\main\404.html:9
+msgid "404 - Страница не найдена"
+msgstr ""
+
+#: .\main\templates\main\404.html:10
+msgid ""
+"К сожалению, запрашиваемая страница не существует. Возможно, вы ввели "
+"неверный адрес или страница была удалена."
+msgstr ""
+
+#: .\main\templates\main\404.html:11
+msgid "Вернуться на главную"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:4
+msgid "Online-Kalkulator – NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:5
+msgid ""
+"Berechnen Sie die Kosten für Renovierung oder Dämmung mit unserem Online-"
+"Kalkulator."
+msgstr ""
+
+#: .\main\templates\main\calculator.html:6
+msgid "Kalkulator, Renovierungskosten, Dämmung, NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:15
+msgid "Online-Kalkulator"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:21
+msgid "Art der Arbeit:"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:23
+msgid "Wohnungsrenovierung"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:24
+msgid "Hausrenovierung"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:25
+msgid "Bürorenovierung"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:26
+msgid "Lagerhallenrenovierung"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:27
+msgid "Fassadenarbeiten"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:28
+msgid "Hausdämmung"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:29
+msgid "Abbrucharbeiten"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:30
+#: .\main\templates\main\calculator.html:73
+msgid "Reinigung nach Renovierung"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:36
+msgid "Fläche (m²):"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:37
+msgid "Z.B. 50"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:42
+msgid "Materialqualität:"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:44
+msgid "Economy"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:45
+msgid "Standard"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:46
+msgid "Premium"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:52
+msgid "Materialien einbeziehen:"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:54
+msgid "Ja"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:55
+msgid "Nein"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:61
+msgid "Dringlichkeit:"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:63
+msgid "Normal"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:64
+msgid "Schnell"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:70
+msgid "Zusätzliche Dienstleistungen:"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:77
+msgid "Lieferung von Materialien"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:82
+msgid "Berechnen"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:83
+msgid "Speichern"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:94
+msgid "Empfehlungen von KI"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:99
+msgid "Zurück zur Hauptseite"
+msgstr ""
+
+#: .\main\templates\main\home.html:4 .\main\templates\main\home.html:25
+#: .\main\templates\main\home.html:46
+msgid "NovaHaus – Ваш надёжный партнёр по ремонту"
+msgstr ""
+
+#: .\main\templates\main\home.html:5 .\main\templates\main\home.html:26
+msgid ""
+"Профессиональный ремонт квартир, офисов и фасадов в Кёльне и Гамбурге с "
+"использованием экологичных материалов."
+msgstr ""
+
+#: .\main\templates\main\home.html:6
+msgid ""
+"ремонт, Кёльн, Гамбург, экологичность, NovaHaus, ремонт квартир, ремонт "
+"офисов, эко-материалы, виртуальный тур"
+msgstr ""
+
+#: .\main\templates\main\home.html:12
+msgid "Главная"
+msgstr ""
+
+#: .\main\templates\main\home.html:40
+msgid "Модная квартира"
+msgstr ""
+
+#: .\main\templates\main\home.html:41
+msgid "Ремонт офиса"
+msgstr ""
+
+#: .\main\templates\main\home.html:42
+msgid "Эко-фасад"
+msgstr ""
+
+#: .\main\templates\main\home.html:47
+msgid "Качество, своевременность, экологичность – от идеи до уборки"
+msgstr ""
+
+#: .\main\templates\main\home.html:49
+msgid "Рассчитать стоимость"
+msgstr ""
+
+#: .\main\templates\main\home.html:50 .\main\templates\main\home.html:166
+msgid "Наши проекты"
+msgstr ""
+
+#: .\main\templates\main\home.html:65
+#, python-format
+msgid "10%% скидка для новых клиентов!"
+msgstr ""
+
+#: .\main\templates\main\home.html:66
+msgid "Только до конца месяца! Закажите сейчас и сэкономьте."
+msgstr ""
+
+#: .\main\templates\main\home.html:67
+msgid "Заказать сейчас"
+msgstr ""
+
+#: .\main\templates\main\home.html:74
+msgid "Наши услуги"
+msgstr ""
+
+#: .\main\templates\main\home.html:81
+msgid "Заглушка"
+msgstr ""
+
+#: .\main\templates\main\home.html:85 .\main\templates\main\home.html:231
+msgid "Узнать больше"
+msgstr ""
+
+#: .\main\templates\main\home.html:88
+msgid "Услуги пока не добавлены."
+msgstr ""
+
+#: .\main\templates\main\home.html:106
+msgid "Кёльн"
+msgstr ""
+
+#: .\main\templates\main\home.html:110
+msgid "Гамбург"
+msgstr ""
+
+#: .\main\templates\main\home.html:123
+msgid "Почему выбирают нас"
+msgstr ""
+
+#: .\main\templates\main\home.html:126
+msgid "Качество"
+msgstr ""
+
+#: .\main\templates\main\home.html:127
+msgid "Высокое качество"
+msgstr ""
+
+#: .\main\templates\main\home.html:128
+msgid "Сертифицировано ISO и LEED"
+msgstr ""
+
+#: .\main\templates\main\home.html:131
+msgid "Своевременность"
+msgstr ""
+
+#: .\main\templates\main\home.html:132
+msgid "Своевременная сдача"
+msgstr ""
+
+#: .\main\templates\main\home.html:133
+msgid "Мы завершаем проекты по графику"
+msgstr ""
+
+#: .\main\templates\main\home.html:136 .\main\templates\main\home.html:137
+msgid "Экологичность"
+msgstr ""
+
+#: .\main\templates\main\home.html:138
+msgid "Экологичные материалы"
+msgstr ""
+
+#: .\main\templates\main\home.html:141
+msgid "Прозрачность"
+msgstr ""
+
+#: .\main\templates\main\home.html:142
+msgid "Прозрачное ценообразование"
+msgstr ""
+
+#: .\main\templates\main\home.html:143
+msgid "Чёткие и честные сметы"
+msgstr ""
+
+#: .\main\templates\main\home.html:149
+msgid "Завершённых проектов"
+msgstr ""
+
+#: .\main\templates\main\home.html:153
+msgid "Удовлетворённость клиентов"
+msgstr ""
+
+#: .\main\templates\main\home.html:157
+msgid "Лет опыта"
+msgstr ""
+
+#: .\main\templates\main\home.html:172 .\main\templates\main\home.html:174
+msgid "До"
+msgstr ""
+
+#: .\main\templates\main\home.html:177 .\main\templates\main\home.html:179
+msgid "После"
+msgstr ""
+
+#: .\main\templates\main\home.html:184
+msgid "Посмотреть 360° тур"
+msgstr ""
+
+#: .\main\templates\main\home.html:188
+msgid "Проекты скоро появятся!"
+msgstr ""
+
+#: .\main\templates\main\home.html:192
+msgid "Посмотреть все проекты"
+msgstr ""
+
+#: .\main\templates\main\home.html:203
+msgid "Виртуальный тур по проекту"
+msgstr ""
+
+#: .\main\templates\main\home.html:224
+msgid "Экологичные решения"
+msgstr ""
+
+#: .\main\templates\main\home.html:225
+msgid ""
+"Мы используем материалы с сертификацией LEED, чтобы создавать устойчивые "
+"пространства для вашего дома и планеты."
+msgstr ""
+
+#: .\main\templates\main\home.html:227
+msgid "Экология"
+msgstr ""
+
+#: .\main\templates\main\home.html:228
+msgid "Энергоэффективность"
+msgstr ""
+
+#: .\main\templates\main\home.html:229
+msgid "Переработка"
+msgstr ""
+
+#: .\main\templates\main\home.html:238
+msgid "Мы знаем ваш город"
+msgstr ""
+
+#: .\main\templates\main\home.html:241
+msgid "Кёльн – Эренфельд и не только"
+msgstr ""
+
+#: .\main\templates\main\home.html:242
+msgid ""
+"От модных лофтов в Эренфельде до классических квартир в центре — мы приносим "
+"качество в каждый уголок Кёльна."
+msgstr ""
+
+#: .\main\templates\main\home.html:243
+msgid "Посмотреть проекты в Кёльне"
+msgstr ""
+
+#: .\main\templates\main\home.html:246
+msgid "Гамбург – Санкт-Паули и не только"
+msgstr ""
+
+#: .\main\templates\main\home.html:247
+msgid ""
+"Современные офисы в Санкт-Паули или склады в порту — мы преображаем "
+"пространства Гамбурга с точностью."
+msgstr ""
+
+#: .\main\templates\main\home.html:248
+msgid "Посмотреть проекты в Гамбурге"
+msgstr ""
+
+#: .\main\templates\main\home.html:257
+msgid "Связаться с нами"
+msgstr ""
+
+#: .\main\templates\main\home.html:261
+msgid "Имя"
+msgstr ""
+
+#: .\main\templates\main\home.html:265
+msgid "Отправить"
+msgstr ""
+
+#: .\main\templates\main\home.html:278
+msgid "Задать вопрос"
+msgstr ""
+
+#: .\main\templates\main\home.html:280
+msgid "Чат"
+msgstr ""
+
+#: .\templates\base.html:9
 msgid "NovaHaus – Your Trusted Renovation Partner"
 msgstr "NovaHaus – Your Trusted Renovation Partner"
 
-msgid "Quality, Timeliness, Eco-Friendliness – From Idea to Cleanup"
-msgstr "Quality, Timeliness, Eco-Friendliness – From Idea to Cleanup"
+#: .\templates\base.html:10
+msgid ""
+"Professional renovation in Cologne and Hamburg with eco-friendly materials."
+msgstr ""
 
-msgid "Calculate Cost"
-msgstr "Calculate Cost"
+#: .\templates\base.html:11
+msgid ""
+"renovation, Cologne, Hamburg, eco-friendly, NovaHaus, apartment renovation, "
+"office renovation, eco-materials"
+msgstr ""
 
-msgid "Our Projects"
-msgstr "Our Projects"
+#: .\templates\base.html:14
+#, fuzzy
+#| msgid "NovaHaus – Your Trusted Renovation Partner"
+msgid "NovaHaus – Renovation Experts"
+msgstr "NovaHaus – Your Trusted Renovation Partner"
 
-msgid "10% Discount for New Clients!"
-msgstr "10% Discount for New Clients!"
+#: .\templates\base.html:15
+msgid ""
+"Transforming spaces with quality and eco-friendliness in Cologne and Hamburg."
+msgstr ""
 
-msgid "Only until the end of the month! Order now and save."
-msgstr "Only until the end of the month! Order now and save."
+#: .\templates\base.html:81
+msgid ""
+"Renovation company in Cologne and Hamburg. Apartments, offices, facades."
+msgstr ""
 
-msgid "Order Now"
-msgstr "Order Now"
+#: .\templates\base.html:86
+msgid "Cologne"
+msgstr ""
 
-msgid "Our Services"
+#: .\templates\base.html:93
+msgid "Hamburg"
+msgstr ""
+
+#: .\templates\base.html:119 .\templates\includes\header.html:17
+#: .\templates\includes\header.html:29 .\templates\includes\header.html:56
+msgid "Home"
+msgstr ""
+
+#: .\templates\base.html:148
+msgid "Switch Theme"
+msgstr ""
+
+#: .\templates\base.html:150
+msgid "Dark Theme"
+msgstr ""
+
+#: .\templates\includes\footer.html:5 .\templates\includes\header.html:24
+msgid "NovaHaus"
+msgstr ""
+
+#: .\templates\includes\footer.html:6
+msgid ""
+"Transforming spaces in Cologne and Hamburg with quality and eco-friendliness."
+msgstr ""
+
+#: .\templates\includes\footer.html:9
+msgid "Quick Links"
+msgstr ""
+
+#: .\templates\includes\footer.html:11 .\templates\includes\header.html:18
+#: .\templates\includes\header.html:30 .\templates\includes\header.html:57
+#, fuzzy
+#| msgid "Our Services"
+msgid "Services"
 msgstr "Our Services"
 
-msgid "No services added yet."
-msgstr "No services added yet."
+#: .\templates\includes\footer.html:12 .\templates\includes\header.html:19
+#: .\templates\includes\header.html:31 .\templates\includes\header.html:58
+msgid "Portfolio"
+msgstr ""
 
-msgid "Learn More"
-msgstr "Learn More"
+#: .\templates\includes\footer.html:13 .\templates\includes\header.html:20
+#: .\templates\includes\header.html:32 .\templates\includes\header.html:59
+msgid "Blog"
+msgstr ""
 
-msgid "Why Choose Us"
-msgstr "Why Choose Us"
+#: .\templates\includes\footer.html:14 .\templates\includes\header.html:22
+#: .\templates\includes\header.html:34 .\templates\includes\header.html:61
+msgid "Contact"
+msgstr ""
 
-msgid "High Quality"
-msgstr "High Quality"
+#: .\templates\includes\footer.html:18
+msgid "Contact Us"
+msgstr ""
 
-msgid "ISO and LEED certified"
-msgstr "ISO and LEED certified"
+#: .\templates\includes\footer.html:19
+msgid "Cologne: Musterstraße 123, 50667"
+msgstr ""
 
-msgid "On-Time Delivery"
-msgstr "On-Time Delivery"
+#: .\templates\includes\footer.html:20
+msgid "Hamburg: Beispielweg 456, 20354"
+msgstr ""
 
-msgid "We finish projects on schedule"
-msgstr "We finish projects on schedule"
+#: .\templates\includes\footer.html:21
+msgid "Phone: +49 155 100 718 48"
+msgstr ""
 
-msgid "Eco-Friendly"
-msgstr "Eco-Friendly"
+#: .\templates\includes\footer.html:25
+msgid "Follow Us"
+msgstr ""
 
-msgid "Sustainable materials"
-msgstr "Sustainable materials"
+#: .\templates\includes\footer.html:34
+msgid "© 2025 NovaHaus. All rights reserved."
+msgstr ""
 
-msgid "Transparent Pricing"
-msgstr "Transparent Pricing"
+#: .\templates\includes\header.html:4
+msgid "Menu"
+msgstr ""
 
-msgid "Clear and honest estimates"
-msgstr "Clear and honest estimates"
+#: .\templates\includes\header.html:12
+msgid "NovaHaus - Home"
+msgstr ""
 
-msgid "Projects Completed"
-msgstr "Projects Completed"
+#: .\templates\includes\header.html:21 .\templates\includes\header.html:33
+#: .\templates\includes\header.html:60
+msgid "About Us"
+msgstr ""
 
-msgid "Client Satisfaction"
-msgstr "Client Satisfaction"
+#: .\templates\includes\header.html:23 .\templates\includes\header.html:35
+#: .\templates\includes\header.html:62
+msgid "Become a Partner"
+msgstr ""
 
-msgid "Years of Experience"
-msgstr "Years of Experience"
+#: .\templates\includes\header.html:42
+msgid "Site Language"
+msgstr ""
 
-msgid "View All Projects"
-msgstr "View All Projects"
+#: .\templates\includes\slider.html:4
+msgid "Современный ремонт квартир"
+msgstr ""
 
-msgid "Eco-Friendly Solutions"
-msgstr "Eco-Friendly Solutions"
+#: .\templates\includes\slider.html:5
+msgid "Утепление фасадов"
+msgstr ""
 
-msgid "We use LEED-certified materials to create sustainable spaces for your home and the planet."
-msgstr "We use LEED-certified materials to create sustainable spaces for your home and the planet."
+#: .\templates\includes\slider.html:6
+msgid "Фасадные работы"
+msgstr ""
 
-msgid "We Know Your City"
-msgstr "We Know Your City"
+#~ msgid "Quality, Timeliness, Eco-Friendliness – From Idea to Cleanup"
+#~ msgstr "Quality, Timeliness, Eco-Friendliness – From Idea to Cleanup"
 
-msgid "Cologne – Ehrenfeld & Beyond"
-msgstr "Cologne – Ehrenfeld & Beyond"
+#~ msgid "Calculate Cost"
+#~ msgstr "Calculate Cost"
 
-msgid "From trendy lofts in Ehrenfeld to classic apartments in the city center, we bring quality to every corner of Cologne."
-msgstr "From trendy lofts in Ehrenfeld to classic apartments in the city center, we bring quality to every corner of Cologne."
+#~ msgid "Our Projects"
+#~ msgstr "Our Projects"
 
-msgid "See Cologne Projects"
-msgstr "See Cologne Projects"
+#~ msgid "10% Discount for New Clients!"
+#~ msgstr "10% Discount for New Clients!"
 
-msgid "Hamburg – St. Pauli & More"
-msgstr "Hamburg – St. Pauli & More"
+#~ msgid "Only until the end of the month! Order now and save."
+#~ msgstr "Only until the end of the month! Order now and save."
 
-msgid "Modern offices in St. Pauli or warehouses in the port – we transform Hamburg spaces with precision."
-msgstr "Modern offices in St. Pauli or warehouses in the port – we transform Hamburg spaces with precision."
+#~ msgid "Order Now"
+#~ msgstr "Order Now"
 
-msgid "See Hamburg Projects"
-msgstr "See Hamburg Projects"
+#~ msgid "No services added yet."
+#~ msgstr "No services added yet."
 
-msgid "Get in Touch"
-msgstr "Get in Touch"
+#~ msgid "Learn More"
+#~ msgstr "Learn More"
 
-msgid "Name"
-msgstr "Name"
+#~ msgid "Why Choose Us"
+#~ msgstr "Why Choose Us"
 
-msgid "Email"
-msgstr "Email"
+#~ msgid "High Quality"
+#~ msgstr "High Quality"
 
-msgid "Phone"
-msgstr "Phone"
+#~ msgid "ISO and LEED certified"
+#~ msgstr "ISO and LEED certified"
 
-msgid "Message"
-msgstr "Message"
+#~ msgid "On-Time Delivery"
+#~ msgstr "On-Time Delivery"
 
-msgid "Send"
-msgstr "Send"
+#~ msgid "We finish projects on schedule"
+#~ msgstr "We finish projects on schedule"
 
-msgid "Chat"
-msgstr "Chat"
+#~ msgid "Eco-Friendly"
+#~ msgstr "Eco-Friendly"
 
-msgid "Ask a question"
-msgstr "Ask a question"
+#~ msgid "Sustainable materials"
+#~ msgstr "Sustainable materials"
+
+#~ msgid "Transparent Pricing"
+#~ msgstr "Transparent Pricing"
+
+#~ msgid "Clear and honest estimates"
+#~ msgstr "Clear and honest estimates"
+
+#~ msgid "Projects Completed"
+#~ msgstr "Projects Completed"
+
+#~ msgid "Client Satisfaction"
+#~ msgstr "Client Satisfaction"
+
+#~ msgid "Years of Experience"
+#~ msgstr "Years of Experience"
+
+#~ msgid "View All Projects"
+#~ msgstr "View All Projects"
+
+#~ msgid "Eco-Friendly Solutions"
+#~ msgstr "Eco-Friendly Solutions"
+
+#~ msgid ""
+#~ "We use LEED-certified materials to create sustainable spaces for your "
+#~ "home and the planet."
+#~ msgstr ""
+#~ "We use LEED-certified materials to create sustainable spaces for your "
+#~ "home and the planet."
+
+#~ msgid "We Know Your City"
+#~ msgstr "We Know Your City"
+
+#~ msgid "Cologne – Ehrenfeld & Beyond"
+#~ msgstr "Cologne – Ehrenfeld & Beyond"
+
+#~ msgid ""
+#~ "From trendy lofts in Ehrenfeld to classic apartments in the city center, "
+#~ "we bring quality to every corner of Cologne."
+#~ msgstr ""
+#~ "From trendy lofts in Ehrenfeld to classic apartments in the city center, "
+#~ "we bring quality to every corner of Cologne."
+
+#~ msgid "See Cologne Projects"
+#~ msgstr "See Cologne Projects"
+
+#~ msgid "Hamburg – St. Pauli & More"
+#~ msgstr "Hamburg – St. Pauli & More"
+
+#~ msgid ""
+#~ "Modern offices in St. Pauli or warehouses in the port – we transform "
+#~ "Hamburg spaces with precision."
+#~ msgstr ""
+#~ "Modern offices in St. Pauli or warehouses in the port – we transform "
+#~ "Hamburg spaces with precision."
+
+#~ msgid "See Hamburg Projects"
+#~ msgstr "See Hamburg Projects"
+
+#~ msgid "Get in Touch"
+#~ msgstr "Get in Touch"
+
+#~ msgid "Name"
+#~ msgstr "Name"
+
+#~ msgid "Email"
+#~ msgstr "Email"
+
+#~ msgid "Phone"
+#~ msgstr "Phone"
+
+#~ msgid "Message"
+#~ msgstr "Message"
+
+#~ msgid "Send"
+#~ msgstr "Send"
+
+#~ msgid "Chat"
+#~ msgstr "Chat"
+
+#~ msgid "Ask a question"
+#~ msgstr "Ask a question"

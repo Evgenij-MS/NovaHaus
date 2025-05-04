@@ -1,37 +1,42 @@
 import re
 import os
+import logging
 from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
-from django.utils.translation import gettext as _
-_ = lambda s: s
+from django.utils.translation import gettext_lazy as _
 
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 def get_env_variable(var_name, default=None):
+    """Получение переменной окружения с логированием."""
     value = os.getenv(var_name, default)
     if value is None:
-        logging.warning(f"Переменная окружения {var_name} отсутствует, используем значение по умолчанию.")
-        return default
+        logging.warning(f"Переменная окружения {var_name} отсутствует, используем значение по умолчанию: {default}")
     return value
 
+# Проверка обязательных переменных окружения
 SECRET_KEY = get_env_variable('SECRET_KEY')
-DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't', 'y', 'yes')
-ROOT_URLCONF = 'NovaHaus.urls'
+if not SECRET_KEY:
+    raise ImproperlyConfigured("SECRET_KEY не установлен в переменных окружения")
 
-ALLOWED_HOSTS = [
+DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't', 'y', 'yes')
+
+# Синхронизация ALLOWED_HOSTS с .env
+ALLOWED_HOSTS = get_env_variable('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+ALLOWED_HOSTS.extend([
     'novahaus-eu.herokuapp.com',
     'novahaus-eu-5b21cc3bb91d.herokuapp.com',
     'novahaus-koeln.de',
     'www.novahaus-koeln.de',
     'novahaus-hamburg.de',
-    'www.novahaus-hamburg.de',
-    'localhost',
-    '127.0.0.1'
-]
+    'www.novahaus-hamburg.de'
+])
+
+ROOT_URLCONF = 'NovaHaus.urls'
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -49,7 +54,7 @@ INSTALLED_APPS = [
     'axes',
     'django_extensions',
     'main',
-    'pwa',  # Добавлено для PWA
+    'pwa',
 ]
 
 MIDDLEWARE = [
@@ -66,10 +71,22 @@ MIDDLEWARE = [
     'django.middleware.gzip.GZipMiddleware',
 ]
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': os.getenv('REDISCLOUD_URL', 'redis://localhost:6379/0'),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
+CACHE_TTL = 60 * 15
+
 USE_I18N = True
 USE_L10N = True
 
-LANGUAGE_CODE = 'de'  # Основной язык — немецкий
+LANGUAGE_CODE = 'de'
 LANGUAGES = [
     ('de', 'Deutsch'),
     ('en', 'English'),
@@ -80,7 +97,7 @@ LANGUAGES = [
 LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
 
 LANGUAGE_COOKIE_NAME = 'django_language'
-LANGUAGE_COOKIE_AGE = 365 * 24 * 60 * 60  # 1 год
+LANGUAGE_COOKIE_AGE = 365 * 24 * 60 * 60
 
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
@@ -100,40 +117,38 @@ if not DEBUG:
 ALLOW_CURL = os.getenv("ALLOW_CURL", "False") == "True"
 
 DISALLOWED_USER_AGENTS = [
-    re.compile(r'bot'),
-    re.compile(r'scanner'),
-    re.compile(r'curl'),
-    re.compile(r'Chrome/91\.0\.4472\.124'),
-    re.compile(r'python-requests'),
-    re.compile(r'Go-http-client'),
-    re.compile(r'Java/'),
-    re.compile(r'nikto'),
-    re.compile(r'sqlmap'),
-    re.compile(r'wget'),
-    re.compile(r'libwww-perl'),
-    re.compile(r'zgrab'),
-    re.compile(r'okhttp'),
-    re.compile(r'postman')
+    re.compile(r'bot', re.IGNORECASE),
+    re.compile(r'scanner', re.IGNORECASE),
+    re.compile(r'Chrome/91\.0\.4472\.124', re.IGNORECASE),
+    re.compile(r'Java/', re.IGNORECASE),
+    re.compile(r'nikto', re.IGNORECASE),
+    re.compile(r'sqlmap', re.IGNORECASE),
+    re.compile(r'wget', re.IGNORECASE),
+    re.compile(r'libwww-perl', re.IGNORECASE),
+    re.compile(r'zgrab', re.IGNORECASE),
+    re.compile(r'okhttp', re.IGNORECASE),
+    re.compile(r'postman', re.IGNORECASE)
 ]
 
 if not ALLOW_CURL:
     DISALLOWED_USER_AGENTS.extend([
-        re.compile(r'curl'),
-        re.compile(r'python-requests'),
+        re.compile(r'curl', re.IGNORECASE),
+        re.compile(r'python-requests', re.IGNORECASE),
+        re.compile(r'Go-http-client', re.IGNORECASE),
     ])
 
 SENSITIVE_URL_PATTERNS = [
-    re.compile(r'(^|/)\.env$'),
-    re.compile(r'(^|/)wp-'),
-    re.compile(r'(^|/)config'),
-    re.compile(r'(^|/)backup'),
-    re.compile(r'(^|/)\.git$'),
-    re.compile(r'\.sql$'),
-    re.compile(r'\.bak$'),
-    re.compile(r'\.log$'),
-    re.compile(r'(^|/)phpmyadmin'),
-    re.compile(r'(^|/)docker'),
-    re.compile(r'(^|/)npm'),
+    re.compile(r'(^|/)\.env$', re.IGNORECASE),
+    re.compile(r'(^|/)wp-', re.IGNORECASE),
+    re.compile(r'(^|/)config', re.IGNORECASE),
+    re.compile(r'(^|/)backup', re.IGNORECASE),
+    re.compile(r'(^|/)\.git$', re.IGNORECASE),
+    re.compile(r'\.sql$', re.IGNORECASE),
+    re.compile(r'\.bak$', re.IGNORECASE),
+    re.compile(r'\.log$', re.IGNORECASE),
+    re.compile(r'(^|/)phpmyadmin', re.IGNORECASE),
+    re.compile(r'(^|/)docker', re.IGNORECASE),
+    re.compile(r'(^|/)npm', re.IGNORECASE),
 ]
 
 AXES_FAILURE_LIMIT = 5
@@ -142,8 +157,6 @@ AXES_LOCKOUT_TEMPLATE = 'errors/lockout.html'
 AXES_RESET_ON_SUCCESS = True
 AXES_DISABLE_ACCESS_LOG = True
 
-# Настройка базы данных
-# Настройка базы данных
 if DEBUG:
     DATABASES = {
         'default': {
@@ -243,36 +256,43 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-CACHE_TTL = 60 * 15
-
-import sentry_sdk
-sentry_sdk.init(
-    dsn=os.getenv('SENTRY_DSN'),
-    traces_sample_rate=1.0,
-    profiles_sample_rate=1.0,
-)
-
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
         },
     },
-    'root': {
-        'handlers': ['console'],
-        'level': 'INFO',
+    'handlers': {
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': BASE_DIR / 'logs' / 'django.log',
+            'formatter': 'verbose',
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
+        },
     },
     'loggers': {
         'django': {
-            'handlers': ['console'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
-            'propagate': False,
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'main': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': True,
         },
         'axes': {
-            'handlers': ['console'],
+            'handlers': ['file', 'console'],
             'level': 'WARNING',
+            'propagate': True,
         },
     },
 }
@@ -282,11 +302,18 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-import logging
-logger = logging.getLogger(__name__)
-logger.info(f"Application started in DEBUG={DEBUG} mode")
+import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
-# PWA
+sentry_sdk.init(
+    dsn=os.getenv('SENTRY_DSN'),
+    integrations=[DjangoIntegration()],
+    traces_sample_rate=1.0,
+    profiles_sample_rate=1.0,
+    send_default_pii=True,
+    environment='production' if not DEBUG else 'development'
+)
+
 PWA_APP_NAME = 'NovaHaus'
 PWA_APP_DESCRIPTION = "Renovation services in Cologne and Hamburg"
 PWA_APP_THEME_COLOR = '#005B99'
@@ -316,6 +343,9 @@ PWA_APP_SPLASH_SCREEN = [
 ]
 PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'de'
+
+logger = logging.getLogger(__name__)
+logger.info(f"Application started in DEBUG={DEBUG} mode")
 
 # Временно закомментировано для выполнения миграций на Heroku
 import django_heroku

@@ -1,78 +1,105 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load static i18n %}
 
-{% block title %}Онлайн-калькулятор – NovaHaus{% endblock %}
-{% block description %}Рассчитайте стоимость ремонта или утепления с помощью нашего онлайн-калькулятора.{% endblock %}
-{% block keywords %}калькулятор, стоимость ремонта, утепление, NovaHaus{% endblock %}
+{% block title %}{% trans "Online-Kalkulator – NovaHaus" %}{% endblock %}
+{% block description %}{% trans "Berechnen Sie die Kosten für Renovierung oder Dämmung mit unserem Online-Kalkulator." %}{% endblock %}
+{% block keywords %}{% trans "Kalkulator, Renovierungskosten, Dämmung, NovaHaus" %}{% endblock %}
 
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/calculator.css' %}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 {% endblock %}
 
 {% block content %}
 <div class="calculator-container fade-in">
-    <h1>Онлайн-калькулятор</h1>
-    <form id="calculator-form" action="#" method="post">
-
-        {% csrf_token %}  <!-- Добавьте CSRF-токен -->
+    <h1>{% trans "Online-Kalkulator" %}</h1>
+    <form id="calculator-form">
+        {% csrf_token %}
 
         <!-- Выбор типа работ -->
         <div class="form-group">
-            <label for="work-type">Тип работ:</label>
+            <label for="work-type">{% trans "Art der Arbeit:" %}</label>
             <select id="work-type" name="work-type" required>
-                <option value="apartment">Ремонт квартир</option>
-                <option value="house">Ремонт домов</option>
-                <option value="office">Ремонт офисов</option>
-                <option value="warehouse">Ремонт складов</option>
-                <option value="facade">Фасадные работы</option>
-                <option value="insulation">Утепление домов</option>
-                <option value="demolition">Демонтажные работы</option>
-                <option value="cleaning">Уборка после ремонта</option>
+                <option value="apartment">{% trans "Wohnungsrenovierung" %}</option>
+                <option value="house">{% trans "Hausrenovierung" %}</option>
+                <option value="office">{% trans "Bürorenovierung" %}</option>
+                <option value="warehouse">{% trans "Lagerhallenrenovierung" %}</option>
+                <option value="facade">{% trans "Fassadenarbeiten" %}</option>
+                <option value="insulation">{% trans "Hausdämmung" %}</option>
+                <option value="demolition">{% trans "Abbrucharbeiten" %}</option>
+                <option value="cleaning">{% trans "Reinigung nach Renovierung" %}</option>
             </select>
         </div>
 
         <!-- Площадь -->
         <div class="form-group">
-            <label for="area">Площадь (м²):</label>
-            <input type="number" id="area" name="area" placeholder="Например: 50" required>
-
+            <label for="area">{% trans "Fläche (m²):" %}</label>
+            <input type="number" id="area" name="area" placeholder="{% trans 'Z.B. 50' %}" required min="1" step="0.1">
         </div>
 
-        <!-- Общая стоимость -->
+        <!-- Материалы -->
         <div class="form-group">
-            <label for="total-cost">Общая стоимость:</label>
-            <input type="number" id="total-cost" name="total-cost" required>
+            <label for="material">{% trans "Materialqualität:" %}</label>
+            <select id="material" name="material" required>
+                <option value="economy">{% trans "Economy" %}</option>
+                <option value="standard">{% trans "Standard" %}</option>
+                <option value="premium">{% trans "Premium" %}</option>
+            </select>
         </div>
 
-        <!-- Стоимость материалов -->
+        <!-- Включение материалов -->
         <div class="form-group">
-            <label for="material-cost">Стоимость материалов:</label>
-            <input type="number" id="material-cost" name="material-cost" required>
+            <label for="include-materials">{% trans "Materialien einbeziehen:" %}</label>
+            <select id="include-materials" name="include-materials" required>
+                <option value="yes">{% trans "Ja" %}</option>
+                <option value="no">{% trans "Nein" %}</option>
+            </select>
         </div>
 
-        <!-- Стоимость работы -->
+        <!-- Срочность -->
         <div class="form-group">
-            <label for="labor-cost">Стоимость работы:</label>
-            <input type="number" id="labor-cost" name="labor-cost" required>
+            <label for="urgency">{% trans "Dringlichkeit:" %}</label>
+            <select id="urgency" name="urgency" required>
+                <option value="normal">{% trans "Normal" %}</option>
+                <option value="fast">{% trans "Schnell" %}</option>
+            </select>
         </div>
 
-        <!-- Кнопка расчета -->
-        <button type="button" id="calculate-button" class="btn">Рассчитать</button>
+        <!-- Дополнительные услуги -->
+        <div class="form-group">
+            <label>{% trans "Zusätzliche Dienstleistungen:" %}</label>
+            <div>
+                <input type="checkbox" id="cleaning" name="cleaning">
+                <label for="cleaning">{% trans "Reinigung nach Renovierung" %}</label>
+            </div>
+            <div>
+                <input type="checkbox" id="delivery" name="delivery">
+                <label for="delivery">{% trans "Lieferung von Materialien" %}</label>
+            </div>
+        </div>
 
+        <!-- Кнопки -->
+        <button type="button" id="calculate-button" class="btn">{% trans "Berechnen" %}</button>
+        <button type="button" id="save-button" class="btn">{% trans "Speichern" %}</button>
     </form>
 
     <!-- Результат -->
     <p id="result" class="result"></p>
 
-    <!-- Блок рекомендаций от ИИ -->
+    <!-- Диаграмма -->
+    <canvas id="cost-chart" style="max-height: 300px;"></canvas>
+
+    <!-- Рекомендации от ИИ -->
     <div id="ai-recommendations" class="ai-recommendations">
-        <h2>Рекомендации от ИИ</h2>
+        <h2>{% trans "Empfehlungen von KI" %}</h2>
         <p id="ai-recommendation-text"></p>
     </div>
 
     <!-- Ссылка назад -->
-    <a href="{% url 'home' %}" class="btn">Вернуться на главную</a>
+    <a href="{% url 'home' %}" class="btn">{% trans "Zurück zur Hauptseite" %}</a>
 </div>
 
+<script src="{% static 'js/calculator.js' %}"></script>
+<script src="{% static 'js/chart.js' %}"></script>
 <script src="{% static 'js/ai-integration.js' %}"></script>
 {% endblock %}

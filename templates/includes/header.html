@@ -16,7 +16,7 @@
         <h1 class="page-title">
             {% if request.path == url_home %}{% trans "Home" %}
             {% elif request.path == url_services %}{% trans "Services" %}
-            {% elif 'portfolio' in request.path %}{% trans "Portfolio" %}
+            {% elif 'portfolio' in request.path %}{% trans "Portfolio" %}
             {% elif 'blog' in request.path %}{% trans "Blog" %}
             {% elif 'about' in request.path %}{% trans "About Us" %}
             {% elif request.path == url_contact %}{% trans "Contact" %}
@@ -37,15 +37,17 @@
         </nav>
 
         <div class="language-switcher">
-            <select id="language" class="language-select" aria-label="{% trans 'Site Language' %}">
-                {% get_available_languages as LANGUAGES %}
-                {% get_current_language as LANGUAGE_CODE %}
-                {% for lang in LANGUAGES %}
-                    <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
-                        {{ lang.1 }}
-                    </option>
-                {% endfor %}
-            </select>
+            <form id="language-form" method="post" action="{% url 'set_language' lang_code='de' %}">
+                {% csrf_token %}
+                <select id="language" name="language" class="language-select" aria-label="{% trans 'Site Language' %}" data-current-lang="{{ LANGUAGE_CODE }}">
+                    {% get_available_languages as LANGUAGES %}
+                    {% for lang in LANGUAGES %}
+                        <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
+                            {{ lang.1 }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
         </div>
     </div>
 
