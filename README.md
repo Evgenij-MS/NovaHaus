@@ -233,3 +233,5 @@ NovaHaus/
 
 NovaHaus/eslint.config.js #в корне проекта
 NovaHaus/main/templates/main/privacy.html
+NovaHaus/static/models/sample_model.glb
+

@@ -4,7 +4,7 @@ from .models import Service, Portfolio, Partner, Calculation, Review
 # Регистрация модели Service
 @admin.register(Service)
 class ServiceAdmin(admin.ModelAdmin):
-    list_display = ('title', 'category', 'price')
+    list_display = ('title', 'category', 'labor_cost_per_m2')
     search_fields = ('title', 'category')
     list_filter = ('category',)
 

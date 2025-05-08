@@ -16,21 +16,64 @@ async function calculateCost(event) {
     const csrfToken = getCSRFToken();
 
     try {
-        const response = await fetch('/calculate_cost/', {
+        // Запрос трудовых затрат
+        // @ts-ignore
+        const costResponse = await fetch('/calculate_cost/', {
             method: 'POST',
             headers: { 'X-CSRFToken': csrfToken },
             body: formData
         });
-        const data = await response.json();
-        if (data.success) {
-            resultElement.innerText = `Примерная стоимость: ${formatCurrency(data.total_cost)}`;
-            resultElement.style.color = 'black';
-            showChart(data.total_cost, data.material_cost, data.labor_cost);
-            await getAIRecommendations(data);
-        } else {
-            resultElement.innerText = `Ошибка: ${data.error}`;
+        const costData = await costResponse.json();
+        console.log('Ответ calculate_cost:', costData);
+
+        if (!costData.success) {
+            resultElement.innerText = `Ошибка: ${costData.error}`;
             resultElement.style.color = 'red';
+            return;
         }
+
+        const laborCost = costData.labor_cost || 0;
+        const workType = costData.work_type || '';
+        const area = costData.area || 0;
+        const materialQuality = formData.get('material-quality') || 'standard';
+
+        // Запрос материальных затрат и рекомендаций
+        // @ts-ignore
+        const aiResponse = await fetch('/get-ai-recommendations/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify({
+                laborCost: laborCost,
+                workType: workType,
+                area: area,
+                materialQuality: materialQuality,
+                language: navigator.language.split('-')[0] || 'de'
+            })
+        });
+        const aiData = await aiResponse.json();
+        console.log('Ответ get-ai-recommendations:', aiData);
+
+        const recommendationElement = document.getElementById('ai-recommendation-text');
+        if (aiData.success) {
+            recommendationElement.innerText = aiData.recommendation || 'Нет рекомендаций';
+        } else {
+            recommendationElement.innerText = `Ошибка: ${aiData.error}`;
+        }
+
+        const materialCost = aiData.material_cost || 0;
+        const totalCost = laborCost + materialCost;
+
+        // Отображение результата
+        resultElement.innerText = `Примерная стоимость: ${formatCurrency(totalCost)}`;
+        resultElement.style.color = 'black';
+        resultElement.dataset.materialCost = materialCost;
+        resultElement.dataset.laborCost = laborCost;
+
+        // Обновление диаграммы
+        showChart(totalCost, materialCost, laborCost);
     } catch (error) {
         resultElement.innerText = 'Ошибка при расчете. Попробуйте снова.';
         resultElement.style.color = 'red';
@@ -66,51 +109,23 @@ function showChart(totalCost, materialCost, laborCost) {
     }
 }
 
-async function getAIRecommendations(data) {
-    const recommendationElement = document.getElementById('ai-recommendation-text');
-    try {
-        const response = await fetch('/get-ai-recommendations/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCSRFToken()
-            },
-            body: JSON.stringify({
-                totalCost: data.total_cost,
-                materialCost: data.material_cost,
-                laborCost: data.labor_cost,
-                workType: String(data.work_type), // Преобразование в строку
-                area: data.area,
-                language: navigator.language.split('-')[0] || 'de'
-            })
-        });
-        const result = await response.json();
-        if (result.success) {
-            recommendationElement.innerText = result.recommendation;
-        } else {
-            recommendationElement.innerText = 'Не удалось получить рекомендации.';
-        }
-    } catch (error) {
-        recommendationElement.innerText = 'Ошибка при получении рекомендаций.';
-        console.error('Ошибка AI:', error);
-    }
-}
-
 async function saveCalculation() {
     const form = document.getElementById('calculator-form');
     const formData = new FormData(form);
+    const resultElement = document.getElementById('result');
     const data = {
-        workType: String(formData.get('work-type')), // Преобразование в строку
-        area: parseFloat(formData.get('area')),
-        material: String(formData.get('material-quality')), // Преобразование в строку
-        totalCost: parseFloat(document.getElementById('result').innerText.match(/[\d,.]+/)?.[0]?.replace(',', '.')) || 0,
-        materialCost: parseFloat(document.getElementById('result').dataset.materialCost || 0),
-        laborCost: parseFloat(document.getElementById('result').dataset.laborCost || 0),
+        workType: String(formData.get('work-type') || ''),
+        area: parseFloat(formData.get('area')) || 0,
+        material: String(formData.get('material-quality') || ''),
+        totalCost: parseFloat(resultElement.innerText.match(/[\d,.]+/)?.[0]?.replace(',', '.')) || 0,
+        materialCost: parseFloat(resultElement.dataset.materialCost || 0),
+        laborCost: parseFloat(resultElement.dataset.laborCost || 0),
         timestamp: new Date().toLocaleString()
     };
     const csrfToken = getCSRFToken();
 
     try {
+        // @ts-ignore
         const response = await fetch('/save-calculation/', {
             method: 'POST',
             headers: {

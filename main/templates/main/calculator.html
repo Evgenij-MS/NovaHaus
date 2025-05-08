@@ -46,6 +46,13 @@
         <h2>{% trans 'AI Recommendations' %}</h2>
         <p id="ai-recommendation-text">{% trans 'Enter data to get recommendations.' %}</p>
     </div>
+    <!-- Секция для 3D-визуализации -->
+    <div class="3d-viewer-section">
+        <h2>{% trans '3D Visualization' %}</h2>
+        <button class="btn model-button" onclick="show3DModel('{% static 'models/sample_model.glb' %}')">{% trans 'Show 3D Model' %}</button>
+        <button class="btn model-button" onclick="hide3DModel()">{% trans 'Hide 3D Model' %}</button>
+        <model-viewer id="3d-viewer" style="display: none; width: 100%; height: 400px;" src="" ar shadow-intensity="1" camera-controls touch-action="pan-y" alt="{% trans '3D Model Viewer' %}"></model-viewer>
+    </div>
     <a href="{% url 'home' %}" class="btn btn-secondary">{% trans 'Back to Home' %}</a>
 </section>
 
@@ -105,6 +112,15 @@
     max-width: 400px;
     margin: 20px auto;
 }
+.3d-viewer-section {
+    margin-top: 20px;
+    padding: 20px;
+    background: #e8f4e8;
+    border-radius: 4px;
+}
+.model-button {
+    margin-bottom: 10px;
+}
 @media (max-width: 600px) {
     .calculator-container {
         margin: 20px;
@@ -116,7 +132,9 @@
     }
 }
 </style>
+
 {% block extra_js %}
     <script src="{% static 'js/calculator.js' %}"></script>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 {% endblock %}
 {% endblock %}
