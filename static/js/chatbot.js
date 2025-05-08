@@ -36,34 +36,41 @@ document.addEventListener('DOMContentLoaded', () => {
     window.style.display = window.style.display === 'block' ? 'none' : 'block';
   });
 
+  async function sendMessage(input, messagesElement) {
+    messagesElement.innerHTML += `<p class="user">${input}</p>`;
+    try {
+      const csrfToken = getCSRFToken();
+      if (!csrfToken) {
+        messagesElement.innerHTML += `<p class="bot">Ошибка: CSRF-токен не найден.</p>`;
+        return;
+      }
+      const response = await fetch('/chatbot/', {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': csrfToken,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message: input, language: lang })
+      });
+      const data = await response.json();
+      if (data.response) {
+        messagesElement.innerHTML += `<p class="bot">${data.response}</p>`;
+      } else {
+        messagesElement.innerHTML += `<p class="bot">Ошибка: ${data.error}</p>`;
+      }
+    } catch (error) {
+      messagesElement.innerHTML += `<p class="bot">Ошибка соединения. Попробуйте позже.</p>`;
+      console.error('Chatbot error:', error);
+    }
+    messagesElement.scrollTop = messagesElement.scrollHeight;
+  }
+
   document.querySelector('.chatbot-input').addEventListener('keypress', async (e) => {
     if (e.key === 'Enter') {
       const input = e.target.value.trim();
       if (!input) return;
-      chatbotMessages.innerHTML += `<p class="user">${input}</p>`;
-      try {
-        const csrfToken = getCSRFToken();
-        if (!csrfToken) throw new Error('CSRF token not found');
-        const response = await fetch('/chatbot/', {
-          method: 'POST',
-          headers: {
-            'X-CSRFToken': csrfToken,
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ message: input, language: lang })
-        });
-        const data = await response.json();
-        if (data.response) {
-          chatbotMessages.innerHTML += `<p class="bot">${data.response}</p>`;
-        } else {
-          chatbotMessages.innerHTML += `<p class="bot">Fehler: ${data.error}</p>`;
-        }
-        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-        e.target.value = '';
-      } catch (error) {
-        chatbotMessages.innerHTML += `<p class="bot">Verbindungsfehler. Bitte versuchen Sie es später.</p>`;
-        console.error('Chatbot error:', error);
-      }
+      await sendMessage(input, chatbotMessages);
+      e.target.value = '';
     }
   });
 });

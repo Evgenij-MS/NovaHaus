@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const supportedLangs = ['de', 'en', 'tr', 'ru'];
   const defaultLang = 'de';
 
-  // Получение CSRF-токена из cookies с использованием регулярного выражения
+  // Получение CSRF-токена из cookies
   function getCSRFToken() {
     const match = document.cookie.match(/(^|;)\s*csrftoken=([^;]+)/);
     return match ? match[2] : null;
@@ -30,10 +30,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       localStorage.setItem('language', lang);
 
+      const csrfToken = getCSRFToken();
+      if (!csrfToken) {
+        console.error('CSRF-токен не найден');
+        return;
+      }
+
       fetch(`/set-language/${lang}/`, {
         method: 'POST',
         headers: {
-          'X-CSRFToken': getCSRFToken(),
+          'X-CSRFToken': csrfToken,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({ language: lang })
@@ -41,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
           if (data.success) {
-            // Редирект с учётом нового языкового префикса
             const currentPath = window.location.pathname;
             location.assign(currentPath.replace(/^\/(de|en|tr|ru)\//, `/${lang}/`));
           } else {

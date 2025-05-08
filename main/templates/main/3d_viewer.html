@@ -1,24 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3D Viewer</title>
-    <link rel="stylesheet" href="{% static 'css/global.css' %}">
-</head>
-<body>
-    <h1>3D Модели</h1>
+{% extends 'base.html' %}
+{% load static i18n %}
 
-    <!-- Контейнер для показа 3D-модели -->
-    <iframe id="3d-viewer" style="display: none; width: 100%; height: 500px;"></iframe>
+{% block title %}{% trans '3D Viewer – NovaHaus' %}{% endblock %}
+{% block meta_description %}{% trans 'View 3D models of renovation projects.' %}{% endblock %}
+{% block og_title %}{% trans '3D Viewer – NovaHaus' %}{% endblock %}
+{% block og_description %}{% trans 'View 3D models of renovation projects.' %}{% endblock %}
 
-    <!-- Кнопки -->
+{% block content %}
+<section class="3d-viewer-container" role="main" aria-labelledby="3d-viewer-title">
+    <h1 id="3d-viewer-title">{% trans '3D Model Viewer' %}</h1>
     <div class="button-container">
-        <button class="model-button" onclick="show3DModel('https://example.com/model.glb')">Показать 3D-модель</button>
-        <button class="model-button" onclick="hide3DModel()">Скрыть 3D-модель</button>
+        <button class="model-button" onclick="show3DModel('https://modelviewer.dev/assets/ShopifyModels/Chair.glb')">{% trans 'Show 3D Model' %}</button>
+        <button class="model-button" onclick="hide3DModel()">{% trans 'Hide 3D Model' %}</button>
     </div>
+    <model-viewer id="3d-viewer" style="display: none; width: 100%; height: 500px;" src="" ar shadow-intensity="1" camera-controls touch-action="pan-y" alt="{% trans '3D Model Viewer' %}"></model-viewer>
+</section>
 
-    <!-- Подключение JavaScript -->
-    <script src="{% static 'js/3d-model.js' %}"></script>
-</body>
-</html>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/3d-viewer.css' %}">
+{% endblock %}
+
+<style>
+.3d-viewer-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.button-container {
+    margin-bottom: 20px;
+}
+.model-button {
+    background: #005B99;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.model-button:hover {
+    background: #004080;
+}
+</style>
+
+{% block extra_js %}
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+{% endblock %}
+{% endblock %}

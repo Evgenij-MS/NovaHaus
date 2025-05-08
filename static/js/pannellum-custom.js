@@ -4,24 +4,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeButton = document.querySelector('.panorama-close');
     const toggles = document.querySelectorAll('.panorama-toggle');
 
+    function loadPanorama(panoramaUrl) {
+        if (typeof pannellum === 'undefined') {
+            console.error('Pannellum: Библиотека не найдена.');
+            return;
+        }
+        pannellum.viewer('panorama', {
+            "type": "equirectangular",
+            "panorama": panoramaUrl,
+            "autoLoad": true,
+            "autoRotate": -2,
+            "compass": true,
+            "title": "NovaHaus Project",
+            "author": "NovaHaus"
+        });
+        console.log('Pannellum: Панорама загружена:', panoramaUrl);
+    }
+
     toggles.forEach(toggle => {
         toggle.addEventListener('click', () => {
             const panoramaUrl = toggle.getAttribute('data-panorama');
             modal.classList.remove('hidden');
-            if (typeof pannellum !== 'undefined') {
-                pannellum.viewer('panorama', {
-                    "type": "equirectangular",
-                    "panorama": panoramaUrl,
-                    "autoLoad": true,
-                    "autoRotate": -2,
-                    "compass": true,
-                    "title": "NovaHaus Project",
-                    "author": "NovaHaus"
-                });
-                console.log('Pannellum: Панорама загружена:', panoramaUrl);
-            } else {
-                console.error('Pannellum: Библиотека не найдена.');
-            }
+            loadPanorama(panoramaUrl);
         });
     });
 

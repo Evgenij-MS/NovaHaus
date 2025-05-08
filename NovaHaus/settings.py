@@ -18,14 +18,12 @@ def get_env_variable(var_name, default=None):
         logging.warning(f"Переменная окружения {var_name} отсутствует, используем значение по умолчанию: {default}")
     return value
 
-# Проверка обязательных переменных окружения
 SECRET_KEY = get_env_variable('SECRET_KEY')
 if not SECRET_KEY:
     raise ImproperlyConfigured("SECRET_KEY не установлен в переменных окружения")
 
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't', 'y', 'yes')
 
-# Синхронизация ALLOWED_HOSTS с .env
 ALLOWED_HOSTS = get_env_variable('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 ALLOWED_HOSTS.extend([
     'novahaus-eu.herokuapp.com',
@@ -69,6 +67,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'axes.middleware.AxesMiddleware',
     'django.middleware.gzip.GZipMiddleware',
+    # Добавляем кастомный middleware
+    'main.middleware.BlockBadBotsMiddleware',
 ]
 
 CACHES = {
@@ -348,5 +348,17 @@ logger = logging.getLogger(__name__)
 logger.info(f"Application started in DEBUG={DEBUG} mode")
 
 # Временно закомментировано для выполнения миграций на Heroku
-import django_heroku
-django_heroku.settings(locals())
+# import django_heroku
+# django_heroku.settings(locals())
+
+import os
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}

@@ -1,282 +1,271 @@
+# English translations for NovaHaus project
 msgid ""
 msgstr ""
-"Project-Id-Version: NovaHaus\n"
+"Project-Id-Version: NovaHaus 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-04 13:33+0200\n"
-"PO-Revision-Date: 2025-04-13 12:00+0200\n"
-"Last-Translator: \n"
-"Language-Team: English\n"
+"POT-Creation-Date: 2025-05-08 10:14+0200\n"
+"PO-Revision-Date: 2025-05-08 12:00+0000\n"
+"Last-Translator: Translator Name <email@example.com>\n"
+"Language-Team: English <en@example.com>\n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
 #: .\main\models.py:8
-msgid "Строительство"
+msgid "Ремонт квартиры"
 msgstr ""
 
 #: .\main\models.py:9
-msgid "Дизайн"
+msgid "Ремонт дома"
 msgstr ""
 
-#: .\main\models.py:10
-msgid "Ремонт"
+#: .\main\models.py:10 .\main\templates\main\home.html:41
+msgid "Ремонт офиса"
 msgstr ""
 
 #: .\main\models.py:11
-msgid "Ванные комнаты"
+msgid "Ремонт склада"
 msgstr ""
 
-#: .\main\models.py:12
-msgid "Электрика"
+#: .\main\models.py:12 .\templates\includes\slider.html:6
+msgid "Фасадные работы"
 msgstr ""
 
 #: .\main\models.py:13
-msgid "Фасады"
+msgid "Ремонт ванной"
 msgstr ""
 
 #: .\main\models.py:14
-msgid "Демонтаж"
+msgid "Электрика"
 msgstr ""
 
 #: .\main\models.py:15
-msgid "Уборка"
+msgid "Демонтаж"
 msgstr ""
 
-#: .\main\models.py:18 .\main\models.py:33 .\main\models.py:113
+#: .\main\models.py:18 .\main\models.py:34 .\main\models.py:111
 msgid "Название"
 msgstr ""
 
-#: .\main\models.py:19 .\main\models.py:34
+#: .\main\models.py:19 .\main\models.py:35
 msgid "Описание"
 msgstr ""
 
 #: .\main\models.py:20
-msgid "Цена"
+msgid "Трудовые затраты за м²"
 msgstr ""
 
-#: .\main\models.py:21 .\main\models.py:38
+#: .\main\models.py:21
+msgid "Базовая стоимость материалов за м²"
+msgstr ""
+
+#: .\main\models.py:22 .\main\models.py:39
 msgid "Категория"
 msgstr ""
 
-#: .\main\models.py:22 .\main\models.py:116
+#: .\main\models.py:23 .\main\models.py:114
 msgid "Изображение"
 msgstr ""
 
-#: .\main\models.py:28
+#: .\main\models.py:29
 msgid "Услуга"
 msgstr ""
 
-#: .\main\models.py:29
+#: .\main\models.py:30
 msgid "Услуги"
 msgstr ""
 
-#: .\main\models.py:35
+#: .\main\models.py:36
 msgid "Изображение до"
 msgstr ""
 
-#: .\main\models.py:36
+#: .\main\models.py:37
 msgid "Изображение после"
 msgstr ""
 
-#: .\main\models.py:37
+#: .\main\models.py:38
 msgid "Панорамное изображение"
 msgstr ""
 
-#: .\main\models.py:44
+#: .\main\models.py:45
 msgid "Проект портфолио"
 msgstr ""
 
-#: .\main\models.py:45
+#: .\main\models.py:46
 msgid "Проекты портфолио"
 msgstr ""
 
-#: .\main\models.py:50
+#: .\main\models.py:51
 msgid "Новый"
 msgstr ""
 
-#: .\main\models.py:51
+#: .\main\models.py:52
 msgid "В процессе"
 msgstr ""
 
-#: .\main\models.py:52
+#: .\main\models.py:53
 msgid "Завершен"
 msgstr ""
 
-#: .\main\models.py:55 .\main\models.py:78 .\main\models.py:93
-#: .\main\models.py:127
+#: .\main\models.py:56 .\main\models.py:76 .\main\models.py:91
+#: .\main\models.py:125
 msgid "Пользователь"
 msgstr ""
 
-#: .\main\models.py:56
+#: .\main\models.py:57
 msgid "Тип работы"
 msgstr ""
 
-#: .\main\models.py:57
+#: .\main\models.py:58
 msgid "Площадь"
 msgstr ""
 
-#: .\main\models.py:58
+#: .\main\models.py:59
 msgid "Материал"
 msgstr ""
 
-#: .\main\models.py:59
-msgid "Включить материалы"
-msgstr ""
-
 #: .\main\models.py:60
-msgid "Срочность"
-msgstr ""
-
-#: .\main\models.py:61
 msgid "Общая стоимость"
 msgstr ""
 
-#: .\main\models.py:62
+#: .\main\models.py:61
 msgid "Стоимость материалов"
 msgstr ""
 
-#: .\main\models.py:63
+#: .\main\models.py:62
 msgid "Стоимость работы"
 msgstr ""
 
-#: .\main\models.py:64
+#: .\main\models.py:63
 msgid "Статус"
 msgstr ""
 
-#: .\main\models.py:65
-msgid "Дата начала"
-msgstr ""
-
-#: .\main\models.py:66
-msgid "Дата окончания"
-msgstr ""
-
-#: .\main\models.py:67
-msgid "Дополнительные данные расчёта"
-msgstr ""
-
-#: .\main\models.py:73
-msgid "Расчёт"
-msgstr ""
-
-#: .\main\models.py:74
-msgid "Расчёты"
-msgstr ""
-
-#: .\main\models.py:79
-msgid "Автор"
-msgstr ""
-
-#: .\main\models.py:80
-msgid "Текст отзыва"
-msgstr ""
-
-#: .\main\models.py:81
-msgid "Оценка"
-msgstr ""
-
-#: .\main\models.py:82 .\main\models.py:134
+#: .\main\models.py:64 .\main\models.py:80 .\main\models.py:132
 msgid "Дата создания"
 msgstr ""
 
-#: .\main\models.py:88
+#: .\main\models.py:65
+msgid "Дополнительные данные расчёта"
+msgstr ""
+
+#: .\main\models.py:71
+msgid "Расчёт"
+msgstr ""
+
+#: .\main\models.py:72
+msgid "Расчёты"
+msgstr ""
+
+#: .\main\models.py:77
+msgid "Автор"
+msgstr ""
+
+#: .\main\models.py:78
+msgid "Текст отзыва"
+msgstr ""
+
+#: .\main\models.py:79
+msgid "Оценка"
+msgstr ""
+
+#: .\main\models.py:86
 msgid "Отзыв"
 msgstr ""
 
-#: .\main\models.py:89
+#: .\main\models.py:87
 msgid "Отзывы"
 msgstr ""
 
-#: .\main\models.py:94
+#: .\main\models.py:92
 msgid "Имя партнёра"
 msgstr ""
 
-#: .\main\models.py:95
+#: .\main\models.py:93
 msgid "Контактная информация"
 msgstr ""
 
-#: .\main\models.py:96 .\main\templates\main\home.html:263
+#: .\main\models.py:94 .\main\templates\main\home.html:263
 msgid "Телефон"
 msgstr ""
 
-#: .\main\models.py:97 .\main\templates\main\home.html:262
+#: .\main\models.py:95 .\main\templates\main\home.html:262
 msgid "Электронная почта"
 msgstr ""
 
-#: .\main\models.py:98
+#: .\main\models.py:96
 msgid "Реферальный код"
 msgstr ""
 
-#: .\main\models.py:99
+#: .\main\models.py:97
 msgid "Количество привлеченных клиентов"
 msgstr ""
 
-#: .\main\models.py:100
+#: .\main\models.py:98
 msgid "Общий заработок"
 msgstr ""
 
-#: .\main\models.py:101
+#: .\main\models.py:99
 msgid "Дата регистрации"
 msgstr ""
 
-#: .\main\models.py:102
+#: .\main\models.py:100
 msgid "Дата последнего обновления"
 msgstr ""
 
-#: .\main\models.py:108
+#: .\main\models.py:106
 msgid "Партнёр"
 msgstr ""
 
-#: .\main\models.py:109
+#: .\main\models.py:107
 msgid "Партнёры"
 msgstr ""
 
-#: .\main\models.py:114
+#: .\main\models.py:112
 msgid "Содержание"
 msgstr ""
 
-#: .\main\models.py:115
+#: .\main\models.py:113
 msgid "Дата публикации"
 msgstr ""
 
-#: .\main\models.py:122
+#: .\main\models.py:120
 msgid "Статья блога"
 msgstr ""
 
-#: .\main\models.py:123
+#: .\main\models.py:121
 msgid "Статьи блога"
 msgstr ""
 
-#: .\main\models.py:128 .\main\templates\main\home.html:264
+#: .\main\models.py:126 .\main\templates\main\home.html:264
 msgid "Сообщение"
 msgstr ""
 
-#: .\main\models.py:129
+#: .\main\models.py:127
 msgid "Ответ"
 msgstr ""
 
-#: .\main\models.py:130
+#: .\main\models.py:128
 msgid "Язык"
 msgstr ""
 
-#: .\main\models.py:131
+#: .\main\models.py:129
 msgid "Путь к файлу"
 msgstr ""
 
-#: .\main\models.py:132
+#: .\main\models.py:130
 msgid "Путь к аудио"
 msgstr ""
 
-#: .\main\models.py:133
+#: .\main\models.py:131
 msgid "IP-адрес"
 msgstr ""
 
-#: .\main\models.py:141
+#: .\main\models.py:139
 msgid "Лог чата"
 msgstr ""
 
-#: .\main\models.py:142
+#: .\main\models.py:140
 msgid "Логи чата"
 msgstr ""
 
@@ -303,130 +292,121 @@ msgid "Вернуться на главную"
 msgstr ""
 
 #: .\main\templates\main\calculator.html:4
-msgid "Online-Kalkulator – NovaHaus"
+#: .\main\templates\main\calculator.html:6
+msgid "Online Calculator – NovaHaus"
 msgstr ""
 
 #: .\main\templates\main\calculator.html:5
-msgid ""
-"Berechnen Sie die Kosten für Renovierung oder Dämmung mit unserem Online-"
-"Kalkulator."
+#: .\main\templates\main\calculator.html:7
+msgid "Calculate the cost of renovation with our AI-powered calculator."
 msgstr ""
 
-#: .\main\templates\main\calculator.html:6
-msgid "Kalkulator, Renovierungskosten, Dämmung, NovaHaus"
+#: .\main\templates\main\calculator.html:11
+msgid "AI Cost Calculator"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:12
+msgid "Cost Calculator Form"
 msgstr ""
 
 #: .\main\templates\main\calculator.html:15
-msgid "Online-Kalkulator"
+msgid "Type of Work"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:17
+msgid "Apartment Renovation"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:18
+msgid "House Renovation"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:19
+msgid "Office Renovation"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:20
+msgid "Warehouse Renovation"
 msgstr ""
 
 #: .\main\templates\main\calculator.html:21
-msgid "Art der Arbeit:"
+msgid "Facade Works"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:22
+msgid "Bathroom Renovation"
 msgstr ""
 
 #: .\main\templates\main\calculator.html:23
-msgid "Wohnungsrenovierung"
+msgid "Electrical Works"
 msgstr ""
 
 #: .\main\templates\main\calculator.html:24
-msgid "Hausrenovierung"
-msgstr ""
-
-#: .\main\templates\main\calculator.html:25
-msgid "Bürorenovierung"
-msgstr ""
-
-#: .\main\templates\main\calculator.html:26
-msgid "Lagerhallenrenovierung"
-msgstr ""
-
-#: .\main\templates\main\calculator.html:27
-msgid "Fassadenarbeiten"
+msgid "Demolition Works"
 msgstr ""
 
 #: .\main\templates\main\calculator.html:28
-msgid "Hausdämmung"
+msgid "Area (m²)"
 msgstr ""
 
 #: .\main\templates\main\calculator.html:29
-msgid "Abbrucharbeiten"
+msgid "E.g. 50"
 msgstr ""
 
 #: .\main\templates\main\calculator.html:30
-#: .\main\templates\main\calculator.html:73
-msgid "Reinigung nach Renovierung"
+msgid "Enter the area in square meters."
 msgstr ""
 
-#: .\main\templates\main\calculator.html:36
-msgid "Fläche (m²):"
+#: .\main\templates\main\calculator.html:33
+msgid "Material Quality"
 msgstr ""
 
-#: .\main\templates\main\calculator.html:37
-msgid "Z.B. 50"
-msgstr ""
-
-#: .\main\templates\main\calculator.html:42
-msgid "Materialqualität:"
-msgstr ""
-
-#: .\main\templates\main\calculator.html:44
+#: .\main\templates\main\calculator.html:35
 msgid "Economy"
 msgstr ""
 
-#: .\main\templates\main\calculator.html:45
+#: .\main\templates\main\calculator.html:36
 msgid "Standard"
 msgstr ""
 
-#: .\main\templates\main\calculator.html:46
+#: .\main\templates\main\calculator.html:37
 msgid "Premium"
 msgstr ""
 
-#: .\main\templates\main\calculator.html:52
-msgid "Materialien einbeziehen:"
+#: .\main\templates\main\calculator.html:40
+msgid "Calculate Cost"
+msgstr "Calculate Cost"
+
+#: .\main\templates\main\calculator.html:40
+#, fuzzy
+#| msgid "Calculate Cost"
+msgid "Calculate"
+msgstr "Calculate Cost"
+
+#: .\main\templates\main\calculator.html:41
+#, fuzzy
+#| msgid "Calculate Cost"
+msgid "Save Calculation"
+msgstr "Calculate Cost"
+
+#: .\main\templates\main\calculator.html:41
+msgid "Save"
 msgstr ""
 
-#: .\main\templates\main\calculator.html:54
-msgid "Ja"
+#: .\main\templates\main\calculator.html:44
+msgid "Cost Distribution Chart"
 msgstr ""
 
-#: .\main\templates\main\calculator.html:55
-msgid "Nein"
+#: .\main\templates\main\calculator.html:46
+msgid "AI Recommendations"
 msgstr ""
 
-#: .\main\templates\main\calculator.html:61
-msgid "Dringlichkeit:"
+#: .\main\templates\main\calculator.html:47
+msgid "Enter data to get recommendations."
 msgstr ""
 
-#: .\main\templates\main\calculator.html:63
-msgid "Normal"
-msgstr ""
-
-#: .\main\templates\main\calculator.html:64
-msgid "Schnell"
-msgstr ""
-
-#: .\main\templates\main\calculator.html:70
-msgid "Zusätzliche Dienstleistungen:"
-msgstr ""
-
-#: .\main\templates\main\calculator.html:77
-msgid "Lieferung von Materialien"
-msgstr ""
-
-#: .\main\templates\main\calculator.html:82
-msgid "Berechnen"
-msgstr ""
-
-#: .\main\templates\main\calculator.html:83
-msgid "Speichern"
-msgstr ""
-
-#: .\main\templates\main\calculator.html:94
-msgid "Empfehlungen von KI"
-msgstr ""
-
-#: .\main\templates\main\calculator.html:99
-msgid "Zurück zur Hauptseite"
+#: .\main\templates\main\calculator.html:49
+msgid "Back to Home"
 msgstr ""
 
 #: .\main\templates\main\home.html:4 .\main\templates\main\home.html:25
@@ -452,10 +432,6 @@ msgstr ""
 
 #: .\main\templates\main\home.html:40
 msgid "Модная квартира"
-msgstr ""
-
-#: .\main\templates\main\home.html:41
-msgid "Ремонт офиса"
 msgstr ""
 
 #: .\main\templates\main\home.html:42
@@ -669,9 +645,80 @@ msgstr ""
 msgid "Чат"
 msgstr ""
 
+#: .\main\templates\main\privacy.html:6 .\templates\includes\footer.html:15
+msgid "Privacy Policy"
+msgstr ""
+
+#: .\main\templates\main\privacy.html:7
+msgid ""
+"At NovaHaus, we are committed to protecting your personal information and "
+"ensuring transparency in how we collect, use, and store your data."
+msgstr ""
+
+#: .\main\templates\main\privacy.html:9
+msgid "1. Information We Collect"
+msgstr ""
+
+#: .\main\templates\main\privacy.html:10
+msgid ""
+"We may collect personal information such as your name, email address, phone "
+"number, and project details when you contact us or use our services."
+msgstr ""
+
+#: .\main\templates\main\privacy.html:12
+msgid "2. How We Use Your Information"
+msgstr ""
+
+#: .\main\templates\main\privacy.html:13
+msgid ""
+"Your information is used to provide and improve our services, respond to "
+"inquiries, and communicate project updates. We do not share your data with "
+"third parties except as required by law."
+msgstr ""
+
+#: .\main\templates\main\privacy.html:15
+msgid "3. Data Security"
+msgstr ""
+
+#: .\main\templates\main\privacy.html:16
+msgid ""
+"We implement industry-standard security measures to protect your data from "
+"unauthorized access or disclosure."
+msgstr ""
+
+#: .\main\templates\main\privacy.html:18
+msgid "4. Your Rights"
+msgstr ""
+
+#: .\main\templates\main\privacy.html:19
+msgid ""
+"You have the.ConcurrentModificationException right to access, correct, or "
+"delete your personal data. Contact us to exercise these rights."
+msgstr ""
+
+# Удалены дублирующиеся сообщения из строк 1063–1113
+#: .\main\templates\main\privacy.html:21
+#, fuzzy
+#| msgctxt "header"
+#| msgid "Contact Us"
+msgid "5. Contact Us"
+msgstr "Contact Us"
+
+#: .\main\templates\main\privacy.html:22
+msgid "For questions about this Privacy Policy, please reach out to us."
+msgstr ""
+
+# Удалены дублирующиеся сообщения из строк 1063–1113
+#: .\main\templates\main\privacy.html:23 .\templates\includes\footer.html:19
+#, fuzzy
+#| msgctxt "header"
+#| msgid "Contact Us"
+msgid "Contact Us"
+msgstr "Contact Us"
+
 #: .\templates\base.html:9
 msgid "NovaHaus – Your Trusted Renovation Partner"
-msgstr "NovaHaus – Your Trusted Renovation Partner"
+msgstr ""
 
 #: .\templates\base.html:10
 msgid ""
@@ -685,10 +732,8 @@ msgid ""
 msgstr ""
 
 #: .\templates\base.html:14
-#, fuzzy
-#| msgid "NovaHaus – Your Trusted Renovation Partner"
 msgid "NovaHaus – Renovation Experts"
-msgstr "NovaHaus – Your Trusted Renovation Partner"
+msgstr ""
 
 #: .\templates\base.html:15
 msgid ""
@@ -708,8 +753,7 @@ msgstr ""
 msgid "Hamburg"
 msgstr ""
 
-#: .\templates\base.html:119 .\templates\includes\header.html:17
-#: .\templates\includes\header.html:29 .\templates\includes\header.html:56
+#: .\templates\base.html:119 .\templates\includes\header.html:15
 msgid "Home"
 msgstr ""
 
@@ -721,8 +765,8 @@ msgstr ""
 msgid "Dark Theme"
 msgstr ""
 
-#: .\templates\includes\footer.html:5 .\templates\includes\header.html:24
-msgid "NovaHaus"
+#: .\templates\includes\footer.html:5 .\templates\includes\header.html:6
+msgid "NovaHaus Logo"
 msgstr ""
 
 #: .\templates\includes\footer.html:6
@@ -734,72 +778,100 @@ msgstr ""
 msgid "Quick Links"
 msgstr ""
 
-#: .\templates\includes\footer.html:11 .\templates\includes\header.html:18
-#: .\templates\includes\header.html:30 .\templates\includes\header.html:57
-#, fuzzy
-#| msgid "Our Services"
+#: .\templates\includes\footer.html:11 .\templates\includes\header.html:16
 msgid "Services"
-msgstr "Our Services"
+msgstr ""
 
-#: .\templates\includes\footer.html:12 .\templates\includes\header.html:19
-#: .\templates\includes\header.html:31 .\templates\includes\header.html:58
+#: .\templates\includes\footer.html:12 .\templates\includes\header.html:17
 msgid "Portfolio"
 msgstr ""
 
-#: .\templates\includes\footer.html:13 .\templates\includes\header.html:20
-#: .\templates\includes\header.html:32 .\templates\includes\header.html:59
+#: .\templates\includes\footer.html:13 .\templates\includes\header.html:18
 msgid "Blog"
 msgstr ""
 
-#: .\templates\includes\footer.html:14 .\templates\includes\header.html:22
-#: .\templates\includes\header.html:34 .\templates\includes\header.html:61
+# Удалены дублирующиеся сообщения из строк 1063–1113
+#: .\templates\includes\footer.html:14 .\templates\includes\header.html:19
+#, fuzzy
+#| msgctxt "header"
+#| msgid "Contact Us"
 msgid "Contact"
-msgstr ""
+msgstr "Contact Us"
 
-#: .\templates\includes\footer.html:18
-msgid "Contact Us"
-msgstr ""
-
-#: .\templates\includes\footer.html:19
+#: .\templates\includes\footer.html:20
 msgid "Cologne: Musterstraße 123, 50667"
 msgstr ""
 
-#: .\templates\includes\footer.html:20
+#: .\templates\includes\footer.html:21
 msgid "Hamburg: Beispielweg 456, 20354"
 msgstr ""
 
-#: .\templates\includes\footer.html:21
+#: .\templates\includes\footer.html:22
 msgid "Phone: +49 155 100 718 48"
 msgstr ""
 
-#: .\templates\includes\footer.html:25
+#: .\templates\includes\footer.html:23
+msgid "Email: info@novahaus.de"
+msgstr ""
+
+#: .\templates\includes\footer.html:26
 msgid "Follow Us"
 msgstr ""
 
-#: .\templates\includes\footer.html:34
+#: .\templates\includes\footer.html:27
+msgid "Facebook"
+msgstr ""
+
+#: .\templates\includes\footer.html:28
+msgid "Instagram"
+msgstr ""
+
+#: .\templates\includes\footer.html:29
+msgid "LinkedIn"
+msgstr ""
+
+#: .\templates\includes\footer.html:32
 msgid "© 2025 NovaHaus. All rights reserved."
 msgstr ""
 
-#: .\templates\includes\header.html:4
-msgid "Menu"
+#: .\templates\includes\header.html:5
+msgid "NovaHaus Home"
 msgstr ""
 
-#: .\templates\includes\header.html:12
-msgid "NovaHaus - Home"
+#: .\templates\includes\header.html:10
+msgid "Main Navigation"
 msgstr ""
 
-#: .\templates\includes\header.html:21 .\templates\includes\header.html:33
-#: .\templates\includes\header.html:60
-msgid "About Us"
+#: .\templates\includes\header.html:11
+msgid "Toggle Menu"
 msgstr ""
 
-#: .\templates\includes\header.html:23 .\templates\includes\header.html:35
-#: .\templates\includes\header.html:62
+#: .\templates\includes\header.html:20
 msgid "Become a Partner"
 msgstr ""
 
-#: .\templates\includes\header.html:42
-msgid "Site Language"
+#: .\templates\includes\header.html:25
+msgid "Language Switcher"
+msgstr ""
+
+#: .\templates\includes\header.html:27
+msgid "Select Language"
+msgstr ""
+
+#: .\templates\includes\header.html:28
+msgid "German"
+msgstr ""
+
+#: .\templates\includes\header.html:29
+msgid "English"
+msgstr ""
+
+#: .\templates\includes\header.html:30
+msgid "Russian"
+msgstr ""
+
+#: .\templates\includes\header.html:31
+msgid "Turkish"
 msgstr ""
 
 #: .\templates\includes\slider.html:4
@@ -810,132 +882,9 @@ msgstr ""
 msgid "Утепление фасадов"
 msgstr ""
 
-#: .\templates\includes\slider.html:6
-msgid "Фасадные работы"
-msgstr ""
+#~ msgid "Welcome to NovaHaus"
+#~ msgstr "Welcome to NovaHaus"
 
-#~ msgid "Quality, Timeliness, Eco-Friendliness – From Idea to Cleanup"
-#~ msgstr "Quality, Timeliness, Eco-Friendliness – From Idea to Cleanup"
-
-#~ msgid "Calculate Cost"
-#~ msgstr "Calculate Cost"
-
-#~ msgid "Our Projects"
-#~ msgstr "Our Projects"
-
-#~ msgid "10% Discount for New Clients!"
-#~ msgstr "10% Discount for New Clients!"
-
-#~ msgid "Only until the end of the month! Order now and save."
-#~ msgstr "Only until the end of the month! Order now and save."
-
-#~ msgid "Order Now"
-#~ msgstr "Order Now"
-
-#~ msgid "No services added yet."
-#~ msgstr "No services added yet."
-
-#~ msgid "Learn More"
-#~ msgstr "Learn More"
-
-#~ msgid "Why Choose Us"
-#~ msgstr "Why Choose Us"
-
-#~ msgid "High Quality"
-#~ msgstr "High Quality"
-
-#~ msgid "ISO and LEED certified"
-#~ msgstr "ISO and LEED certified"
-
-#~ msgid "On-Time Delivery"
-#~ msgstr "On-Time Delivery"
-
-#~ msgid "We finish projects on schedule"
-#~ msgstr "We finish projects on schedule"
-
-#~ msgid "Eco-Friendly"
-#~ msgstr "Eco-Friendly"
-
-#~ msgid "Sustainable materials"
-#~ msgstr "Sustainable materials"
-
-#~ msgid "Transparent Pricing"
-#~ msgstr "Transparent Pricing"
-
-#~ msgid "Clear and honest estimates"
-#~ msgstr "Clear and honest estimates"
-
-#~ msgid "Projects Completed"
-#~ msgstr "Projects Completed"
-
-#~ msgid "Client Satisfaction"
-#~ msgstr "Client Satisfaction"
-
-#~ msgid "Years of Experience"
-#~ msgstr "Years of Experience"
-
-#~ msgid "View All Projects"
-#~ msgstr "View All Projects"
-
-#~ msgid "Eco-Friendly Solutions"
-#~ msgstr "Eco-Friendly Solutions"
-
-#~ msgid ""
-#~ "We use LEED-certified materials to create sustainable spaces for your "
-#~ "home and the planet."
-#~ msgstr ""
-#~ "We use LEED-certified materials to create sustainable spaces for your "
-#~ "home and the planet."
-
-#~ msgid "We Know Your City"
-#~ msgstr "We Know Your City"
-
-#~ msgid "Cologne – Ehrenfeld & Beyond"
-#~ msgstr "Cologne – Ehrenfeld & Beyond"
-
-#~ msgid ""
-#~ "From trendy lofts in Ehrenfeld to classic apartments in the city center, "
-#~ "we bring quality to every corner of Cologne."
-#~ msgstr ""
-#~ "From trendy lofts in Ehrenfeld to classic apartments in the city center, "
-#~ "we bring quality to every corner of Cologne."
-
-#~ msgid "See Cologne Projects"
-#~ msgstr "See Cologne Projects"
-
-#~ msgid "Hamburg – St. Pauli & More"
-#~ msgstr "Hamburg – St. Pauli & More"
-
-#~ msgid ""
-#~ "Modern offices in St. Pauli or warehouses in the port – we transform "
-#~ "Hamburg spaces with precision."
-#~ msgstr ""
-#~ "Modern offices in St. Pauli or warehouses in the port – we transform "
-#~ "Hamburg spaces with precision."
-
-#~ msgid "See Hamburg Projects"
-#~ msgstr "See Hamburg Projects"
-
-#~ msgid "Get in Touch"
+#~ msgctxt "footer"
+#~ msgid "Contact Us"
 #~ msgstr "Get in Touch"
-
-#~ msgid "Name"
-#~ msgstr "Name"
-
-#~ msgid "Email"
-#~ msgstr "Email"
-
-#~ msgid "Phone"
-#~ msgstr "Phone"
-
-#~ msgid "Message"
-#~ msgstr "Message"
-
-#~ msgid "Send"
-#~ msgstr "Send"
-
-#~ msgid "Chat"
-#~ msgstr "Chat"
-
-#~ msgid "Ask a question"
-#~ msgstr "Ask a question"

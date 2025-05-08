@@ -230,3 +230,6 @@ NovaHaus/
         ├── header.html
         ├── modal.html
         └── slider.html  # Обновлён
+
+NovaHaus/eslint.config.js #в корне проекта
+NovaHaus/main/templates/main/privacy.html

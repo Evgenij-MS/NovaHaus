@@ -1,76 +1,43 @@
-// Цены на услуги (€ за м²)
-const prices = {
-    apartment: { economy: 70, standard: 100, premium: 130 }, // Ремонт квартир
-    house: { economy: 80, standard: 110, premium: 140 },     // Ремонт домов
-    office: { economy: 90, standard: 120, premium: 150 },    // Ремонт офисов
-    warehouse: { economy: 50, standard: 70, premium: 90 },   // Ремонт складов
-    facade: { economy: 40, standard: 50, premium: 60 },      // Фасадные работы
-    insulation: { economy: 45, standard: 55, premium: 65 },  // Утепление домов
-    demolition: 25,                                          // Демонтажные работы
-    cleaning: 8                                              // Уборка после ремонта
-};
-
-// Дополнительные услуги
-const additionalServices = {
-    cleaning: 8, // € за м²
-    delivery: 100 // Фиксированная стоимость
-};
-
-// Функция для расчета стоимости
-function calculateCost() {
-    const workType = document.getElementById('work-type').value;
-    const area = parseFloat(document.getElementById('area').value);
-    const material = document.getElementById('material').value;
-    const includeMaterials = document.getElementById('include-materials').value;
-    const urgency = document.getElementById('urgency').value;
-    const cleaning = document.getElementById('cleaning').checked;
-    const delivery = document.getElementById('delivery').checked;
-
-
-    // Валидация ввода
-if (isNaN(area) || area <= 0) {
-    const resultElement = document.getElementById('result');
-    resultElement.innerText = 'Ошибка: Введите корректную площадь!';
-    resultElement.style.color = 'red';
-    return;
+/* global Chart */
+function getCSRFToken() {
+    const match = document.cookie.match(/(^|;)\s*csrftoken=([^;]+)/);
+    return match ? match[2] : null;
 }
 
+function formatCurrency(amount, locale = navigator.language || 'de-DE') {
+    return new Intl.NumberFormat(locale, { style: 'currency', currency: 'EUR' }).format(amount);
+}
 
-    // Расчет стоимости за м²
-    let costPerSquareMeter = prices[workType][material] || prices[workType];
-    if (urgency === 'fast') costPerSquareMeter *= 1.2; // Срочные работы дороже на 20%
-
-    // Расчет стоимости материалов и работы
-    const materialPercentage = 0.4; // 40% на материалы
-    const laborPercentage = 0.6;    // 60% на работу
-    let materialCost = includeMaterials === 'yes' ? area * costPerSquareMeter * materialPercentage : 0;
-    let laborCost = includeMaterials === 'yes' ? area * costPerSquareMeter * laborPercentage : area * costPerSquareMeter;
-
-    // Дополнительные услуги
-    let additionalCost = 0;
-    if (cleaning) additionalCost += area * additionalServices.cleaning;
-    if (delivery) additionalCost += additionalServices.delivery;
-
-    // Итоговая стоимость
-    const totalCost = materialCost + laborCost + additionalCost;
-
-    // Отображение результата
+async function calculateCost(event) {
+    event.preventDefault();
+    const form = document.getElementById('calculator-form');
     const resultElement = document.getElementById('result');
-    if (resultElement) {
-        const formattedCost = new Intl.NumberFormat('ru-RU', { style: 'currency', currency: 'EUR' }).format(totalCost);
-resultElement.innerText = `Примерная стоимость: ${formattedCost}`;
+    const formData = new FormData(form);
+    const csrfToken = getCSRFToken();
 
+    try {
+        const response = await fetch('/calculate_cost/', {
+            method: 'POST',
+            headers: { 'X-CSRFToken': csrfToken },
+            body: formData
+        });
+        const data = await response.json();
+        if (data.success) {
+            resultElement.innerText = `Примерная стоимость: ${formatCurrency(data.total_cost)}`;
+            resultElement.style.color = 'black';
+            showChart(data.total_cost, data.material_cost, data.labor_cost);
+            await getAIRecommendations(data);
+        } else {
+            resultElement.innerText = `Ошибка: ${data.error}`;
+            resultElement.style.color = 'red';
+        }
+    } catch (error) {
+        resultElement.innerText = 'Ошибка при расчете. Попробуйте снова.';
+        resultElement.style.color = 'red';
+        console.error('Ошибка:', error);
     }
-
-    // Показ графика
-    showChart(totalCost, materialCost, laborCost);
-
-    // Получение рекомендаций от ИИ
-    getAIRecommendations(totalCost, materialCost, laborCost, workType, area)
-        .catch(error => console.error('Ошибка при получении рекомендаций:', error));
 }
 
-// Функция для отображения графика
 function showChart(totalCost, materialCost, laborCost) {
     const chartElement = document.getElementById('cost-chart');
     if (!chartElement) {
@@ -78,7 +45,6 @@ function showChart(totalCost, materialCost, laborCost) {
         return;
     }
     const ctx = chartElement.getContext('2d');
-
     if (ctx) {
         new Chart(ctx, {
             type: 'pie',
@@ -92,64 +58,78 @@ function showChart(totalCost, materialCost, laborCost) {
             options: {
                 responsive: true,
                 plugins: {
-                    legend: {
-                        position: 'top',
-                    },
-                    title: {
-                        display: true,
-                        text: 'Распределение затрат',
-                    }
+                    legend: { position: 'top' },
+                    title: { display: true, text: 'Распределение затрат' }
                 }
             }
         });
     }
 }
 
-// Функция для сохранения расчета
-function saveCalculation() {
-    const workType = document.getElementById('work-type').value;
-    const area = document.getElementById('area').value;
-    const material = document.getElementById('material').value;
-    const includeMaterials = document.getElementById('include-materials').value;
-    const urgency = document.getElementById('urgency').value;
-    const totalCost = parseFloat(document.getElementById('result').innerText.replace('Примерная стоимость: €', ''));
+async function getAIRecommendations(data) {
+    const recommendationElement = document.getElementById('ai-recommendation-text');
+    try {
+        const response = await fetch('/get-ai-recommendations/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCSRFToken()
+            },
+            body: JSON.stringify({
+                totalCost: data.total_cost,
+                materialCost: data.material_cost,
+                laborCost: data.labor_cost,
+                workType: String(data.work_type), // Преобразование в строку
+                area: data.area,
+                language: navigator.language.split('-')[0] || 'de'
+            })
+        });
+        const result = await response.json();
+        if (result.success) {
+            recommendationElement.innerText = result.recommendation;
+        } else {
+            recommendationElement.innerText = 'Не удалось получить рекомендации.';
+        }
+    } catch (error) {
+        recommendationElement.innerText = 'Ошибка при получении рекомендаций.';
+        console.error('Ошибка AI:', error);
+    }
+}
 
-    const calculation = {
-        workType: workType,
-        area: area,
-        material: material,
-        includeMaterials: includeMaterials,
-        urgency: urgency,
-        totalCost: totalCost,
+async function saveCalculation() {
+    const form = document.getElementById('calculator-form');
+    const formData = new FormData(form);
+    const data = {
+        workType: String(formData.get('work-type')), // Преобразование в строку
+        area: parseFloat(formData.get('area')),
+        material: String(formData.get('material-quality')), // Преобразование в строку
+        totalCost: parseFloat(document.getElementById('result').innerText.match(/[\d,.]+/)?.[0]?.replace(',', '.')) || 0,
+        materialCost: parseFloat(document.getElementById('result').dataset.materialCost || 0),
+        laborCost: parseFloat(document.getElementById('result').dataset.laborCost || 0),
         timestamp: new Date().toLocaleString()
     };
+    const csrfToken = getCSRFToken();
 
-    // Отправка данных на сервер
-    fetch('/save-calculation/', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRFToken': getCookie('csrftoken')
-        },
-        body: JSON.stringify(calculation)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.success) {
+    try {
+        const response = await fetch('/save-calculation/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        if (result.success) {
             alert('Расчет успешно сохранен!');
         } else {
             alert('Ошибка при сохранении расчета.');
         }
-    })
-    .catch(error => {
+    } catch (error) {
+        alert('Ошибка при сохранении. Попробуйте снова.');
         console.error('Ошибка:', error);
-        const resultElement = document.getElementById('result');
-        resultElement.innerText = 'Ошибка при сохранении. Пожалуйста, попробуйте позже.';
-        resultElement.style.color = 'red';
-    });
-
-
-document.getElementById('calculate-button').addEventListener('click', calculateCost);
-document.getElementById('save-button').addEventListener('click', saveCalculation);
-
+    }
 }
+
+document.getElementById('calculator-form').addEventListener('submit', calculateCost);
+document.getElementById('save-button').addEventListener('click', saveCalculation);

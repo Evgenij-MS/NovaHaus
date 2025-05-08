@@ -1,105 +1,122 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 
-{% block title %}{% trans "Online-Kalkulator – NovaHaus" %}{% endblock %}
-{% block description %}{% trans "Berechnen Sie die Kosten für Renovierung oder Dämmung mit unserem Online-Kalkulator." %}{% endblock %}
-{% block keywords %}{% trans "Kalkulator, Renovierungskosten, Dämmung, NovaHaus" %}{% endblock %}
-
-{% block head %}
-<link rel="stylesheet" href="{% static 'css/calculator.css' %}">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-{% endblock %}
+{% block title %}{% trans 'Online Calculator – NovaHaus' %}{% endblock %}
+{% block meta_description %}{% trans 'Calculate the cost of renovation with our AI-powered calculator.' %}{% endblock %}
+{% block og_title %}{% trans 'Online Calculator – NovaHaus' %}{% endblock %}
+{% block og_description %}{% trans 'Calculate the cost of renovation with our AI-powered calculator.' %}{% endblock %}
 
 {% block content %}
-<div class="calculator-container fade-in">
-    <h1>{% trans "Online-Kalkulator" %}</h1>
-    <form id="calculator-form">
+<section class="calculator-container" role="main" aria-labelledby="calculator-title">
+    <h1 id="calculator-title">{% trans 'AI Cost Calculator' %}</h1>
+    <form id="calculator-form" method="POST" aria-label="{% trans 'Cost Calculator Form' %}">
         {% csrf_token %}
-
-        <!-- Выбор типа работ -->
         <div class="form-group">
-            <label for="work-type">{% trans "Art der Arbeit:" %}</label>
+            <label for="work-type">{% trans 'Type of Work' %}:</label>
             <select id="work-type" name="work-type" required>
-                <option value="apartment">{% trans "Wohnungsrenovierung" %}</option>
-                <option value="house">{% trans "Hausrenovierung" %}</option>
-                <option value="office">{% trans "Bürorenovierung" %}</option>
-                <option value="warehouse">{% trans "Lagerhallenrenovierung" %}</option>
-                <option value="facade">{% trans "Fassadenarbeiten" %}</option>
-                <option value="insulation">{% trans "Hausdämmung" %}</option>
-                <option value="demolition">{% trans "Abbrucharbeiten" %}</option>
-                <option value="cleaning">{% trans "Reinigung nach Renovierung" %}</option>
+                <option value="apartment">{% trans 'Apartment Renovation' %}</option>
+                <option value="house">{% trans 'House Renovation' %}</option>
+                <option value="office">{% trans 'Office Renovation' %}</option>
+                <option value="warehouse">{% trans 'Warehouse Renovation' %}</option>
+                <option value="facade">{% trans 'Facade Works' %}</option>
+                <option value="bathroom">{% trans 'Bathroom Renovation' %}</option>
+                <option value="electrical">{% trans 'Electrical Works' %}</option>
+                <option value="demolition">{% trans 'Demolition Works' %}</option>
             </select>
         </div>
-
-        <!-- Площадь -->
         <div class="form-group">
-            <label for="area">{% trans "Fläche (m²):" %}</label>
-            <input type="number" id="area" name="area" placeholder="{% trans 'Z.B. 50' %}" required min="1" step="0.1">
+            <label for="area">{% trans 'Area (m²)' %}:</label>
+            <input type="number" id="area" name="area" min="1" step="0.1" placeholder="{% trans 'E.g. 50' %}" required>
+            <p class="hint">{% trans 'Enter the area in square meters.' %}</p>
         </div>
-
-        <!-- Материалы -->
         <div class="form-group">
-            <label for="material">{% trans "Materialqualität:" %}</label>
-            <select id="material" name="material" required>
-                <option value="economy">{% trans "Economy" %}</option>
-                <option value="standard">{% trans "Standard" %}</option>
-                <option value="premium">{% trans "Premium" %}</option>
+            <label for="material-quality">{% trans 'Material Quality' %}:</label>
+            <select id="material-quality" name="material-quality" required>
+                <option value="economy">{% trans 'Economy' %}</option>
+                <option value="standard">{% trans 'Standard' %}</option>
+                <option value="premium">{% trans 'Premium' %}</option>
             </select>
         </div>
-
-        <!-- Включение материалов -->
-        <div class="form-group">
-            <label for="include-materials">{% trans "Materialien einbeziehen:" %}</label>
-            <select id="include-materials" name="include-materials" required>
-                <option value="yes">{% trans "Ja" %}</option>
-                <option value="no">{% trans "Nein" %}</option>
-            </select>
-        </div>
-
-        <!-- Срочность -->
-        <div class="form-group">
-            <label for="urgency">{% trans "Dringlichkeit:" %}</label>
-            <select id="urgency" name="urgency" required>
-                <option value="normal">{% trans "Normal" %}</option>
-                <option value="fast">{% trans "Schnell" %}</option>
-            </select>
-        </div>
-
-        <!-- Дополнительные услуги -->
-        <div class="form-group">
-            <label>{% trans "Zusätzliche Dienstleistungen:" %}</label>
-            <div>
-                <input type="checkbox" id="cleaning" name="cleaning">
-                <label for="cleaning">{% trans "Reinigung nach Renovierung" %}</label>
-            </div>
-            <div>
-                <input type="checkbox" id="delivery" name="delivery">
-                <label for="delivery">{% trans "Lieferung von Materialien" %}</label>
-            </div>
-        </div>
-
-        <!-- Кнопки -->
-        <button type="button" id="calculate-button" class="btn">{% trans "Berechnen" %}</button>
-        <button type="button" id="save-button" class="btn">{% trans "Speichern" %}</button>
+        <button type="submit" id="calculate-button" class="btn" aria-label="{% trans 'Calculate Cost' %}">{% trans 'Calculate' %}</button>
+        <button type="button" id="save-button" class="btn" aria-label="{% trans 'Save Calculation' %}">{% trans 'Save' %}</button>
     </form>
-
-    <!-- Результат -->
-    <p id="result" class="result"></p>
-
-    <!-- Диаграмма -->
-    <canvas id="cost-chart" style="max-height: 300px;"></canvas>
-
-    <!-- Рекомендации от ИИ -->
-    <div id="ai-recommendations" class="ai-recommendations">
-        <h2>{% trans "Empfehlungen von KI" %}</h2>
-        <p id="ai-recommendation-text"></p>
+    <div id="result" class="result" aria-live="polite"></div>
+    <canvas id="cost-chart" aria-label="{% trans 'Cost Distribution Chart' %}"></canvas>
+    <div class="ai-recommendations" aria-live="polite">
+        <h2>{% trans 'AI Recommendations' %}</h2>
+        <p id="ai-recommendation-text">{% trans 'Enter data to get recommendations.' %}</p>
     </div>
+    <a href="{% url 'home' %}" class="btn btn-secondary">{% trans 'Back to Home' %}</a>
+</section>
 
-    <!-- Ссылка назад -->
-    <a href="{% url 'home' %}" class="btn">{% trans "Zurück zur Hauptseite" %}</a>
-</div>
-
-<script src="{% static 'js/calculator.js' %}"></script>
-<script src="{% static 'js/chart.js' %}"></script>
-<script src="{% static 'js/ai-integration.js' %}"></script>
+<style>
+.calculator-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.form-group select, .form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+.hint {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+.btn {
+    background: #005B99;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+.btn:hover {
+    background: #004080;
+}
+.result {
+    text-align: center;
+    font-size: 20px;
+    margin: 20px 0;
+}
+.ai-recommendations {
+    margin-top: 20px;
+    padding: 20px;
+    background: #e8f4e8;
+    border-radius: 4px;
+}
+#cost-chart {
+    max-width: 400px;
+    margin: 20px auto;
+}
+@media (max-width: 600px) {
+    .calculator-container {
+        margin: 20px;
+        padding: 15px;
+    }
+    .btn {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+}
+</style>
+{% block extra_js %}
+    <script src="{% static 'js/calculator.js' %}"></script>
+{% endblock %}
 {% endblock %}

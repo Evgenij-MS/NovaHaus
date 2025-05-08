@@ -5,19 +5,20 @@ from django.utils.translation import gettext_lazy as _
 # Модель для услуг
 class Service(models.Model):
     CATEGORY_CHOICES = [
-        ('construction', _('Строительство')),
-        ('design', _('Дизайн')),
-        ('renovation', _('Ремонт')),
-        ('bathroom', _('Ванные комнаты')),
+        ('apartment', _('Ремонт квартиры')),
+        ('house', _('Ремонт дома')),
+        ('office', _('Ремонт офиса')),
+        ('warehouse', _('Ремонт склада')),
+        ('facade', _('Фасадные работы')),
+        ('bathroom', _('Ремонт ванной')),
         ('electrical', _('Электрика')),
-        ('facade', _('Фасады')),
         ('demolition', _('Демонтаж')),
-        ('cleaning', _('Уборка')),
     ]
 
     title = models.CharField(max_length=100, verbose_name=_("Название"))
     description = models.TextField(verbose_name=_("Описание"))
-    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Цена"), null=True, blank=True)
+    labor_cost_per_m2 = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Трудовые затраты за м²"), null=True, blank=True)
+    base_material_cost_per_m2 = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Базовая стоимость материалов за м²"), null=True, blank=True)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES, verbose_name=_("Категория"))
     image = models.ImageField(upload_to='services/', blank=True, null=True, verbose_name=_("Изображение"))
 
@@ -56,14 +57,11 @@ class Calculation(models.Model):
     work_type = models.CharField(max_length=100, verbose_name=_("Тип работы"))
     area = models.FloatField(verbose_name=_("Площадь"))
     material = models.CharField(max_length=100, verbose_name=_("Материал"))
-    include_materials = models.BooleanField(default=False, verbose_name=_("Включить материалы"))
-    urgency = models.CharField(max_length=50, verbose_name=_("Срочность"))
     total_cost = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Общая стоимость"))
     material_cost = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Стоимость материалов"))
     labor_cost = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Стоимость работы"))
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='new', verbose_name=_("Статус"))
-    start_date = models.DateField(null=True, blank=True, verbose_name=_("Дата начала"))
-    end_date = models.DateField(null=True, blank=True, verbose_name=_("Дата окончания"))
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True, verbose_name=_("Дата создания"))
     data = models.JSONField(blank=True, null=True, verbose_name=_("Дополнительные данные расчёта"))
 
     def __str__(self):

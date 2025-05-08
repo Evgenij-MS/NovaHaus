@@ -1,6 +1,2 @@
-from django.urls import path
-from .consumers import AIConsumer  # Импорт вашего WebSocket-консьюмера
-
-websocket_urlpatterns = [
-    path('ws/ai/', AIConsumer.as_asgi()),  # Маршрут для WebSocket соединений
-]
+# routing.py
+# Удален, так как не используется в текущей реализации с HTTP-запросами к Grok API
