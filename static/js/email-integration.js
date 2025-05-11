@@ -1,9 +1,3 @@
-// Интеграция с CRM/почтой
-function getCSRFToken() {
-    const match = document.cookie.match(/(^|;)\s*csrftoken=([^;]+)/);
-    return match ? match[2] : null;
-}
-
 async function sendCalculationByEmail(email) {
     const totalCost = parseFloat(document.getElementById('result').innerText.match(/[\d,.]+/)?.[0]?.replace(',', '.') || 0);
     const calculation = {
@@ -32,7 +26,7 @@ async function sendCalculationByEmail(email) {
     }
 }
 
-document.getElementById('send-email-button')?.addEventListener('click', () => {
+document.getElementById('send-email-button')?.addEventListener('click', async () => {
     const email = prompt('Введите ваш email:');
-    if (email) sendCalculationByEmail(email);
+    if (email) await sendCalculationByEmail(email);
 });

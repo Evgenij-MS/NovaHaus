@@ -1,9 +1,3 @@
-// Обратная связь
-function getCSRFToken() {
-    const match = document.cookie.match(/(^|;)\s*csrftoken=([^;]+)/);
-    return match ? match[2] : null;
-}
-
 async function sendFeedback() {
     const name = document.getElementById('feedback-name').value;
     const email = document.getElementById('feedback-email').value;

@@ -6,16 +6,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{% block title %}{% trans "NovaHaus – Your Trusted Renovation Partner" %}{% endblock %}</title>
-    <meta name="description" content="{% block description %}{% trans "Professional renovation in Cologne and Hamburg with eco-friendly materials." %}{% endblock %}">
-    <meta name="keywords" content="{% block keywords %}{% trans "renovation, Cologne, Hamburg, eco-friendly, NovaHaus, apartment renovation, office renovation, eco-materials" %}{% endblock %}">
+    <title>{% block title %}{% trans "NovaHaus – Ваш надёжный партнёр по ремонту" %}{% endblock %}</title>
+    <meta name="description" content="{% block description %}{% trans "Профессиональный ремонт в Кёльне и Гамбурге с использованием экологичных материалов." %}{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}{% trans "ремонт, Кёльн, Гамбург, экологичность, NovaHaus, ремонт квартир, ремонт офисов, эко-материалы" %}{% endblock %}">
     <meta name="author" content="NovaHaus">
     <meta name="robots" content="index, follow">
-    <meta property="og:title" content="{% trans "NovaHaus – Renovation Experts" %}">
-    <meta property="og:description" content="{% trans "Transforming spaces with quality and eco-friendliness in Cologne and Hamburg." %}">
+    <meta property="og:title" content="{% trans "NovaHaus – Эксперты по ремонту" %}">
+    <meta property="og:description" content="{% trans "Преображаем пространства с качеством и экологичностью в Кёльне и Гамбурге." %}">
     <meta property="og:image" content="{% static 'images/logo.png' %}">
     <meta property="og:url" content="{% if request.get_host == 'novahaus-hamburg.de' or request.get_host == 'www.novahaus-hamburg.de' %}https://www.novahaus-hamburg.de{% else %}https://www.novahaus-koeln.de{% endif %}">
     <meta property="og:type" content="website">
+    <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
 
     <!-- PWA -->
     <link rel="manifest" href="{% static 'manifest.json' %}">
@@ -75,22 +76,22 @@
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "@id": "https://www.novahaus-hamburg.de/#business",
+      "@id": "{% if request.get_host == 'novahaus-hamburg.de' or request.get_host == 'www.novahaus-hamburg.de' %}https://www.novahaus-hamburg.de/#business{% else %}https://www.novahaus-koeln.de/#business{% endif %}",
       "name": "NovaHaus",
       "image": "{% static 'images/logo.png' %}",
-      "description": "{% trans "Renovation company in Cologne and Hamburg. Apartments, offices, facades." %}",
+      "description": "{% trans "Ремонтная компания в Кёльне и Гамбурге. Квартиры, офисы, фасады." %}",
       "address": [
         {
           "@type": "PostalAddress",
           "streetAddress": "Musterstraße 123",
-          "addressLocality": "{% trans "Cologne" %}",
+          "addressLocality": "{% trans "Кёльн" %}",
           "postalCode": "50667",
           "addressCountry": "DE"
         },
         {
           "@type": "PostalAddress",
           "streetAddress": "Beispielweg 456",
-          "addressLocality": "{% trans "Hamburg" %}",
+          "addressLocality": "{% trans "Гамбург" %}",
           "postalCode": "20354",
           "addressCountry": "DE"
         }
@@ -103,7 +104,20 @@
         "https://www.linkedin.com/company/novahaus"
       ],
       "openingHours": "Mo-Fr 08:00-18:00",
-      "priceRange": "$$"
+      "priceRange": "$$",
+      "review": {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "John Doe"
+        },
+        "reviewBody": "{% trans "Отличный сервис и качество!" %}"
+      }
     }
     </script>
 
@@ -116,7 +130,7 @@
         {
           "@type": "ListItem",
           "position": 1,
-          "name": "{% trans "Home" %}",
+          "name": "{% trans "Главная" %}",
           "item": "{% if request.get_host == 'novahaus-hamburg.de' or request.get_host == 'www.novahaus-hamburg.de' %}https://www.novahaus-hamburg.de{% else %}https://www.novahaus-koeln.de{% endif %}"
         }
         {% block breadcrumbs %}
@@ -138,7 +152,7 @@
 
     {% include 'includes/header.html' %}
 
-    <!-- Добавляем переключатель языка -->
+    <!-- Переключатель языка -->
     <div class="language-switcher">
         <form method="POST" action="{% url 'set_language' %}">
             {% csrf_token %}
@@ -169,18 +183,18 @@
 
     {% include 'includes/footer.html' %}
 
-    <button id="theme-toggle" class="theme-toggle-btn" aria-label="{% trans 'Switch Theme' %}">
+    <button id="theme-toggle" class="theme-toggle-btn" aria-label="{% trans 'Переключить тему' %}">
         <i class="fas fa-moon"></i>
-        <span class="theme-toggle-text">{% trans "Dark Theme" %}</span>
+        <span class="theme-toggle-text">{% trans "Тёмная тема" %}</span>
     </button>
 
     <!-- JavaScript -->
-    <script src="{% static 'js/scripts.js' %}"></script>
-    <script src="{% static 'js/slider.js' %}"></script>
-    <script src="{% static 'js/language.js' %}"></script>
-    <script src="{% static 'js/chatbot.js' %}"></script>
-    <script src="{% static 'js/pannellum.js' %}"></script>
-    <script src="{% static 'js/pannellum-custom.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}" defer></script>
+    <script src="{% static 'js/slider.js' %}" defer></script>
+    <script src="{% static 'js/language.js' %}" defer></script>
+    <script src="{% static 'js/chatbot.js' %}" defer></script>
+    <script src="{% static 'js/pannellum.js' %}" defer></script>
+    <script src="{% static 'js/pannellum-custom.js' %}" defer></script>
     <script src="{% static 'js/visualization.js' %}" defer></script>
     <script src="{% static 'js/service-worker.js' %}" defer></script>
 </body>

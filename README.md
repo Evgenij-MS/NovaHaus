@@ -234,4 +234,5 @@ NovaHaus/
 NovaHaus/eslint.config.js #в корне проекта
 NovaHaus/main/templates/main/privacy.html
 NovaHaus/static/models/sample_model.glb
-
+NovaHaus/static/js/utils.js (новый файл)
+static/images/placeholder.jpg

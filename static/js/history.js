@@ -1,4 +1,3 @@
-// Функция для сохранения расчета в локальном хранилище
 function saveCalculation(totalCost, materialCost, laborCost) {
     const calculation = {
         workType: document.getElementById('work-type').value,
@@ -13,7 +12,6 @@ function saveCalculation(totalCost, materialCost, laborCost) {
     localStorage.setItem('calculationHistory', JSON.stringify(history));
 }
 
-// Функция для отображения истории расчетов
 function showHistory() {
     const history = JSON.parse(localStorage.getItem('calculationHistory')) || [];
     const content = history.map((calc, index) => `
@@ -28,5 +26,4 @@ function showHistory() {
     openModal(`<h2>История расчетов</h2>${content}`);
 }
 
-// Привязка к кнопке для отображения истории
 document.getElementById('show-history-button')?.addEventListener('click', showHistory);
