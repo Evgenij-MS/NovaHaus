@@ -152,30 +152,6 @@
 
     {% include 'includes/header.html' %}
 
-    <!-- Переключатель языка -->
-    <div class="language-switcher">
-        <form method="POST" action="{% url 'set_language' %}">
-            {% csrf_token %}
-            <input type="hidden" name="language" value="en">
-            <button type="submit">English</button>
-        </form>
-        <form method="POST" action="{% url 'set_language' %}">
-            {% csrf_token %}
-            <input type="hidden" name="language" value="de">
-            <button type="submit">Deutsch</button>
-        </form>
-        <form method="POST" action="{% url 'set_language' %}">
-            {% csrf_token %}
-            <input type="hidden" name="language" value="tr">
-            <button type="submit">Türkçe</button>
-        </form>
-        <form method="POST" action="{% url 'set_language' %}">
-            {% csrf_token %}
-            <input type="hidden" name="language" value="ru">
-            <button type="submit">Русский</button>
-        </form>
-    </div>
-
     <main>
         {% block content %}
         {% endblock %}
