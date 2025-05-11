@@ -18,46 +18,60 @@ header {
     position: relative;
 }
 
-.header-content {
+header .header-content {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 20px;
 }
 
-.logo img {
+header .logo img {
     max-width: 150px;
     height: auto;
     transition: all 0.3s ease;
 }
 
-.nav-menu {
+header nav {
+    margin-left: 20px;
+}
+
+header nav .nav-menu {
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.nav-menu li {
+header nav .nav-menu li {
     margin-right: 20px;
 }
 
-.nav-menu li a {
+header nav .nav-menu li:last-child {
+    margin-right: 0;
+}
+
+header nav .nav-menu li a {
     text-decoration: none;
     color: var(--neutral-100);
     font-weight: 500;
     transition: color 0.3s ease;
+    white-space: nowrap;
 }
 
-.nav-menu li a:hover,
-.nav-menu li a.active {
+header nav .nav-menu li a:hover,
+header nav .nav-menu li a.active {
     color: #ff4500;
     font-weight: 700;
 }
 
-.language-switcher select {
+header .language-switcher {
+    margin-left: auto;
+}
+
+header .language-switcher select {
     padding: 8px 12px;
     border-radius: 4px;
     border: 1px solid var(--neutral-300);
@@ -66,12 +80,12 @@ header {
     cursor: pointer;
 }
 
-.language-switcher select:focus {
+header .language-switcher select:focus {
     outline: 2px solid var(--primary-color);
 }
 
 /* Мобильное меню */
-.mobile-menu-toggle {
+header .mobile-menu-toggle {
     display: none;
     background: none;
     border: none;
@@ -80,13 +94,58 @@ header {
     color: var(--neutral-100);
 }
 
-.mobile-menu-toggle i {
+header .mobile-menu-toggle i {
     font-size: 24px;
 }
 
-/* Адаптивные стили */
+/* Переопределяем для десктопной версии */
+@media (min-width: 769px) {
+    header .header-content {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+    }
+
+    header nav .nav-menu {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        background-color: transparent !important;
+        padding: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        width: auto !important;
+    }
+
+    header nav .nav-menu li {
+        margin-right: 20px !important;
+        margin-bottom: 0 !important;
+    }
+
+    header nav .nav-menu li a {
+        font-size: 16px !important;
+        padding: 0 !important;
+        text-align: left !important;
+    }
+
+    header .language-switcher {
+        align-self: auto !important;
+        padding: 0 !important;
+        width: auto !important;
+        text-align: right !important;
+    }
+
+    header .language-switcher select {
+        width: auto !important;
+        max-width: none !important;
+        margin: 0 !important;
+    }
+}
+
+/* Адаптивные стили для мобильных */
 @media (max-width: 768px) {
-    .nav-menu {
+    header .nav-menu {
         display: none;
         position: absolute;
         top: 60px;
@@ -99,48 +158,48 @@ header {
         transition: all 0.3s ease;
     }
 
-    .nav-menu.active {
+    header .nav-menu.active {
         display: flex;
     }
 
-    .nav-menu li {
+    header .nav-menu li {
         margin: 10px 0;
     }
 
-    .nav-menu li a {
+    header .nav-menu li a {
         font-size: 18px;
         padding: 10px 0;
         display: block;
+        text-align: center;
     }
 
-    .mobile-menu-toggle {
+    header .mobile-menu-toggle {
         display: block;
     }
 
-    .header-content {
-        flex-wrap: wrap;
+    header .header-content {
         justify-content: space-between;
     }
 
-    .logo img {
+    header .logo img {
         max-width: 100px;
     }
 
-    .language-switcher {
+    header .language-switcher {
         margin-top: 10px;
     }
 }
 
 @media (max-width: 480px) {
-    .logo img {
+    header .logo img {
         max-width: 80px;
     }
 
-    .nav-menu li a {
+    header .nav-menu li a {
         font-size: 16px;
     }
 
-    .language-switcher select {
+    header .language-switcher select {
         padding: 6px 10px;
         font-size: 14px;
     }

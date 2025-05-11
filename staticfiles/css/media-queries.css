@@ -1,5 +1,12 @@
 /* media-queries.css */
-@media (max-width: var(--breakpoint-mobile)) {
+
+/* Предполагаем, что --breakpoint-mobile равен 768px, если не определено */
+:root {
+    --breakpoint-mobile: 768px;
+}
+
+/* Мобильные устройства */
+@media (max-width: 768px) {
     /* Header adjustments */
     header {
         height: auto;
@@ -42,24 +49,6 @@
     nav {
         width: 100%;
         margin-top: 10px;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: 10px;
-        background-color: #f8f9fa;
-        padding: 10px;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        width: 100%;
-        box-sizing: border-box;
-    }
-
-    nav ul li a {
-        font-size: var(--font-size-sm);
-        padding: 8px 0;
-        display: block;
-        text-align: center;
     }
 
     .language-switcher {
@@ -107,29 +96,6 @@
         grid-template-columns: 1fr; /* 1 карточка в ряд */
         gap: 15px;
     }
-}
-
-@media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .header-text {
-        margin-left: 0;
-        text-align: center;
-    }
-
-    nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    /* Карточки услуг */
-    .service-cards {
-        grid-template-columns: 1fr; /* 1 карточка в ряд */
-        gap: 15px;
-    }
 
     .card {
         padding: 15px;
@@ -156,4 +122,3 @@
         padding: 10px;
     }
 }
-
