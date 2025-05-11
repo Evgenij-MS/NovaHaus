@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "500 - Server Error" %}</title>
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+</head>
+<body>
+    <h1>{% trans "Server Error" %}</h1>
+    <p>{% trans "Something went wrong. Please try again later or contact us." %}</p>
+    <a href="{% url 'home' %}">{% trans "Back to Home" %}</a>
+</body>
+</html>

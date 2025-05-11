@@ -3,24 +3,22 @@
     <div class="header-content">
         <div class="logo">
             <a href="{% url 'home' %}" aria-label="{% trans 'NovaHaus Home' %}">
-                <img src="{% static 'images/logo.png' %}" alt="{% trans 'NovaHaus Logo' %}" width="150" height="50">
+                <img src="{% static 'images/logo.png' %}" alt="{% trans 'NovaHaus Logo' %}" width="150" height="50" loading="lazy">
             </a>
         </div>
-        <div class="text-section">
-            <nav role="navigation" aria-label="{% trans 'Main Navigation' %}">
-                <button class="mobile-menu-toggle" aria-label="{% trans 'Toggle Menu' %}" aria-expanded="false" onclick="toggleMobileMenu()">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <ul class="nav-menu" id="nav-menu">
-                    <li><a href="{% url 'home' %}" {% if request.path == '/' %}class="active"{% endif %}>{% trans 'Home' %}</a></li>
-                    <li><a href="{% url 'services' %}" {% if 'services' in request.path %}class="active"{% endif %}>{% trans 'Services' %}</a></li>
-                    <li><a href="{% url 'portfolio' %}" {% if 'portfolio' in request.path %}class="active"{% endif %}>{% trans 'Portfolio' %}</a></li>
-                    <li><a href="{% url 'blog' %}" {% if 'blog' in request.path %}class="active"{% endif %}>{% trans 'Blog' %}</a></li>
-                    <li><a href="{% url 'contact' %}" {% if 'contact' in request.path %}class="active"{% endif %}>{% trans 'Contact' %}</a></li>
-                    <li><a href="{% url 'register_partner' %}" {% if 'register-partner' in request.path %}class="active"{% endif %}>{% trans 'Become a Partner' %}</a></li>
-                </ul>
-            </nav>
-        </div>
+        <nav role="navigation" aria-label="{% trans 'Main Navigation' %}">
+            <button class="mobile-menu-toggle" aria-label="{% trans 'Toggle Menu' %}" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="{% url 'home' %}" {% if request.path == '/' %}class="active" aria-current="page"{% endif %}>{% trans 'Home' %}</a></li>
+                <li><a href="{% url 'services' %}" {% if request.path == '/services/' %}class="active" aria-current="page"{% endif %}>{% trans 'Services' %}</a></li>
+                <li><a href="{% url 'portfolio' %}" {% if request.path == '/portfolio/' %}class="active" aria-current="page"{% endif %}>{% trans 'Portfolio' %}</a></li>
+                <li><a href="{% url 'blog' %}" {% if request.path == '/blog/' %}class="active" aria-current="page"{% endif %}>{% trans 'Blog' %}</a></li>
+                <li><a href="{% url 'contact' %}" {% if request.path == '/contact/' %}class="active" aria-current="page"{% endif %}>{% trans 'Contact' %}</a></li>
+                <li><a href="{% url 'register_partner' %}" {% if request.path == '/register-partner/' %}class="active" aria-current="page"{% endif %}>{% trans 'Become a Partner' %}</a></li>
+            </ul>
+        </nav>
         <div class="language-switcher">
             <form action="{% url 'set_language' %}" method="post" aria-label="{% trans 'Language Switcher' %}">
                 {% csrf_token %}

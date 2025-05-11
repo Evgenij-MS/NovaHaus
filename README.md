@@ -13,7 +13,7 @@ NovaHaus/
 ├── requirements.in
 ├── requirements.txt
 ├── README.md
-├── robots.txt
+├── 
 ├── test.txt
 ├── compress_images.py
 ├── locale/
@@ -236,3 +236,6 @@ NovaHaus/main/templates/main/privacy.html
 NovaHaus/static/models/sample_model.glb
 NovaHaus/static/js/utils.js (новый файл)
 static/images/placeholder.jpg
+NovaHaus/static/robots.txt
+Добавь /main/templates/main/500.html
+/static/images/favicon/favicon-192x192.png

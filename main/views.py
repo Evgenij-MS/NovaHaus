@@ -310,3 +310,7 @@ def generate_unique_referral():
     while Partner.objects.filter(referral_code=code).exists():
         code = uuid.uuid4().hex[:8].upper()
     return code
+
+def custom_500(request):
+    """Обработка ошибки 500."""
+    return render(request, 'main/500.html', status=500)

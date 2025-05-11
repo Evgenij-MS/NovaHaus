@@ -25,3 +25,7 @@ urlpatterns = [
     # Добавляем маршрут для robots.txt
     path('robots.txt', serve, {'document_root': settings.STATIC_ROOT, 'path': 'robots.txt'}),
 ]
+
+
+handler404 = 'main.views.page_not_found'
+handler500 = 'main.views.custom_500'

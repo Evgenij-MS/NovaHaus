@@ -1,4 +1,4 @@
-// Функция для проверки загрузки Google Analytics
+// Google Analytics: Проверка загрузки gtag.js
 function checkGoogleAnalytics() {
     if (typeof gtag === 'undefined') {
         console.error('Google Analytics: gtag.js не загружен. Проверьте подключение скрипта.');
@@ -8,7 +8,7 @@ function checkGoogleAnalytics() {
     return true;
 }
 
-// Отправка тестового события для отладки
+// Google Analytics: Отправка тестового события
 function sendTestEvent() {
     if (checkGoogleAnalytics()) {
         try {
@@ -19,25 +19,25 @@ function sendTestEvent() {
             });
             console.log('Google Analytics: Тестовое событие отправлено.');
         } catch (e) {
-            console.error('Google Analytics: Ошибка при отправке события:', e);
+            console.error('Google Analytics: Ошибка отправки события:', e);
         }
     }
 }
 
-// Проверка междоменного отслеживания
+// Google Analytics: Проверка междоменного отслеживания
 function checkCrossDomain() {
     if (checkGoogleAnalytics()) {
         const domains = ['novahaus-hamburg.de', 'novahaus-koeln.de'];
         const currentDomain = window.location.hostname;
         if (domains.includes(currentDomain)) {
-            console.log('Google Analytics: Текущий домен поддерживает междоменное отслеживание:', currentDomain);
+            console.log('Google Analytics: Междоменное отслеживание для:', currentDomain);
         } else {
-            console.warn('Google Analytics: Текущий домен не в списке междоменного отслеживания:', currentDomain);
+            console.warn('Google Analytics: Домен не в списке:', currentDomain);
         }
     }
 }
 
-// Проверка текущего GA ID
+// Google Analytics: Проверка ID аналитики
 function checkGAId() {
     const host = window.location.hostname;
     if (host === 'novahaus-hamburg.de' || host === 'www.novahaus-hamburg.de') {
@@ -49,11 +49,31 @@ function checkGAId() {
     }
 }
 
-// Запуск проверок после загрузки страницы
+// Мобильное меню: Переключение навигации
+function toggleMobileMenu() {
+    const menu = document.getElementById('nav-menu');
+    const toggleButton = document.querySelector('.mobile-menu-toggle');
+
+    if (menu && toggleButton) {
+        menu.classList.toggle('active');
+        const isExpanded = menu.classList.contains('active');
+        toggleButton.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+    } else {
+        console.warn('Мобильное меню: Элементы nav-menu или mobile-menu-toggle не найдены.');
+    }
+}
+
+// Инициализация скриптов после загрузки DOM
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Запуск отладки Google Analytics...');
+    // Проверки Google Analytics
     checkGoogleAnalytics();
     checkGAId();
     sendTestEvent();
     checkCrossDomain();
+
+    // Обработчик кнопки мобильного меню
+    const toggleButton = document.querySelector('.mobile-menu-toggle');
+    if (toggleButton) {
+        toggleButton.addEventListener('click', toggleMobileMenu);
+    }
 });
