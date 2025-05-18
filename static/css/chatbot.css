@@ -5,10 +5,11 @@
 }
 .chatbot-window {
   width: 300px;
-  background: white;
+  background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 1rem;
+  border: 1px solid #ccc;
 }
 .chatbot-messages {
   max-height: 200px;
@@ -46,4 +47,75 @@
   .chatbot-window {
     width: 250px;
   }
+}
+
+/* Новые стили */
+.message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.user-message {
+    background-color: #e6f7ff;
+    text-align: right;
+    margin-left: 20px;
+}
+
+.bot-message {
+    background-color: #f0f0f0;
+    text-align: left;
+    margin-right: 20px;
+}
+
+.loading {
+    font-style: italic;
+    color: #888;
+}
+
+.input-area {
+    display: flex;
+    align-items: center;
+}
+
+.chatbot-input {
+    flex: 1;
+    resize: none;
+    min-height: 40px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.send-button {
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 50%;
+    margin-left: 5px;
+    transition: background-color 0.3s;
+}
+
+.send-button:hover {
+    background-color: #0056b3;
+}
+
+.system-message {
+    font-style: italic;
+    color: #555;
+}
+.success {
+    color: green;
+}
+.error {
+    color: red;
+}
+
+.system-message.success {
+    color: green;
+}
+.system-message.error {
+    color: red;
 }

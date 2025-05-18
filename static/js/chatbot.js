@@ -1,16 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // Создание элемента чатбота
     function createChatbotElement() {
         const chatbot = document.createElement('div');
         chatbot.className = 'chatbot fixed bottom-4 right-4 z-50';
         chatbot.innerHTML = `
             <div class="chatbot-window bg-white shadow-lg rounded-lg p-4 w-80 h-96 overflow-y-auto hidden">
                 <div class="chatbot-messages"></div>
-                <input type="text" class="chatbot-input w-full p-2 border rounded-lg" placeholder="{% trans 'Ask a question' %}">
+                <div class="input-area flex mt-2">
+                    <textarea class="chatbot-input w-full p-2 border rounded-lg" placeholder="{% trans 'Ask a question' %}" rows="2"></textarea>
+                    <button class="send-button bg-primary text-white p-2 rounded-full ml-2">➤</button>
+                </div>
             </div>
-            <button class="chatbot-toggle bg-primary text-white p-4 rounded-full">{% trans 'Chat' %}</button>
+            <button class="chatbot-toggle bg-primary text-white p-4 rounded-full shadow-md hover:bg-primary-dark transition">
+                {% trans 'Open Chat' %}
+            </button>
         `;
         return chatbot;
     }
+
+    // Инициализация элементов
+    const lang = document.documentElement.lang || 'ru';
+    const chatbot = createChatbotElement();
+    document.body.appendChild(chatbot);
 
     const messages = {
         de: 'Hallo! Wie kann ich bei Ihrer Renovierung helfen?',
@@ -19,53 +30,120 @@ document.addEventListener('DOMContentLoaded', () => {
         ru: 'Привет! Чем могу помочь с ремонтом?'
     };
 
-    const lang = document.documentElement.lang || 'de';
-    const chatbot = createChatbotElement();
-    document.body.appendChild(chatbot);
-
+    // Элементы интерфейса
+    const chatbotToggle = document.querySelector('.chatbot-toggle');
+    const chatbotWindow = document.querySelector('.chatbot-window');
+    const chatbotInput = document.querySelector('.chatbot-input');
     const chatbotMessages = document.querySelector('.chatbot-messages');
-    chatbotMessages.innerHTML = `<p class="bot">${messages[lang]}</p>`;
+    const sendButton = document.querySelector('.send-button');
 
-    document.querySelector('.chatbot-toggle').addEventListener('click', () => {
-        const window = document.querySelector('.chatbot-window');
-        window.style.display = window.style.display === 'block' ? 'none' : 'block';
+    // Начальное сообщение (добавляется только один раз)
+    appendMessage('Бот', messages[lang], 'bot-message');
+
+    // Обработчики событий
+    chatbotToggle.addEventListener('click', () => {
+        chatbotWindow.classList.toggle('hidden');
+        updateToggleButtonText();
     });
 
-    async function sendMessage(input, messagesElement) {
-        messagesElement.innerHTML += `<p class="user">${input}</p>`;
+    // Новая функция для обработки отправки сообщения
+    async function handleSendMessage() {
+        try {
+            await sendMessage();
+            console.log('Сообщение успешно отправлено');
+            appendMessage('Система', 'Сообщение отправлено!', 'system-message success');
+        } catch (error) {
+            console.error('Ошибка при отправке:', error);
+            appendMessage('Система', 'Не удалось отправить сообщение', 'system-message error');
+        }
+    }
+
+    // Обработчик клика на кнопку отправки
+    sendButton.addEventListener('click', handleSendMessage);
+
+    // Обработчик нажатия клавиши Enter
+    chatbotInput.addEventListener('keydown', async (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            await handleSendMessage();
+        }
+    });
+
+    async function sendMessage() {
+        const message = chatbotInput.value.trim();
+        if (!message) return;
+
+        appendMessage('Вы', message, 'user-message');
+        chatbotInput.value = '';
+
+        // Показать индикатор загрузки
+        const loadingMessage = appendMessage('Бот', 'Печатает...', 'bot-message loading');
+
         try {
             const csrfToken = getCSRFToken();
             if (!csrfToken) {
-                messagesElement.innerHTML += `<p class="bot">Ошибка: CSRF-токен не найден.</p>`;
+                showError('CSRF-токен не найден');
+                removeLoadingMessage(loadingMessage);
                 return;
             }
+
             const response = await fetch('/chatbot/', {
                 method: 'POST',
                 headers: {
-                    'X-CSRFToken': csrfToken,
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
                 },
-                body: JSON.stringify({ message: input, language: lang })
+                body: JSON.stringify({
+                    message,
+                    language: lang
+                })
             });
+
             const data = await response.json();
+            removeLoadingMessage(loadingMessage);
             if (data.response) {
-                messagesElement.innerHTML += `<p class="bot">${data.response}</p>`;
+                appendMessage('Бот', data.response, 'bot-message');
             } else {
-                messagesElement.innerHTML += `<p class="bot">Ошибка: ${data.error}</p>`;
+                showError(data.error || 'Не удалось получить ответ');
             }
         } catch (error) {
-            messagesElement.innerHTML += `<p class="bot">Ошибка соединения. Попробуйте позже.</p>`;
+            removeLoadingMessage(loadingMessage);
+            showError('Ошибка подключения');
             console.error('Chatbot error:', error);
+            throw error;
         }
-        messagesElement.scrollTop = messagesElement.scrollHeight;
     }
 
-    document.querySelector('.chatbot-input').addEventListener('keypress', async (e) => {
-        if (e.key === 'Enter') {
-            const input = e.target.value.trim();
-            if (!input) return;
-            await sendMessage(input, chatbotMessages);
-            e.target.value = '';
+    // Вспомогательные функции
+    function appendMessage(sender, text, className) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${className} p-2 mb-2 rounded-lg`;
+        messageDiv.innerHTML = `<strong>${sender}:</strong> ${text}`;
+        chatbotMessages.appendChild(messageDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        return messageDiv;
+    }
+
+    function showError(errorText) {
+        appendMessage('Бот', `Ошибка: ${errorText}`, 'bot-message error text-red-500');
+    }
+
+    function removeLoadingMessage(loadingMessage) {
+        if (loadingMessage) {
+            loadingMessage.remove();
         }
-    });
+    }
+
+    function getCSRFToken() {
+        const cookieValue = document.cookie.match(/csrftoken=([^;]+)/);
+        return cookieValue ? cookieValue[1] : null;
+    }
+
+    function updateToggleButtonText() {
+        const isHidden = chatbotWindow.classList.contains('hidden');
+        chatbotToggle.textContent = isHidden ? '{% trans "Open Chat" %}' : '{% trans "Close Chat" %}';
+    }
+
+    // Установить начальный текст кнопки
+    updateToggleButtonText();
 });
