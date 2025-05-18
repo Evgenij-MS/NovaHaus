@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', () => {
         slides.forEach((slide, i) => {
             slide.classList.toggle('active', i === index);
             slide.classList.toggle('opacity-0', i !== index);
+            if (slide.tagName === 'VIDEO') {
+                i === index ? slide.play().catch(() => slide.pause()) : slide.pause();
+            }
         });
         indicators.forEach((indicator, i) => {
             indicator.classList.toggle('active', i === index);
@@ -32,10 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     slides.forEach(slide => {
         if (slide.tagName === 'VIDEO') {
-            slide.addEventListener('play', () => {
-                if (!slide.classList.contains('active')) {
-                    slide.pause();
-                }
+            slide.addEventListener('error', () => {
+                console.error('Ошибка загрузки видео:', slide.src);
+                nextSlide(); // Переключаем слайд, если видео не загрузилось
             });
         }
     });

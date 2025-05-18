@@ -5,6 +5,13 @@
 {% block description %}{% trans "Профессиональный ремонт квартир, офисов и фасадов в Кёльне и Гамбурге с использованием экологичных материалов." %}{% endblock %}
 {% block keywords %}{% trans "ремонт, Кёльн, Гамбург, экологичность, NovaHaus, ремонт квартир, ремонт офисов, эко-материалы, виртуальный тур" %}{% endblock %}
 
+{% block extra_head %}
+<meta property="og:title" content="{% trans 'NovaHaus – Ваш надёжный партнёр по ремонту' %}">
+<meta property="og:description" content="{% trans 'Профессиональный ремонт квартир, офисов и фасадов в Кёльне и Гамбурге.' %}">
+<meta property="og:image" content="{% static 'images/logo.png' %}">
+<meta property="og:url" content="{% if request.get_host == 'novahaus-hamburg.de' or request.get_host == 'www.novahaus-hamburg.de' %}https://www.novahaus-hamburg.de{% else %}https://www.novahaus-koeln.de{% endif %}">
+{% endblock %}
+
 {% block breadcrumbs %}
 ,{
   "@type": "ListItem",
@@ -35,7 +42,7 @@
   <section class="hero relative h-screen overflow-hidden">
     <div class="slider" id="hero-slider">
       <video autoplay muted loop class="w-full h-full object-cover absolute opacity-0 active" id="hero-video">
-        <source src="{% static 'media/hero-video.mp4' %}" type="video/mp4">
+        <source src="{% static 'media/hero-video.webm' %}" type="video/webm">
       </video>
       <img src="{% static 'images/slider/slide1.webp' %}" alt="{% trans 'Модная квартира' %}" class="w-full h-full object-cover absolute opacity-0" width="1920" height="1080" loading="lazy">
       <img src="{% static 'images/slider/slide2.webp' %}" alt="{% trans 'Ремонт офиса' %}" class="w-full h-full object-cover absolute opacity-0" width="1920" height="1080" loading="lazy">
@@ -169,12 +176,12 @@
           <div class="portfolio-item relative">
             <div class="before-after-slider">
               {% if project.image_before %}
-                <img src="{{ project.image_before.url }}" alt="{% trans 'До' %}" class="w-full h-48 object-cover" width="400" height="300" loading="lazy">
+                <img src="{{ project.image_before.url }}" alt="{% trans 'До' %} {{ project.title }}" class="w-full h-48 object-cover" width="400" height="300" loading="lazy">
               {% else %}
                 <img src="{% static 'images/placeholder.jpg' %}" alt="{% trans 'До' %}" class="w-full h-48 object-cover" width="400" height="300" loading="lazy">
               {% endif %}
               {% if project.image_after %}
-                <img src="{{ project.image_after.url }}" alt="{% trans 'После' %}" class="w-full h-48 object-cover" width="400" height="300" loading="lazy">
+                <img src="{{ project.image_after.url }}" alt="{% trans 'После' %} {{ project.title }}" class="w-full h-48 object-cover" width="400" height="300" loading="lazy">
               {% else %}
                 <img src="{% static 'images/placeholder.jpg' %}" alt="{% trans 'После' %}" class="w-full h-48 object-cover" width="400" height="300" loading="lazy">
               {% endif %}
@@ -284,4 +291,7 @@
     </div>
     <button class="chatbot-toggle bg-primary text-white p-4 rounded-full">{% trans 'Чат' %}</button>
   </div>
+
+  <!-- Chatbot Script -->
+  <script src="{% static 'js/chatbot.js' %}"></script>
 {% endblock %}
