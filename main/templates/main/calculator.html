@@ -49,6 +49,8 @@
     <!-- Секция для 3D-визуализации -->
     <div class="viewer-section">
         <h2>{% trans '3D Visualization' %}</h2>
+        <button id="show-model" class="btn">{% trans 'Show Model' %}</button>
+        <button id="hide-model" class="btn">{% trans 'Hide Model' %}</button>
         <model-viewer id="viewer" style="display: none; width: 100%; height: 400px;" src="" ar shadow-intensity="1" camera-controls touch-action="pan-y" alt="{% trans '3D Model Viewer' %}"></model-viewer>
     </div>
     <a href="{% url 'home' %}" class="btn btn-secondary">{% trans 'Back to Home' %}</a>

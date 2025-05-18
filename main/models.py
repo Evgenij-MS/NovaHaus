@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
+from django.core.validators import MinValueValidator
+
 
 # Модель для услуг
 class Service(models.Model):
@@ -55,7 +57,7 @@ class Calculation(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='calculations', blank=True, null=True, verbose_name=_("Пользователь"))
     work_type = models.CharField(max_length=100, verbose_name=_("Тип работы"))
-    area = models.FloatField(verbose_name=_("Площадь"))
+    area = models.FloatField(verbose_name=_("Площадь"), validators=[MinValueValidator(0.1)])
     material = models.CharField(max_length=100, verbose_name=_("Материал"))
     total_cost = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Общая стоимость"))
     material_cost = models.DecimalField(max_digits=10, decimal_places=2, verbose_name=_("Стоимость материалов"))
