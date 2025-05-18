@@ -199,7 +199,7 @@ NovaHaus/
 │   │   ├── pannellum.js
 │   │   ├── pannellum-custom.js
 │   │   ├── testimonials.js
-│   │   ├── 3d-model.js
+│   │   ├── 
 │   │   ├── ai-integration.js
 │   │   ├── animations.js
 │   │   ├── calculator.js
@@ -229,7 +229,7 @@ NovaHaus/
         ├── footer.html  # Обновлён
         ├── header.html
         ├── modal.html
-        └── slider.html  # Обновлён
+        └── slider.html  # ОбновлёнЫ
 
 NovaHaus/eslint.config.js #в корне проекта
 NovaHaus/main/templates/main/privacy.html
@@ -239,3 +239,19 @@ static/images/placeholder.jpg
 NovaHaus/static/robots.txt
 Добавь /main/templates/main/500.html
 /static/images/favicon/favicon-192x192.png
+static/js/three.min.js
+
+NovaHaus/static/js/GLTFLoader.js
+
+
+
+/static/models/ -- добавить всех этих файлов --
+apartment_economy.glb, apartment_standard.glb, apartment_premium.glb
+house_economy.glb, house_standard.glb, house_premium.glb
+office_economy.glb, office_standard.glb, office_premium.glb
+warehouse_economy.glb, warehouse_standard.glb, warehouse_premium.glb
+facade_economy.glb, facade_standard.glb, facade_premium.glb
+bathroom_economy.glb, bathroom_standard.glb, bathroom_premium.glb   ,  sample_model.glb
+
+
+
