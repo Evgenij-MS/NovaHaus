@@ -7,6 +7,9 @@ import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import gettext_lazy as _
 
+# Определяем logger в начале файла
+logger = logging.getLogger(__name__)
+
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -15,7 +18,7 @@ def get_env_variable(var_name, default=None):
     """Получение переменной окружения с логированием."""
     value = os.getenv(var_name, default)
     if value is None:
-        logging.warning(f"Переменная окружения {var_name} отсутствует, используем значение по умолчанию: {default}")
+        logger.warning(f"Переменная окружения {var_name} отсутствует, используем значение по умолчанию: {default}")
     return value
 
 # SECRET_KEY должен быть задан в .env
@@ -325,7 +328,6 @@ if SENTRY_DSN:
 else:
     logger.info("SENTRY_DSN не задан, Sentry не инициализирован")
 
-
 PWA_APP_NAME = 'NovaHaus'
 PWA_APP_DESCRIPTION = "Renovation services in Cologne and Hamburg"
 PWA_APP_THEME_COLOR = '#005B99'
@@ -356,7 +358,6 @@ PWA_APP_SPLASH_SCREEN = [
 PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'de'
 
-logger = logging.getLogger(__name__)
 logger.info(f"Application started in DEBUG={DEBUG} mode")
 
 # Временно закомментировано для выполнения миграций на Heroku
