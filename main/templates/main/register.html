@@ -1,5 +1,25 @@
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Зарегистрироваться</button>
-</form>
+{% extends 'base.html' %}
+{% load compress static i18n %}
+
+{% block title %}
+    {% trans "Регистрация – NovaHaus" %}
+{% endblock %}
+
+{% block description %}
+    {% trans "Зарегистрируйтесь, чтобы получить доступ к личному кабинету и услугам NovaHaus." %}
+{% endblock %}
+
+{% block keywords %}
+    {% trans "регистрация, личный кабинет, NovaHaus" %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{% trans "Регистрация" %}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">{% trans "Зарегистрироваться" %}</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,28 +1,26 @@
-{% load static i18n %}
-<header role="banner">
-    <div class="header-content">
+{% load compress static i18n %}
+
+<header>
+    <nav class="navbar">
         <div class="logo">
-            <a href="{% url 'home' %}" aria-label="{% trans 'NovaHaus Home' %}">
-                <img src="{% static 'images/logo.png' %}" alt="{% trans 'NovaHaus Logo' %}" width="150" height="50" loading="lazy">
+            <a href="{% url 'home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="{% trans 'NovaHaus Logo' %}" width="150" height="50">
             </a>
         </div>
-        <nav role="navigation" aria-label="{% trans 'Main Navigation' %}">
-            <button class="mobile-menu-toggle" aria-label="{% trans 'Toggle Menu' %}" aria-expanded="false">
-                <i class="fas fa-bars"></i>
-            </button>
-            <ul class="nav-menu" id="nav-menu">
-                <li><a href="{% url 'home' %}" {% if request.path == '/' %}class="active" aria-current="page"{% endif %}>{% trans 'Home' %}</a></li>
-                <li><a href="{% url 'services' %}" {% if request.path == '/services/' %}class="active" aria-current="page"{% endif %}>{% trans 'Services' %}</a></li>
-                <li><a href="{% url 'portfolio' %}" {% if request.path == '/portfolio/' %}class="active" aria-current="page"{% endif %}>{% trans 'Portfolio' %}</a></li>
-                <li><a href="{% url 'blog' %}" {% if request.path == '/blog/' %}class="active" aria-current="page"{% endif %}>{% trans 'Blog' %}</a></li>
-                <li><a href="{% url 'contact' %}" {% if request.path == '/contact/' %}class="active" aria-current="page"{% endif %}>{% trans 'Contact' %}</a></li>
-                <li><a href="{% url 'register_partner' %}" {% if request.path == '/register-partner/' %}class="active" aria-current="page"{% endif %}>{% trans 'Become a Partner' %}</a></li>
-            </ul>
-        </nav>
-        <div class="language-switcher">
-            <form action="{% url 'set_language' %}" method="post" aria-label="{% trans 'Language Switcher' %}">
+
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">{% trans 'Home' %}</a></li>
+            <li><a href="{% url 'services' %}">{% trans 'Services' %}</a></li>
+            <li><a href="{% url 'portfolio' %}">{% trans 'Portfolio' %}</a></li>
+            <li><a href="{% url 'blog' %}">{% trans 'Blog' %}</a></li>
+            <li><a href="{% url 'contact' %}">{% trans 'Contact' %}</a></li>
+            <li><a href="{% url 'register_partner' %}">{% trans 'Become a Partner' %}</a></li>
+        </ul>
+
+        <div class="language-selector">
+            <form id="language-form" method="post" action="{% url 'set_language' %}">
                 {% csrf_token %}
-                <select name="language" onchange="this.form.submit()" aria-label="{% trans 'Select Language' %}">
+                <select name="language" onchange="this.form.submit()">
                     <option value="de" {% if LANGUAGE_CODE == 'de' %}selected{% endif %}>{% trans 'German' %}</option>
                     <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>{% trans 'English' %}</option>
                     <option value="ru" {% if LANGUAGE_CODE == 'ru' %}selected{% endif %}>{% trans 'Russian' %}</option>
@@ -30,5 +28,9 @@
                 </select>
             </form>
         </div>
-    </div>
+    </nav>
+
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+    {% endcompress %}
 </header>

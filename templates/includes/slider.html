@@ -1,4 +1,4 @@
-{% load static i18n %}
+{% load compress static i18n %}
 <div class="slider">
     <div class="slides">
         <img src="{% static 'images/slider/slide1.jpg' %}" alt="{% trans 'Современный ремонт квартир' %}">
@@ -13,3 +13,6 @@
         <button class="indicator"></button>
     </div>
 </div>
+{% compress js %}
+<script src="{% static 'js/slider.js' %}"></script>
+{% endcompress %}

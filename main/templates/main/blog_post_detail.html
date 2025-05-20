@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="{{ request.LANGUAGE_CODE }}">
-<head>
-    <title>Детали блога</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load compress static i18n %}
+
+{% block title %}
+    {{ post.title }} – NovaHaus
+{% endblock %}
+
+{% block description %}
+    {{ post.content|truncatewords:30 }}
+{% endblock %}
+
+{% block keywords %}
+    {% trans "блог, строительство, ремонт, NovaHaus" %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
     <h1>{{ post.title }}</h1>
-    <p>{{ post.content }}</p>
-</body>
-</html>
+    <article class="blog-post">
+        <p>{{ post.content }}</p>
+    </article>
+    <a href="{% url 'blog' %}" class="btn">{% trans "Вернуться к блогу" %}</a>
+</div>
+{% endblock %}

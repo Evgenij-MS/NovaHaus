@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static i18n %}
+{% load compress static i18n %}
 
 {% block title %}{% trans "NovaHaus – Ваш надёжный партнёр по ремонту" %}{% endblock %}
 {% block description %}{% trans "Профессиональный ремонт квартир, офисов и фасадов в Кёльне и Гамбурге с использованием экологичных материалов." %}{% endblock %}
@@ -284,4 +284,9 @@
     </div>
     <button class="chatbot-toggle bg-primary text-white p-4 rounded-full">{% trans 'Чат' %}</button>
   </div>
+
+  {% compress js %}
+  <script src="{% static 'js/pannellum.js' %}"></script>
+  <script src="{% static 'js/pannellum-custom.js' %}"></script>
+  {% endcompress %}
 {% endblock %}

@@ -18,6 +18,7 @@ def get_env_variable(var_name, default=None):
         logging.warning(f"Переменная окружения {var_name} отсутствует, используем значение по умолчанию: {default}")
     return value
 
+# SECRET_KEY должен быть задан в .env
 SECRET_KEY = get_env_variable('SECRET_KEY')
 if not SECRET_KEY:
     raise ImproperlyConfigured("SECRET_KEY не установлен в переменных окружения")
@@ -206,11 +207,11 @@ if DEBUG:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME', 'NH'),
-            'USER': os.getenv('DB_USER', 'postgres'),
-            'PASSWORD': os.getenv('DB_PASSWORD', 'Okro.123'),
-            'HOST': os.getenv('DB_HOST', 'localhost'),
-            'PORT': os.getenv('DB_PORT', '5432'),
+            'NAME': os.getenv('DB_NAME'),
+            'USER': os.getenv('DB_USER'),
+            'PASSWORD': os.getenv('DB_PASSWORD'),
+            'HOST': os.getenv('DB_HOST'),
+            'PORT': os.getenv('DB_PORT'),
         }
     }
 else:
@@ -257,6 +258,8 @@ USE_TZ = True
 
 OTP_TOTP_ISSUER = 'NovaHaus'
 
+# Django-Compressor settings
+# Note: COMPRESS_OFFLINE = True requires {% compress %} tags in templates
 COMPRESS_ENABLED = not DEBUG
 COMPRESS_OFFLINE = not DEBUG
 COMPRESS_CSS_FILTERS = [
@@ -309,14 +312,19 @@ AUTHENTICATION_BACKENDS = [
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
-sentry_sdk.init(
-    dsn=os.getenv('SENTRY_DSN'),
-    integrations=[DjangoIntegration()],
-    traces_sample_rate=1.0,
-    profiles_sample_rate=1.0,
-    send_default_pii=True,
-    environment='production' if not DEBUG else 'development'
-)
+SENTRY_DSN = os.getenv('SENTRY_DSN')
+if SENTRY_DSN:
+    sentry_sdk.init(
+        dsn=SENTRY_DSN,
+        integrations=[DjangoIntegration()],
+        traces_sample_rate=1.0,
+        profiles_sample_rate=1.0,
+        send_default_pii=True,
+        environment='production' if not DEBUG else 'development'
+    )
+else:
+    logger.info("SENTRY_DSN не задан, Sentry не инициализирован")
+
 
 PWA_APP_NAME = 'NovaHaus'
 PWA_APP_DESCRIPTION = "Renovation services in Cologne and Hamburg"

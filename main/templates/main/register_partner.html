@@ -1,13 +1,25 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load compress static i18n %}
+
+{% block title %}
+    {% trans "Регистрация партнера – NovaHaus" %}
+{% endblock %}
+
+{% block description %}
+    {% trans "Станьте партнером NovaHaus и получайте бонусы за привлечение клиентов." %}
+{% endblock %}
+
+{% block keywords %}
+    {% trans "партнер, регистрация, NovaHaus" %}
+{% endblock %}
 
 {% block content %}
 <div class="container">
-    <h2>Регистрация партнера</h2>
+    <h2>{% trans "Регистрация партнера" %}</h2>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn">Зарегистрироваться</button>
+        <button type="submit" class="btn">{% trans "Зарегистрироваться" %}</button>
     </form>
 </div>
 {% endblock %}

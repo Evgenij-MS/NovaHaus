@@ -1,46 +1,50 @@
 {% extends 'base.html' %}
-{% load static i18n %}
+{% load compress static i18n %}
 
 {% block title %}
-    Услуги – NovaHaus
+    {% trans "Услуги – NovaHaus" %}
 {% endblock %}
 
 {% block description %}
-    Профессиональные услуги по ремонту, фасадным работам, электромонтажу и демонтажу в Кёльне.
+    {% trans "Профессиональные услуги по ремонту, фасадным работам, электромонтажу и демонтажу в Кёльне и Гамбурге." %}
 {% endblock %}
 
 {% block keywords %}
-    ремонт, фасадные работы, электромонтаж, демонтаж, Кёльн, NovaHaus
+    {% trans "ремонт, фасадные работы, электромонтаж, демонтаж, Кёльн, Гамбург, NovaHaus" %}
 {% endblock %}
 
 {% block extra_css %}
+    {% compress css %}
     <link rel="stylesheet" href="{% static 'css/services.css' %}">
+    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modal.css' %}">
+    {% endcompress %}
 {% endblock %}
 
 {% block content %}
     <section class="services-section">
         <div class="container">
             <!-- Заголовок -->
-            <h2 class="section-title">Наши услуги</h2>
+            <h2 class="section-title">{% trans "Наши услуги" %}</h2>
 
             <!-- Блок: Рекомендации ИИ -->
             <div class="ai-recommendations">
-                <h3 class="ai-title">Рекомендации ИИ от Grok 3</h3>
+                <h3 class="ai-title">{% trans "Рекомендации ИИ от Grok 3" %}</h3>
                 <p class="ai-description">
-                    Не уверены, какие технологии или материалы выбрать для вашего проекта? Наш партнер, Grok 3 от xAI, поможет найти оптимальные решения – от энергоэффективных фасадов до современных систем освещения.
+                    {% trans "Не уверены, какие технологии или материалы выбрать для вашего проекта? Наш партнер, Grok 3 от xAI, поможет найти оптимальные решения – от энергоэффективных фасадов до современных систем освещения." %}
                 </p>
                 <a href="{% url 'get_ai_recommendations' %}" class="ai-button">
-                    Получить рекомендации
+                    {% trans "Получить рекомендации" %}
                 </a>
             </div>
 
             <!-- Прайс-лист и калькулятор -->
             <div class="tools-container">
                 <div class="price-list-container">
-                    <button class="price-list-button" onclick="openPriceList()">Прайс-лист</button>
+                    <button class="price-list-button" onclick="openPriceList()">{% trans "Прайс-лист" %}</button>
                 </div>
                 <div class="calculator-container">
-                    <a href="{% url 'calculator' %}" class="calculator-button">Калькулятор</a>
+                    <a href="{% url 'calculator' %}" class="calculator-button">{% trans "Калькулятор" %}</a>
                 </div>
             </div>
 
@@ -48,96 +52,96 @@
             <div class="services-grid">
                 <!-- Ремонт -->
                 <div class="service-card">
-                    <h3 class="service-title large-title">Ремонт</h3>
+                    <h3 class="service-title large-title">{% trans "Ремонт" %}</h3>
                     <div class="service-content" style="background-image: url('{% static 'images/services/renovation.jpg' %}');">
                         <p class="service-description">
-                            Мы преображаем ваше пространство с заботой о каждой детали. Качественный ремонт для комфортной жизни и работы.
+                            {% trans "Мы преображаем ваше пространство с заботой о каждой детали. Качественный ремонт для комфортной жизни и работы." %}
                         </p>
                         <ul class="service-list">
-                            <li><i class="fas fa-building"></i> Квартиры</li>
-                            <li><i class="fas fa-home"></i> Дома</li>
-                            <li><i class="fas fa-briefcase"></i> Офисы</li>
-                            <li><i class="fas fa-warehouse"></i> Склады</li>
+                            <li><i class="fas fa-building"></i> {% trans "Квартиры" %}</li>
+                            <li><i class="fas fa-home"></i> {% trans "Дома" %}</li>
+                            <li><i class="fas fa-briefcase"></i> {% trans "Офисы" %}</li>
+                            <li><i class="fas fa-warehouse"></i> {% trans "Склады" %}</li>
                         </ul>
-                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
+                        <a href="{% url 'contact' %}" class="service-button">{% trans "Связаться" %}</a>
                     </div>
                 </div>
 
                 <!-- Фасадные работы -->
                 <div class="service-card">
-                    <h3 class="service-title">Фасадные работы</h3>
+                    <h3 class="service-title">{% trans "Фасадные работы" %}</h3>
                     <div class="service-content" style="background-image: url('{% static 'images/services/facade.jpg' %}');">
                         <p class="service-description">
-                            Создаем долговечные и эстетичные фасады, повышая энергоэффективность и внешний вид зданий.
+                            {% trans "Создаем долговечные и эстетичные фасады, повышая энергоэффективность и внешний вид зданий." %}
                         </p>
                         <ul class="service-list">
-                            <li><i class="fas fa-tools"></i> Демонтаж</li>
-                            <li><i class="fas fa-shield-alt"></i> Утепление</li>
-                            <li><i class="fas fa-hammer"></i> Монтаж</li>
+                            <li><i class="fas fa-tools"></i> {% trans "Демонтаж" %}</li>
+                            <li><i class="fas fa-shield-alt"></i> {% trans "Утепление" %}</li>
+                            <li><i class="fas fa-hammer"></i> {% trans "Монтаж" %}</li>
                         </ul>
-                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
+                        <a href="{% url 'contact' %}" class="service-button">{% trans "Связаться" %}</a>
                     </div>
                 </div>
 
                 <!-- Ремонт ванных комнат -->
                 <div class="service-card">
-                    <h3 class="service-title">Ремонт ванных комнат</h3>
+                    <h3 class="service-title">{% trans "Ремонт ванных комнат" %}</h3>
                     <div class="service-content" style="background-image: url('{% static 'images/services/bathroom.jpg' %}');">
                         <p class="service-description">
-                            Современные решения для ванных комнат – от укладки плитки до полной реконструкции.
+                            {% trans "Современные решения для ванных комнат – от укладки плитки до полной реконструкции." %}
                         </p>
                         <ul class="service-list">
-                            <li><i class="fas fa-th"></i> Монтаж и поклейка плитки</li>
+                            <li><i class="fas fa-th"></i> {% trans "Монтаж и поклейка плитки" %}</li>
                         </ul>
-                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
+                        <a href="{% url 'contact' %}" class="service-button">{% trans "Связаться" %}</a>
                     </div>
                 </div>
 
                 <!-- Электромонтажные работы -->
                 <div class="service-card">
-                    <h3 class="service-title">Электромонтажные работы</h3>
+                    <h3 class="service-title">{% trans "Электромонтажные работы" %}</h3>
                     <div class="service-content" style="background-image: url('{% static 'images/services/electrical.jpg' %}');">
                         <p class="service-description">
-                            Безопасные и профессиональные электромонтажные услуги для любых объектов.
+                            {% trans "Безопасные и профессиональные электромонтажные услуги для любых объектов." %}
                         </p>
                         <ul class="service-list">
-                            <li><i class="fas fa-building"></i> Квартиры</li>
-                            <li><i class="fas fa-home"></i> Дома</li>
-                            <li><i class="fas fa-briefcase"></i> Офисы</li>
-                            <li><i class="fas fa-warehouse"></i> Склады</li>
+                            <li><i class="fas fa-building"></i> {% trans "Квартиры" %}</li>
+                            <li><i class="fas fa-home"></i> {% trans "Дома" %}</li>
+                            <li><i class="fas fa-briefcase"></i> {% trans "Офисы" %}</li>
+                            <li><i class="fas fa-warehouse"></i> {% trans "Склады" %}</li>
                         </ul>
-                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
+                        <a href="{% url 'contact' %}" class="service-button">{% trans "Связаться" %}</a>
                     </div>
                 </div>
 
                 <!-- Демонтажные работы -->
                 <div class="service-card">
-                    <h3 class="service-title">Демонтажные работы</h3>
+                    <h3 class="service-title">{% trans "Демонтажные работы" %}</h3>
                     <div class="service-content" style="background-image: url('{% static 'images/services/demolition.jpg' %}');">
                         <p class="service-description">
-                            Выполняем демонтаж любой сложности быстро, безопасно и с учетом всех требований.
+                            {% trans "Выполняем демонтаж любой сложности быстро, безопасно и с учетом всех требований." %}
                         </p>
                         <ul class="service-list">
-                            <li><i class="fas fa-tools"></i> Любой сложности</li>
+                            <li><i class="fas fa-tools"></i> {% trans "Любой сложности" %}</li>
                         </ul>
-                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
+                        <a href="{% url 'contact' %}" class="service-button">{% trans "Связаться" %}</a>
                     </div>
                 </div>
 
                 <!-- Материалы и уборка -->
                 <div class="service-card">
-                    <h3 class="service-title">Материалы и уборка</h3>
+                    <h3 class="service-title">{% trans "Материалы и уборка" %}</h3>
                     <div class="service-content" style="background-image: url('{% static 'images/services/materials_cleaning.jpg' %}');">
                         <p class="service-description">
-                            Организуем закупку и доставку материалов, а также уборку после ремонта для вашего удобства.
+                            {% trans "Организуем закупку и доставку материалов, а также уборку после ремонта для вашего удобства." %}
                         </p>
                         <ul class="service-list">
-                            <li><i class="fas fa-shopping-cart"></i> Закупка материалов</li>
-                            <li><i class="fas fa-truck"></i> Доставка</li>
-                            <li><i class="fas fa-ladder"></i> Подъем в квартиру</li>
-                            <li><i class="fas fa-broom"></i> Уборка после ремонта</li>
+                            <li><i class="fas fa-shopping-cart"></i> {% trans "Закупка материалов" %}</li>
+                            <li><i class="fas fa-truck"></i> {% trans "Доставка" %}</li>
+                            <li><i class="fas fa-ladder"></i> {% trans "Подъем в квартиру" %}</li>
+                            <li><i class="fas fa-broom"></i> {% trans "Уборка после ремонта" %}</li>
                         </ul>
-                        <a href="{% url 'contact' %}" class="service-button">Связаться</a>
+                        <a href="{% url 'contact' %}" class="service-button">{% trans "Связаться" %}</a>
                     </div>
                 </div>
             </div>
@@ -147,58 +151,61 @@
         <div id="price-list-modal" class="modal">
             <div class="modal-content">
                 <span class="close" onclick="closePriceList()">×</span>
-                <h2>Прайс-лист</h2>
+                <h2>{% trans "Прайс-лист" %}</h2>
 
                 <!-- Демонтажные работы -->
                 <section class="price-list-section">
-                    <h3>Демонтажные работы</h3>
+                    <h3>{% trans "Демонтажные работы" %}</h3>
                     <ul>
-                        <li>Демонтаж стен и перегородок: <strong>€15–25/м²</strong></li>
-                        <li>Демонтаж напольных покрытий: <strong>€5–10/м²</strong></li>
-                        <li>Демонтаж потолков: <strong>€10–20/м²</strong></li>
-                        <li>Демонтаж сантехники: <strong>€50–150/ед.</strong></li>
-                        <li>Демонтаж электропроводки: <strong>€3–5/м.п.</strong></li>
+                        <li>{% trans "Демонтаж стен и перегородок" %}: <strong>€15–25/м²</strong></li>
+                        <li>{% trans "Демонтаж напольных покрытий" %}: <strong>€5–10/м²</strong></li>
+                        <li>{% trans "Демонтаж потолков" %}: <strong>€10–20/м²</strong></li>
+                        <li>{% trans "Демонтаж сантехники" %}: <strong>€50–150/ед.</strong></li>
+                        <li>{% trans "Демонтаж электропроводки" %}: <strong>€3–5/м.п.</strong></li>
                     </ul>
                 </section>
 
                 <!-- Монтажные работы -->
                 <section class="price-list-section">
-                    <h3>Монтажные работы</h3>
+                    <h3>{% trans "Монтажные работы" %}</h3>
                     <ul>
-                        <li>Монтаж гипсокартонных стен: <strong>€20–35/м²</strong></li>
-                        <li>Укладка напольных покрытий: <strong>€15–30/м²</strong></li>
-                        <li>Монтаж натяжных потолков: <strong>€25–40/м²</strong></li>
-                        <li>Установка сантехники: <strong>€100–300/ед.</strong></li>
-                        <li>Монтаж электропроводки: <strong>€5–10/м.п.</strong></li>
+                        <li>{% trans "Монтаж гипсокартонных стен" %}: <strong>€20–35/м²</strong></li>
+                        <li>{% trans "Укладка напольных покрытий" %}: <strong>€15–30/м²</strong></li>
+                        <li>{% trans "Монтаж натяжных потолков" %}: <strong>€25–40/м²</strong></li>
+                        <li>{% trans "Установка сантехники" %}: <strong>€100–300/ед.</strong></li>
+                        <li>{% trans "Монтаж электропроводки" %}: <strong>€5–10/м.п.</strong></li>
                     </ul>
                 </section>
 
                 <!-- Ремонтные работы -->
                 <section class="price-list-section">
-                    <h3>Ремонтные работы</h3>
+                    <h3>{% trans "Ремонтные работы" %}</h3>
                     <ul>
-                        <li>Штукатурка стен: <strong>€10–20/м²</strong></li>
-                        <li>Шпаклевка и покраска стен: <strong>€8–15/м²</strong></li>
-                        <li>Укладка плитки: <strong>€30–50/м²</strong></li>
-                        <li>Утепление стен: <strong>€35–55/м²</strong></li>
-                        <li>Утепление фасада: <strong>€40–60/м²</strong></li>
-                        <li>Установка дверей: <strong>€100–200/ед.</strong></li>
-                        <li>Установка окон: <strong>€300–500/ед.</strong></li>
+                        <li>{% trans "Штукатурка стен" %}: <strong>€10–20/м²</strong></li>
+                        <li>{% trans "Шпаклевка и покраска стен" %}: <strong>€8–15/м²</strong></li>
+                        <li>{% trans "Укладка плитки" %}: <strong>€30–50/м²</strong></li>
+                        <li>{% trans "Утепление стен" %}: <strong>€35–55/м²</strong></li>
+                        <li>{% trans "Утепление фасада" %}: <strong>€40–60/м²</strong></li>
+                        <li>{% trans "Установка дверей" %}: <strong>€100–200/ед.</strong></li>
+                        <li>{% trans "Установка окон" %}: <strong>€300–500/ед.</strong></li>
                     </ul>
                 </section>
 
                 <!-- Материалы и уборка -->
                 <section class="price-list-section">
-                    <h3>Материалы и уборка</h3>
+                    <h3>{% trans "Материалы и уборка" %}</h3>
                     <ul>
-                        <li>Закупка и доставка материалов: <strong>По договоренности</strong></li>
-                        <li>Подъем материалов в квартиру: <strong>€50–150/заказ</strong></li>
-                        <li>Уборка после ремонта: <strong>€10–20/м²</strong></li>
+                        <li>{% trans "Закупка и доставка материалов" %}: <strong>{% trans "По договоренности" %}</strong></li>
+                        <li>{% trans "Подъем материалов в квартиру" %}: <strong>€50–150/заказ</strong></li>
+                        <li>{% trans "Уборка после ремонта" %}: <strong>€10–20/м²</strong></li>
                     </ul>
                 </section>
             </div>
         </div>
     </section>
 
+    {% compress js %}
     <script src="{% static 'js/services.js' %}"></script>
+    <script src="{% static 'js/modal.js' %}"></script>
+    {% endcompress %}
 {% endblock %}

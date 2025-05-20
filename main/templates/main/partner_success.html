@@ -1,10 +1,22 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load compress static i18n %}
+
+{% block title %}
+    {% trans "Регистрация партнера завершена – NovaHaus" %}
+{% endblock %}
+
+{% block description %}
+    {% trans "Спасибо за регистрацию в качестве партнера NovaHaus." %}
+{% endblock %}
+
+{% block keywords %}
+    {% trans "партнер, регистрация, NovaHaus" %}
+{% endblock %}
 
 {% block content %}
 <div class="container">
-    <h2>Регистрация успешно завершена!</h2>
-    <p>Спасибо за регистрацию в качестве партнера. Ваш реферальный код: <strong>{{ partner.referral_code }}</strong></p>
-    <a href="/" class="btn">Вернуться на главную</a>
+    <h2>{% trans "Регистрация успешно завершена!" %}</h2>
+    <p>{% trans "Спасибо за регистрацию в качестве партнера. Ваш реферальный код:" %} <strong>{{ partner.referral_code }}</strong></p>
+    <a href="{% url 'home' %}" class="btn">{% trans "Вернуться на главную" %}</a>
 </div>
 {% endblock %}

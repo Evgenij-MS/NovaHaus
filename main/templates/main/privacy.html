@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
-{% load static i18n %}
+{% load compress static i18n %}
+
+{% block title %}{% trans "Privacy Policy" %}{% endblock %}
+{% block description %}{% trans "At NovaHaus, we are committed to protecting your personal information and ensuring transparency in how we collect, use, and store your data." %}{% endblock %}
+{% block keywords %}{% trans "privacy policy, NovaHaus, data protection" %}{% endblock %}
 
 {% block content %}
 <div class="container py-16">
@@ -16,7 +20,7 @@
     <p class="mb-4">{% trans "We implement industry-standard security measures to protect your data from unauthorized access or disclosure." %}</p>
 
     <h3 class="text-2xl font-semibold mb-4">{% trans "4. Your Rights" %}</h3>
-    <p class="mb-4">{% trans "You have the.ConcurrentModificationException right to access, correct, or delete your personal data. Contact us to exercise these rights." %}</p>
+    <p class="mb-4">{% trans "You have the right to access, correct, or delete your personal data. Contact us to exercise these rights." %}</p>
 
     <h3 class="text-2xl font-semibold mb-4">{% trans "5. Contact Us" %}</h3>
     <p class="mb-4">{% trans "For questions about this Privacy Policy, please reach out to us." %}</p>

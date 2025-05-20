@@ -1,6 +1,30 @@
-{% for faq in faqs %}
-    <div class="faq-item">
-        <h3>{{ faq.question }}</h3>
-        <p>{{ faq.answer }}</p>
-    </div>
-{% endfor %}
+{% extends 'base.html' %}
+{% load compress static i18n %}
+
+{% block title %}
+    {% trans "Часто задаваемые вопросы – NovaHaus" %}
+{% endblock %}
+
+{% block description %}
+    {% trans "Ответы на часто задаваемые вопросы о наших услугах по ремонту и строительству." %}
+{% endblock %}
+
+{% block keywords %}
+    {% trans "FAQ, вопросы, ремонт, строительство, NovaHaus" %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{% trans "Часто задаваемые вопросы" %}</h1>
+    <section class="faq-list">
+        {% for faq in faqs %}
+        <div class="faq-item">
+            <h3>{{ faq.question }}</h3>
+            <p>{{ faq.answer }}</p>
+        </div>
+        {% empty %}
+        <p>{% trans "Вопросы пока не добавлены." %}</p>
+        {% endfor %}
+    </section>
+</div>
+{% endblock %}

@@ -1,40 +1,49 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load compress static i18n %}
 
-{% block title %}Отзывы – NovaHaus{% endblock %}
-{% block description %}Читайте отзывы наших клиентов о качестве наших услуг.{% endblock %}
-{% block keywords %}отзывы, клиенты, NovaHaus, ремонт, утепление{% endblock %}
+{% block title %}
+    {% trans "Отзывы – NovaHaus" %}
+{% endblock %}
+
+{% block description %}
+    {% trans "Читайте отзывы наших клиентов о качестве наших услуг." %}
+{% endblock %}
+
+{% block keywords %}
+    {% trans "отзывы, клиенты, NovaHaus, ремонт, утепление" %}
+{% endblock %}
 
 {% block content %}
 <div class="container">
-    <h1>Отзывы клиентов</h1>
+    <h1>{% trans "Отзывы клиентов" %}</h1>
     <section class="reviews-list">
         <div class="review">
-            <p>"Отличная работа, спасибо команде NovaHaus! Все сделали быстро и качественно."</p>
-            <span>– Иван Иванов</span>
+            <p>{% trans "Отличная работа, спасибо команде NovaHaus! Все сделали быстро и качественно." %}</p>
+            <span>– {% trans "Иван Иванов" %}</span>
         </div>
         <div class="review">
-            <p>"Очень доволен утеплением дома. Теперь зимой тепло, а счета за отопление снизились."</p>
-            <span>– Мария Петрова</span>
+            <p>{% trans "Очень доволен утеплением дома. Теперь зимой тепло, а счета за отопление снизились." %}</p>
+            <span>– {% trans "Мария Петрова" %}</span>
         </div>
         <div class="review">
-            <p>"Профессиональный подход и внимание к деталям. Рекомендую!"</p>
-            <span>– Алексей Смирнов</span>
+            <p>{% trans "Профессиональный подход и внимание к деталям. Рекомендую!" %}</p>
+            <span>– {% trans "Алексей Смирнов" %}</span>
         </div>
     </section>
 
     <section class="add-review">
-        <h2>Оставьте свой отзыв</h2>
-        <form action="/submit-review/" method="post">
+        <h2>{% trans "Оставьте свой отзыв" %}</h2>
+        <form action="{% url 'submit_review' %}" method="post">
+            {% csrf_token %}
             <div class="form-group">
-                <label for="review-name">Имя:</label>
+                <label for="review-name">{% trans "Имя" %}:</label>
                 <input type="text" id="review-name" name="name" required>
             </div>
             <div class="form-group">
-                <label for="review-message">Сообщение:</label>
+                <label for="review-message">{% trans "Сообщение" %}:</label>
                 <textarea id="review-message" name="message" rows="5" required></textarea>
             </div>
-            <button type="submit" class="btn">Отправить</button>
+            <button type="submit" class="btn">{% trans "Отправить" %}</button>
         </form>
     </section>
 </div>

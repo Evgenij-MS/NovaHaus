@@ -1,13 +1,22 @@
-<!DOCTYPE html>
-<html lang="{{ LANGUAGE_CODE }}">
-<head>
-    <meta charset="UTF-8">
-    <title>{% trans "500 - Server Error" %}</title>
-    <link rel="stylesheet" href="{% static 'css/global.css' %}">
-</head>
-<body>
-    <h1>{% trans "Server Error" %}</h1>
-    <p>{% trans "Something went wrong. Please try again later or contact us." %}</p>
-    <a href="{% url 'home' %}">{% trans "Back to Home" %}</a>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load compress static i18n %}
+
+{% block title %}
+    {% trans "Server Error" %}
+{% endblock %}
+
+{% block description %}
+    {% trans "Something went wrong. Please try again later or contact us." %}
+{% endblock %}
+
+{% block keywords %}
+    {% trans "server error, NovaHaus" %}
+{% endblock %}
+
+{% block content %}
+    <section class="container fade-in">
+        <h1>{% trans "500 - Server Error" %}</h1>
+        <p>{% trans "Something went wrong. Please try again later or contact us." %}</p>
+        <a href="{% url 'home' %}" class="btn">{% trans "Back to Home" %}</a>
+    </section>
+{% endblock %}

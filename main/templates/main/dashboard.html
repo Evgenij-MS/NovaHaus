@@ -1,112 +1,46 @@
-<div class="project-status">
-    <h2>Статус проекта</h2>
-    <div class="status-bar">
-        <div class="status-step active">Планирование</div>
-        <div class="status-step">Закупка материалов</div>
-        <div class="status-step">Ремонт</div>
-        <div class="status-step">Завершение</div>
-    </div>
-</div>
+{% extends 'base.html' %}
+{% load compress static i18n %}
 
-<div class="document-upload">
-    <h2>Загрузка документов</h2>
-    <form id="upload-form" enctype="multipart/form-data">
-        <label for="document-input">Выберите файл:</label>
-        <input type="file" name="document" id="document-input" required aria-label="Выбор файла для загрузки">
-        <button type="submit">Загрузить</button>
+{% block title %}
+    {% trans "Личный кабинет – NovaHaus" %}
+{% endblock %}
+
+{% block description %}
+    {% trans "Управляйте вашими проектами, загружайте документы и общайтесь с менеджером." %}
+{% endblock %}
+
+{% block keywords %}
+    {% trans "личный кабинет, проекты, документы, чат, NovaHaus" %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{% trans "Статус проекта" %}</h1>
+    <div class="project-status">
+        <ul>
+            <li>{% trans "Планирование" %}</li>
+            <li>{% trans "Закупка материалов" %}</li>
+            <li>{% trans "Ремонт" %}</li>
+            <li>{% trans "Завершение" %}</li>
+        </ul>
+    </div>
+
+    <h2>{% trans "Загрузка документов" %}</h2>
+    <form class="document-upload" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="document-file">{% trans "Выберите файл" %}:</label>
+        <input type="file" id="document-file" name="file" accept=".pdf,.jpg,.png">
+        <button type="submit">{% trans "Загрузить" %}</button>
     </form>
-</div>
 
-<div class="chat-with-manager">
-    <h2>Чат с менеджером</h2>
-    <div class="chat-messages" id="chat-messages">
-        <!-- Сообщения будут добавляться сюда -->
+    <h2>{% trans "Чат с менеджером" %}</h2>
+    <div class="manager-chat">
+        <div class="chat-messages" aria-live="polite"></div>
+        <form class="chat-form" method="post">
+            {% csrf_token %}
+            <textarea name="message" placeholder="{% trans 'Введите сообщение' %}" required></textarea>
+            <button type="submit">{% trans "Отправить" %}</button>
+        </form>
     </div>
-    <div class="chat-input">
-        <input type="text" id="chat-input" placeholder="Введите ваше сообщение..." aria-label="Поле ввода сообщения">
-        <button onclick="sendMessageToManager()">Отправить</button>
-    </div>
 </div>
-
-<script>
-    // Функция для получения CSRF-токена
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-
-    // Функция для отправки сообщения менеджеру
-    function sendMessageToManager() {
-        const message = document.getElementById('chat-input').value.trim();
-        if (message === "") return;
-
-        fetch('/send-message-to-manager/', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
-            },
-            body: JSON.stringify({ message: message })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                appendMessage('user', message);
-                document.getElementById('chat-input').value = "";
-            } else {
-                alert('Ошибка при отправке сообщения.');
-            }
-        })
-        .catch(error => {
-            console.error('Ошибка:', error);
-            alert('Произошла ошибка. Пожалуйста, попробуйте позже.');
-        });
-    }
-
-    // Функция для добавления сообщения в чат
-    function appendMessage(sender, message) {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('message', sender);
-        messageElement.innerText = message;
-        document.getElementById('chat-messages').appendChild(messageElement);
-        document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
-    }
-</script>
-
-<script>
-    // Обработка загрузки документа
-    document.getElementById('upload-form').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const formData = new FormData(this);
-
-        fetch('/upload-document/', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-CSRFToken': getCookie('csrftoken')
-            }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Документ успешно загружен!');
-            } else {
-                alert('Ошибка при загрузке документа.');
-            }
-        })
-        .catch(error => {
-            console.error('Ошибка:', error);
-            alert('Произошла ошибка. Пожалуйста, попробуйте позже.');
-        });
-    });
-</script>
+{% endblock %}

@@ -1,2 +1,22 @@
-<!-- Интеграция Zoom или Google Meet -->
-<iframe src="https://zoom.us/meeting-id"></iframe>
+{% extends 'base.html' %}
+{% load compress static i18n %}
+
+{% block title %}
+    {% trans "Консультация – NovaHaus" %}
+{% endblock %}
+
+{% block description %}
+    {% trans "Получите бесплатную консультацию по вашим проектам ремонта или строительства." %}
+{% endblock %}
+
+{% block keywords %}
+    {% trans "консультация, ремонт, строительство, NovaHaus" %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>{% trans "Консультация" %}</h1>
+    <p>{% trans "Свяжитесь с нами для бесплатной консультации по вашим проектам. Мы поможем выбрать оптимальные решения и рассчитать стоимость." %}</p>
+    <a href="{% url 'contact' %}" class="btn">{% trans "Записаться на консультацию" %}</a>
+</div>
+{% endblock %}
