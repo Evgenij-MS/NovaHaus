@@ -104,12 +104,12 @@ LOGGING = {
     'loggers': {
         'django': {
             'handlers': ['file', 'console'],
-            'level': 'INFO' if os.environ.get('HEROKU') else 'DEBUG',
+            'level': 'DEBUG',
             'propagate': True,
         },
         'main': {
             'handlers': ['file', 'console'],
-            'level': 'INFO' if os.environ.get('HEROKU') else 'DEBUG',
+            'level': 'DEBUG',
             'propagate': True,
         },
         'axes': {
@@ -163,7 +163,11 @@ if not DEBUG:
     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     SECURE_HSTS_PRELOAD = True
 
-ALLOW_CURL = os.getenv("ALLOW_CURL", "False") == "True"
+ALLOWED_CRAWLERS = [
+    re.compile(r'googlebot', re.IGNORECASE),
+    re.compile(r'bingbot', re.IGNORECASE),
+    re.compile(r'yandexbot', re.IGNORECASE),
+]
 
 DISALLOWED_USER_AGENTS = [
     re.compile(r'bot', re.IGNORECASE),
@@ -179,7 +183,7 @@ DISALLOWED_USER_AGENTS = [
     re.compile(r'postman', re.IGNORECASE)
 ]
 
-if not ALLOW_CURL:
+if not os.getenv("ALLOW_CURL", "False") == "True":
     DISALLOWED_USER_AGENTS.extend([
         re.compile(r'curl', re.IGNORECASE),
         re.compile(r'python-requests', re.IGNORECASE),
@@ -262,7 +266,6 @@ USE_TZ = True
 OTP_TOTP_ISSUER = 'NovaHaus'
 
 # Django-Compressor settings
-# Note: COMPRESS_OFFLINE = True requires {% compress %} tags in templates
 COMPRESS_ENABLED = not DEBUG
 COMPRESS_OFFLINE = not DEBUG
 COMPRESS_CSS_FILTERS = [
@@ -316,7 +319,7 @@ import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
 SENTRY_DSN = os.getenv('SENTRY_DSN')
-if SENTRY_DSN:
+if SENTRY_DSN and SENTRY_DSN.startswith('https://'):
     sentry_sdk.init(
         dsn=SENTRY_DSN,
         integrations=[DjangoIntegration()],
@@ -326,7 +329,7 @@ if SENTRY_DSN:
         environment='production' if not DEBUG else 'development'
     )
 else:
-    logger.info("SENTRY_DSN не задан, Sentry не инициализирован")
+    logger.info("SENTRY_DSN не задан или некорректен, Sentry не инициализирован")
 
 PWA_APP_NAME = 'NovaHaus'
 PWA_APP_DESCRIPTION = "Renovation services in Cologne and Hamburg"
@@ -359,7 +362,3 @@ PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'de'
 
 logger.info(f"Application started in DEBUG={DEBUG} mode")
-
-# Временно закомментировано для выполнения миграций на Heroku
-import django_heroku
-django_heroku.settings(locals())

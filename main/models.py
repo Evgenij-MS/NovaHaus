@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import MinValueValidator
 
-
 # Модель для услуг
 class Service(models.Model):
     CATEGORY_CHOICES = [

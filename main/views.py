@@ -183,11 +183,13 @@ def home(request):
 
 def services(request):
     """Страница услуг."""
-    return render(request, 'main/services.html')
+    service_list = Service.objects.all()
+    return render(request, 'main/services.html', {'services': service_list})
 
 def portfolio(request):
     """Страница портфолио."""
-    return render(request, 'main/portfolio.html')
+    project_list = Portfolio.objects.all()
+    return render(request, 'main/portfolio.html', {'projects': project_list})
 
 def about(request):
     """Страница о компании."""
@@ -195,7 +197,8 @@ def about(request):
 
 def reviews(request):
     """Страница отзывов."""
-    return render(request, 'main/reviews.html')
+    review_list = Review.objects.all()
+    return render(request, 'main/reviews.html', {'reviews': review_list})
 
 def contact(request):
     """Страница контактов."""
