@@ -100,30 +100,60 @@ LOGGING = {
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
+        'sentry': {
+            'level': 'ERROR',
+            'class': 'sentry_sdk.integrations.logging.SentryHandler',
+            'formatter': 'verbose',
+        },
     },
     'loggers': {
         'django': {
-            'handlers': ['file', 'console'],
+            'handlers': ['file', 'console', 'sentry'],
             'level': 'INFO',
             'propagate': True,
         },
         'main': {
-            'handlers': ['file', 'console'],
+            'handlers': ['file', 'console', 'sentry'],
             'level': 'INFO',
             'propagate': True,
         },
     },
 }
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': os.getenv('REDISCLOUD_URL', 'redis://localhost:6379/0'),
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+if DEBUG:
+    # Локальная разработка: использовать LocMemCache
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'LOCATION': 'unique-snowflake',
         }
     }
-}
+    # Отключить Redis для каналов в разработке
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        }
+    }
+else:
+    # Продакшен: использовать Redis
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': os.getenv('REDISCLOUD_URL', 'redis://localhost:6379/0'),
+            'OPTIONS': {
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            }
+        }
+    }
+    CHANNEL_LAYERS = {
+        'default': {
+            'BACKEND': 'channels_redis.core.RedisChannelLayer',
+            'CONFIG': {
+                'hosts': [os.getenv('REDISCLOUD_URL', 'redis://localhost:6379/0')],
+                'socket_timeout': 5,
+            },
+        },
+    }
 
 CACHE_TTL = 60 * 15
 
@@ -274,16 +304,6 @@ COMPRESS_JS_FILTERS = [
 ]
 
 REDIS_URL = os.getenv('REDISCLOUD_URL', 'redis://localhost:6379/0')
-
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            'hosts': [REDIS_URL],
-            'socket_timeout': 5,
-        },
-    },
-}
 
 ASGI_APPLICATION = 'NovaHaus.asgi.application'
 
