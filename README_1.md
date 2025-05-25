@@ -1089,3 +1089,4 @@ SEO и доступность:
 Убедитесь, что в settings.py на продакшене включены параметры безопасности: SECURE_SSL_REDIRECT = True, SESSION_COOKIE_SECURE = True, CSRF_COOKIE_SECURE = True.
 
 
+heroku config:set DEBUG=True --app novahaus-eu

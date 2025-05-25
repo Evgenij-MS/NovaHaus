@@ -1,11 +1,17 @@
 import re
 import os
 import logging
+import sys
 from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import gettext_lazy as _
+
+
+# В начале файла (после импортов)
+DEBUG = os.getenv('DJANGO_DEBUG', 'False').lower() in ('true', '1', 't', 'y', 'yes')
+
 
 # Определяем logger в начале файла
 logger = logging.getLogger(__name__)
@@ -14,6 +20,7 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
 def get_env_variable(var_name, default=None):
     """Получение переменной окружения с логированием."""
     value = os.getenv(var_name, default)
@@ -21,12 +28,27 @@ def get_env_variable(var_name, default=None):
         logger.warning(f"Переменная окружения {var_name} отсутствует, используем значение по умолчанию: {default}")
     return value
 
+
+# Функция для определения DEBUG режима
+def get_debug_value():
+    # Проверяем аргументы командной строки
+    if 'runserver' in sys.argv:
+        if '--debug=true' in sys.argv:
+            return True
+        elif '--debug=false' in sys.argv:
+            return False
+
+    # Проверяем переменную окружения
+    debug_value = os.getenv('DEBUG', 'False').lower()
+    return debug_value in ('true', '1', 't', 'y', 'yes')
+
+
+
+
 # SECRET_KEY должен быть задан в .env или на Heroku
 SECRET_KEY = get_env_variable('SECRET_KEY')
 if not SECRET_KEY:
     raise ImproperlyConfigured("SECRET_KEY не установлен в переменных окружения")
-
-DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't', 'y', 'yes')
 
 ALLOWED_HOSTS = get_env_variable('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 ALLOWED_HOSTS.extend([
@@ -344,8 +366,8 @@ if SENTRY_DSN and SENTRY_DSN.startswith('https://'):
         integrations=[
             DjangoIntegration(),
             LoggingIntegration(
-                level=logging.INFO,  # Логи уровня INFO и выше записываются как "хлебные крошки"
-                event_level=logging.ERROR  # Логи уровня ERROR и выше отправляются как события
+                level=logging.INFO,
+                event_level=logging.ERROR
             )
         ],
         traces_sample_rate=1.0,
@@ -388,10 +410,32 @@ PWA_APP_LANG = 'de'
 
 logger.info(f"Application started in DEBUG={DEBUG} mode")
 
-
 PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/js/service-worker.js')
 
 # Content Security Policy
 CSP_DEFAULT_SRC = ("'self'", "https://www.googletagmanager.com")
 CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com")
 CSP_IMG_SRC = ("'self'", "data:", "https://*.tile.openstreetmap.org")
+
+# Добавляем обработку аргументов командной строки
+if 'runserver' in sys.argv:
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--debug', type=str, choices=['true', 'false'], help='Set debug mode explicitly')
+    args, unknown = parser.parse_known_args()
+
+    if args.debug:
+        DEBUG = args.debug.lower() == 'true'
+        os.environ['DEBUG'] = str(DEBUG)
+        logger.info(f"DEBUG mode explicitly set to: {DEBUG}")
+
+        # Принудительно переопределяем DEBUG из переменных окружения
+        import os
+
+        DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't', 'y', 'yes')
+
+        # Если используете django_heroku, добавьте так:
+        import django_heroku
+
+        django_heroku.settings(locals(), staticfiles=False, allowed_hosts=False)
