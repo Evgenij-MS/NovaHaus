@@ -13,7 +13,7 @@ NovaHaus/
 ├── requirements.in
 ├── requirements.txt
 ├── README.md
-├── 
+├── robots.txt
 ├── test.txt
 ├── compress_images.py
 ├── locale/
@@ -236,7 +236,7 @@ NovaHaus/main/templates/main/privacy.html
 NovaHaus/static/models/sample_model.glb
 NovaHaus/static/js/utils.js (новый файл)
 static/images/placeholder.jpg
-NovaHaus/static/robots.txt
+
 Добавь /main/templates/main/500.html
 /static/images/favicon/favicon-192x192.png
 static/js/three.min.js
@@ -253,5 +253,6 @@ warehouse_economy.glb, warehouse_standard.glb, warehouse_premium.glb
 facade_economy.glb, facade_standard.glb, facade_premium.glb
 bathroom_economy.glb, bathroom_standard.glb, bathroom_premium.glb   ,  sample_model.glb
 
-
-
+Новый файл static/js/main.js
+'static/images/favicon/favicon-192x192.png
+static/css/visualization.css

@@ -2,12 +2,18 @@
 
 <header>
     <nav class="navbar">
+        <!-- Логотип -->
         <div class="logo">
             <a href="{% url 'home' %}">
-                <img src="{% static 'images/logo.png' %}" alt="{% trans 'NovaHaus Logo' %}" width="150" height="50">
+                <img src="{% static 'images/logo.png' %}"
+                     alt="{% trans 'NovaHaus Logo' %}"
+                     width="150"
+                     height="50"
+                     loading="lazy">
             </a>
         </div>
 
+        <!-- Навигация -->
         <ul class="nav-links">
             <li><a href="{% url 'home' %}">{% trans 'Home' %}</a></li>
             <li><a href="{% url 'services' %}">{% trans 'Services' %}</a></li>
@@ -17,10 +23,11 @@
             <li><a href="{% url 'register_partner' %}">{% trans 'Become a Partner' %}</a></li>
         </ul>
 
+        <!-- Выбор языка -->
         <div class="language-selector">
-            <form id="language-form" method="post" action="{% url 'set_language' %}">
+            <form method="post" action="{% url 'set_language' %}" class="language-form">
                 {% csrf_token %}
-                <select name="language" onchange="this.form.submit()">
+                <select name="language" onchange="this.form.submit()" aria-label="{% trans 'Select Language' %}">
                     <option value="de" {% if LANGUAGE_CODE == 'de' %}selected{% endif %}>{% trans 'German' %}</option>
                     <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>{% trans 'English' %}</option>
                     <option value="ru" {% if LANGUAGE_CODE == 'ru' %}selected{% endif %}>{% trans 'Russian' %}</option>
@@ -32,5 +39,7 @@
 
     {% compress css %}
     <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/media-queries.css' %}">
     {% endcompress %}
 </header>

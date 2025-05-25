@@ -23,7 +23,8 @@ urlpatterns = [
     path('chatbot/', views.chatbot, name='chatbot'),
     path('i18n/', include('django.conf.urls.i18n')),
     # Добавляем маршрут для robots.txt
-    path('robots.txt', serve, {'document_root': settings.STATIC_ROOT, 'path': 'robots.txt'}),
+    # urls.py (исправленный маршрут)
+    path('robots.txt', serve, {'document_root': settings.BASE_DIR, 'path': 'robots.txt'}),
 ]
 
 

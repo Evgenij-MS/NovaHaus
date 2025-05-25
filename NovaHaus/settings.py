@@ -387,3 +387,11 @@ PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'de'
 
 logger.info(f"Application started in DEBUG={DEBUG} mode")
+
+
+PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/js/service-worker.js')
+
+# Content Security Policy
+CSP_DEFAULT_SRC = ("'self'", "https://www.googletagmanager.com")
+CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com")
+CSP_IMG_SRC = ("'self'", "data:", "https://*.tile.openstreetmap.org")

@@ -1,52 +1,48 @@
 {% extends 'base.html' %}
 {% load static i18n %}
 
-{% block title %}{% trans '3D Viewer – NovaHaus' %}{% endblock %}
-{% block meta_description %}{% trans 'View 3D models of renovation projects.' %}{% endblock %}
-{% block og_title %}{% trans '3D Viewer – NovaHaus' %}{% endblock %}
-{% block og_description %}{% trans 'View 3D models of renovation projects.' %}{% endblock %}
+{% block title %}{% trans '3D Просмотр проектов – NovaHaus' %}{% endblock %}
+{% block description %}{% trans 'Интерактивный просмотр 3D моделей строительных объектов' %}{% endblock %}
+{% block og_title %}{% trans '3D Просмотр проектов – NovaHaus' %}{% endblock %}
 
 {% block content %}
-<section class="3d-viewer-container" role="main" aria-labelledby="3d-viewer-title">
-    <h1 id="3d-viewer-title">{% trans '3D Model Viewer' %}</h1>
-    <div class="button-container">
-        <button class="model-button" onclick="show3DModel('https://modelviewer.dev/assets/ShopifyModels/Chair.glb')">{% trans 'Show 3D Model' %}</button>
-        <button class="model-button" onclick="hide3DModel()">{% trans 'Hide 3D Model' %}</button>
+<section class="model-viewer-section" aria-labelledby="3d-viewer-heading">
+    <div class="container">
+        <h1 id="3d-viewer-heading" class="section-title">{% trans 'Интерактивный 3D просмотр' %}</h1>
+
+        <div class="model-controls">
+            <button class="btn-primary" data-model="apartment_economy">
+                {% trans 'Квартира эконом' %}
+            </button>
+            <button class="btn-primary" data-model="house_premium">
+                {% trans 'Дом премиум' %}
+            </button>
+            <button class="btn-primary" data-model="office_standard">
+                {% trans 'Офис стандарт' %}
+            </button>
+        </div>
+
+        <!-- Контейнер для 3D модели -->
+        <div id="model-container"
+            data-model="{% static 'models/sample_model.glb' %}"
+            style="width: 100%; height: 70vh; position: relative;">
+
+            <div class="loading-overlay" role="status">
+                <div class="spinner"></div>
+                <p>{% trans 'Загрузка модели...' %}</p>
+            </div>
+        </div>
     </div>
-    <model-viewer id="3d-viewer" style="display: none; width: 100%; height: 500px;" src="" ar shadow-intensity="1" camera-controls touch-action="pan-y" alt="{% trans '3D Model Viewer' %}"></model-viewer>
 </section>
+{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/3d-viewer.css' %}">
+<link rel="stylesheet" href="{% static 'css/3d-viewer.css' %}">
 {% endblock %}
-
-<style>
-.3d-viewer-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    background: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-.button-container {
-    margin-bottom: 20px;
-}
-.model-button {
-    background: #005B99;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 10px;
-}
-.model-button:hover {
-    background: #004080;
-}
-</style>
 
 {% block extra_js %}
-    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
-{% endblock %}
+<!-- Локальная версия Three.js -->
+<script src="{% static 'js/three.min.js' %}"></script>
+<script src="{% static 'js/GLTFLoader.js' %}"></script>
+<script src="{% static 'js/visualization.js' %}"></script>
 {% endblock %}

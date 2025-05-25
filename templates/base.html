@@ -1,16 +1,22 @@
-{% load static i18n %}
+{% load static i18n compress %}
 
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
+    <meta name="msapplication-TileColor" content="#005B99">
+    <meta name="msapplication-config" content="static/images/favicon/browserconfig.xml">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Title & Meta -->
     <title>{% block title %}{% trans "NovaHaus – Ваш надёжный партнёр по ремонту" %}{% endblock %}</title>
     <meta name="description" content="{% block description %}{% trans "Профессиональный ремонт в Кёльне и Гамбурге с использованием экологичных материалов." %}{% endblock %}">
     <meta name="keywords" content="{% block keywords %}{% trans "ремонт, Кёльн, Гамбург, экологичность, NovaHaus, ремонт квартир, ремонт офисов, эко-материалы" %}{% endblock %}">
     <meta name="author" content="NovaHaus">
     <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
     <meta property="og:title" content="{% trans "NovaHaus – Эксперты по ремонту" %}">
     <meta property="og:description" content="{% trans "Преображаем пространства с качеством и экологичностью в Кёльне и Гамбурге." %}">
     <meta property="og:image" content="{% static 'images/logo.png' %}">
@@ -23,7 +29,18 @@
     <meta name="theme-color" content="#005B99">
     <link rel="apple-touch-icon" href="{% static 'images/favicon/apple-touch-icon.png' %}">
 
+    <!-- Сервис-воркер перемещён в head -->
+    <script src="{% static 'js/service-worker.js' %}" defer></script>
+
+    <!-- Favicon Suite -->
+    <link rel="shortcut icon" href="{% static 'images/favicon/favicon.ico' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}">
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon/favicon.svg' %}">
+
     <!-- CSS -->
+    {% compress css %}
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
     <link rel="stylesheet" href="{% static 'css/global.css' %}">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
@@ -33,16 +50,13 @@
     <link rel="stylesheet" href="{% static 'css/slider.css' %}">
     <link rel="stylesheet" href="{% static 'css/footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/chatbot.css' %}">
-    <link rel="stylesheet" href="{% static 'fontawesome/css/all.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/media-queries.css' %}">
     <link rel="stylesheet" href="{% static 'css/pannellum.css' %}">
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="{% static 'images/favicon/favicon.ico' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}">
-    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon/favicon.svg' %}">
+    <link rel="stylesheet" href="{% static 'css/visualization.css' %}">
+    <link rel="stylesheet" href="{% static 'css/media-queries.css' %}">
+    <!-- Добавлены модули из пользовательской версии -->
+    <link rel="stylesheet" href="{% static 'css/partner.css' %}">
+    <link rel="stylesheet" href="{% static 'css/calculator.css' %}">
+    {% endcompress %}
 
     <!-- Google Analytics -->
     {% if request.get_host == "novahaus-hamburg.de" or request.get_host == "www.novahaus-hamburg.de" %}
@@ -71,12 +85,11 @@
     </script>
     {% endif %}
 
-    <!-- JSON-LD: LocalBusiness -->
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "LocalBusiness",
-      "@id": "{% if request.get_host == 'novahaus-hamburg.de' or request.get_host == 'www.novahaus-hamburg.de' %}https://www.novahaus-hamburg.de/#business{% else %}https://www.novahaus-koeln.de/#business{% endif %}",
       "name": "NovaHaus",
       "image": "{% static 'images/logo.png' %}",
       "description": "{% trans "Ремонтная компания в Кёльне и Гамбурге. Квартиры, офисы, фасады." %}",
@@ -97,6 +110,7 @@
         }
       ],
       "telephone": "+49 155 100 718 48",
+      "email": "info@novahaus.de",
       "url": "{% if request.get_host == 'novahaus-hamburg.de' or request.get_host == 'www.novahaus-hamburg.de' %}https://www.novahaus-hamburg.de{% else %}https://www.novahaus-koeln.de{% endif %}",
       "sameAs": [
         "https://www.instagram.com/novahaus",
@@ -104,41 +118,15 @@
         "https://www.linkedin.com/company/novahaus"
       ],
       "openingHours": "Mo-Fr 08:00-18:00",
-      "priceRange": "$$",
-      "review": {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "John Doe"
-        },
-        "reviewBody": "{% trans "Отличный сервис и качество!" %}"
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "120"
       }
     }
     </script>
-
-    <!-- JSON-LD: BreadcrumbList -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "{% trans "Главная" %}",
-          "item": "{% if request.get_host == 'novahaus-hamburg.de' or request.get_host == 'www.novahaus-hamburg.de' %}https://www.novahaus-hamburg.de{% else %}https://www.novahaus-koeln.de{% endif %}"
-        }
-        {% block breadcrumbs %}
-        {% endblock %}
-      ]
-    }
-    </script>
 </head>
+
 <body>
     {% block extra_context %}
         {% url 'home' as url_home %}
@@ -159,19 +147,45 @@
 
     {% include 'includes/footer.html' %}
 
+    <!-- Interactive Elements -->
     <button id="theme-toggle" class="theme-toggle-btn" aria-label="{% trans 'Переключить тему' %}">
         <i class="fas fa-moon"></i>
         <span class="theme-toggle-text">{% trans "Тёмная тема" %}</span>
     </button>
 
-    <!-- JavaScript -->
-    <script src="{% static 'js/scripts.js' %}" defer></script>
+    <div id="chatbot" class="chatbot-container" aria-label="{% trans 'Чат-поддержка' %}">
+        <iframe src="{% url 'chatbot' %}" title="{% trans 'Чат-бот NovaHaus' %}"></iframe>
+    </div>
+
+    <!-- JS -->
+    <script src="{% static 'js/main.js' %}" defer></script>
     <script src="{% static 'js/slider.js' %}" defer></script>
     <script src="{% static 'js/language.js' %}" defer></script>
     <script src="{% static 'js/chatbot.js' %}" defer></script>
     <script src="{% static 'js/pannellum.js' %}" defer></script>
     <script src="{% static 'js/pannellum-custom.js' %}" defer></script>
     <script src="{% static 'js/visualization.js' %}" defer></script>
-    <script src="{% static 'js/service-worker.js' %}" defer></script>
+    <!-- Добавлен calculator.js -->
+    <script src="{% static 'js/calculator.js' %}" defer></script>
+
+    <!-- Исправлено имя блока: breadcrumbs → breadcrumb -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "{% trans 'Home' %}",
+                "item": "{% url 'home' %}"
+            }
+            {% block breadcrumb %}{% endblock %}
+        ]
+    }
+    </script>
+
+    <!-- Structured Data for Current Page -->
+    {% block structured_data %}{% endblock %}
 </body>
 </html>
