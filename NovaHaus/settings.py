@@ -21,7 +21,7 @@ def get_env_variable(var_name, default=None):
         logger.warning(f"Переменная окружения {var_name} отсутствует, используем значение по умолчанию: {default}")
     return value
 
-# SECRET_KEY должен быть задан в .env
+# SECRET_KEY должен быть задан в .env или на Heroku
 SECRET_KEY = get_env_variable('SECRET_KEY')
 if not SECRET_KEY:
     raise ImproperlyConfigured("SECRET_KEY не установлен в переменных окружения")
@@ -205,18 +205,21 @@ AXES_LOCKOUT_TEMPLATE = 'errors/lockout.html'
 AXES_RESET_ON_SUCCESS = True
 AXES_DISABLE_ACCESS_LOG = True
 
+# Настройка базы данных
 if DEBUG:
+    # Локальная разработка: PostgreSQL из pgAdmin
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
             'NAME': os.getenv('DB_NAME'),
             'USER': os.getenv('DB_USER'),
             'PASSWORD': os.getenv('DB_PASSWORD'),
-            'HOST': os.getenv('DB_HOST'),
-            'PORT': os.getenv('DB_PORT'),
+            'HOST': os.getenv('DB_HOST', 'localhost'),
+            'PORT': os.getenv('DB_PORT', '5432'),
         }
     }
 else:
+    # Продакшен: Heroku PostgreSQL
     DATABASES = {
         'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
     }
