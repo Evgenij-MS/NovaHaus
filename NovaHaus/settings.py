@@ -92,7 +92,7 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(LOG_DIR, 'django.log'),
+            'filename': os.path.join(BASE_DIR, 'logs', 'django.log'),
             'formatter': 'verbose',
         },
         'console': {
@@ -110,11 +110,6 @@ LOGGING = {
         'main': {
             'handlers': ['file', 'console'],
             'level': 'INFO',
-            'propagate': True,
-        },
-        'axes': {
-            'handlers': ['file', 'console'],
-            'level': 'WARNING',
             'propagate': True,
         },
     },
@@ -317,12 +312,19 @@ AUTHENTICATION_BACKENDS = [
 
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.logging import LoggingIntegration
 
 SENTRY_DSN = os.getenv('SENTRY_DSN')
 if SENTRY_DSN and SENTRY_DSN.startswith('https://'):
     sentry_sdk.init(
         dsn=SENTRY_DSN,
-        integrations=[DjangoIntegration()],
+        integrations=[
+            DjangoIntegration(),
+            LoggingIntegration(
+                level=logging.INFO,  # Логи уровня INFO и выше записываются как "хлебные крошки"
+                event_level=logging.ERROR  # Логи уровня ERROR и выше отправляются как события
+            )
+        ],
         traces_sample_rate=1.0,
         profiles_sample_rate=1.0,
         send_default_pii=True,
