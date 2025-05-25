@@ -37,3 +37,10 @@ env.bak/
 venv.bak/
 .novahaus_env/
 *.pyc
+# .gitignore
+*.pyo
+*.pyd
+*.sqlite3
+media/
+staticfiles/
+logs/
