@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: NovaHaus 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-25 20:30+0200\n"
+"POT-Creation-Date: 2025-05-25 22:02+0200\n"
 "PO-Revision-Date: 2025-05-08 12:00+0000\n"
 "Last-Translator: Translator Name <email@example.com>\n"
 "Language-Team: English <en@example.com>\n"
@@ -276,26 +276,31 @@ msgstr ""
 
 #: .\main\templates\main\3d_viewer.html:4
 #: .\main\templates\main\3d_viewer.html:6
-msgid "3D Viewer – NovaHaus"
+msgid "3D Просмотр проектов – NovaHaus"
 msgstr ""
 
 #: .\main\templates\main\3d_viewer.html:5
-#: .\main\templates\main\3d_viewer.html:7
-msgid "View 3D models of renovation projects."
+msgid "Интерактивный просмотр 3D моделей строительных объектов"
 msgstr ""
 
 #: .\main\templates\main\3d_viewer.html:11
-#: .\main\templates\main\3d_viewer.html:16
-#: .\main\templates\main\calculator.html:54
-msgid "3D Model Viewer"
+msgid "Интерактивный 3D просмотр"
 msgstr ""
 
-#: .\main\templates\main\3d_viewer.html:13
-msgid "Show 3D Model"
+#: .\main\templates\main\3d_viewer.html:15
+msgid "Квартира эконом"
 msgstr ""
 
-#: .\main\templates\main\3d_viewer.html:14
-msgid "Hide 3D Model"
+#: .\main\templates\main\3d_viewer.html:18
+msgid "Дом премиум"
+msgstr ""
+
+#: .\main\templates\main\3d_viewer.html:21
+msgid "Офис стандарт"
+msgstr ""
+
+#: .\main\templates\main\3d_viewer.html:32
+msgid "Загрузка модели..."
 msgstr ""
 
 #: .\main\templates\main\404.html:4
@@ -475,6 +480,10 @@ msgstr ""
 
 #: .\main\templates\main\calculator.html:53
 msgid "Hide Model"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:54
+msgid "3D Model Viewer"
 msgstr ""
 
 #: .\main\templates\main\chatbot.html:5 .\main\templates\main\chatbot.html:24
