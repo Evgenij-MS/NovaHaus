@@ -8,49 +8,41 @@ import dj_database_url
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import gettext_lazy as _
 
-
-# В начале файла (после импортов)
-DEBUG = os.getenv('DJANGO_DEBUG', 'False').lower() in ('true', '1', 't', 'y', 'yes')
-
-
-# Определяем logger в начале файла
-logger = logging.getLogger(__name__)
-
+# Загрузка .env в самом начале
 load_dotenv()
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+# Надежная настройка DEBUG с приоритетом для runserver
+DEBUG = os.getenv('DJANGO_DEBUG', 'False').lower() in ('true', '1', 't', 'y', 'yes')
+if 'runserver' in sys.argv and not any(arg.startswith('--debug') for arg in sys.argv):
+    DEBUG = True
+    os.environ['DJANGO_DEBUG'] = 'True'
 
+# Логгер с UTF-8 фильтром для Windows
+class UTF8EncodingFilter(logging.Filter):
+    def filter(self, record):
+        if isinstance(record.msg, str):
+            record.msg = record.msg.encode('utf-8', errors='replace').decode('utf-8')
+        return True
+
+logger = logging.getLogger(__name__)
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 def get_env_variable(var_name, default=None):
     """Получение переменной окружения с логированием."""
     value = os.getenv(var_name, default)
     if value is None:
-        logger.warning(f"Переменная окружения {var_name} отсутствует, используем значение по умолчанию: {default}")
+        logger.warning(f"Переменная окружения {var_name} отсутствует. Используем значение по умолчанию: {default}")
     return value
 
-
-# Функция для определения DEBUG режима
-def get_debug_value():
-    # Проверяем аргументы командной строки
-    if 'runserver' in sys.argv:
-        if '--debug=true' in sys.argv:
-            return True
-        elif '--debug=false' in sys.argv:
-            return False
-
-    # Проверяем переменную окружения
-    debug_value = os.getenv('DEBUG', 'False').lower()
-    return debug_value in ('true', '1', 't', 'y', 'yes')
-
-
-
-
-# SECRET_KEY должен быть задан в .env или на Heroku
+# SECRET_KEY должен быть задан
 SECRET_KEY = get_env_variable('SECRET_KEY')
 if not SECRET_KEY:
     raise ImproperlyConfigured("SECRET_KEY не установлен в переменных окружения")
 
-ALLOWED_HOSTS = get_env_variable('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+# Фильтрация ALLOWED_HOSTS
+allowed_hosts_str = get_env_variable('ALLOWED_HOSTS', 'localhost,127.0.0.1')
+ALLOWED_HOSTS = [host.strip() for host in allowed_hosts_str.split(',') if host.strip()]
 ALLOWED_HOSTS.extend([
     'novahaus-eu.herokuapp.com',
     'novahaus-eu-5b21cc3bb91d.herokuapp.com',
@@ -59,6 +51,28 @@ ALLOWED_HOSTS.extend([
     'novahaus-hamburg.de',
     'www.novahaus-hamburg.de'
 ])
+
+# ========== Безопасность ==========
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+else:
+    SECURE_SSL_REDIRECT = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    SECURE_HSTS_SECONDS = 0
+
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_REFERRER_POLICY = 'same-origin'
+USE_X_FORWARDED_HOST = True
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+# ==================================
 
 ROOT_URLCONF = 'NovaHaus.urls'
 
@@ -96,14 +110,17 @@ MIDDLEWARE = [
     'main.middleware.BlockBadBotsMiddleware',
 ]
 
-# Create logs directory if it doesn't exist
-LOG_DIR = os.path.join(BASE_DIR, 'logs')
-if not os.path.exists(LOG_DIR):
-    os.makedirs(LOG_DIR)
+# Логирование с обработкой кодировки
+LOG_DIR = BASE_DIR / 'logs'
+if not LOG_DIR.exists():
+    LOG_DIR.mkdir()
 
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'filters': {
+        'utf8_encoding': {'()': UTF8EncodingFilter},
+    },
     'formatters': {
         'verbose': {
             'format': '{levelname} {asctime} {module} {message}',
@@ -114,56 +131,83 @@ LOGGING = {
         'file': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
-            'filename': os.path.join(BASE_DIR, 'logs', 'django.log'),
+            'filename': LOG_DIR / 'django.log',
             'formatter': 'verbose',
+            'filters': ['utf8_encoding'],
         },
         'console': {
-            'level': 'DEBUG',
+            'level': 'DEBUG' if DEBUG else 'INFO',
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
-        },
-        'sentry': {
-            'level': 'ERROR',
-            'class': 'sentry_sdk.integrations.logging.SentryHandler',
-            'formatter': 'verbose',
+            'filters': ['utf8_encoding'],
+            'stream': sys.stdout,
         },
     },
     'loggers': {
         'django': {
-            'handlers': ['file', 'console', 'sentry'],
+            'handlers': ['file', 'console'],
             'level': 'INFO',
             'propagate': True,
         },
         'main': {
-            'handlers': ['file', 'console', 'sentry'],
-            'level': 'INFO',
+            'handlers': ['file', 'console'],
+            'level': 'DEBUG' if DEBUG else 'INFO',
             'propagate': True,
         },
     },
 }
 
+# Sentry только для production
+if not DEBUG:
+    sentry_dsn = os.getenv('SENTRY_DSN')
+    if sentry_dsn and sentry_dsn.startswith('https://'):
+        import sentry_sdk
+        from sentry_sdk.integrations.django import DjangoIntegration
+        from sentry_sdk.integrations.logging import LoggingIntegration
+
+        sentry_sdk.init(
+            dsn=sentry_dsn,
+            integrations=[
+                DjangoIntegration(),
+                LoggingIntegration(level=logging.INFO, event_level=logging.ERROR)
+            ],
+            traces_sample_rate=1.0,
+            send_default_pii=True,
+            environment='production'
+        )
+        logger.info("Sentry инициализирован для production")
+
+        # Добавляем Sentry handler
+        LOGGING['handlers']['sentry'] = {
+            'level': 'ERROR',
+            'class': 'sentry_sdk.integrations.logging.SentryHandler',
+            'formatter': 'verbose',
+        }
+        for logger_name in LOGGING['loggers']:
+            LOGGING['loggers'][logger_name]['handlers'].append('sentry')
+    else:
+        logger.warning("Sentry не инициализирован: SENTRY_DSN отсутствует или некорректен")
+
+# ========== Кэш и Redis ==========
 if DEBUG:
-    # Локальная разработка: использовать LocMemCache
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
             'LOCATION': 'unique-snowflake',
         }
     }
-    # Отключить Redis для каналов в разработке
-    CHANNEL_LAYERS = {
-        'default': {
-            'BACKEND': 'channels.layers.InMemoryChannelLayer',
-        }
-    }
+    CHANNEL_LAYERS = {'default': {'BACKEND': 'channels.layers.InMemoryChannelLayer'}}
 else:
-    # Продакшен: использовать Redis
+    redis_url = os.getenv('REDISCLOUD_URL', 'redis://localhost:6379/0')
+    ssl_params = {'ssl_cert_reqs': None} if 'rediss://' in redis_url else {}
+
     CACHES = {
         'default': {
             'BACKEND': 'django_redis.cache.RedisCache',
-            'LOCATION': os.getenv('REDISCLOUD_URL', 'redis://localhost:6379/0'),
+            'LOCATION': redis_url,
             'OPTIONS': {
                 'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+                'CONNECTION_POOL_KWARGS': ssl_params,
             }
         }
     }
@@ -171,16 +215,19 @@ else:
         'default': {
             'BACKEND': 'channels_redis.core.RedisChannelLayer',
             'CONFIG': {
-                'hosts': [os.getenv('REDISCLOUD_URL', 'redis://localhost:6379/0')],
-                'socket_timeout': 5,
+                'hosts': [(redis_url, ssl_params)],
             },
         },
     }
 
 CACHE_TTL = 60 * 15
+# =================================
 
+# Локализация
 USE_I18N = True
 USE_L10N = True
+USE_TZ = True
+TIME_ZONE = 'Europe/Berlin'
 
 LANGUAGE_CODE = 'de'
 LANGUAGES = [
@@ -189,27 +236,11 @@ LANGUAGES = [
     ('tr', 'Türkçe'),
     ('ru', 'Русский'),
 ]
-
-LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
-
+LOCALE_PATHS = [BASE_DIR / 'locale']
 LANGUAGE_COOKIE_NAME = 'django_language'
-LANGUAGE_COOKIE_AGE = 365 * 24 * 60 * 60
+LANGUAGE_COOKIE_AGE = 31536000  # 1 год
 
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-X_FRAME_OPTIONS = 'DENY'
-SECURE_REFERRER_POLICY = 'same-origin'
-USE_X_FORWARDED_HOST = True
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-if not DEBUG:
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    SECURE_HSTS_SECONDS = 31536000
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
-
+# Безопасность: блокировка ботов
 ALLOWED_CRAWLERS = [
     re.compile(r'googlebot', re.IGNORECASE),
     re.compile(r'bingbot', re.IGNORECASE),
@@ -219,7 +250,6 @@ ALLOWED_CRAWLERS = [
 DISALLOWED_USER_AGENTS = [
     re.compile(r'bot', re.IGNORECASE),
     re.compile(r'scanner', re.IGNORECASE),
-    re.compile(r'Chrome/91\.0\.4472\.124', re.IGNORECASE),
     re.compile(r'Java/', re.IGNORECASE),
     re.compile(r'nikto', re.IGNORECASE),
     re.compile(r'sqlmap', re.IGNORECASE),
@@ -242,46 +272,34 @@ SENSITIVE_URL_PATTERNS = [
     re.compile(r'(^|/)wp-', re.IGNORECASE),
     re.compile(r'(^|/)config', re.IGNORECASE),
     re.compile(r'(^|/)backup', re.IGNORECASE),
-    re.compile(r'(^|/)\.git$', re.IGNORECASE),
+    re.compile(r'(^|/)\.git', re.IGNORECASE),
     re.compile(r'\.sql$', re.IGNORECASE),
     re.compile(r'\.bak$', re.IGNORECASE),
     re.compile(r'\.log$', re.IGNORECASE),
     re.compile(r'(^|/)phpmyadmin', re.IGNORECASE),
-    re.compile(r'(^|/)docker', re.IGNORECASE),
-    re.compile(r'(^|/)npm', re.IGNORECASE),
 ]
 
+# Защита от брутфорса
 AXES_FAILURE_LIMIT = 5
 AXES_COOLOFF_TIME = 1
 AXES_LOCKOUT_TEMPLATE = 'errors/lockout.html'
 AXES_RESET_ON_SUCCESS = True
 AXES_DISABLE_ACCESS_LOG = True
 
-# Настройка базы данных
-if DEBUG:
-    # Локальная разработка: PostgreSQL из pgAdmin
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('DB_NAME'),
-            'USER': os.getenv('DB_USER'),
-            'PASSWORD': os.getenv('DB_PASSWORD'),
-            'HOST': os.getenv('DB_HOST', 'localhost'),
-            'PORT': os.getenv('DB_PORT', '5432'),
-        }
-    }
-else:
-    # Продакшен: Heroku PostgreSQL
-    DATABASES = {
-        'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
-    }
+# ========== БАЗА ДАННЫХ ==========
+DATABASES = {
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL', 'postgres://postgres:Okro.123@localhost:5432/NH'),
+        conn_max_age=600,
+        ssl_require=not DEBUG
+    )
+}
+# =================================
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            BASE_DIR / 'templates',
-        ],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -300,35 +318,29 @@ TEMPLATES = [
     },
 ]
 
+# Статические файлы
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+# Медиа файлы
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-TIME_ZONE = 'Europe/Berlin'
-USE_I18N = True
-USE_L10N = True
-USE_TZ = True
-
+# Дополнительные настройки
 OTP_TOTP_ISSUER = 'NovaHaus'
 
-# Django-Compressor settings
+# Compressor
 COMPRESS_ENABLED = not DEBUG
 COMPRESS_OFFLINE = not DEBUG
-COMPRESS_CSS_FILTERS = [
-    'compressor.filters.cssmin.CSSMinFilter',
-]
-COMPRESS_JS_FILTERS = [
-    'compressor.filters.jsmin.JSMinFilter',
-]
+COMPRESS_CSS_FILTERS = ['compressor.filters.cssmin.CSSMinFilter']
+COMPRESS_JS_FILTERS = ['compressor.filters.jsmin.JSMinFilter']
 
-REDIS_URL = os.getenv('REDISCLOUD_URL', 'redis://localhost:6379/0')
-
+# ASGI
 ASGI_APPLICATION = 'NovaHaus.asgi.application'
 
+# CORS/CSRF
 CORS_ALLOWED_ORIGINS = [
     "https://novahaus-koeln.de",
     "https://www.novahaus-koeln.de",
@@ -355,29 +367,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-from sentry_sdk.integrations.logging import LoggingIntegration
-
-SENTRY_DSN = os.getenv('SENTRY_DSN')
-if SENTRY_DSN and SENTRY_DSN.startswith('https://'):
-    sentry_sdk.init(
-        dsn=SENTRY_DSN,
-        integrations=[
-            DjangoIntegration(),
-            LoggingIntegration(
-                level=logging.INFO,
-                event_level=logging.ERROR
-            )
-        ],
-        traces_sample_rate=1.0,
-        profiles_sample_rate=1.0,
-        send_default_pii=True,
-        environment='production' if not DEBUG else 'development'
-    )
-else:
-    logger.info("SENTRY_DSN не задан или некорректен, Sentry не инициализирован")
-
+# PWA
 PWA_APP_NAME = 'NovaHaus'
 PWA_APP_DESCRIPTION = "Renovation services in Cologne and Hamburg"
 PWA_APP_THEME_COLOR = '#005B99'
@@ -388,54 +378,36 @@ PWA_APP_ORIENTATION = 'any'
 PWA_APP_START_URL = '/'
 PWA_APP_STATUS_BAR_COLOR = 'default'
 PWA_APP_ICONS = [
-    {
-        'src': '/static/images/logo.png',
-        'sizes': '192x192',
-        'type': 'image/png'
-    },
-    {
-        'src': '/static/images/logo.png',
-        'sizes': '512x512',
-        'type': 'image/png'
-    }
-]
-PWA_APP_SPLASH_SCREEN = [
-    {
-        'src': '/static/images/splash.png',
-        'media': '(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)'
-    }
+    {'src': '/static/images/logo.png', 'sizes': '192x192', 'type': 'image/png'},
+    {'src': '/static/images/logo.png', 'sizes': '512x512', 'type': 'image/png'}
 ]
 PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'de'
+PWA_SERVICE_WORKER_PATH = BASE_DIR / 'static/js/service-worker.js'
 
-logger.info(f"Application started in DEBUG={DEBUG} mode")
-
-PWA_SERVICE_WORKER_PATH = os.path.join(BASE_DIR, 'static/js/service-worker.js')
-
-# Content Security Policy
+# CSP
 CSP_DEFAULT_SRC = ("'self'", "https://www.googletagmanager.com")
 CSP_SCRIPT_SRC = ("'self'", "'unsafe-inline'", "https://cdnjs.cloudflare.com")
 CSP_IMG_SRC = ("'self'", "data:", "https://*.tile.openstreetmap.org")
 
-# Добавляем обработку аргументов командной строки
-if 'runserver' in sys.argv:
-    import argparse
+# ========== HEROKU ==========
+if 'DYNO' in os.environ:
+    import django_heroku
 
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--debug', type=str, choices=['true', 'false'], help='Set debug mode explicitly')
-    args, unknown = parser.parse_known_args()
+    django_heroku.settings(
+        locals(),
+        staticfiles=False,
+        allowed_hosts=False,
+        logging=False
+    )
+    SECURE_SSL_REDIRECT = False
 
-    if args.debug:
-        DEBUG = args.debug.lower() == 'true'
-        os.environ['DEBUG'] = str(DEBUG)
-        logger.info(f"DEBUG mode explicitly set to: {DEBUG}")
+    # Отключаем консольные логи в production
+    if not DEBUG:
+        for logger_config in LOGGING['loggers'].values():
+            if 'console' in logger_config['handlers']:
+                logger_config['handlers'].remove('console')
+        logger.info("Console logging disabled on Heroku production")
+# ============================
 
-        # Принудительно переопределяем DEBUG из переменных окружения
-        import os
-
-        DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't', 'y', 'yes')
-
-        # Если используете django_heroku, добавьте так:
-        import django_heroku
-
-        django_heroku.settings(locals(), staticfiles=False, allowed_hosts=False)
+logger.info(f"Application started in DEBUG={DEBUG} mode")

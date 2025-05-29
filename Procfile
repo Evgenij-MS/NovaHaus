@@ -1,2 +1,3 @@
-release: python manage.py migrate && python manage.py compress --force && python manage.py collectstatic --noinput
-web: gunicorn NovaHaus.wsgi --workers=3 --threads=2 --worker-class=gthread --max-requests=1000 --max-requests-jitter=50 --timeout=30 --bind=0.0.0.0:$PORT
+# Замените содержимое на:
+release: python manage.py migrate
+web: gunicorn NovaHaus.wsgi --workers=2 --threads=4 --worker-class=gthread --bind=0.0.0.0:$PORT
