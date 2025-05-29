@@ -16,7 +16,8 @@ db.sqlite3
 .vscode/
 
 # Статические файлы
-/staticfiles/
+staticfiles/*
+!staticfiles/CACHE/
 /media/
 
 # Python
@@ -41,7 +42,5 @@ venv.bak/
 *.pyo
 *.pyd
 *.sqlite3
-media/
-staticfiles/
-logs/
+
 
