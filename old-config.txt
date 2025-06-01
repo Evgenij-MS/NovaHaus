@@ -1,5 +1,0 @@
-=== novahaus Config Vars
-
-DATABASE_URL: postgres://u2abda224fptdi:p8c941a2737a4a9fb9de6646623bd0a7c8153c3dff6d9841af47b0d5d89b611c6@c3cj4hehegopde.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com:5432/de4u32aq70ul9p
-DEBUG:        false
-SECRET_KEY:   75qebe7r^+49n%0qi@5x4h4h)=0^_=c+-k^%@gu9o498aiq&5l

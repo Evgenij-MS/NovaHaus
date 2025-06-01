@@ -25,6 +25,7 @@ urlpatterns = [
     # Добавляем маршрут для robots.txt
     # urls.py (исправленный маршрут)
     path('robots.txt', serve, {'document_root': settings.BASE_DIR, 'path': 'robots.txt'}),
+    path('partner/', views.partner_view, name='partner'),
 ]
 
 

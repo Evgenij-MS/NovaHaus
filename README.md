@@ -10,13 +10,13 @@ NovaHaus/
  - package.json (в корне проекта)
  - package-lock.json (в корне проекта)
 ├── manage.py
-├── old-config.txt
+├── 
 ├── Procfile
 ├── requirements.in
 ├── requirements.txt
 ├── README.md
 ├── robots.txt
-├── test.txt
+├── 
 ├── compress_images.py
 ├── locale/
 │   ├── ru/
@@ -258,3 +258,11 @@ bathroom_economy.glb, bathroom_standard.glb, bathroom_premium.glb   ,  sample_mo
 Новый файл static/js/main.js
 static/images/favicon/favicon-192x192.png
 static/css/visualization.css
+main/templates/main/partner.html
+ еще эти файли появились  -- static/
+└── images/
+    └── icons/
+        ├── bonus.png
+        ├── support.png
+        ├── eco.png
+        └── growth.png

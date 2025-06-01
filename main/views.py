@@ -17,6 +17,9 @@ logger = logging.getLogger(__name__)
 GROK_API_KEY = os.getenv('GROK_API_KEY')
 GROK_API_URL = "https://api.x.ai/v1/chat/completions"
 
+def partner_view(request):
+    return render(request, 'main/partner.html')
+
 def page_not_found(request, _exception):
     """Обработка ошибки 404."""
     return render(request, 'main/404.html', status=404)

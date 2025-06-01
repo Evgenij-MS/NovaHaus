@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load compress static i18n %}
+
+{% block title %}
+    {% trans "Партнёрская программа NovaHaus – Зарабатывайте с нами" %}
+{% endblock %}
+
+{% block description %}
+    {% trans "Присоединяйтесь к партнёрской программе NovaHaus в Кёльне и Гамбурге, рекомендуйте наши услуги и получайте бонусы." %}
+{% endblock %}
+
+{% block keywords %}
+    {% trans "партнёрская программа, NovaHaus, ремонт, Кёльн, Гамбург, бонусы, сотрудничество" %}
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/partner.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-12 partner-page">
+    <!-- Hero Section -->
+    <section class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">
+            {% trans "Станьте партнёром NovaHaus" %}
+        </h1>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            {% trans "Рекомендуйте наши профессиональные услуги по ремонту в Кёльне и Гамбурге и зарабатывайте бонусы за каждого привлечённого клиента." %}
+        </p>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6">
+            {% trans "Почему стоит стать партнёром?" %}
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <img src="{% static 'images/icons/bonus.png' %}" alt="{% trans 'Бонусы' %}" class="w-12 h-12 mb-4">
+                <h3 class="text-xl font-medium text-gray-700">
+                    {% trans "Щедрые бонусы" %}
+                </h3>
+                <p class="text-gray-600">
+                    {% trans "Получайте вознаграждение за каждого клиента, который воспользуется нашими услугами по вашей рекомендации." %}
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <img src="{% static 'images/icons/support.png' %}" alt="{% trans 'Поддержка' %}" class="w-12 h-12 mb-4">
+                <h3 class="text-xl font-medium text-gray-700">
+                    {% trans "Полная поддержка" %}
+                </h3>
+                <p class="text-gray-600">
+                    {% trans "Наша команда поможет вам на каждом этапе сотрудничества." %}
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <img src="{% static 'images/icons/eco.png' %}" alt="{% trans 'Экологичность' %}" class="w-12 h-12 mb-4">
+                <h3 class="text-xl font-medium text-gray-700">
+                    {% trans "Эко-ориентированность" %}
+                </h3>
+                <p class="text-gray-600">
+                    {% trans "Продвигайте экологичные решения вместе с нами и привлекайте осознанных клиентов." %}
+                </p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <img src="{% static 'images/icons/growth.png' %}" alt="{% trans 'Рост' %}" class="w-12 h-12 mb-4">
+                <h3 class="text-xl font-medium text-gray-700">
+                    {% trans "Развитие бизнеса" %}
+                </h3>
+                <p class="text-gray-600">
+                    {% trans "Расширяйте свою сеть и увеличивайте доход с NovaHaus." %}
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6">
+            {% trans "Как это работает?" %}
+        </h2>
+        <ol class="space-y-4 text-gray-600">
+            <li class="flex items-start">
+                <span class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-4">1</span>
+                <p>{% trans "Зарегистрируйтесь в нашей программе через форму ниже." %}</p>
+            </li>
+            <li class="flex items-start">
+                <span class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-4">2</span>
+                <p>{% trans "Получите уникальный реферальный код после успешной регистрации." %}</p>
+            </li>
+            <li class="flex items-start">
+                <span class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-4">3</span>
+                <p>{% trans "Делитесь кодом с клиентами, друзьями или партнёрами." %}</p>
+            </li>
+            <li class="flex items-start">
+                <span class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-4">4</span>
+                <p>{% trans "Зарабатывайте бонусы за каждого привлечённого клиента." %}</p>
+            </li>
+        </ol>
+    </section>
+
+    <!-- Partner Registration Form -->
+    <section class="mb-12">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">
+            {% trans "Готовы начать?" %}
+        </h2>
+        <p class="text-lg text-gray-600 text-center mb-8">
+            {% trans "Присоединяйтесь к нам и станьте частью успешной команды NovaHaus!" %}
+        </p>
+        <form method="post" class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700 font-medium mb-2">{% trans "Имя" %}</label>
+                <input type="text" id="name" name="name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700 font-medium mb-2">{% trans "Email" %}</label>
+                <input type="email" id="email" name="email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="phone" class="block text-gray-700 font-medium mb-2">{% trans "Телефон" %}</label>
+                <input type="tel" id="phone" name="phone" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="message" class="block text-gray-700 font-medium mb-2">{% trans "Сообщение" %}</label>
+                <textarea id="message" name="message" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+            </div>
+            <button type="submit" class="w-full bg-blue-500 text-white font-semibold py-3 rounded-lg hover:bg-blue-600 transition-colors">
+                {% trans "Зарегистрироваться" %}
+            </button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="text-center text-gray-600 mt-12">
+        <img src="{% static 'images/logo.png' %}" alt="NovaHaus Logo" class="mx-auto mb-4 w-24">
+        <p>{% trans "Transforming spaces in Cologne and Hamburg with quality and eco-friendliness." %}</p>
+        <p class="mt-2">© 2025 NovaHaus. {% trans "All rights reserved." %}</p>
+    </footer>
+</div>
+{% endblock %}
