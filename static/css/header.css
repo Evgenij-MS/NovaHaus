@@ -1,17 +1,37 @@
+/* Define CSS variables for a modern color scheme */
+:root {
+    --header-bg: #2a303c;
+    --text-color: #f0f0f0;
+    --primary-color: #007bff;
+    --secondary-color: #00bcd4;
+    --accent-color: #ff4500;
+    --neutral-100: #ffffff;
+    --neutral-300: #ccc;
+    --font-size-md: 16px;
+    --max-width: 1200px;
+}
+
 /* Основные стили шапки */
 header {
     background-color: var(--header-bg, #2a303c);
     color: var(--neutral-100, #ffffff);
+.header {
+    background-color: var(--header-bg);
+    color: var(--text-color);
+    height: 170px;
+    padding: 10px 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: relative;
 }
 
 /* Верхняя строка: логотип, заголовок и переключатель языков */
 .header-top {
+/* Контейнер для содержимого шапки */
+.header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: var(--max-width, 1200px);
+    max-width: var(--max-width);
     margin: 0 auto;
     padding: 0 20px;
     height: 150px; /* Высота шапки равна высоте логотипа */
@@ -21,13 +41,35 @@ header {
     height: 130px; /* Задаем высоту логотипа для десктопной версии */
     width: auto; /* Ширина пропорциональна высоте */
     margin: 10px 0; /* Добавляем отступы сверху и снизу */
+    height: 100%;
 }
 
 /* Переключатель языка */
 .language-switcher {
+/* Логотип */
+.logo {
     flex: 0 0 auto;
+    padding: 10px;
 }
 
+.logo img {
+    height: 150px;
+    width: auto;
+}
+
+/* Контейнер для заголовка, подзаголовка и навигации */
+.content {
+    flex: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.page-title {
+    font-size: 24px;
+    color: var(--text-color);
+    margin: 0 0 5px 0;
 .language-select {
     padding: 8px 12px;
     border-radius: 4px;
@@ -50,6 +92,13 @@ header {
     width: 100%;
 }
 
+.subtitle {
+    font-size: 16px;
+    color: var(--text-color);
+    margin: 0 0 10px 0;
+}
+
+/* Навигация для компьютеров */
 .desktop-nav ul {
     display: flex;
     gap: 25px;
@@ -59,31 +108,109 @@ header {
 }
 
 .nav-link {
-    color: var(--neutral-100, #ffffff);
+    color: var(--text-color);
     text-decoration: none;
-    font-size: var(--font-size-md, 16px);
+    font-size: var(--font-size-md);
     padding: 5px 0;
+    position: relative;
     transition: color 0.3s ease;
 }
 
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-color);
+    transition: width 0.3s ease;
+}
+
 .nav-link:hover {
-    color: var(--primary-color, #007bff);
+    color: var(--secondary-color);
+}
+
+.nav-link:hover::after {
+    width: 100%;
 }
 
 .nav-link.active {
-    color: #ff4500;
-    font-weight: 700;
+    color: var(--accent-color);
+    font-weight: 600;
+    position: relative;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    border-radius: 3px;
+    animation: activeLink 0.4s ease-out;
+}
+
+@keyframes activeLink {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+    to {
+        width: 100%;
+        opacity: 1;
+    }
 }
 
 .partner-link {
-    background-color: var(--primary-color, #007bff);
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
     padding: 8px 16px;
     border-radius: 4px;
+    color: var(--neutral-100);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.partner-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.partner-link.active {
+    background: linear-gradient(90deg, var(--accent-color), #ff6b00);
+    box-shadow: 0 2px 10px rgba(255, 69, 0, 0.3);
+}
+
+/* Переключатель языка */
+.language-switcher {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.language-select {
+    padding: 8px 24px 8px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--neutral-300);
+    background-color: var(--header-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    font-size: 16px;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="5" viewBox="0 0 10 5"><path fill="#f0f0f0" d="M0 0h10L5 5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
 }
 
 /* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
-    .header-top {
+    .header {
+        height: auto;
+        padding: 10px;
+    }
+
+    .header-container {
         flex-direction: column;
         align-items: center;
         height: auto; /* Для мобильных устройств высота автоматическая */
@@ -92,13 +219,21 @@ header {
         height: 40px; /* Меньшая высота для мобильных устройств */
         margin: 10px 0; /* Добавляем отступы сверху и снизу */
     }
+
+    .content {
+        text-align: left;
+        margin-top: 10px;
     .title-container {
         text-align: center;
         margin-top: 10px;
     }
+
     .page-title {
         font-size: 18px;
     }
+
+    .subtitle {
+        font-size: 14px;
     .language-switcher {
         margin-top: 10px;
     }
@@ -108,6 +243,15 @@ header {
     .bottom-content {
         justify-content: center;
     }
+
+    .desktop-nav ul {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .language-switcher {
+        position: static;
+        margin-top: 10px;
     .desktop-nav ul {
         flex-wrap: wrap;
         justify-content: center;
