@@ -6,7 +6,9 @@ NovaHaus/
 ├── .github/
 │   └── CODEOWNERS
 ├── app.json
-├── db.sqlite3
+├── README_1.md
+ - package.json (в корне проекта)
+ - package-lock.json (в корне проекта)
 ├── manage.py
 ├── old-config.txt
 ├── Procfile
@@ -254,5 +256,5 @@ facade_economy.glb, facade_standard.glb, facade_premium.glb
 bathroom_economy.glb, bathroom_standard.glb, bathroom_premium.glb   ,  sample_model.glb
 
 Новый файл static/js/main.js
-'static/images/favicon/favicon-192x192.png
+static/images/favicon/favicon-192x192.png
 static/css/visualization.css
