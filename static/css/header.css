@@ -2,62 +2,54 @@
 header {
     background-color: var(--header-bg, #2a303c);
     color: var(--neutral-100, #ffffff);
-    padding: 10px 0;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     position: relative;
 }
 
-/* Верхняя строка: логотип и заголовок */
+/* Верхняя строка: логотип, заголовок и переключатель языков */
 .header-top {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     max-width: var(--max-width, 1200px);
     margin: 0 auto;
     padding: 0 20px;
-}
-
-.logo {
-    flex: 0 0 auto;
+    height: 150px; /* Высота шапки равна высоте логотипа */
 }
 
 .logo img {
-    width: 150px; /* Логотип шириной 150px */
-    height: auto;
+    height: 130px; /* Задаем высоту логотипа для десктопной версии */
+    width: auto; /* Ширина пропорциональна высоте */
+    margin: 10px 0; /* Добавляем отступы сверху и снизу */
 }
 
-.title-container {
-    flex: 1;
-    text-align: center;
+/* Переключатель языка */
+.language-switcher {
+    flex: 0 0 auto;
 }
 
-.page-title {
-    font-size: 24px;
+.language-select {
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid var(--neutral-300, #ccc);
+    background-color: var(--header-bg, #2a303c);
     color: var(--neutral-100, #ffffff);
-    margin: 0;
+    cursor: pointer;
 }
 
-/* Нижняя строка: подзаголовок и навигация */
+/* Нижняя строка: навигация */
 .header-bottom {
     max-width: var(--max-width, 1200px);
     margin: 0 auto;
     padding: 5px 20px;
-    position: relative;
 }
 
 .bottom-content {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: center;
     width: 100%;
 }
 
-.subtitle {
-    font-size: 16px;
-    color: var(--neutral-100, #ffffff);
-    margin: 0 0 10px 0;
-}
-
-/* Навигация для компьютеров */
 .desktop-nav ul {
     display: flex;
     gap: 25px;
@@ -89,50 +81,35 @@ header {
     border-radius: 4px;
 }
 
-/* Переключатель языка */
-.language-switcher {
-    position: absolute;
-    top: 10px;
-    right: 20px;
-}
-
-.language-select {
-    padding: 8px 12px;
-    border-radius: 4px;
-    border: 1px solid var(--neutral-300, #ccc);
-    background-color: var(--header-bg, #2a303c);
-    color: var(--neutral-100, #ffffff);
-    cursor: pointer;
-}
-
 /* Адаптивность для мобильных устройств */
 @media (max-width: 768px) {
     .header-top {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        height: auto; /* Для мобильных устройств высота автоматическая */
+    }
+    .logo img {
+        height: 40px; /* Меньшая высота для мобильных устройств */
+        margin: 10px 0; /* Добавляем отступы сверху и снизу */
     }
     .title-container {
-        text-align: left;
-        margin-top: 5px;
+        text-align: center;
+        margin-top: 10px;
     }
     .page-title {
         font-size: 18px;
+    }
+    .language-switcher {
+        margin-top: 10px;
     }
     .header-bottom {
         padding: 5px 20px;
     }
     .bottom-content {
-        align-items: flex-start;
+        justify-content: center;
     }
-    .subtitle {
-        font-size: 14px;
-        margin: 5px 0;
-    }
-    .desktop-nav {
-        display: none; /* Предполагается мобильное меню */
-    }
-    .language-switcher {
-        position: static;
-        margin-top: 10px;
+    .desktop-nav ul {
+        flex-wrap: wrap;
+        justify-content: center;
     }
 }

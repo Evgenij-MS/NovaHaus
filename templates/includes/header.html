@@ -3,37 +3,37 @@
 <header>
     <div class="header-top">
         <div class="logo">
-            <a href="{% url 'home' %}"><img src="{% static 'images/logo.webp' %}" alt="Логотип NovaHaus"></a>
+            <a href="{% url 'home' %}">
+                <img src="{% static 'images/logo.png' %}" alt="NovaHaus Logo">
+            </a>
         </div>
         <div class="title-container">
-            <h1 class="page-title">{{ page_title }}</h1>
+            <h1 class="page-title">{% trans "NovaHaus – Качественный ремонт в Кёльне и Гамбурге" %}</h1>
+        </div>
+        <div class="language-switcher">
+            <form method="post" action="{% url 'set_language' %}" id="language-form">
+                {% csrf_token %}
+                <select name="language" class="language-select" id="language-select" aria-label="Выберите язык" onchange="document.getElementById('language-form').submit();">
+                    <option value="de" {% if LANGUAGE_CODE == 'de' %}selected{% endif %}>DE</option>
+                    <option value="en" {% if LANGUAGE_CODE == 'en' %}selected{% endif %}>EN</option>
+                    <option value="ru" {% if LANGUAGE_CODE == 'ru' %}selected{% endif %}>RU</option>
+                    <option value="tr" {% if LANGUAGE_CODE == 'tr' %}selected{% endif %}>TR</option>
+                </select>
+            </form>
         </div>
     </div>
     <div class="header-bottom">
         <div class="bottom-content">
-            <p class="subtitle">{% trans "Качественный ремонт в Кёльне и Гамбурге" %}</p>
             <nav class="desktop-nav">
                 <ul>
-                    <li><a href="{% url 'home' %}" class="nav-link {% if request.path == '/' %}active{% endif %}">{% trans 'Главная' %}</a></li>
-                    <li><a href="{% url 'services' %}" class="nav-link {% if 'services' in request.path %}active{% endif %}">{% trans 'Услуги' %}</a></li>
-                    <li><a href="{% url 'portfolio' %}" class="nav-link {% if 'portfolio' in request.path %}active{% endif %}">{% trans 'Портфолио' %}</a></li>
-                    <li><a href="{% url 'blog' %}" class="nav-link {% if 'blog' in request.path %}active{% endif %}">{% trans 'Блог' %}</a></li>
-                    <li><a href="{% url 'contact' %}" class="nav-link {% if 'contact' in request.path %}active{% endif %}">{% trans 'Контакты' %}</a></li>
-                    <li><a href="{% url 'partner' %}" class="nav-link partner-link {% if 'partner' in request.path %}active{% endif %}">{% trans 'Стать партнером' %}</a></li>
+                    <li><a href="{% url 'home' %}" class="nav-link">{% trans 'Главная' %}</a></li>
+                    <li><a href="{% url 'services' %}" class="nav-link">{% trans 'Услуги' %}</a></li>
+                    <li><a href="{% url 'portfolio' %}" class="nav-link">{% trans 'Портфолио' %}</a></li>
+                    <li><a href="{% url 'blog' %}" class="nav-link">{% trans 'Блог' %}</a></li>
+                    <li><a href="{% url 'contact' %}" class="nav-link">{% trans 'Контакты' %}</a></li>
+                    <li><a href="{% url 'register_partner' %}" class="nav-link partner-link">{% trans 'Стать партнером' %}</a></li>
                 </ul>
             </nav>
-        </div>
-        <div class="language-switcher">
-            <form action="{% url 'set_language' %}" method="post" id="language-form">
-                {% csrf_token %}
-                <label for="language-select">{% trans 'Выберите язык' %}</label>
-                <select id="language-select" name="language" class="language-select" onchange="document.getElementById('language-form').submit()">
-                    <option value="de" {% if request.LANGUAGE_CODE == 'de' %}selected{% endif %}>{% trans 'Немецкий' %}</option>
-                    <option value="en" {% if request.LANGUAGE_CODE == 'en' %}selected{% endif %}>{% trans 'Английский' %}</option>
-                    <option value="ru" {% if request.LANGUAGE_CODE == 'ru' %}selected{% endif %}>{% trans 'Русский' %}</option>
-                    <option value="tr" {% if request.LANGUAGE_CODE == 'tr' %}selected{% endif %}>{% trans 'Турецкий' %}</option>
-                </select>
-            </form>
         </div>
     </div>
 </header>
