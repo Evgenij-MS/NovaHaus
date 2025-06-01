@@ -12,9 +12,6 @@
 }
 
 /* Основные стили шапки */
-header {
-    background-color: var(--header-bg, #2a303c);
-    color: var(--neutral-100, #ffffff);
 .header {
     background-color: var(--header-bg);
     color: var(--text-color);
@@ -24,28 +21,15 @@ header {
     position: relative;
 }
 
-/* Верхняя строка: логотип, заголовок и переключатель языков */
-.header-top {
 /* Контейнер для содержимого шапки */
 .header-container {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 20px;
-    height: 150px; /* Высота шапки равна высоте логотипа */
-}
-
-.logo img {
-    height: 130px; /* Задаем высоту логотипа для десктопной версии */
-    width: auto; /* Ширина пропорциональна высоте */
-    margin: 10px 0; /* Добавляем отступы сверху и снизу */
     height: 100%;
 }
 
-/* Переключатель языка */
-.language-switcher {
 /* Логотип */
 .logo {
     flex: 0 0 auto;
@@ -70,26 +54,6 @@ header {
     font-size: 24px;
     color: var(--text-color);
     margin: 0 0 5px 0;
-.language-select {
-    padding: 8px 12px;
-    border-radius: 4px;
-    border: 1px solid var(--neutral-300, #ccc);
-    background-color: var(--header-bg, #2a303c);
-    color: var(--neutral-100, #ffffff);
-    cursor: pointer;
-}
-
-/* Нижняя строка: навигация */
-.header-bottom {
-    max-width: var(--max-width, 1200px);
-    margin: 0 auto;
-    padding: 5px 20px;
-}
-
-.bottom-content {
-    display: flex;
-    justify-content: center;
-    width: 100%;
 }
 
 .subtitle {
@@ -105,6 +69,7 @@ header {
     list-style: none;
     margin: 0;
     padding: 0;
+    justify-content: center;
 }
 
 .nav-link {
@@ -212,19 +177,11 @@ header {
 
     .header-container {
         flex-direction: column;
-        align-items: center;
-        height: auto; /* Для мобильных устройств высота автоматическая */
-    }
-    .logo img {
-        height: 40px; /* Меньшая высота для мобильных устройств */
-        margin: 10px 0; /* Добавляем отступы сверху и снизу */
+        align-items: flex-start;
     }
 
     .content {
         text-align: left;
-        margin-top: 10px;
-    .title-container {
-        text-align: center;
         margin-top: 10px;
     }
 
@@ -234,14 +191,6 @@ header {
 
     .subtitle {
         font-size: 14px;
-    .language-switcher {
-        margin-top: 10px;
-    }
-    .header-bottom {
-        padding: 5px 20px;
-    }
-    .bottom-content {
-        justify-content: center;
     }
 
     .desktop-nav ul {
@@ -252,8 +201,5 @@ header {
     .language-switcher {
         position: static;
         margin-top: 10px;
-    .desktop-nav ul {
-        flex-wrap: wrap;
-        justify-content: center;
     }
 }
