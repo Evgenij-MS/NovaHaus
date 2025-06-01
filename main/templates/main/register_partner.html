@@ -2,24 +2,181 @@
 {% load compress static i18n %}
 
 {% block title %}
-    {% trans "Регистрация партнера – NovaHaus" %}
+    {% trans "Партнёрская программа | NovaHaus" %}
 {% endblock %}
 
 {% block description %}
-    {% trans "Станьте партнером NovaHaus и получайте бонусы за привлечение клиентов." %}
+    {% trans "Станьте партнёром NovaHaus и получайте до 15% бонусов за рекомендации клиентов в Кёльне и Гамбурге" %}
 {% endblock %}
 
 {% block keywords %}
-    {% trans "партнер, регистрация, NovaHaus" %}
+    {% trans "партнер, регистрация, NovaHaus, бонусы, ремонт, Кёльн, Гамбург" %}
+{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/partner.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2>{% trans "Регистрация партнера" %}</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn">{% trans "Зарегистрироваться" %}</button>
-    </form>
+<div class="partner-container">
+    <!-- Hero Section -->
+    <section class="partner-hero">
+        <div class="hero-content">
+            <h1>{% trans "Станьте партнёром NovaHaus" %}</h1>
+            <p class="subtitle">{% trans "Рекомендуйте наши профессиональные услуги по ремонту в Кёльне и Гамбурге и зарабатывайте бонусы за каждого привлечённого клиента." %}</p>
+            <div class="cta-buttons">
+                <a href="#registration" class="btn btn-primary">{% trans "Присоединиться сейчас" %}</a>
+                <a href="#benefits" class="btn btn-secondary">{% trans "Узнать больше" %}</a>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-value">15%</div>
+                    <div class="stat-label">{% trans "Максимальный бонус" %}</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">€250K+</div>
+                    <div class="stat-label">{% trans "Выплачено партнёрам" %}</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">48ч</div>
+                    <div class="stat-label">{% trans "Быстрые выплаты" %}</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="{% static 'images/services/renovation.jpg' %}" alt="{% trans 'Партнёрская программа NovaHaus' %}">
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="partner-benefits">
+        <h2>{% trans "Почему стоит стать партнёром?" %}</h2>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <img src="{% static 'images/icons/bonus.png' %}" alt="{% trans 'Щедрые бонусы' %}">
+                <h3>{% trans "Щедрые бонусы" %}</h3>
+                <p>{% trans "Получайте вознаграждение за каждого клиента, который воспользуется нашими услугами по вашей рекомендации." %}</p>
+            </div>
+            <div class="benefit-item">
+                <img src="{% static 'images/icons/support.png' %}" alt="{% trans 'Полная поддержка' %}">
+                <h3>{% trans "Полная поддержка" %}</h3>
+                <p>{% trans "Наша команда поможет вам на каждом этапе сотрудничества." %}</p>
+            </div>
+            <div class="benefit-item">
+                <img src="{% static 'images/icons/eco.png' %}" alt="{% trans 'Эко-ориентированность' %}">
+                <h3>{% trans "Эко-ориентированность" %}</h3>
+                <p>{% trans "Продвигайте экологичные решения вместе с нами и привлекайте осознанных клиентов." %}</p>
+            </div>
+            <div class="benefit-item">
+                <img src="{% static 'images/icons/growth.png' %}" alt="{% trans 'Развитие бизнеса' %}">
+                <h3>{% trans "Развитие бизнеса" %}</h3>
+                <p>{% trans "Расширяйте свою сеть и увеличивайте доход с NovaHaus." %}</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="partner-process">
+        <h2>{% trans "Как это работает?" %}</h2>
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>{% trans "Зарегистрируйтесь" %}</h3>
+                <p>{% trans "Зарегистрируйтесь в нашей программе через форму ниже." %}</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>{% trans "Получите код" %}</h3>
+                <p>{% trans "Получите уникальный реферальный код после успешной регистрации." %}</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>{% trans "Рекомендуйте" %}</h3>
+                <p>{% trans "Делитесь кодом с клиентами, друзьями или партнёрами." %}</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>{% trans "Зарабатывайте" %}</h3>
+                <p>{% trans "Зарабатывайте бонусы за каждого привлечённого клиента." %}</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="partner-testimonials">
+        <h2>{% trans "Отзывы наших партнёров" %}</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial">
+                <div class="quote">{% trans "Сотрудничество с NovaHaus значительно увеличило мой доход как риелтора. Клиенты довольны качеством ремонта, а я получаю стабильные бонусы. Особенно ценю их экологичный подход!" %}</div>
+                <div class="author">
+                    <img src="{% static 'images/team/member1.jpg' %}" alt="Thomas Weber">
+                    <div class="author-info">
+                        <div class="name">Thomas Weber</div>
+                        <div class="title">{% trans "Риелтор, Кёльн" %}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial">
+                <div class="quote">{% trans "Как дизайнер интерьеров, я долго искала надёжную компанию для реализации своих проектов. NovaHaus превзошли все ожидания! Их команда профессионалов, а партнёрская программа приносит до 15% с каждого проекта." %}</div>
+                <div class="author">
+                    <img src="{% static 'images/team/member2.jpg' %}" alt="Anna Müller">
+                    <div class="author-info">
+                        <div class="name">Anna Müller</div>
+                        <div class="title">{% trans "Дизайнер интерьеров, Гамбург" %}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration Section -->
+    <section id="registration" class="partner-registration">
+        <div class="registration-container">
+            <div class="registration-form">
+                <h2>{% trans "Готовы начать?" %}</h2>
+                <p>{% trans "Присоединяйтесь к нам и станьте частью успешной команды NovaHaus!" %}</p>
+                {% if form.errors %}
+                    <div class="form-errors">
+                        <p>{% trans "Пожалуйста, исправьте ошибки в форме:" %}</p>
+                        <ul>
+                            {% for field, errors in form.errors.items %}
+                                {% for error in errors %}
+                                    <li>{{ field }}: {{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                <form method="post" class="partner-form">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary">{% trans "Зарегистрироваться" %}</button>
+                </form>
+            </div>
+            <div class="registration-info">
+                <div class="faq-section">
+                    <h3>{% trans "Частые вопросы" %}</h3>
+                    <div class="faq-item">
+                        <div class="question">{% trans "Как быстро я получу реферальный код?" %}</div>
+                        <div class="answer">{% trans "Код генерируется сразу после регистрации и приходит на вашу почту в течение 5 минут." %}</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="question">{% trans "Когда я получу вознаграждение?" %}</div>
+                        <div class="answer">{% trans "В течение 48 часов после полной оплаты проекта клиентом." %}</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="question">{% trans "Могу ли я стать партнёром из другого города?" %}</div>
+                        <div class="answer">{% trans "Да, но бонусы выплачиваются только за проекты в Кёльне и Гамбурге." %}</div>
+                    </div>
+                </div>
+                <div class="contact-info">
+                    <h3>{% trans "Контакты для партнёров" %}</h3>
+                    <p>{% trans "Email: " %}<strong>partners@novahaus.de</strong></p>
+                    <p>{% trans "Телефон: " %}<strong>+49 155 100 718 48</strong></p>
+                    <p>{% trans "Часы работы: Пн-Пт, 9:00-18:00" %}</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 {% endblock %}

@@ -18,7 +18,24 @@ GROK_API_KEY = os.getenv('GROK_API_KEY')
 GROK_API_URL = "https://api.x.ai/v1/chat/completions"
 
 def partner_view(request):
-    return render(request, 'main/partner.html')
+    """Обработка страницы партнёрской программы и регистрации."""
+    if request.method == 'POST':
+        form = PartnerForm(request.POST)
+        if form.is_valid():
+            partner = form.save(commit=False)
+            partner.referral_code = generate_unique_referral()
+            partner.save()
+            return redirect('partner_success')
+        # Если форма невалидна, передаём её с ошибками в шаблон
+    else:
+        form = PartnerForm()
+
+    return render(request, 'main/register_partner.html', {
+        'form': form,
+        'meta_title': 'Партнёрская программа | NovaHaus',
+        'meta_description': 'Станьте партнёром NovaHaus и получайте до 15% бонусов за рекомендации клиентов в Кёльне и Гамбурге',
+        'meta_keywords': 'партнер, регистрация, NovaHaus'
+    })
 
 def page_not_found(request, _exception):
     """Обработка ошибки 404."""
@@ -293,22 +310,6 @@ def get_ai_recommendations(request):
         except Exception as e:
             logger.error(f"Ошибка рекомендаций: {str(e)}")
             return JsonResponse({'success': False, 'error': 'Ошибка обработки'}, status=500)
-
-def register_partner(request):
-    """Регистрация партнера."""
-    if request.method == 'POST':
-        form = PartnerForm(request.POST)
-        if form.is_valid():
-            partner = form.save(commit=False)
-            partner.referral_code = generate_unique_referral()
-            partner.save()
-            return redirect('partner_success')
-    else:
-        form = PartnerForm()
-    return render(request, 'main/register_partner.html', {
-        'form': form,
-        'meta_title': 'Регистрация партнера'
-    })
 
 def generate_unique_referral():
     """Генерация уникального реферального кода."""

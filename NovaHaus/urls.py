@@ -1,33 +1,37 @@
+from django.contrib import admin
 from django.urls import path, include
-from main import views
+from main.views import (
+    home, partner_view, services, portfolio, about, reviews, contact,
+    calculator, calculate_cost, save_calculation, get_ai_recommendations,
+    partner_success, blog, blog_post_detail, view_3d_model, privacy, chatbot
+)
 from django.conf import settings
 from django.views.static import serve
+from django.shortcuts import redirect
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('services/', views.services, name='services'),
-    path('portfolio/', views.portfolio, name='portfolio'),
-    path('about/', views.about, name='about'),
-    path('reviews/', views.reviews, name='reviews'),
-    path('contact/', views.contact, name='contact'),
-    path('calculator/', views.calculator, name='calculator'),
-    path('calculate_cost/', views.calculate_cost, name='calculate_cost'),
-    path('save-calculation/', views.save_calculation, name='save_calculation'),
-    path('get-ai-recommendations/', views.get_ai_recommendations, name='get_ai_recommendations'),
-    path('partner-success/', views.partner_success, name='partner_success'),
-    path('blog/', views.blog, name='blog'),
-    path('blog/<int:post_id>/', views.blog_post_detail, name='blog_post_detail'),
-    path('3d-viewer/', views.view_3d_model, name='view_3d_model'),
-    path('privacy/', views.privacy, name='privacy'),
-    path('register-partner/', views.register_partner, name='register_partner'),
-    path('chatbot/', views.chatbot, name='chatbot'),
+    path('admin/', admin.site.urls),  # Added admin URL
+    path('', home, name='home'),
+    path('services/', services, name='services'),
+    path('portfolio/', portfolio, name='portfolio'),
+    path('about/', about, name='about'),
+    path('reviews/', reviews, name='reviews'),
+    path('contact/', contact, name='contact'),
+    path('calculator/', calculator, name='calculator'),
+    path('calculate_cost/', calculate_cost, name='calculate_cost'),
+    path('save-calculation/', save_calculation, name='save_calculation'),
+    path('get-ai-recommendations/', get_ai_recommendations, name='get_ai_recommendations'),
+    path('partner-success/', partner_success, name='partner_success'),
+    path('blog/', blog, name='blog'),
+    path('blog/<int:post_id>/', blog_post_detail, name='blog_post_detail'),
+    path('3d-viewer/', view_3d_model, name='view_3d_model'),
+    path('privacy/', privacy, name='privacy'),
+    path('chatbot/', chatbot, name='chatbot'),
     path('i18n/', include('django.conf.urls.i18n')),
-    # Добавляем маршрут для robots.txt
-    # urls.py (исправленный маршрут)
-    path('robots.txt', serve, {'document_root': settings.BASE_DIR, 'path': 'robots.txt'}),
-    path('partner/', views.partner_view, name='partner'),
+    path('robots.txt', serve, {'document_root': settings.STATIC_ROOT, 'path': 'robots.txt'}),
+    path('partner/', partner_view, name='partner'),
+    path('register-partner/', lambda request: redirect('partner'), name='register_partner'),
 ]
-
 
 handler404 = 'main.views.page_not_found'
 handler500 = 'main.views.custom_500'

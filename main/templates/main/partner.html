@@ -1,141 +1,185 @@
 {% extends 'base.html' %}
 {% load compress static i18n %}
 
-{% block title %}
-    {% trans "Партнёрская программа NovaHaus – Зарабатывайте с нами" %}
-{% endblock %}
-
-{% block description %}
-    {% trans "Присоединяйтесь к партнёрской программе NovaHaus в Кёльне и Гамбурге, рекомендуйте наши услуги и получайте бонусы." %}
-{% endblock %}
-
-{% block keywords %}
-    {% trans "партнёрская программа, NovaHaus, ремонт, Кёльн, Гамбург, бонусы, сотрудничество" %}
-{% endblock %}
+{% block title %}{% trans "Партнёрская программа | NovaHaus" %}{% endblock %}
+{% block description %}{% trans "Станьте партнёром NovaHaus и получайте до 15% бонусов за рекомендации клиентов в Кёльне и Гамбурге" %}{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/partner.css' %}">
+<link rel="stylesheet" href="{% static 'css/partner.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="container mx-auto px-4 py-12 partner-page">
+<div class="partner-container">
     <!-- Hero Section -->
-    <section class="text-center mb-12">
-        <h1 class="text-4xl font-bold text-gray-800 mb-4">
-            {% trans "Станьте партнёром NovaHaus" %}
-        </h1>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-            {% trans "Рекомендуйте наши профессиональные услуги по ремонту в Кёльне и Гамбурге и зарабатывайте бонусы за каждого привлечённого клиента." %}
-        </p>
+    <section class="partner-hero">
+        <div class="hero-content">
+            <h1>{% trans "Станьте эксклюзивным партнёром NovaHaus" %}</h1>
+            <p class="subtitle">{% trans "Зарабатывайте до 15% с каждого проекта, рекомендуя премиальные услуги ремонта в Кёльне и Гамбурге" %}</p>
+            <div class="cta-buttons">
+                <a href="#registration" class="btn btn-primary">{% trans "Присоединиться сейчас" %}</a>
+                <a href="#benefits" class="btn btn-secondary">{% trans "Узнать больше" %}</a>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <div class="stat-value">15%</div>
+                    <div class="stat-label">{% trans "Максимальный бонус" %}</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">€250K+</div>
+                    <div class="stat-label">{% trans "Выплачено партнёрам" %}</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">48ч</div>
+                    <div class="stat-label">{% trans "Быстрые выплаты" %}</div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="{% static 'images/services/renovation.jpg' %}" alt="{% trans 'Партнёрская программа NovaHaus' %}">
+        </div>
     </section>
 
     <!-- Benefits Section -->
-    <section class="mb-12">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-6">
-            {% trans "Почему стоит стать партнёром?" %}
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                <img src="{% static 'images/icons/bonus.png' %}" alt="{% trans 'Бонусы' %}" class="w-12 h-12 mb-4">
-                <h3 class="text-xl font-medium text-gray-700">
-                    {% trans "Щедрые бонусы" %}
-                </h3>
-                <p class="text-gray-600">
-                    {% trans "Получайте вознаграждение за каждого клиента, который воспользуется нашими услугами по вашей рекомендации." %}
-                </p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                <img src="{% static 'images/icons/support.png' %}" alt="{% trans 'Поддержка' %}" class="w-12 h-12 mb-4">
-                <h3 class="text-xl font-medium text-gray-700">
-                    {% trans "Полная поддержка" %}
-                </h3>
-                <p class="text-gray-600">
-                    {% trans "Наша команда поможет вам на каждом этапе сотрудничества." %}
-                </p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                <img src="{% static 'images/icons/eco.png' %}" alt="{% trans 'Экологичность' %}" class="w-12 h-12 mb-4">
-                <h3 class="text-xl font-medium text-gray-700">
-                    {% trans "Эко-ориентированность" %}
-                </h3>
-                <p class="text-gray-600">
-                    {% trans "Продвигайте экологичные решения вместе с нами и привлекайте осознанных клиентов." %}
-                </p>
-            </div>
-            <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-                <img src="{% static 'images/icons/growth.png' %}" alt="{% trans 'Рост' %}" class="w-12 h-12 mb-4">
-                <h3 class="text-xl font-medium text-gray-700">
-                    {% trans "Развитие бизнеса" %}
-                </h3>
-                <p class="text-gray-600">
-                    {% trans "Расширяйте свою сеть и увеличивайте доход с NovaHaus." %}
-                </p>
-            </div>
+    <section id="benefits" class="partner-benefits">
+        <h2>{% trans "Преимущества партнёрства" %}</h2>
+        <div class="benefits-grid">
+            {% include 'includes/partner_benefits.html' %}
         </div>
     </section>
 
     <!-- How It Works Section -->
-    <section class="mb-12">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-6">
-            {% trans "Как это работает?" %}
-        </h2>
-        <ol class="space-y-4 text-gray-600">
-            <li class="flex items-start">
-                <span class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-4">1</span>
-                <p>{% trans "Зарегистрируйтесь в нашей программе через форму ниже." %}</p>
-            </li>
-            <li class="flex items-start">
-                <span class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-4">2</span>
-                <p>{% trans "Получите уникальный реферальный код после успешной регистрации." %}</p>
-            </li>
-            <li class="flex items-start">
-                <span class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-4">3</span>
-                <p>{% trans "Делитесь кодом с клиентами, друзьями или партнёрами." %}</p>
-            </li>
-            <li class="flex items-start">
-                <span class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center mr-4">4</span>
-                <p>{% trans "Зарабатывайте бонусы за каждого привлечённого клиента." %}</p>
-            </li>
-        </ol>
+    <section class="partner-process">
+        <h2>{% trans "Как это работает" %}</h2>
+        <div class="process-steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>{% trans "Регистрация" %}</h3>
+                <p>{% trans "Заполните форму и получите реферальный код" %}</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>{% trans "Рекомендация" %}</h3>
+                <p>{% trans "Делитесь кодом с клиентами и партнёрами" %}</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>{% trans "Завершение проекта" %}</h3>
+                <p>{% trans "Клиент оплачивает наши услуги" %}</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>{% trans "Получение бонуса" %}</h3>
+                <p>{% trans "Вы получаете вознаграждение в течение 48 часов" %}</p>
+            </div>
+        </div>
     </section>
 
-    <!-- Partner Registration Form -->
-    <section class="mb-12">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-6 text-center">
-            {% trans "Готовы начать?" %}
-        </h2>
-        <p class="text-lg text-gray-600 text-center mb-8">
-            {% trans "Присоединяйтесь к нам и станьте частью успешной команды NovaHaus!" %}
-        </p>
-        <form method="post" class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md">
-            {% csrf_token %}
-            <div class="mb-4">
-                <label for="name" class="block text-gray-700 font-medium mb-2">{% trans "Имя" %}</label>
-                <input type="text" id="name" name="name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+    <!-- Testimonials Section -->
+    <section class="partner-testimonials">
+        <h2>{% trans "Отзывы наших партнёров" %}</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial">
+                <div class="quote">{% trans "Сотрудничество с NovaHaus значительно увеличило мой доход как риелтора. Клиенты довольны качеством ремонта, а я получаю стабильные бонусы. Особенно ценю их экологичный подход!" %}</div>
+                <div class="author">
+                    <img src="{% static 'images/team/member1.jpg' %}" alt="Thomas Weber">
+                    <div class="author-info">
+                        <div class="name">Thomas Weber</div>
+                        <div class="title">{% trans "Риелтор, Кёльн" %}</div>
+                    </div>
+                </div>
             </div>
-            <div class="mb-4">
-                <label for="email" class="block text-gray-700 font-medium mb-2">{% trans "Email" %}</label>
-                <input type="email" id="email" name="email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <div class="testimonial">
+                <div class="quote">{% trans "Как дизайнер интерьеров, я долго искала надёжную компанию для реализации своих проектов. NovaHaus превзошли все ожидания! Их команда профессионалов, а партнёрская программа приносит до 15% с каждого проекта." %}</div>
+                <div class="author">
+                    <img src="{% static 'images/team/member2.jpg' %}" alt="Anna Müller">
+                    <div class="author-info">
+                        <div class="name">Anna Müller</div>
+                        <div class="title">{% trans "Дизайнер интерьеров, Гамбург" %}</div>
+                    </div>
+                </div>
             </div>
-            <div class="mb-4">
-                <label for="phone" class="block text-gray-700 font-medium mb-2">{% trans "Телефон" %}</label>
-                <input type="tel" id="phone" name="phone" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-            </div>
-            <div class="mb-4">
-                <label for="message" class="block text-gray-700 font-medium mb-2">{% trans "Сообщение" %}</label>
-                <textarea id="message" name="message" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-            </div>
-            <button type="submit" class="w-full bg-blue-500 text-white font-semibold py-3 rounded-lg hover:bg-blue-600 transition-colors">
-                {% trans "Зарегистрироваться" %}
-            </button>
-        </form>
+        </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="text-center text-gray-600 mt-12">
-        <img src="{% static 'images/logo.png' %}" alt="NovaHaus Logo" class="mx-auto mb-4 w-24">
-        <p>{% trans "Transforming spaces in Cologne and Hamburg with quality and eco-friendliness." %}</p>
-        <p class="mt-2">© 2025 NovaHaus. {% trans "All rights reserved." %}</p>
-    </footer>
+    <!-- Registration Section -->
+    <section id="registration" class="partner-registration">
+        <div class="registration-container">
+            <div class="registration-form">
+                <h2>{% trans "Стать партнёром" %}</h2>
+                <form method="post" class="partner-form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">{% trans "Имя и фамилия" %}*</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">{% trans "Email" %}*</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">{% trans "Телефон" %}*</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">{% trans "Компания (если есть)" %}</label>
+                        <input type="text" id="company" name="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="partner_type">{% trans "Тип партнёрства" %}*</label>
+                        <select id="partner_type" name="partner_type" required>
+                            <option value="">{% trans "Выберите тип" %}</option>
+                            <option value="realtor">{% trans "Риелтор/Агентство недвижимости" %}</option>
+                            <option value="designer">{% trans "Дизайнер интерьеров" %}</option>
+                            <option value="architect">{% trans "Архитектор" %}</option>
+                            <option value="business">{% trans "Бизнес-партнёр" %}</option>
+                            <option value="other">{% trans "Другое" %}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="cities">{% trans "Города работы" %}*</label>
+                        <select id="cities" name="cities" required>
+                            <option value="">{% trans "Выберите город" %}</option>
+                            <option value="cologne">{% trans "Кёльн" %}</option>
+                            <option value="hamburg">{% trans "Гамбург" %}</option>
+                            <option value="both">{% trans "Оба города" %}</option>
+                        </select>
+                    </div>
+                    <div class="agreement">
+                        <input type="checkbox" id="agreement" name="agreement" required>
+                        <label for="agreement">
+                            {% trans "Я согласен с " %}<a href="{% url 'privacy' %}">{% trans "условиями партнёрской программы" %}</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">{% trans "Отправить заявку" %}</button>
+                </form>
+            </div>
+
+            <div class="registration-info">
+                <div class="faq-section">
+                    <h3>{% trans "Частые вопросы" %}</h3>
+                    <div class="faq-item">
+                        <div class="question">{% trans "Как быстро я получу реферальный код?" %}</div>
+                        <div class="answer">{% trans "Код генерируется сразу после регистрации и приходит на вашу почту в течение 5 минут." %}</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="question">{% trans "Когда я получу вознаграждение?" %}</div>
+                        <div class="answer">{% trans "В течение 48 часов после полной оплаты проекта клиентом." %}</div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="question">{% trans "Могу ли я стать партнёром из другого города?" %}</div>
+                        <div class="answer">{% trans "Да, но бонусы выплачиваются только за проекты в Кёльне и Гамбурге." %}</div>
+                    </div>
+                </div>
+
+                <div class="contact-info">
+                    <h3>{% trans "Контакты для партнёров" %}</h3>
+                    <p>{% trans "Email: " %}<strong>partners@novahaus.de</strong></p>
+                    <p>{% trans "Телефон: " %}<strong>+49 155 100 718 48</strong></p>
+                    <p>{% trans "Часы работы: Пн-Пт, 9:00-18:00" %}</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>
 {% endblock %}

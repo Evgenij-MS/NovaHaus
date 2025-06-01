@@ -266,3 +266,4 @@ main/templates/main/partner.html
         ├── support.png
         ├── eco.png
         └── growth.png
+Создайте файл templates/includes/partner_benefits.html

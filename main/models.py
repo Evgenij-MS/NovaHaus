@@ -91,9 +91,22 @@ class Review(models.Model):
 class Partner(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='partners', blank=True, null=True, verbose_name=_("Пользователь"))
     name = models.CharField(max_length=255, verbose_name=_("Имя партнёра"))
-    contact_info = models.CharField(max_length=255, blank=True, verbose_name=_("Контактная информация"))
-    phone = models.CharField(max_length=20, blank=True, null=True, verbose_name=_("Телефон"))
-    email = models.EmailField(blank=True, null=True, verbose_name=_("Электронная почта"))
+    phone = models.CharField(max_length=20, verbose_name=_("Телефон"))
+    email = models.EmailField(unique=True, verbose_name=_("Электронная почта"))
+    company = models.CharField(max_length=255, blank=True, verbose_name=_("Компания"))
+    partner_type = models.CharField(max_length=50, choices=[
+        ('realtor', _('Риелтор/Агентство недвижимости')),
+        ('designer', _('Дизайнер интерьеров')),
+        ('architect', _('Архитектор')),
+        ('business', _('Бизнес-партнёр')),
+        ('other', _('Другое')),
+    ], verbose_name=_("Тип партнёрства"))
+    cities = models.CharField(max_length=50, choices=[
+        ('cologne', _('Кёльн')),
+        ('hamburg', _('Гамбург')),
+        ('both', _('Оба города')),
+    ], verbose_name=_("Города работы"))
+    agreement = models.BooleanField(default=False, verbose_name=_("Согласие с условиями"))
     referral_code = models.CharField(max_length=50, unique=True, verbose_name=_("Реферальный код"))
     total_referrals = models.IntegerField(default=0, verbose_name=_("Количество привлеченных клиентов"))
     total_earnings = models.DecimalField(max_digits=10, decimal_places=2, default=0, verbose_name=_("Общий заработок"))
