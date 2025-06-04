@@ -377,14 +377,12 @@ PWA_APP_SCOPE = '/'
 PWA_APP_ORIENTATION = 'any'
 PWA_APP_START_URL = '/'
 PWA_APP_STATUS_BAR_COLOR = 'default'
-PWA_APP_ICONS = [
-    {'src': '/static/images/logo.png', 'sizes': '192x192', 'type': 'image/png'},
-    {'src': '/static/images/logo.png', 'sizes': '512x512', 'type': 'image/png'},
 
+PWA_APP_ICONS = [
     {'src': '/static/images/favicon/android-chrome-192x192.png', 'sizes': '192x192', 'type': 'image/png'},
     {'src': '/static/images/favicon/android-chrome-512x512.png', 'sizes': '512x512', 'type': 'image/png'}
-
 ]
+
 PWA_APP_DIR = 'ltr'
 PWA_APP_LANG = 'de'
 PWA_SERVICE_WORKER_PATH = BASE_DIR / 'static/js/service-worker.js'

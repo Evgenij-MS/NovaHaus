@@ -138,7 +138,7 @@ NovaHaus/
 │   │   │   ├── favicon-96x96.png
 │   │   │   ├── favicon-96x96.webp
 │   │   │   ├── favicon.svg
-│   │   │   └── site.webmanifest
+│   │   │   └── 
 │   │   ├── icons/
 │   │   │   ├── eco.png
 │   │   │   ├── email.webp
@@ -267,3 +267,4 @@ main/templates/main/partner.html
         ├── eco.png
         └── growth.png
 Создайте файл templates/includes/partner_benefits.html
+static/images/favicon/browserconfig.xml

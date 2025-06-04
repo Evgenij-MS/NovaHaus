@@ -9,7 +9,14 @@ from django.conf import settings
 from django.views.static import serve
 from django.shortcuts import redirect
 
+
+
 urlpatterns = [
+    path('static/images/favicon/browserconfig.xml', serve, {
+        'document_root': settings.STATIC_ROOT,
+        'path': 'images/favicon/browserconfig.xml',
+        'content_type': 'application/xml'
+    }),
     path('admin/', admin.site.urls),  # Added admin URL
     path('', home, name='home'),
     path('services/', services, name='services'),
