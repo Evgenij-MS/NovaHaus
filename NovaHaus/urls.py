@@ -9,15 +9,13 @@ from django.conf import settings
 from django.views.static import serve
 from django.shortcuts import redirect
 
-
-
 urlpatterns = [
     path('static/images/favicon/browserconfig.xml', serve, {
         'document_root': settings.STATIC_ROOT,
         'path': 'images/favicon/browserconfig.xml',
         'content_type': 'application/xml'
     }),
-    path('admin/', admin.site.urls),  # Added admin URL
+    path('admin/', admin.site.urls),
     path('', home, name='home'),
     path('services/', services, name='services'),
     path('portfolio/', portfolio, name='portfolio'),
@@ -35,7 +33,14 @@ urlpatterns = [
     path('privacy/', privacy, name='privacy'),
     path('chatbot/', chatbot, name='chatbot'),
     path('i18n/', include('django.conf.urls.i18n')),
-    path('robots.txt', serve, {'document_root': settings.STATIC_ROOT, 'path': 'robots.txt'}),
+
+    # Отдаем robots.txt из корня проекта
+    path('robots.txt', serve, {
+        'document_root': settings.BASE_DIR,  # Корень проекта (где manage.py)
+        'path': 'robots.txt',
+        'content_type': 'text/plain'
+    }),
+
     path('partner/', partner_view, name='partner'),
     path('register-partner/', lambda request: redirect('partner'), name='register_partner'),
 ]
