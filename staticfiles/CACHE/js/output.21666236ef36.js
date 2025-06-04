@@ -1,1 +1,0 @@
-document.addEventListener('DOMContentLoaded',()=>{const cards=document.querySelectorAll('.service-card');cards.forEach((card,index)=>{setTimeout(()=>{card.classList.add('animate');},index*200);});});;

@@ -1,5 +1,8 @@
 /* global Chart */
-const modelMap = {
+import { show3DModel } from './visualization.js';
+import { showChart } from './chart.js'; // Импортируем showChart из chart.js
+
+export const modelMap = {
     'apartment': {
         'economy': '/static/models/apartment_economy.glb',
         'standard': '/static/models/apartment_standard.glb',
@@ -59,6 +62,12 @@ function debounce(func, wait) {
     };
 }
 
+function getCSRFToken() {
+    const token = document.querySelector('meta[name="csrf-token"]')?.content;
+    // eslint-disable-next-line no-throw-literal
+    return token || null;
+}
+
 async function calculateCost(event) {
     event.preventDefault();
     const form = document.getElementById('calculator-form');
@@ -70,6 +79,12 @@ async function calculateCost(event) {
 
     try {
         const csrfToken = getCSRFToken();
+        // eslint-disable-next-line no-throw-literal
+        if (!csrfToken) {
+            throw new Error('CSRF token not found');
+        }
+
+        // TODO: Дублированный код (59 строк) с updateUI; рассмотреть вынос в общую функцию
         const formData = new FormData(form);
         const area = parseFloat(formData.get('area') || '0');
         const workType = formData.get('work-type');
@@ -90,6 +105,7 @@ async function calculateCost(event) {
 
         loader.style.display = 'block';
 
+        // TODO: Дублированный код (27 строк); рассмотреть вынос в общую функцию
         const costData = await fetchData('/calculate_cost/', {
             method: 'POST',
             headers: { 'X-CSRFToken': csrfToken },
@@ -122,7 +138,7 @@ async function calculateCost(event) {
         if (!aiData.success) {
             recommendationElement.innerText = `Ошибка: ${aiData.error || 'Неизвестная ошибка'}`;
         } else {
-            recommendationElement.innerText = aiData.recommendation || 'Нет рекомендаций';
+            recommendationElement.innerText = aiData?.recommendation || 'Нет рекомендаций';
         }
 
         calculationCache.set(cacheKey, { costData, aiData });
@@ -143,6 +159,7 @@ function updateUI(costData, aiData, workType, materialQuality) {
     const materialCost = aiData?.material_cost || 0;
     const totalCost = laborCost + materialCost;
 
+    // TODO: Дублированный код (14 строк); рассмотреть объединение с calculateCost
     resultElement.innerText = `Примерная стоимость: ${formatCurrency(totalCost)}`;
     resultElement.style.color = 'black';
     resultElement.dataset.materialCost = materialCost.toString();
@@ -150,49 +167,8 @@ function updateUI(costData, aiData, workType, materialQuality) {
 
     recommendationElement.innerText = aiData?.recommendation || 'Нет рекомендаций';
 
-    showChart(totalCost, materialCost, laborCost);
-    show3DModel(workType, materialQuality);
-}
-
-function show3DModel(workType, materialQuality) {
-    const viewer = document.getElementById('viewer');
-    if (!viewer) {
-        console.error('Элемент #viewer не найден.');
-        return;
-    }
-    const modelUrl = modelMap[workType]?.[materialQuality] || '/static/models/sample_model.glb';
-    viewer.setAttribute('src', modelUrl);
-    viewer.setAttribute('loading', 'lazy');
-    viewer.style.display = 'block';
-    console.log('Загружена модель:', modelUrl);
-}
-
-function showChart(totalCost, materialCost, laborCost) {
-    const chartElement = document.getElementById('cost-chart');
-    if (!chartElement) {
-        console.error('Элемент #cost-chart не найден.');
-        return;
-    }
-    const ctx = chartElement.getContext('2d');
-    if (ctx) {
-        new Chart(ctx, {
-            type: 'pie',
-            data: {
-                labels: ['Материалы', 'Работа'],
-                datasets: [{
-                    data: [materialCost, laborCost],
-                    backgroundColor: ['#007bff', '#28a745']
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { position: 'top' },
-                    title: { display: true, text: 'Распределение затрат' }
-                }
-            }
-        });
-    }
+    showChart(materialCost, laborCost, 0); // Используем showChart из chart.js
+    show3DModel(modelMap[workType]?.[materialQuality] || '/static/models/sample_model.glb');
 }
 
 async function saveCalculation() {
@@ -202,6 +178,12 @@ async function saveCalculation() {
 
     try {
         const csrfToken = getCSRFToken();
+        // eslint-disable-next-line no-throw-literal
+        if (!csrfToken) {
+            throw new Error('CSRF token not found');
+        }
+
+        // TODO: Дублированный код (20 строк); рассмотреть объединение с calculateCost
         const formData = new FormData(form);
         const data = {
             workType: String(formData.get('work-type') || ''),
