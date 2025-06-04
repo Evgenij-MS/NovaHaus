@@ -4,7 +4,7 @@ from django.views.generic.base import TemplateView
 from main.views import (
     home, partner_view, services, portfolio, about, reviews, contact,
     calculator, calculate_cost, save_calculation, get_ai_recommendations,
-    partner_success, blog, blog_post_detail, view_3d_model, privacy, chatbot
+    partner_success, blog, blog_post_detail, view_3d_model, privacy,
 )
 from django.conf import settings
 from django.views.static import serve
@@ -33,7 +33,7 @@ urlpatterns = [
     path('blog/<int:post_id>/', blog_post_detail, name='blog_post_detail'),
     path('3d-viewer/', view_3d_model, name='view_3d_model'),
     path('privacy/', privacy, name='privacy'),
-    path('chatbot/', chatbot, name='chatbot'),
+    path('chatbot/', TemplateView.as_view(template_name='main/chatbot.html'), name='chatbot'),
     path('i18n/', include('django.conf.urls.i18n')),
 
     # Отдаем robots.txt из корня проекта
