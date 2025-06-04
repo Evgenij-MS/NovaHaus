@@ -1,6 +1,16 @@
-import re
-from django.http import HttpResponseForbidden
+
 from django.conf import settings
+from django.http import HttpResponseForbidden
+
+class BlockSensitivePathsMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        # Блокировка доступа к путям, начинающимся с /.git/
+        if request.path.startswith('/.git/'):
+            return HttpResponseForbidden("Access denied")
+        return self.get_response(request)
 
 class BlockBadBotsMiddleware:
     def __init__(self, get_response):
