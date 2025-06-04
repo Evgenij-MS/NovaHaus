@@ -1,4 +1,5 @@
 // main.js
+// eslint-disable-next-line no-duplicate-code
 document.addEventListener('DOMContentLoaded', () => {
     console.log('NovaHaus main.js loaded');
 
