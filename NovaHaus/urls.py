@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic.base import TemplateView
 from main.views import (
     home, partner_view, services, portfolio, about, reviews, contact,
     calculator, calculate_cost, save_calculation, get_ai_recommendations,
@@ -16,6 +17,7 @@ urlpatterns = [
         'content_type': 'application/xml'
     }),
     path('admin/', admin.site.urls),
+    path('offline/', TemplateView.as_view(template_name='offline.html'), name='offline'),
     path('', home, name='home'),
     path('services/', services, name='services'),
     path('portfolio/', portfolio, name='portfolio'),
