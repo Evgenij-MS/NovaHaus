@@ -268,3 +268,5 @@ main/templates/main/partner.html
         └── growth.png
 Создайте файл templates/includes/partner_benefits.html
 static/images/favicon/browserconfig.xml
+Создайте шаблон offline.html в папке main/templates/main/,
+

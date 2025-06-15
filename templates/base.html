@@ -1,11 +1,13 @@
 {% load static i18n compress %}
+
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
 <head>
+    <meta name="msapplication-TileColor" content="#005B99">
+    <meta name="msapplication-config" content="static/images/favicon/browserconfig.xml">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="theme-color" content="#005B99">
 
     <!-- Title & Meta -->
     <title>{% block title %}{% trans "NovaHaus – Ваш надёжный партнёр по ремонту" %}{% endblock %}</title>
@@ -22,16 +24,21 @@
     <meta property="og:type" content="website">
     <meta property="og:locale" content="{{ LANGUAGE_CODE }}">
 
+    <!-- PWA -->
+    <link rel="manifest" href="{% static 'manifest.json' %}">
+    <meta name="theme-color" content="#005B99">
+    <link rel="apple-touch-icon" href="{% static 'images/favicon/apple-touch-icon.png' %}">
+
+    <!-- Сервис-воркер перемещён в head -->
+    <script src="{% static 'js/service-worker.js' %}" defer></script>
+
     <!-- Favicon Suite -->
     <link rel="shortcut icon" href="{% static 'images/favicon/favicon.ico' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'images/favicon/favicon-16x16.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/favicon/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="96x96" href="{% static 'images/favicon/favicon-96x96.png' %}">
     <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon/favicon.svg' %}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}">
-
-    <!-- PWA Manifest -->
-    <link rel="manifest" href="{% static 'manifest.json' %}">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/favicon/favicon.ico' %}">
 
     <!-- CSS -->
     {% compress css %}
@@ -47,6 +54,7 @@
     <link rel="stylesheet" href="{% static 'css/pannellum.css' %}">
     <link rel="stylesheet" href="{% static 'css/visualization.css' %}">
     <link rel="stylesheet" href="{% static 'css/media-queries.css' %}">
+    <!-- Добавлены модули из пользовательской версии -->
     <link rel="stylesheet" href="{% static 'css/partner.css' %}">
     <link rel="stylesheet" href="{% static 'css/calculator.css' %}">
     {% endcompress %}
@@ -55,70 +63,71 @@
     {% if request.get_host == "novahaus-hamburg.de" or request.get_host == "www.novahaus-hamburg.de" %}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-19RQG7TDMC"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-19RQG7TDMC', {
-            'linker': {
-                'domains': ['novahaus-hamburg.de', 'novahaus-koeln.de']
-            }
-        });
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-19RQG7TDMC', {
+        'linker': {
+          'domains': ['novahaus-hamburg.de', 'novahaus-koeln.de']
+        }
+      });
     </script>
     {% elif request.get_host == "novahaus-koeln.de" or request.get_host == "www.novahaus-koeln.de" %}
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BS4J4PD0WF"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-BS4J4PD0WF', {
-            'linker': {
-                'domains': ['novahaus-hamburg.de', 'novahaus-koeln.de']
-            }
-        });
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BS4J4PD0WF', {
+        'linker': {
+          'domains': ['novahaus-hamburg.de', 'novahaus-koeln.de']
+        }
+      });
     </script>
     {% endif %}
 
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "NovaHaus",
-        "image": "{% static 'images/logo.png' %}",
-        "description": "{% trans "Ремонтная компания в Кёльне и Гамбурге. Квартиры, офисы, фасады." %}",
-        "address": [
-            {
-                "@type": "PostalAddress",
-                "streetAddress": "Musterstraße 123",
-                "addressLocality": "{% trans "Кёльн" %}",
-                "postalCode": "50667",
-                "addressCountry": "DE"
-            },
-            {
-                "@type": "PostalAddress",
-                "streetAddress": "Beispielweg 456",
-                "addressLocality": "{% trans "Гамбург" %}",
-                "postalCode": "20354",
-                "addressCountry": "DE"
-            }
-        ],
-        "telephone": "+49 155 100 718 48",
-        "email": "info@novahaus.de",
-        "url": "{% if request.get_host == 'novahaus-hamburg.de' or request.get_host == 'www.novahaus-hamburg.de' %}https://www.novahaus-hamburg.de{% else %}https://www.novahaus-koeln.de{% endif %}",
-        "sameAs": [
-            "https://www.instagram.com/novahaus",
-            "https://www.facebook.com/novahaus",
-            "https://www.linkedin.com/company/novahaus"
-        ],
-        "openingHours": "Mo-Fr 08:00-18:00",
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "reviewCount": "120"
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "NovaHaus",
+      "image": "{% static 'images/logo.png' %}",
+      "description": "{% trans "Ремонтная компания в Кёльне и Гамбурге. Квартиры, офисы, фасады." %}",
+      "address": [
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "Musterstraße 123",
+          "addressLocality": "{% trans "Кёльн" %}",
+          "postalCode": "50667",
+          "addressCountry": "DE"
+        },
+        {
+          "@type": "PostalAddress",
+          "streetAddress": "Beispielweg 456",
+          "addressLocality": "{% trans "Гамбург" %}",
+          "postalCode": "20354",
+          "addressCountry": "DE"
         }
+      ],
+      "telephone": "+49 155 100 718 48",
+      "email": "info@novahaus.de",
+      "url": "{% if request.get_host == 'novahaus-hamburg.de' or request.get_host == 'www.novahaus-hamburg.de' %}https://www.novahaus-hamburg.de{% else %}https://www.novahaus-koeln.de{% endif %}",
+      "sameAs": [
+        "https://www.instagram.com/novahaus",
+        "https://www.facebook.com/novahaus",
+        "https://www.linkedin.com/company/novahaus"
+      ],
+      "openingHours": "Mo-Fr 08:00-18:00",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "120"
+      }
     }
     </script>
 </head>
+
 <body>
     {% block extra_context %}
         {% url 'home' as url_home %}
@@ -157,11 +166,10 @@
     <script src="{% static 'js/pannellum.js' %}" defer></script>
     <script src="{% static 'js/pannellum-custom.js' %}" defer></script>
     <script src="{% static 'js/visualization.js' %}" defer></script>
+    <!-- Добавлен calculator.js -->
     <script src="{% static 'js/calculator.js' %}" defer></script>
 
-
-
-    <!-- Breadcrumb -->
+    <!-- Исправлено имя блока: breadcrumbs → breadcrumb -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
