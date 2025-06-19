@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block title %}{% trans "Edit Profile" %}{% endblock %}
+
+{% block description %}{% trans "Edit your user profile" %}{% endblock %}
+
+{% block content %}
+<div class="container profile-edit-container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="profile-edit-title">{% trans "Edit Your Profile" %}</h1>
+
+            <div class="profile-edit-form">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {% for error in form.non_field_errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <div class="form-group">
+                        <label for="{{ form.bio.id_for_label }}">{% trans "Biography" %}</label>
+                        {{ form.bio }}
+                        {% if form.bio.errors %}
+                            <div class="invalid-feedback d-block">
+                                {% for error in form.bio.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <small class="form-text text-muted">{{ form.bio.help_text }}</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ form.avatar.id_for_label }}">{% trans "Profile Picture" %}</label>
+                        {% if profile.avatar %}
+                            <div class="current-avatar mb-2">
+                                <img src="{{ profile.avatar.url }}" alt="{% trans 'Current profile picture' %}" class="img-thumbnail" style="max-width: 150px;">
+                            </div>
+                        {% endif %}
+                        {{ form.avatar }}
+                        {% if form.avatar.errors %}
+                            <div class="invalid-feedback d-block">
+                                {% for error in form.avatar.errors %}
+                                    {{ error }}
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <small class="form-text text-muted">{{ form.avatar.help_text }}</small>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> {% trans "Save Changes" %}
+                        </button>
+                        <a href="{% url 'profiles:profile_detail' username=user.username %}" class="btn btn-secondary">
+                            <i class="fas fa-times"></i> {% trans "Cancel" %}
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block breadcrumb %}
+, {
+    "@type": "ListItem",
+    "position": 2,
+    "name": "{% trans 'Profile' %}",
+    "item": "{% url 'profiles:profile_detail' username=user.username %}"
+},
+{
+    "@type": "ListItem",
+    "position": 3,
+    "name": "{% trans 'Edit' %}",
+    "item": "{% url 'profiles:profile_edit' %}"
+}
+{% endblock %}

@@ -1,22 +1,16 @@
-{% extends 'base.html' %}
-{% load compress static i18n %}
-
-{% block title %}
-    {% trans "Server Error" %}
-{% endblock %}
-
-{% block description %}
-    {% trans "Something went wrong. Please try again later or contact us." %}
-{% endblock %}
-
-{% block keywords %}
-    {% trans "server error, NovaHaus" %}
-{% endblock %}
-
-{% block content %}
-    <section class="container fade-in">
-        <h1>{% trans "500 - Server Error" %}</h1>
-        <p>{% trans "Something went wrong. Please try again later or contact us." %}</p>
-        <a href="{% url 'home' %}" class="btn">{% trans "Back to Home" %}</a>
-    </section>
-{% endblock %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% trans "Serverfehler" %}</title>
+    <link rel="stylesheet" href="{% static 'css/global.css' %}">
+</head>
+<body>
+    <div class="container text-center" style="padding: 100px 20px;">
+        <h1>{% trans "Ein Fehler ist aufgetreten" %}</h1>
+        <p>{% trans "Unsere Techniker wurden benachrichtigt und arbeiten bereits an einer Lösung." %}</p>
+        <a href="{% url 'home' %}" class="btn btn-primary">{% trans "Zurück zur Startseite" %}</a>
+    </div>
+</body>
+</html>

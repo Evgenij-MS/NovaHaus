@@ -1,0 +1,356 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+
+{% block title %}{% trans "NovaHaus - Renovierung in Köln und Hamburg" %}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/global.css' %}">
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="{% static 'css/slider.css' %}">
+<link rel="stylesheet" href="{% static 'css/cards.css' %}">
+<link rel="stylesheet" href="{% static 'css/buttons.css' %}">
+<link rel="stylesheet" href="{% static 'css/services.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="main-content">
+    <!-- Hero Section mit Video Background -->
+    <section class="hero-section">
+        <div class="hero-video-container">
+            <video autoplay muted loop playsinline class="hero-video">
+                <source src="{% static 'media/hero-video.mp4' %}" type="video/mp4">
+                {% trans "Ihr Browser unterstützt keine Videos" %}
+            </video>
+            <div class="hero-overlay"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">{% trans "Professionelle Renovierung" %}</h1>
+                <p class="hero-subtitle">{% trans "Zuverlässigkeit, Qualität und Termine garantiert" %}</p>
+                <p class="hero-description">
+                    {% trans "Von der Wohnungsrenovierung bis zur Fassadensanierung - wir sind Ihr vertrauensvoller Partner in Köln und Hamburg." %}
+                </p>
+            </div>
+
+            <div class="hero-buttons">
+                <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-phone"></i>
+                    {% trans "Kostenlose Beratung" %}
+                </a>
+                <a href="{% url 'calculator' %}" class="btn btn-secondary btn-lg">
+                    <i class="fas fa-calculator"></i>
+                    {% trans "Kostenrechner" %}
+                </a>
+            </div>
+
+            <!-- Statistiken -->
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">{% trans "Projekte" %}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15</span>
+                    <span class="stat-label">{% trans "Jahre Erfahrung" %}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">98%</span>
+                    <span class="stat-label">{% trans "Zufriedene Kunden" %}</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Preview Section -->
+    <section class="services-preview">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">{% trans "Unsere Leistungen" %}</h2>
+                <p class="section-subtitle">
+                    {% trans "Professionelle Renovierungsdienstleistungen für jeden Bedarf" %}
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Wohnungsrenovierung -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="service-icon">
+                        <img src="{% static 'images/icons/house.png' %}" alt="{% trans 'Wohnungsrenovierung' %}">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">{% trans "Wohnungsrenovierung" %}</h3>
+                        <p class="service-description">
+                            {% trans "Komplette Renovierung Ihrer Wohnung mit hochwertigen Materialien" %}
+                        </p>
+                        <ul class="service-features">
+                            <li>{% trans "Badezimmermodernisierung" %}</li>
+                            <li>{% trans "Küchenerneuerung" %}</li>
+                            <li>{% trans "Bodenverlegung" %}</li>
+                            <li>{% trans "Malerarbeiten" %}</li>
+                        </ul>
+                        <div class="service-price">
+                            {% trans "ab" %} €45/m²
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fassadensanierung -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="service-icon">
+                        <img src="{% static 'images/icons/facade.png' %}" alt="{% trans 'Fassadensanierung' %}">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">{% trans "Fassadensanierung" %}</h3>
+                        <p class="service-description">
+                            {% trans "Professionelle Fassadenerneuerung und Wärmedämmung" %}
+                        </p>
+                        <ul class="service-features">
+                            <li>{% trans "Wärmedämmung" %}</li>
+                            <li>{% trans "Fassadenanstrich" %}</li>
+                            <li>{% trans "Rissreparatur" %}</li>
+                            <li>{% trans "Schutzanstriche" %}</li>
+                        </ul>
+                        <div class="service-price">
+                            {% trans "ab" %} €65/m²
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bürorenovierung -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-icon">
+                        <img src="{% static 'images/icons/office.png' %}" alt="{% trans 'Bürorenovierung' %}">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">{% trans "Bürorenovierung" %}</h3>
+                        <p class="service-description">
+                            {% trans "Moderne Arbeitsplätze schaffen für maximale Produktivität" %}
+                        </p>
+                        <ul class="service-features">
+                            <li>{% trans "Büroplanung" %}</li>
+                            <li>{% trans "Akustiklösungen" %}</li>
+                            <li>{% trans "Beleuchtungssysteme" %}</li>
+                            <li>{% trans "Elektrische Anlagen" %}</li>
+                        </ul>
+                        <div class="service-price">
+                            {% trans "ab" %} €75/m²
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lagerhausrenovierung -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-icon">
+                        <img src="{% static 'images/icons/warehouse.png' %}" alt="{% trans 'Lagerhausrenovierung' %}">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">{% trans "Lagerhausrenovierung" %}</h3>
+                        <p class="service-description">
+                            {% trans "Optimierung von Lagerflächen für maximale Effizienz" %}
+                        </p>
+                        <ul class="service-features">
+                            <li>{% trans "Bodensanierung" %}</li>
+                            <li>{% trans "Beleuchtungsoptimierung" %}</li>
+                            <li>{% trans "Sicherheitssysteme" %}</li>
+                            <li>{% trans "Klimaanlagen" %}</li>
+                        </ul>
+                        <div class="service-price">
+                            {% trans "ab" %} €35/m²
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Badezimmermodernisierung -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-icon">
+                        <img src="{% static 'images/icons/repair.png' %}" alt="{% trans 'Badezimmermodernisierung' %}">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">{% trans "Badezimmermodernisierung" %}</h3>
+                        <p class="service-description">
+                            {% trans "Komplette Badezimmererneuerung mit modernen Standards" %}
+                        </p>
+                        <ul class="service-features">
+                            <li>{% trans "Sanitärinstallation" %}</li>
+                            <li>{% trans "Fliesenarbeiten" %}</li>
+                            <li>{% trans "Wasserabdichtung" %}</li>
+                            <li>{% trans "Armaturen" %}</li>
+                        </ul>
+                        <div class="service-price">
+                            {% trans "ab" %} €8.500 {% trans "komplett" %}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Entkernung -->
+                <div class="service-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="service-icon">
+                        <img src="{% static 'images/icons/insulation.png' %}" alt="{% trans 'Entkernung' %}">
+                    </div>
+                    <div class="service-content">
+                        <h3 class="service-title">{% trans "Entkernung" %}</h3>
+                        <p class="service-description">
+                            {% trans "Professionelle Entkernungsarbeiten für Neugestaltung" %}
+                        </p>
+                        <ul class="service-features">
+                            <li>{% trans "Rückbau" %}</li>
+                            <li>{% trans "Entsorgung" %}</li>
+                            <li>{% trans "Staubschutz" %}</li>
+                            <li>{% trans "Materialrecycling" %}</li>
+                        </ul>
+                        <div class="service-price">
+                            {% trans "ab" %} €25/m²
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-cta">
+                <a href="{% url 'services' %}" class="btn btn-outline-primary btn-lg">
+                    {% trans "Alle Leistungen anzeigen" %}
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Warum NovaHaus Section -->
+    <section class="why-us-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">{% trans "Warum NovaHaus?" %}</h2>
+                <p class="section-subtitle">
+                    {% trans "Ihre Vorteile bei der Zusammenarbeit mit uns" %}
+                </p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-item" data-aos="fade-right">
+                    <div class="feature-icon">
+                        <img src="{% static 'images/icons/quality.png' %}" alt="{% trans 'Qualität' %}">
+                    </div>
+                    <div class="feature-content">
+                        <h3>{% trans "Höchste Qualität" %}</h3>
+                        <p>{% trans "Nur beste Materialien und erfahrene Handwerker" %}</p>
+                    </div>
+                </div>
+
+                <div class="feature-item" data-aos="fade-right" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <img src="{% static 'images/icons/time.png' %}" alt="{% trans 'Pünktlichkeit' %}">
+                    </div>
+                    <div class="feature-content">
+                        <h3>{% trans "Termingerecht" %}</h3>
+                        <p>{% trans "Zuverlässige Einhaltung aller vereinbarten Termine" %}</p>
+                    </div>
+                </div>
+
+                <div class="feature-item" data-aos="fade-right" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <img src="{% static 'images/icons/price.png' %}" alt="{% trans 'Faire Preise' %}">
+                    </div>
+                    <div class="feature-content">
+                        <h3>{% trans "Faire Preise" %}</h3>
+                        <p>{% trans "Transparente Kostenvoranschläge ohne versteckte Kosten" %}</p>
+                    </div>
+                </div>
+
+                <div class="feature-item" data-aos="fade-right" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <img src="{% static 'images/icons/eco.png' %}" alt="{% trans 'Nachhaltigkeit' %}">
+                    </div>
+                    <div class="feature-content">
+                        <h3>{% trans "Nachhaltig" %}</h3>
+                        <p>{% trans "Umweltfreundliche Materialien und energieeffiziente Lösungen" %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Preview -->
+    <section class="portfolio-preview-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">{% trans "Unsere Projekte" %}</h2>
+                <p class="section-subtitle">
+                    {% trans "Einige unserer erfolgreich abgeschlossenen Renovierungsprojekte" %}
+                </p>
+            </div>
+
+            <div class="portfolio-grid">
+                <div class="portfolio-item" data-aos="zoom-in">
+                    <img src="{% static 'images/portfolio/project1.jpg' %}" alt="{% trans 'Projekt 1' %}">
+                    <div class="portfolio-overlay">
+                        <h4>{% trans "Moderne Wohnungsrenovierung" %}</h4>
+                        <p>{% trans "Hamburg" %} • 85m²</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="{% static 'images/portfolio/project2.jpg' %}" alt="{% trans 'Projekt 2' %}">
+                    <div class="portfolio-overlay">
+                        <h4>{% trans "Büro-Komplettmodernisierung" %}</h4>
+                        <p>{% trans "Köln" %} • 250m²</p>
+                    </div>
+                </div>
+
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="{% static 'images/portfolio/project3.jpg' %}" alt="{% trans 'Projekt 3' %}">
+                    <div class="portfolio-overlay">
+                        <h4>{% trans "Fassadensanierung Altbau" %}</h4>
+                        <p>{% trans "Hamburg" %} • 450m²</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-cta">
+                <a href="{% url 'portfolio' %}" class="btn btn-outline-primary btn-lg">
+                    {% trans "Alle Projekte ansehen" %}
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">{% trans "Bereit für Ihr Projekt?" %}</h2>
+                <p class="cta-subtitle">
+                    {% trans "Lassen Sie uns gemeinsam Ihre Renovierungsträume verwirklichen" %}
+                </p>
+                <div class="cta-buttons">
+                    <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-phone"></i>
+                        {% trans "Jetzt Termin vereinbaren" %}
+                    </a>
+                    <a href="{% url 'calculator' %}" class="btn btn-outline-white btn-lg">
+                        <i class="fas fa-calculator"></i>
+                        {% trans "Kosten berechnen" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- AOS Animation Library -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 800,
+        easing: 'ease-in-out',
+        once: true,
+        offset: 100
+    });
+</script>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/scripts.js' %}"></script>
+<script src="{% static 'js/slider.js' %}"></script>
+<script src="{% static 'js/animations.js' %}"></script>
+{% endblock %}

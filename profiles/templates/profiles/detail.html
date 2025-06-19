@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load static i18n %}
+
+{% block title %}{{ user_profile.username }} - {% trans "Profile" %}{% endblock %}
+
+{% block description %}{% trans "User profile for" %} {{ user_profile.username }}{% endblock %}
+
+{% block content %}
+<div class="container profile-container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="profile-title">{{ user_profile.get_full_name|default:user_profile.username }}</h1>
+
+            {% if profile.avatar %}
+                <div class="profile-avatar">
+                    <img src="{{ profile.avatar.url }}" alt="{% trans 'Profile picture of' %} {{ user_profile.username }}" class="img-fluid rounded-circle">
+                </div>
+            {% else %}
+                <div class="profile-avatar profile-avatar-placeholder">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            {% endif %}
+
+            <div class="profile-info">
+                <h2>{% trans "About" %}</h2>
+                <div class="profile-bio">
+                    {% if profile.bio %}
+                        {{ profile.bio|linebreaks }}
+                    {% else %}
+                        <p class="text-muted">{% trans "This user hasn't added a bio yet." %}</p>
+                    {% endif %}
+                </div>
+
+                <div class="profile-metadata">
+                    <p><strong>{% trans "Member since" %}:</strong> {{ user_profile.date_joined|date:"F Y" }}</p>
+                </div>
+
+                {% if user.is_authenticated and user == user_profile %}
+                    <div class="profile-actions">
+                        <a href="{% url 'profiles:profile_edit' %}" class="btn btn-primary">
+                            <i class="fas fa-edit"></i> {% trans "Edit Profile" %}
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block breadcrumb %}
+, {
+    "@type": "ListItem",
+    "position": 2,
+    "name": "{% trans 'Profiles' %}",
+    "item": "{% url 'profiles:profile_detail' username=user_profile.username %}"
+}
+{% endblock %}

@@ -37,10 +37,6 @@ def partner_view(request):
         'meta_keywords': 'партнер, регистрация, NovaHaus'
     })
 
-def page_not_found(request, _exception):
-    """Обработка ошибки 404."""
-    return render(request, 'main/404.html', status=404)
-
 def get_client_ip(request):
     """Получение IP-адреса клиента."""
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
@@ -318,6 +314,16 @@ def generate_unique_referral():
         code = uuid.uuid4().hex[:8].upper()
     return code
 
+# Fügen Sie diese Views hinzu:
+
+def page_not_found(request, exception):
+    """Custom 404 handler"""
+    return render(request, 'main/404.html', status=404)
+
 def custom_500(request):
-    """Обработка ошибки 500."""
+    """Custom 500 handler"""
     return render(request, 'main/500.html', status=500)
+
+def offline(request):
+    """Offline page for PWA"""
+    return render(request, 'main/offline.html')

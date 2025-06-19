@@ -1,0 +1,1976 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-06-19 20:52+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\main\base.html:10
+msgid "NovaHaus - Ihr Partner für Renovierung"
+msgstr ""
+
+#: .\main\base.html:38
+msgid "Navigation umschalten"
+msgstr ""
+
+#: .\main\base.html:45 .\main\base.html:169
+msgid "Startseite"
+msgstr ""
+
+#: .\main\base.html:50 .\main\base.html:170 .\main\base.html:176
+msgid "Leistungen"
+msgstr ""
+
+#: .\main\base.html:55 .\main\base.html:171 .\templates\includes\footer.html:12
+msgid "Portfolio"
+msgstr ""
+
+#: .\main\base.html:60 .\main\base.html:172
+msgid "Über uns"
+msgstr ""
+
+#: .\main\base.html:65
+msgid "Kalkulator"
+msgstr ""
+
+#: .\main\base.html:70 .\main\base.html:185 .\main\templates\main\404.html:22
+msgid "Kontakt"
+msgstr ""
+
+#: .\main\base.html:159
+msgid ""
+"Ihr zuverlässiger Partner für professionelle Renovierung und Sanierung in "
+"Köln und Hamburg."
+msgstr ""
+
+#: .\main\base.html:167
+msgid "Navigation"
+msgstr ""
+
+#: .\main\base.html:178
+msgid "Komplettrenovierung"
+msgstr ""
+
+#: .\main\base.html:179
+msgid "Badezimmersanierung"
+msgstr ""
+
+#: .\main\base.html:180
+msgid "Fassadenreinigung"
+msgstr ""
+
+#: .\main\base.html:181
+msgid "Kostenrechner"
+msgstr ""
+
+#: .\main\base.html:197
+msgid "Köln & Hamburg"
+msgstr ""
+
+#: .\main\base.html:206
+msgid "Alle Rechte vorbehalten."
+msgstr ""
+
+#: .\main\base.html:210
+msgid "Datenschutz"
+msgstr ""
+
+#: .\main\base.html:211
+msgid "Impressum"
+msgstr ""
+
+#: .\main\models.py:9
+msgid "Ремонт квартиры"
+msgstr ""
+
+#: .\main\models.py:10
+msgid "Ремонт дома"
+msgstr ""
+
+#: .\main\models.py:11 .\main\templates\main\home.html:41
+msgid "Ремонт офиса"
+msgstr ""
+
+#: .\main\models.py:12
+msgid "Ремонт склада"
+msgstr ""
+
+#: .\main\models.py:13 .\main\templates\main\services.html:72
+#: .\templates\includes\slider.html:6
+msgid "Фасадные работы"
+msgstr ""
+
+#: .\main\models.py:14
+msgid "Ремонт ванной"
+msgstr ""
+
+#: .\main\models.py:15
+msgid "Электрика"
+msgstr ""
+
+#: .\main\models.py:16 .\main\templates\main\services.html:78
+msgid "Демонтаж"
+msgstr ""
+
+#: .\main\models.py:19 .\main\models.py:35 .\main\models.py:125
+msgid "Название"
+msgstr ""
+
+#: .\main\models.py:20 .\main\models.py:36
+msgid "Описание"
+msgstr ""
+
+#: .\main\models.py:21
+msgid "Трудовые затраты за м²"
+msgstr ""
+
+#: .\main\models.py:22
+msgid "Базовая стоимость материалов за м²"
+msgstr ""
+
+#: .\main\models.py:23 .\main\models.py:40
+msgid "Категория"
+msgstr ""
+
+#: .\main\models.py:24 .\main\models.py:128
+msgid "Изображение"
+msgstr ""
+
+#: .\main\models.py:30
+msgid "Услуга"
+msgstr ""
+
+#: .\main\models.py:31 .\templates\includes\header.html:14
+msgid "Услуги"
+msgstr ""
+
+#: .\main\models.py:37
+msgid "Изображение до"
+msgstr ""
+
+#: .\main\models.py:38
+msgid "Изображение после"
+msgstr ""
+
+#: .\main\models.py:39
+msgid "Панорамное изображение"
+msgstr ""
+
+#: .\main\models.py:46
+msgid "Проект портфолио"
+msgstr ""
+
+#: .\main\models.py:47
+msgid "Проекты портфолио"
+msgstr ""
+
+#: .\main\models.py:52
+msgid "Новый"
+msgstr ""
+
+#: .\main\models.py:53
+msgid "В процессе"
+msgstr ""
+
+#: .\main\models.py:54
+msgid "Завершен"
+msgstr ""
+
+#: .\main\models.py:57 .\main\models.py:77 .\main\models.py:92
+#: .\main\models.py:139
+msgid "Пользователь"
+msgstr ""
+
+#: .\main\models.py:58
+msgid "Тип работы"
+msgstr ""
+
+#: .\main\models.py:59
+msgid "Площадь"
+msgstr ""
+
+#: .\main\models.py:60
+msgid "Материал"
+msgstr ""
+
+#: .\main\models.py:61
+msgid "Общая стоимость"
+msgstr ""
+
+#: .\main\models.py:62
+msgid "Стоимость материалов"
+msgstr ""
+
+#: .\main\models.py:63
+msgid "Стоимость работы"
+msgstr ""
+
+#: .\main\models.py:64
+msgid "Статус"
+msgstr ""
+
+#: .\main\models.py:65 .\main\models.py:81 .\main\models.py:146
+msgid "Дата создания"
+msgstr ""
+
+#: .\main\models.py:66
+msgid "Дополнительные данные расчёта"
+msgstr ""
+
+#: .\main\models.py:72
+msgid "Расчёт"
+msgstr ""
+
+#: .\main\models.py:73
+msgid "Расчёты"
+msgstr ""
+
+#: .\main\models.py:78
+msgid "Автор"
+msgstr ""
+
+#: .\main\models.py:79
+msgid "Текст отзыва"
+msgstr ""
+
+#: .\main\models.py:80
+msgid "Оценка"
+msgstr ""
+
+#: .\main\models.py:87
+msgid "Отзыв"
+msgstr ""
+
+#: .\main\models.py:88
+msgid "Отзывы"
+msgstr ""
+
+#: .\main\models.py:93
+msgid "Имя партнёра"
+msgstr ""
+
+#: .\main\models.py:94 .\main\templates\main\home.html:265
+#: .\main\templates\main\home.html:266 .\main\templates\main\partner.html:121
+msgid "Телефон"
+msgstr ""
+
+#: .\main\models.py:95 .\main\templates\main\home.html:263
+#: .\main\templates\main\home.html:264
+msgid "Электронная почта"
+msgstr ""
+
+#: .\main\models.py:96
+msgid "Компания"
+msgstr ""
+
+#: .\main\models.py:98 .\main\templates\main\partner.html:132
+msgid "Риелтор/Агентство недвижимости"
+msgstr ""
+
+#: .\main\models.py:99 .\main\templates\main\partner.html:133
+msgid "Дизайнер интерьеров"
+msgstr ""
+
+#: .\main\models.py:100 .\main\templates\main\partner.html:134
+msgid "Архитектор"
+msgstr ""
+
+#: .\main\models.py:101 .\main\templates\main\partner.html:135
+msgid "Бизнес-партнёр"
+msgstr ""
+
+#: .\main\models.py:102 .\main\templates\main\partner.html:136
+msgid "Другое"
+msgstr ""
+
+#: .\main\models.py:103 .\main\templates\main\partner.html:129
+msgid "Тип партнёрства"
+msgstr ""
+
+#: .\main\models.py:105 .\main\templates\main\home.html:106
+#: .\main\templates\main\partner.html:143 .\templates\base.html:93
+msgid "Кёльн"
+msgstr ""
+
+#: .\main\models.py:106 .\main\templates\main\home.html:110
+#: .\main\templates\main\partner.html:144 .\templates\base.html:100
+msgid "Гамбург"
+msgstr ""
+
+#: .\main\models.py:107 .\main\templates\main\partner.html:145
+msgid "Оба города"
+msgstr ""
+
+#: .\main\models.py:108 .\main\templates\main\partner.html:140
+msgid "Города работы"
+msgstr ""
+
+#: .\main\models.py:109
+msgid "Согласие с условиями"
+msgstr ""
+
+#: .\main\models.py:110
+msgid "Реферальный код"
+msgstr ""
+
+#: .\main\models.py:111
+msgid "Количество привлеченных клиентов"
+msgstr ""
+
+#: .\main\models.py:112
+msgid "Общий заработок"
+msgstr ""
+
+#: .\main\models.py:113
+msgid "Дата регистрации"
+msgstr ""
+
+#: .\main\models.py:114
+msgid "Дата последнего обновления"
+msgstr ""
+
+#: .\main\models.py:120
+msgid "Партнёр"
+msgstr ""
+
+#: .\main\models.py:121
+msgid "Партнёры"
+msgstr ""
+
+#: .\main\models.py:126
+msgid "Содержание"
+msgstr ""
+
+#: .\main\models.py:127
+msgid "Дата публикации"
+msgstr ""
+
+#: .\main\models.py:134
+msgid "Статья блога"
+msgstr ""
+
+#: .\main\models.py:135
+msgid "Статьи блога"
+msgstr ""
+
+#: .\main\models.py:140 .\main\templates\main\chatbot.html:31
+#: .\main\templates\main\home.html:267 .\main\templates\main\home.html:268
+#: .\main\templates\main\reviews.html:43
+msgid "Сообщение"
+msgstr ""
+
+#: .\main\models.py:141
+msgid "Ответ"
+msgstr ""
+
+#: .\main\models.py:142
+msgid "Язык"
+msgstr ""
+
+#: .\main\models.py:143
+msgid "Путь к файлу"
+msgstr ""
+
+#: .\main\models.py:144
+msgid "Путь к аудио"
+msgstr ""
+
+#: .\main\models.py:145
+msgid "IP-адрес"
+msgstr ""
+
+#: .\main\models.py:153
+msgid "Лог чата"
+msgstr ""
+
+#: .\main\models.py:154
+msgid "Логи чата"
+msgstr ""
+
+#: .\main\templates\main\3d_viewer.html:4
+#: .\main\templates\main\3d_viewer.html:6
+msgid "3D Просмотр проектов – NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\3d_viewer.html:5
+msgid "Интерактивный просмотр 3D моделей строительных объектов"
+msgstr ""
+
+#: .\main\templates\main\3d_viewer.html:11
+msgid "Интерактивный 3D просмотр"
+msgstr ""
+
+#: .\main\templates\main\3d_viewer.html:15
+msgid "Квартира эконом"
+msgstr ""
+
+#: .\main\templates\main\3d_viewer.html:18
+msgid "Дом премиум"
+msgstr ""
+
+#: .\main\templates\main\3d_viewer.html:21
+msgid "Офис стандарт"
+msgstr ""
+
+#: .\main\templates\main\3d_viewer.html:32
+msgid "Загрузка модели..."
+msgstr ""
+
+#: .\main\templates\main\404.html:4 .\main\templates\main\404.html:12
+msgid "Seite nicht gefunden"
+msgstr ""
+
+#: .\main\templates\main\404.html:14
+msgid ""
+"Die angeforderte Seite konnte nicht gefunden werden. Möglicherweise haben "
+"Sie eine falsche URL eingegeben oder die Seite wurde verschoben."
+msgstr ""
+
+#: .\main\templates\main\404.html:19
+msgid "Zur Startseite"
+msgstr ""
+
+#: .\main\templates\main\500.html:6
+msgid "Serverfehler"
+msgstr ""
+
+#: .\main\templates\main\500.html:11
+msgid "Ein Fehler ist aufgetreten"
+msgstr ""
+
+#: .\main\templates\main\500.html:12
+msgid ""
+"Unsere Techniker wurden benachrichtigt und arbeiten bereits an einer Lösung."
+msgstr ""
+
+#: .\main\templates\main\500.html:13
+msgid "Zurück zur Startseite"
+msgstr ""
+
+#: .\main\templates\main\blog_post_detail.html:13
+msgid "блог, строительство, ремонт, NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\blog_post_detail.html:22
+msgid "Вернуться к блогу"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:4
+#: .\main\templates\main\calculator.html:6
+msgid "Online Calculator – NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:5
+#: .\main\templates\main\calculator.html:7
+msgid "Calculate the cost of renovation with our AI-powered calculator."
+msgstr ""
+
+#: .\main\templates\main\calculator.html:11
+msgid "AI Cost Calculator"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:12
+msgid "Cost Calculator Form"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:15
+msgid "Type of Work"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:17
+msgid "Apartment Renovation"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:18
+msgid "House Renovation"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:19
+msgid "Office Renovation"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:20
+msgid "Warehouse Renovation"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:21
+msgid "Facade Works"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:22
+msgid "Bathroom Renovation"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:23
+msgid "Electrical Works"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:24
+msgid "Demolition Works"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:28
+msgid "Area (m²)"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:29
+msgid "E.g. 50"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:30
+msgid "Enter the area in square meters."
+msgstr ""
+
+#: .\main\templates\main\calculator.html:33
+msgid "Material Quality"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:35
+msgid "Economy"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:36
+msgid "Standard"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:37
+msgid "Premium"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:40
+msgid "Calculate Cost"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:40
+msgid "Calculate"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:41
+msgid "Save Calculation"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:41
+msgid "Save"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:44
+msgid "Cost Distribution Chart"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:46
+msgid "AI Recommendations"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:47
+msgid "Enter data to get recommendations."
+msgstr ""
+
+#: .\main\templates\main\calculator.html:51
+msgid "3D Visualization"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:52
+msgid "Show Model"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:53
+msgid "Hide Model"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:54
+msgid "3D Model Viewer"
+msgstr ""
+
+#: .\main\templates\main\calculator.html:56
+msgid "Back to Home"
+msgstr ""
+
+#: .\main\templates\main\chatbot.html:5 .\main\templates\main\chatbot.html:24
+#: .\templates\base.html:149
+msgid "Чат-бот NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\chatbot.html:9
+msgid ""
+"Общайтесь с нашим чат-ботом для консультаций по ремонту и строительству в "
+"Кёльне и Гамбурге."
+msgstr ""
+
+#: .\main\templates\main\chatbot.html:13
+msgid "чат-бот, ремонт, строительство, консультация, NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\chatbot.html:26
+msgid "Закрыть"
+msgstr ""
+
+#: .\main\templates\main\chatbot.html:32
+msgid "Введите ваше сообщение"
+msgstr ""
+
+#: .\main\templates\main\chatbot.html:35
+msgid "Файл"
+msgstr ""
+
+#: .\main\templates\main\chatbot.html:39
+msgid "Начать запись"
+msgstr ""
+
+#: .\main\templates\main\chatbot.html:40
+#: .\main\templates\main\dashboard.html:42 .\main\templates\main\home.html:269
+#: .\main\templates\main\reviews.html:46
+msgid "Отправить"
+msgstr ""
+
+#: .\main\templates\main\chatbot.html:41
+msgid "Прикрепить файл"
+msgstr ""
+
+#: .\main\templates\main\chatbot.html:45
+msgid "Остановить запись"
+msgstr ""
+
+#: .\main\templates\main\chatbot.html:46
+msgid "Воспроизвести"
+msgstr ""
+
+#: .\main\templates\main\consultation.html:5
+msgid "Консультация – NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\consultation.html:9
+msgid ""
+"Получите бесплатную консультацию по вашим проектам ремонта или строительства."
+msgstr ""
+
+#: .\main\templates\main\consultation.html:13
+msgid "консультация, ремонт, строительство, NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\consultation.html:18
+msgid "Консультация"
+msgstr ""
+
+#: .\main\templates\main\consultation.html:19
+msgid ""
+"Свяжитесь с нами для бесплатной консультации по вашим проектам. Мы поможем "
+"выбрать оптимальные решения и рассчитать стоимость."
+msgstr ""
+
+#: .\main\templates\main\consultation.html:20
+msgid "Записаться на консультацию"
+msgstr ""
+
+#: .\main\templates\main\dashboard.html:5
+msgid "Личный кабинет – NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\dashboard.html:9
+msgid ""
+"Управляйте вашими проектами, загружайте документы и общайтесь с менеджером."
+msgstr ""
+
+#: .\main\templates\main\dashboard.html:13
+msgid "личный кабинет, проекты, документы, чат, NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\dashboard.html:18
+msgid "Статус проекта"
+msgstr ""
+
+#: .\main\templates\main\dashboard.html:21
+msgid "Планирование"
+msgstr ""
+
+#: .\main\templates\main\dashboard.html:22
+#: .\main\templates\main\services.html:139
+msgid "Закупка материалов"
+msgstr ""
+
+#: .\main\templates\main\dashboard.html:23
+#: .\main\templates\main\services.html:55
+msgid "Ремонт"
+msgstr ""
+
+#: .\main\templates\main\dashboard.html:24
+msgid "Завершение"
+msgstr ""
+
+#: .\main\templates\main\dashboard.html:28
+msgid "Загрузка документов"
+msgstr ""
+
+#: .\main\templates\main\dashboard.html:31
+msgid "Выберите файл"
+msgstr ""
+
+#: .\main\templates\main\dashboard.html:33
+msgid "Загрузить"
+msgstr ""
+
+#: .\main\templates\main\dashboard.html:36
+msgid "Чат с менеджером"
+msgstr ""
+
+#: .\main\templates\main\dashboard.html:41
+msgid "Введите сообщение"
+msgstr ""
+
+#: .\main\templates\main\faq.html:5
+msgid "Часто задаваемые вопросы – NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\faq.html:9
+msgid ""
+"Ответы на часто задаваемые вопросы о наших услугах по ремонту и "
+"строительству."
+msgstr ""
+
+#: .\main\templates\main\faq.html:13
+msgid "FAQ, вопросы, ремонт, строительство, NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\faq.html:18
+msgid "Часто задаваемые вопросы"
+msgstr ""
+
+#: .\main\templates\main\faq.html:26
+msgid "Вопросы пока не добавлены."
+msgstr ""
+
+#: .\main\templates\main\home.html:4 .\main\templates\main\home.html:25
+#: .\main\templates\main\home.html:46 .\templates\base.html:11
+msgid "NovaHaus – Ваш надёжный партнёр по ремонту"
+msgstr ""
+
+#: .\main\templates\main\home.html:5 .\main\templates\main\home.html:26
+msgid ""
+"Профессиональный ремонт квартир, офисов и фасадов в Кёльне и Гамбурге с "
+"использованием экологичных материалов."
+msgstr ""
+
+#: .\main\templates\main\home.html:6
+msgid ""
+"ремонт, Кёльн, Гамбург, экологичность, NovaHaus, ремонт квартир, ремонт "
+"офисов, эко-материалы, виртуальный тур"
+msgstr ""
+
+#: .\main\templates\main\home.html:12 .\templates\includes\header.html:13
+msgid "Главная"
+msgstr ""
+
+#: .\main\templates\main\home.html:40
+msgid "Модная квартира"
+msgstr ""
+
+#: .\main\templates\main\home.html:42
+msgid "Эко-фасад"
+msgstr ""
+
+#: .\main\templates\main\home.html:47
+msgid "Качество, своевременность, экологичность – от идеи до уборки"
+msgstr ""
+
+#: .\main\templates\main\home.html:49
+msgid "Рассчитать стоимость"
+msgstr ""
+
+#: .\main\templates\main\home.html:50 .\main\templates\main\home.html:166
+msgid "Наши проекты"
+msgstr ""
+
+#: .\main\templates\main\home.html:65
+#, python-format
+msgid "10%% скидка для новых клиентов!"
+msgstr ""
+
+#: .\main\templates\main\home.html:66
+msgid "Только до конца месяца! Закажите сейчас и сэкономьте."
+msgstr ""
+
+#: .\main\templates\main\home.html:67
+msgid "Заказать сейчас"
+msgstr ""
+
+#: .\main\templates\main\home.html:74 .\main\templates\main\services.html:28
+msgid "Наши услуги"
+msgstr ""
+
+#: .\main\templates\main\home.html:81
+msgid "Заглушка"
+msgstr ""
+
+#: .\main\templates\main\home.html:85 .\main\templates\main\home.html:231
+#: .\main\templates\main\partner.html:20
+#: .\main\templates\main\register_partner.html:29
+msgid "Узнать больше"
+msgstr ""
+
+#: .\main\templates\main\home.html:88
+msgid "Услуги пока не добавлены."
+msgstr ""
+
+#: .\main\templates\main\home.html:123
+msgid "Почему выбирают нас"
+msgstr ""
+
+#: .\main\templates\main\home.html:126 .\main\templates\main\home.html:127
+msgid "Высокое качество"
+msgstr ""
+
+#: .\main\templates\main\home.html:128
+msgid "Сертифицировано ISO и LEED"
+msgstr ""
+
+#: .\main\templates\main\home.html:131 .\main\templates\main\home.html:132
+msgid "Своевременная сдача"
+msgstr ""
+
+#: .\main\templates\main\home.html:133
+msgid "Мы завершаем проекты по графику"
+msgstr ""
+
+#: .\main\templates\main\home.html:136 .\main\templates\main\home.html:137
+msgid "Экологичность"
+msgstr ""
+
+#: .\main\templates\main\home.html:138
+msgid "Экологичные материалы"
+msgstr ""
+
+#: .\main\templates\main\home.html:141 .\main\templates\main\home.html:142
+msgid "Прозрачное ценообразование"
+msgstr ""
+
+#: .\main\templates\main\home.html:143
+msgid "Чёткие и честные сметы"
+msgstr ""
+
+#: .\main\templates\main\home.html:149
+msgid "Завершённых проектов"
+msgstr ""
+
+#: .\main\templates\main\home.html:153
+msgid "Удовлетворённость клиентов"
+msgstr ""
+
+#: .\main\templates\main\home.html:157
+msgid "Лет опыта"
+msgstr ""
+
+#: .\main\templates\main\home.html:172 .\main\templates\main\home.html:174
+msgid "До"
+msgstr ""
+
+#: .\main\templates\main\home.html:177 .\main\templates\main\home.html:179
+msgid "После"
+msgstr ""
+
+#: .\main\templates\main\home.html:183 .\main\templates\main\home.html:184
+msgid "Посмотреть 360° тур"
+msgstr ""
+
+#: .\main\templates\main\home.html:188
+msgid "Проекты скоро появятся!"
+msgstr ""
+
+#: .\main\templates\main\home.html:192
+msgid "Посмотреть все проекты"
+msgstr ""
+
+#: .\main\templates\main\home.html:203
+msgid "Виртуальный тур по проекту"
+msgstr ""
+
+#: .\main\templates\main\home.html:224
+msgid "Экологичные решения"
+msgstr ""
+
+#: .\main\templates\main\home.html:225
+msgid ""
+"Мы используем материалы с сертификацией LEED, чтобы создавать устойчивые "
+"пространства для вашего дома и планеты."
+msgstr ""
+
+#: .\main\templates\main\home.html:227
+msgid "Экология"
+msgstr ""
+
+#: .\main\templates\main\home.html:228
+msgid "Энергоэффективность"
+msgstr ""
+
+#: .\main\templates\main\home.html:229
+msgid "Переработка"
+msgstr ""
+
+#: .\main\templates\main\home.html:238
+msgid "Мы знаем ваш город"
+msgstr ""
+
+#: .\main\templates\main\home.html:241
+msgid "Кёльн – Эренфельд и не только"
+msgstr ""
+
+#: .\main\templates\main\home.html:242
+msgid ""
+"От модных лофтов в Эренфельде до классических квартир в центре — мы приносим "
+"качество в каждый уголок Кёльна."
+msgstr ""
+
+#: .\main\templates\main\home.html:243
+msgid "Посмотреть проекты в Кёльне"
+msgstr ""
+
+#: .\main\templates\main\home.html:246
+msgid "Гамбург – Санкт-Паули и не только"
+msgstr ""
+
+#: .\main\templates\main\home.html:247
+msgid ""
+"Современные офисы в Санкт-Паули или склады в порту — мы преображаем "
+"пространства Гамбурга с точностью."
+msgstr ""
+
+#: .\main\templates\main\home.html:248
+msgid "Посмотреть проекты в Гамбурге"
+msgstr ""
+
+#: .\main\templates\main\home.html:257
+msgid "Связаться с нами"
+msgstr ""
+
+#: .\main\templates\main\home.html:261 .\main\templates\main\home.html:262
+#: .\main\templates\main\reviews.html:39
+msgid "Имя"
+msgstr ""
+
+#: .\main\templates\main\home.html:282 .\main\templates\main\home.html:283
+msgid "Задать вопрос"
+msgstr ""
+
+#: .\main\templates\main\home.html:285
+msgid "Чат"
+msgstr ""
+
+#: .\main\templates\main\offline.html:7
+msgid "Offline"
+msgstr ""
+
+#: .\main\templates\main\offline.html:17
+msgid "Keine Internetverbindung"
+msgstr ""
+
+#: .\main\templates\main\offline.html:19
+msgid ""
+"Sie sind offline. Bitte prüfen Sie Ihre Internetverbindung und versuchen Sie "
+"es erneut."
+msgstr ""
+
+#: .\main\templates\main\offline.html:23
+msgid "Seite neu laden"
+msgstr ""
+
+#: .\main\templates\main\partner-benefits.html:3
+msgid "Unsere Vorteile für Partner"
+msgstr ""
+
+#: .\main\templates\main\partner-benefits.html:6
+msgid "Bonus"
+msgstr ""
+
+#: .\main\templates\main\partner-benefits.html:7
+msgid "Attraktive Boni und Provisionen"
+msgstr ""
+
+#: .\main\templates\main\partner-benefits.html:10
+msgid "Support"
+msgstr ""
+
+#: .\main\templates\main\partner-benefits.html:11
+msgid "Umfassender technischer Support"
+msgstr ""
+
+#: .\main\templates\main\partner-benefits.html:14
+msgid "Öko"
+msgstr ""
+
+#: .\main\templates\main\partner-benefits.html:15
+msgid "Nachhaltige und ökologische Lösungen"
+msgstr ""
+
+#: .\main\templates\main\partner-benefits.html:18
+msgid "Wachstum"
+msgstr ""
+
+#: .\main\templates\main\partner-benefits.html:19
+msgid "Wachstum und gemeinsame Erfolge"
+msgstr ""
+
+#: .\main\templates\main\partner.html:4
+#: .\main\templates\main\register_partner.html:5
+msgid "Партнёрская программа | NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\partner.html:5
+#: .\main\templates\main\register_partner.html:9
+#, python-format
+msgid ""
+"Станьте партнёром NovaHaus и получайте до 15%% бонусов за рекомендации "
+"клиентов в Кёльне и Гамбурге"
+msgstr ""
+
+#: .\main\templates\main\partner.html:16
+msgid "Станьте эксклюзивным партнёром NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\partner.html:17
+#, python-format
+msgid ""
+"Зарабатывайте до 15%% с каждого проекта, рекомендуя премиальные услуги "
+"ремонта в Кёльне и Гамбурге"
+msgstr ""
+
+#: .\main\templates\main\partner.html:19
+#: .\main\templates\main\register_partner.html:28
+msgid "Присоединиться сейчас"
+msgstr ""
+
+#: .\main\templates\main\partner.html:26
+#: .\main\templates\main\register_partner.html:34
+msgid "Максимальный бонус"
+msgstr ""
+
+#: .\main\templates\main\partner.html:30
+#: .\main\templates\main\register_partner.html:38
+msgid "Выплачено партнёрам"
+msgstr ""
+
+#: .\main\templates\main\partner.html:34
+#: .\main\templates\main\register_partner.html:42
+msgid "Быстрые выплаты"
+msgstr ""
+
+#: .\main\templates\main\partner.html:39
+#: .\main\templates\main\register_partner.html:47
+msgid "Партнёрская программа NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\partner.html:45
+msgid "Преимущества партнёрства"
+msgstr ""
+
+#: .\main\templates\main\partner.html:53
+msgid "Как это работает"
+msgstr ""
+
+#: .\main\templates\main\partner.html:57 .\main\templates\main\register.html:18
+msgid "Регистрация"
+msgstr ""
+
+#: .\main\templates\main\partner.html:58
+msgid "Заполните форму и получите реферальный код"
+msgstr ""
+
+#: .\main\templates\main\partner.html:62
+msgid "Рекомендация"
+msgstr ""
+
+#: .\main\templates\main\partner.html:63
+msgid "Делитесь кодом с клиентами и партнёрами"
+msgstr ""
+
+#: .\main\templates\main\partner.html:67
+msgid "Завершение проекта"
+msgstr ""
+
+#: .\main\templates\main\partner.html:68
+msgid "Клиент оплачивает наши услуги"
+msgstr ""
+
+#: .\main\templates\main\partner.html:72
+msgid "Получение бонуса"
+msgstr ""
+
+#: .\main\templates\main\partner.html:73
+msgid "Вы получаете вознаграждение в течение 48 часов"
+msgstr ""
+
+#: .\main\templates\main\partner.html:80
+#: .\main\templates\main\register_partner.html:107
+msgid "Отзывы наших партнёров"
+msgstr ""
+
+#: .\main\templates\main\partner.html:83
+#: .\main\templates\main\register_partner.html:110
+msgid ""
+"Сотрудничество с NovaHaus значительно увеличило мой доход как риелтора. "
+"Клиенты довольны качеством ремонта, а я получаю стабильные бонусы. Особенно "
+"ценю их экологичный подход!"
+msgstr ""
+
+#: .\main\templates\main\partner.html:88
+#: .\main\templates\main\register_partner.html:115
+msgid "Риелтор, Кёльн"
+msgstr ""
+
+#: .\main\templates\main\partner.html:93
+#: .\main\templates\main\register_partner.html:120
+#, python-format
+msgid ""
+"Как дизайнер интерьеров, я долго искала надёжную компанию для реализации "
+"своих проектов. NovaHaus превзошли все ожидания! Их команда профессионалов, "
+"а партнёрская программа приносит до 15%% с каждого проекта."
+msgstr ""
+
+#: .\main\templates\main\partner.html:98
+#: .\main\templates\main\register_partner.html:125
+msgid "Дизайнер интерьеров, Гамбург"
+msgstr ""
+
+#: .\main\templates\main\partner.html:109
+msgid "Стать партнёром"
+msgstr ""
+
+#: .\main\templates\main\partner.html:113
+msgid "Имя и фамилия"
+msgstr ""
+
+#: .\main\templates\main\partner.html:117 .\profiles\admin.py:15
+msgid "Email"
+msgstr ""
+
+#: .\main\templates\main\partner.html:125
+msgid "Компания (если есть)"
+msgstr ""
+
+#: .\main\templates\main\partner.html:131
+msgid "Выберите тип"
+msgstr ""
+
+#: .\main\templates\main\partner.html:142
+msgid "Выберите город"
+msgstr ""
+
+#: .\main\templates\main\partner.html:151
+msgid "Я согласен с "
+msgstr ""
+
+#: .\main\templates\main\partner.html:151
+msgid "условиями партнёрской программы"
+msgstr ""
+
+#: .\main\templates\main\partner.html:154
+msgid "Отправить заявку"
+msgstr ""
+
+#: .\main\templates\main\partner.html:160
+#: .\main\templates\main\register_partner.html:158
+msgid "Частые вопросы"
+msgstr ""
+
+#: .\main\templates\main\partner.html:162
+#: .\main\templates\main\register_partner.html:160
+msgid "Как быстро я получу реферальный код?"
+msgstr ""
+
+#: .\main\templates\main\partner.html:163
+#: .\main\templates\main\register_partner.html:161
+msgid ""
+"Код генерируется сразу после регистрации и приходит на вашу почту в течение "
+"5 минут."
+msgstr ""
+
+#: .\main\templates\main\partner.html:166
+#: .\main\templates\main\register_partner.html:164
+msgid "Когда я получу вознаграждение?"
+msgstr ""
+
+#: .\main\templates\main\partner.html:167
+#: .\main\templates\main\register_partner.html:165
+msgid "В течение 48 часов после полной оплаты проекта клиентом."
+msgstr ""
+
+#: .\main\templates\main\partner.html:170
+#: .\main\templates\main\register_partner.html:168
+msgid "Могу ли я стать партнёром из другого города?"
+msgstr ""
+
+#: .\main\templates\main\partner.html:171
+#: .\main\templates\main\register_partner.html:169
+msgid "Да, но бонусы выплачиваются только за проекты в Кёльне и Гамбурге."
+msgstr ""
+
+#: .\main\templates\main\partner.html:176
+#: .\main\templates\main\register_partner.html:173
+msgid "Контакты для партнёров"
+msgstr ""
+
+#: .\main\templates\main\partner.html:177
+#: .\main\templates\main\register_partner.html:174
+msgid "Email: "
+msgstr ""
+
+#: .\main\templates\main\partner.html:178
+#: .\main\templates\main\register_partner.html:175
+msgid "Телефон: "
+msgstr ""
+
+#: .\main\templates\main\partner.html:179
+#: .\main\templates\main\register_partner.html:176
+msgid "Часы работы: Пн-Пт, 9:00-18:00"
+msgstr ""
+
+#: .\main\templates\main\partner_success.html:5
+msgid "Регистрация партнера завершена – NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\partner_success.html:9
+msgid "Спасибо за регистрацию в качестве партнера NovaHaus."
+msgstr ""
+
+#: .\main\templates\main\partner_success.html:13
+msgid "партнер, регистрация, NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\partner_success.html:18
+msgid "Регистрация успешно завершена!"
+msgstr ""
+
+#: .\main\templates\main\partner_success.html:19
+msgid "Спасибо за регистрацию в качестве партнера. Ваш реферальный код:"
+msgstr ""
+
+#: .\main\templates\main\partner_success.html:20
+msgid "Вернуться на главную"
+msgstr ""
+
+#: .\main\templates\main\privacy.html:4 .\main\templates\main\privacy.html:10
+#: .\templates\includes\footer.html:15
+msgid "Privacy Policy"
+msgstr ""
+
+#: .\main\templates\main\privacy.html:5 .\main\templates\main\privacy.html:11
+msgid ""
+"At NovaHaus, we are committed to protecting your personal information and "
+"ensuring transparency in how we collect, use, and store your data."
+msgstr ""
+
+#: .\main\templates\main\privacy.html:6
+msgid "privacy policy, NovaHaus, data protection"
+msgstr ""
+
+#: .\main\templates\main\privacy.html:13
+msgid "1. Information We Collect"
+msgstr ""
+
+#: .\main\templates\main\privacy.html:14
+msgid ""
+"We may collect personal information such as your name, email address, phone "
+"number, and project details when you contact us or use our services."
+msgstr ""
+
+#: .\main\templates\main\privacy.html:16
+msgid "2. How We Use Your Information"
+msgstr ""
+
+#: .\main\templates\main\privacy.html:17
+msgid ""
+"Your information is used to provide and improve our services, respond to "
+"inquiries, and communicate project updates. We do not share your data with "
+"third parties except as required by law."
+msgstr ""
+
+#: .\main\templates\main\privacy.html:19
+msgid "3. Data Security"
+msgstr ""
+
+#: .\main\templates\main\privacy.html:20
+msgid ""
+"We implement industry-standard security measures to protect your data from "
+"unauthorized access or disclosure."
+msgstr ""
+
+#: .\main\templates\main\privacy.html:22
+msgid "4. Your Rights"
+msgstr ""
+
+#: .\main\templates\main\privacy.html:23
+msgid ""
+"You have the right to access, correct, or delete your personal data. Contact "
+"us to exercise these rights."
+msgstr ""
+
+#: .\main\templates\main\privacy.html:25
+msgid "5. Contact Us"
+msgstr ""
+
+#: .\main\templates\main\privacy.html:26
+msgid "For questions about this Privacy Policy, please reach out to us."
+msgstr ""
+
+#: .\main\templates\main\privacy.html:27 .\templates\includes\footer.html:19
+msgid "Contact Us"
+msgstr ""
+
+#: .\main\templates\main\register.html:5
+msgid "Регистрация – NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\register.html:9
+msgid ""
+"Зарегистрируйтесь, чтобы получить доступ к личному кабинету и услугам "
+"NovaHaus."
+msgstr ""
+
+#: .\main\templates\main\register.html:13
+msgid "регистрация, личный кабинет, NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\register.html:22
+#: .\main\templates\main\register_partner.html:153
+msgid "Зарегистрироваться"
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:13
+msgid "партнер, регистрация, NovaHaus, бонусы, ремонт, Кёльн, Гамбург"
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:25
+msgid "Станьте партнёром NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:26
+msgid ""
+"Рекомендуйте наши профессиональные услуги по ремонту в Кёльне и Гамбурге и "
+"зарабатывайте бонусы за каждого привлечённого клиента."
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:53
+msgid "Почему стоит стать партнёром?"
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:56
+#: .\main\templates\main\register_partner.html:57
+#: .\templates\includes\partner_benefits.html:2
+#: .\templates\includes\partner_benefits.html:3
+msgid "Щедрые бонусы"
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:58
+#: .\templates\includes\partner_benefits.html:4
+msgid ""
+"Получайте вознаграждение за каждого клиента, который воспользуется нашими "
+"услугами по вашей рекомендации."
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:61
+#: .\main\templates\main\register_partner.html:62
+#: .\templates\includes\partner_benefits.html:7
+#: .\templates\includes\partner_benefits.html:8
+msgid "Полная поддержка"
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:63
+#: .\templates\includes\partner_benefits.html:9
+msgid "Наша команда поможет вам на каждом этапе сотрудничества."
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:66
+#: .\main\templates\main\register_partner.html:67
+#: .\templates\includes\partner_benefits.html:12
+#: .\templates\includes\partner_benefits.html:13
+msgid "Эко-ориентированность"
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:68
+#: .\templates\includes\partner_benefits.html:14
+msgid ""
+"Продвигайте экологичные решения вместе с нами и привлекайте осознанных "
+"клиентов."
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:71
+#: .\main\templates\main\register_partner.html:72
+#: .\templates\includes\partner_benefits.html:17
+#: .\templates\includes\partner_benefits.html:18
+msgid "Развитие бизнеса"
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:73
+#: .\templates\includes\partner_benefits.html:19
+msgid "Расширяйте свою сеть и увеличивайте доход с NovaHaus."
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:80
+msgid "Как это работает?"
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:84
+msgid "Зарегистрируйтесь"
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:85
+msgid "Зарегистрируйтесь в нашей программе через форму ниже."
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:89
+msgid "Получите код"
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:90
+msgid "Получите уникальный реферальный код после успешной регистрации."
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:94
+msgid "Рекомендуйте"
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:95
+msgid "Делитесь кодом с клиентами, друзьями или партнёрами."
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:99
+msgid "Зарабатывайте"
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:100
+msgid "Зарабатывайте бонусы за каждого привлечённого клиента."
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:136
+msgid "Готовы начать?"
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:137
+msgid "Присоединяйтесь к нам и станьте частью успешной команды NovaHaus!"
+msgstr ""
+
+#: .\main\templates\main\register_partner.html:140
+msgid "Пожалуйста, исправьте ошибки в форме:"
+msgstr ""
+
+#: .\main\templates\main\reviews.html:5
+msgid "Отзывы – NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\reviews.html:9
+msgid "Читайте отзывы наших клиентов о качестве наших услуг."
+msgstr ""
+
+#: .\main\templates\main\reviews.html:13
+msgid "отзывы, клиенты, NovaHaus, ремонт, утепление"
+msgstr ""
+
+#: .\main\templates\main\reviews.html:18
+msgid "Отзывы клиентов"
+msgstr ""
+
+#: .\main\templates\main\reviews.html:21
+msgid ""
+"Отличная работа, спасибо команде NovaHaus! Все сделали быстро и качественно."
+msgstr ""
+
+#: .\main\templates\main\reviews.html:22
+msgid "Иван Иванов"
+msgstr ""
+
+#: .\main\templates\main\reviews.html:25
+msgid ""
+"Очень доволен утеплением дома. Теперь зимой тепло, а счета за отопление "
+"снизились."
+msgstr ""
+
+#: .\main\templates\main\reviews.html:26
+msgid "Мария Петрова"
+msgstr ""
+
+#: .\main\templates\main\reviews.html:29
+msgid "Профессиональный подход и внимание к деталям. Рекомендую!"
+msgstr ""
+
+#: .\main\templates\main\reviews.html:30
+msgid "Алексей Смирнов"
+msgstr ""
+
+#: .\main\templates\main\reviews.html:35
+msgid "Оставьте свой отзыв"
+msgstr ""
+
+#: .\main\templates\main\services.html:5
+msgid "Услуги – NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\services.html:9
+msgid ""
+"Профессиональные услуги по ремонту, фасадным работам, электромонтажу и "
+"демонтажу в Кёльне и Гамбурге."
+msgstr ""
+
+#: .\main\templates\main\services.html:13
+msgid ""
+"ремонт, фасадные работы, электромонтаж, демонтаж, Кёльн, Гамбург, NovaHaus"
+msgstr ""
+
+#: .\main\templates\main\services.html:32
+msgid "Рекомендации ИИ от Grok 3"
+msgstr ""
+
+#: .\main\templates\main\services.html:34
+msgid ""
+"Не уверены, какие технологии или материалы выбрать для вашего проекта? Наш "
+"партнер, Grok 3 от xAI, поможет найти оптимальные решения – от "
+"энергоэффективных фасадов до современных систем освещения."
+msgstr ""
+
+#: .\main\templates\main\services.html:37
+msgid "Получить рекомендации"
+msgstr ""
+
+#: .\main\templates\main\services.html:44
+#: .\main\templates\main\services.html:154
+msgid "Прайс-лист"
+msgstr ""
+
+#: .\main\templates\main\services.html:47
+msgid "Калькулятор"
+msgstr ""
+
+#: .\main\templates\main\services.html:58
+msgid ""
+"Мы преображаем ваше пространство с заботой о каждой детали. Качественный "
+"ремонт для комфортной жизни и работы."
+msgstr ""
+
+#: .\main\templates\main\services.html:61
+#: .\main\templates\main\services.html:108
+msgid "Квартиры"
+msgstr ""
+
+#: .\main\templates\main\services.html:62
+#: .\main\templates\main\services.html:109
+msgid "Дома"
+msgstr ""
+
+#: .\main\templates\main\services.html:63
+#: .\main\templates\main\services.html:110
+msgid "Офисы"
+msgstr ""
+
+#: .\main\templates\main\services.html:64
+#: .\main\templates\main\services.html:111
+msgid "Склады"
+msgstr ""
+
+#: .\main\templates\main\services.html:66
+#: .\main\templates\main\services.html:82
+#: .\main\templates\main\services.html:96
+#: .\main\templates\main\services.html:113
+#: .\main\templates\main\services.html:127
+#: .\main\templates\main\services.html:144
+msgid "Связаться"
+msgstr ""
+
+#: .\main\templates\main\services.html:75
+msgid ""
+"Создаем долговечные и эстетичные фасады, повышая энергоэффективность и "
+"внешний вид зданий."
+msgstr ""
+
+#: .\main\templates\main\services.html:79
+msgid "Утепление"
+msgstr ""
+
+#: .\main\templates\main\services.html:80
+msgid "Монтаж"
+msgstr ""
+
+#: .\main\templates\main\services.html:88
+msgid "Ремонт ванных комнат"
+msgstr ""
+
+#: .\main\templates\main\services.html:91
+msgid ""
+"Современные решения для ванных комнат – от укладки плитки до полной "
+"реконструкции."
+msgstr ""
+
+#: .\main\templates\main\services.html:94
+msgid "Монтаж и поклейка плитки"
+msgstr ""
+
+#: .\main\templates\main\services.html:102
+msgid "Электромонтажные работы"
+msgstr ""
+
+#: .\main\templates\main\services.html:105
+msgid ""
+"Безопасные и профессиональные электромонтажные услуги для любых объектов."
+msgstr ""
+
+#: .\main\templates\main\services.html:119
+#: .\main\templates\main\services.html:158
+msgid "Демонтажные работы"
+msgstr ""
+
+#: .\main\templates\main\services.html:122
+msgid ""
+"Выполняем демонтаж любой сложности быстро, безопасно и с учетом всех "
+"требований."
+msgstr ""
+
+#: .\main\templates\main\services.html:125
+msgid "Любой сложности"
+msgstr ""
+
+#: .\main\templates\main\services.html:133
+#: .\main\templates\main\services.html:196
+msgid "Материалы и уборка"
+msgstr ""
+
+#: .\main\templates\main\services.html:136
+msgid ""
+"Организуем закупку и доставку материалов, а также уборку после ремонта для "
+"вашего удобства."
+msgstr ""
+
+#: .\main\templates\main\services.html:140
+msgid "Доставка"
+msgstr ""
+
+#: .\main\templates\main\services.html:141
+msgid "Подъем в квартиру"
+msgstr ""
+
+#: .\main\templates\main\services.html:142
+#: .\main\templates\main\services.html:200
+msgid "Уборка после ремонта"
+msgstr ""
+
+#: .\main\templates\main\services.html:160
+msgid "Демонтаж стен и перегородок"
+msgstr ""
+
+#: .\main\templates\main\services.html:161
+msgid "Демонтаж напольных покрытий"
+msgstr ""
+
+#: .\main\templates\main\services.html:162
+msgid "Демонтаж потолков"
+msgstr ""
+
+#: .\main\templates\main\services.html:163
+msgid "Демонтаж сантехники"
+msgstr ""
+
+#: .\main\templates\main\services.html:164
+msgid "Демонтаж электропроводки"
+msgstr ""
+
+#: .\main\templates\main\services.html:170
+msgid "Монтажные работы"
+msgstr ""
+
+#: .\main\templates\main\services.html:172
+msgid "Монтаж гипсокартонных стен"
+msgstr ""
+
+#: .\main\templates\main\services.html:173
+msgid "Укладка напольных покрытий"
+msgstr ""
+
+#: .\main\templates\main\services.html:174
+msgid "Монтаж натяжных потолков"
+msgstr ""
+
+#: .\main\templates\main\services.html:175
+msgid "Установка сантехники"
+msgstr ""
+
+#: .\main\templates\main\services.html:176
+msgid "Монтаж электропроводки"
+msgstr ""
+
+#: .\main\templates\main\services.html:182
+msgid "Ремонтные работы"
+msgstr ""
+
+#: .\main\templates\main\services.html:184
+msgid "Штукатурка стен"
+msgstr ""
+
+#: .\main\templates\main\services.html:185
+msgid "Шпаклевка и покраска стен"
+msgstr ""
+
+#: .\main\templates\main\services.html:186
+msgid "Укладка плитки"
+msgstr ""
+
+#: .\main\templates\main\services.html:187
+msgid "Утепление стен"
+msgstr ""
+
+#: .\main\templates\main\services.html:188
+msgid "Утепление фасада"
+msgstr ""
+
+#: .\main\templates\main\services.html:189
+msgid "Установка дверей"
+msgstr ""
+
+#: .\main\templates\main\services.html:190
+msgid "Установка окон"
+msgstr ""
+
+#: .\main\templates\main\services.html:198
+msgid "Закупка и доставка материалов"
+msgstr ""
+
+#: .\main\templates\main\services.html:198
+msgid "По договоренности"
+msgstr ""
+
+#: .\main\templates\main\services.html:199
+msgid "Подъем материалов в квартиру"
+msgstr ""
+
+#: .\profiles\admin.py:21
+msgid "Has Avatar"
+msgstr ""
+
+#: .\profiles\forms.py:18
+msgid "Tell something about yourself..."
+msgstr ""
+
+#: .\profiles\forms.py:38
+msgid "Image file too large. Please keep it under 2MB."
+msgstr ""
+
+#: .\profiles\forms.py:42
+msgid "Uploaded file is not a valid image."
+msgstr ""
+
+#: .\profiles\models.py:14
+msgid "User"
+msgstr ""
+
+#: .\profiles\models.py:17 .\profiles\templates\profiles\edit.html:27
+msgid "Biography"
+msgstr ""
+
+#: .\profiles\models.py:18
+msgid "Tell something about yourself"
+msgstr ""
+
+#: .\profiles\models.py:25 .\profiles\templates\profiles\edit.html:40
+msgid "Profile Picture"
+msgstr ""
+
+#: .\profiles\models.py:26
+msgid "Upload your profile picture"
+msgstr ""
+
+#: .\profiles\models.py:30 .\profiles\templates\profiles\detail.html:4
+#: .\profiles\templates\profiles\edit.html:76
+msgid "Profile"
+msgstr ""
+
+#: .\profiles\models.py:31 .\profiles\templates\profiles\detail.html:55
+msgid "Profiles"
+msgstr ""
+
+#: .\profiles\templates\profiles\detail.html:6
+msgid "User profile for"
+msgstr ""
+
+#: .\profiles\templates\profiles\detail.html:16
+msgid "Profile picture of"
+msgstr ""
+
+#: .\profiles\templates\profiles\detail.html:25
+msgid "About"
+msgstr ""
+
+#: .\profiles\templates\profiles\detail.html:30
+msgid "This user hasn't added a bio yet."
+msgstr ""
+
+#: .\profiles\templates\profiles\detail.html:35
+msgid "Member since"
+msgstr ""
+
+#: .\profiles\templates\profiles\detail.html:41
+#: .\profiles\templates\profiles\edit.html:4
+msgid "Edit Profile"
+msgstr ""
+
+#: .\profiles\templates\profiles\edit.html:6
+msgid "Edit your user profile"
+msgstr ""
+
+#: .\profiles\templates\profiles\edit.html:12
+msgid "Edit Your Profile"
+msgstr ""
+
+#: .\profiles\templates\profiles\edit.html:43
+msgid "Current profile picture"
+msgstr ""
+
+#: .\profiles\templates\profiles\edit.html:59
+msgid "Save Changes"
+msgstr ""
+
+#: .\profiles\templates\profiles\edit.html:62
+msgid "Cancel"
+msgstr ""
+
+#: .\profiles\templates\profiles\edit.html:82
+msgid "Edit"
+msgstr ""
+
+#: .\profiles\views.py:58
+msgid "Your profile has been updated successfully."
+msgstr ""
+
+#: .\templates\base.html:12
+msgid ""
+"Профессиональный ремонт в Кёльне и Гамбурге с использованием экологичных "
+"материалов."
+msgstr ""
+
+#: .\templates\base.html:13
+msgid ""
+"ремонт, Кёльн, Гамбург, экологичность, NovaHaus, ремонт квартир, ремонт "
+"офисов, эко-материалы"
+msgstr ""
+
+#: .\templates\base.html:18
+msgid "NovaHaus – Эксперты по ремонту"
+msgstr ""
+
+#: .\templates\base.html:19
+msgid ""
+"Преображаем пространства с качеством и экологичностью в Кёльне и Гамбурге."
+msgstr ""
+
+#: .\templates\base.html:88
+msgid "Ремонтная компания в Кёльне и Гамбурге. Квартиры, офисы, фасады."
+msgstr ""
+
+#: .\templates\base.html:143
+msgid "Переключить тему"
+msgstr ""
+
+#: .\templates\base.html:145
+msgid "Тёмная тема"
+msgstr ""
+
+#: .\templates\base.html:148
+msgid "Чат-поддержка"
+msgstr ""
+
+#: .\templates\base.html:173
+msgid "Home"
+msgstr ""
+
+#: .\templates\includes\footer.html:5
+msgid "NovaHaus Logo"
+msgstr ""
+
+#: .\templates\includes\footer.html:6
+msgid ""
+"Transforming spaces in Cologne and Hamburg with quality and eco-friendliness."
+msgstr ""
+
+#: .\templates\includes\footer.html:9
+msgid "Quick Links"
+msgstr ""
+
+#: .\templates\includes\footer.html:11
+msgid "Services"
+msgstr ""
+
+#: .\templates\includes\footer.html:13
+msgid "Blog"
+msgstr ""
+
+#: .\templates\includes\footer.html:14
+msgid "Contact"
+msgstr ""
+
+#: .\templates\includes\footer.html:20
+msgid "Cologne: Musterstraße 123, 50667"
+msgstr ""
+
+#: .\templates\includes\footer.html:21
+msgid "Hamburg: Beispielweg 456, 20354"
+msgstr ""
+
+#: .\templates\includes\footer.html:22
+msgid "Phone: +49 155 100 718 48"
+msgstr ""
+
+#: .\templates\includes\footer.html:23
+msgid "Email: info@novahaus.de"
+msgstr ""
+
+#: .\templates\includes\footer.html:26
+msgid "Follow Us"
+msgstr ""
+
+#: .\templates\includes\footer.html:27
+msgid "Facebook"
+msgstr ""
+
+#: .\templates\includes\footer.html:28
+msgid "Instagram"
+msgstr ""
+
+#: .\templates\includes\footer.html:29
+msgid "LinkedIn"
+msgstr ""
+
+#: .\templates\includes\footer.html:32
+msgid "© 2025 NovaHaus. All rights reserved."
+msgstr ""
+
+#: .\templates\includes\header.html:10
+msgid "надежность, качество и сроки гарантируется"
+msgstr ""
+
+#: .\templates\includes\header.html:15
+msgid "Портфолио"
+msgstr ""
+
+#: .\templates\includes\header.html:16
+msgid "Блог"
+msgstr ""
+
+#: .\templates\includes\header.html:17
+msgid "Контакты"
+msgstr ""
+
+#: .\templates\includes\header.html:18
+msgid "Стать партнером"
+msgstr ""
+
+#: .\templates\includes\slider.html:4
+msgid "Современный ремонт квартир"
+msgstr ""
+
+#: .\templates\includes\slider.html:5
+msgid "Утепление фасадов"
+msgstr ""
