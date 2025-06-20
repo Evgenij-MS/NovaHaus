@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 {% load compress static i18n %}
 
@@ -22,31 +23,126 @@
 {% block content %}
 <div class="container">
     <h1>{% trans "Чат-бот NovaHaus" %}</h1>
+
+    <!-- Bereich für Fehlermeldungen -->
+    {% if messages %}
+        <div id="messageContainer" class="alert-container" role="alert" aria-live="assertive">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     <div class="chatbot-container">
-        <button class="chatbot-close" aria-label="{% trans 'Закрыть' %}">×</button>
-        <div class="chatbot-messages" aria-live="polite"></div>
-        <form class="chatbot-form" method="post" enctype="multipart/form-data">
+        <button class="chatbot-close" aria-label="{{ 'Чат закрыть'|trans }}" type="button">×</button>
+
+        <div class="chatbot-messages" aria-live="polite" aria-label="{{ 'Чат сообщения'|trans }}"></div>
+
+        <!-- Ladeanzeige -->
+        <div id="loadingIndicator" class="loading-indicator" style="display: none;" aria-live="polite">
+            <span>{% trans "Отправка сообщения..." %}</span>
+        </div>
+
+        <form class="chatbot-form" method="post" enctype="multipart/form-data" id="chatbotForm" novalidate>
             {% csrf_token %}
+
+            <!-- Fehlermeldungen für das Formular -->
+            <div id="formErrors" class="form-errors" role="alert" aria-live="assertive" style="display: none;"></div>
+
             <div class="form-group">
-                <label for="chatbot-message" class="sr-only">{% trans "Сообщение" %}</label>
-                <textarea id="chatbot-message" name="message" class="chatbot-input w-full p-2 border rounded-lg" placeholder="{% trans 'Введите ваше сообщение' %}" rows="2" required></textarea>
+                <label for="chatbot-message" class="form-label">{% trans "Ваше сообщение" %}</label>
+                <textarea
+                    id="chatbot-message"
+                    name="message"
+                    class="chatbot-input form-control"
+                    placeholder="{{ 'Введите ваше сообщение'|trans }}"
+                    rows="3"
+                    required
+                    aria-describedby="message-help"
+                    maxlength="1000"></textarea>
+                <small id="message-help" class="form-text">{% trans "Максимум 1000 символов" %}</small>
             </div>
+
             <div class="form-group">
-                <label for="chatbot-file" class="sr-only">{% trans "Файл" %}</label>
-                <input type="file" id="chatbot-file" name="file" accept=".jpg,.png,.pdf">
+                <label for="chatbot-file" class="form-label">{% trans "Прикрепить файл (необязательно)" %}</label>
+                <input
+                    type="file"
+                    id="chatbot-file"
+                    name="file"
+                    class="form-control-file"
+                    accept=".jpg,.jpeg,.png,.pdf"
+                    aria-describedby="file-help">
+                <small id="file-help" class="form-text">{% trans "Разрешенные форматы: JPG, PNG, PDF. Максимальный размер: 5MB" %}</small>
             </div>
+
             <div class="form-actions">
-                <button type="button" class="record-button" aria-label="{% trans 'Начать запись' %}">🎤</button>
-                <button type="submit" class="send-button bg-primary text-white p-2 rounded-full">{% trans "Отправить" %}</button>
-                <button type="button" class="attach-button" aria-label="{% trans 'Прикрепить файл' %}">📎</button>
+                <button
+                    type="button"
+                    class="btn btn-secondary record-button"
+                    aria-label="{{ 'Записать голосовое сообщение'|trans }}"
+                    title="{{ 'Записать голосовое сообщение'|trans }}">
+                    <span aria-hidden="true">🎤</span>
+                    <span class="sr-only">{% trans "Запись" %}</span>
+                </button>
+
+                <button
+                    type="submit"
+                    class="btn btn-primary send-button"
+                    aria-label="{{ 'Отправить сообщение'|trans }}">
+                    {% trans "Отправить" %}
+                </button>
+
+                <button
+                    type="button"
+                    class="btn btn-secondary attach-button"
+                    aria-label="{{ 'Выбрать файл для прикрепления'|trans }}"
+                    title="{{ 'Прикрепить файл'|trans }}"
+                    onclick="document.getElementById('chatbot-file').click();">
+                    <span aria-hidden="true">📎</span>
+                    <span class="sr-only">{% trans "Файл" %}</span>
+                </button>
             </div>
         </form>
-        <div class="recording-controls" style="display: none;">
-            <button type="button" class="stop-recording">{% trans "Остановить запись" %}</button>
-            <button type="button" class="play-recording">{% trans "Воспроизвести" %}</button>
+
+        <!-- Контроллы записи -->
+        <div class="recording-controls" style="display: none;" role="region" aria-label="{{ 'Контроллы записи'|trans }}">
+            <button type="button" class="btn btn-danger stop-recording">
+                <span aria-hidden="true">⏹</span>
+                {% trans "Остановить запись" %}
+            </button>
+            <button type="button" class="btn btn-info play-recording">
+                <span aria-hidden="true">▶</span>
+                {% trans "Воспроизвести" %}
+            </button>
+            <button type="button" class="btn btn-secondary cancel-recording">
+                <span aria-hidden="true">❌</span>
+                {% trans "Отменить" %}
+            </button>
         </div>
     </div>
 </div>
+
+<!-- Übersetzungen für JavaScript -->
+<script id="chatbot-translations" type="application/json">
+{
+    "csrfToken": "{{ csrf_token }}",
+    "translations": {
+        "messageRequired": "{{ 'Пожалуйста, введите сообщение.'|trans }}",
+        "messageTooLong": "{{ 'Сообщение не может быть длиннее 1000 символов.'|trans }}",
+        "fileTooLarge": "{{ 'Размер файла не должен превышать 5MB.'|trans }}",
+        "invalidFileType": "{{ 'Разрешены только файлы JPG, PNG и PDF.'|trans }}",
+        "connectionError": "{{ 'Ошибка соединения. Попробуйте еще раз.'|trans }}",
+        "sendError": "{{ 'Произошла ошибка при отправке сообщения.'|trans }}",
+        "sending": "{{ 'Отправка...'|trans }}",
+        "send": "{{ 'Отправить'|trans }}",
+        "microphoneError": "{{ 'Не удалось получить доступ к микрофону.'|trans }}",
+        "playbackError": "{{ 'Не удалось воспроизвести запись.'|trans }}",
+        "stopRecording": "{{ 'Остановить запись'|trans }}",
+        "startRecording": "{{ 'Записать голосовое сообщение'|trans }}",
+        "welcomeMessage": "{{ 'Добро пожаловать! Задайте свой вопрос...'|trans }}"
+    }
+}
+</script>
 {% endblock %}
 
 {% block extra_js %}

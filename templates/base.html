@@ -1,3 +1,4 @@
+
 {% load static i18n compress %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}">
@@ -118,6 +119,25 @@
         }
     }
     </script>
+
+    <!-- Chatbot Übersetzungen für JavaScript -->
+    <script>
+    window.chatbotTranslations = {
+        askQuestion: "{% trans 'Ask a question' %}",
+        openChat: "{% trans 'Open Chat' %}",
+        closeChat: "{% trans 'Close Chat' %}",
+        typing: "{% trans 'Typing...' %}",
+        error: "{% trans 'Error' %}",
+        connectionError: "{% trans 'Connection error' %}",
+        csrfNotFound: "{% trans 'CSRF token not found' %}",
+        messageSent: "{% trans 'Message sent!' %}",
+        failedToSend: "{% trans 'Failed to send message' %}",
+        you: "{% trans 'You' %}",
+        bot: "{% trans 'Bot' %}",
+        system: "{% trans 'System' %}",
+        couldNotGetResponse: "{% trans 'Could not get response' %}"
+    };
+    </script>
 </head>
 <body>
     {% block extra_context %}
@@ -145,11 +165,9 @@
         <span class="theme-toggle-text">{% trans "Тёмная тема" %}</span>
     </button>
 
-    <div id="chatbot" class="chatbot-container" aria-label="{% trans 'Чат-поддержка' %}">
-        <iframe src="{% url 'chatbot' %}" title="{% trans 'Чат-бот NovaHaus' %}"></iframe>
-    </div>
+    <!-- Chatbot Widget wird dynamisch über JavaScript geladen -->
 
-    <!-- JS -->
+    <!-- JS Scripts -->
     <script src="{% static 'js/main.js' %}" defer></script>
     <script src="{% static 'js/slider.js' %}" defer></script>
     <script src="{% static 'js/language.js' %}" defer></script>
@@ -158,8 +176,6 @@
     <script src="{% static 'js/pannellum-custom.js' %}" defer></script>
     <script src="{% static 'js/visualization.js' %}" defer></script>
     <script src="{% static 'js/calculator.js' %}" defer></script>
-
-
 
     <!-- Breadcrumb -->
     <script type="application/ld+json">

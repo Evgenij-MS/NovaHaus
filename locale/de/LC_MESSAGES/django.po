@@ -73,3 +73,77 @@ msgstr "Kostenlose Beratung"
 
 msgid "Kostenrechner"
 msgstr "Kostenrechner"
+
+# Chatbot Übersetzungen
+msgid "Ask a question"
+msgstr "Stellen Sie eine Frage"
+
+msgid "Open Chat"
+msgstr "Chat öffnen"
+
+msgid "Close Chat"
+msgstr "Chat schließen"
+
+msgid "Typing..."
+msgstr "Tippt..."
+
+msgid "Error"
+msgstr "Fehler"
+
+msgid "Connection error"
+msgstr "Verbindungsfehler"
+
+msgid "CSRF token not found"
+msgstr "CSRF-Token nicht gefunden"
+
+msgid "Message sent!"
+msgstr "Nachricht gesendet!"
+
+msgid "Failed to send message"
+msgstr "Nachricht senden fehlgeschlagen"
+
+msgid "You"
+msgstr "Sie"
+
+msgid "Bot"
+msgstr "Bot"
+
+msgid "System"
+msgstr "System"
+
+msgid "Could not get response"
+msgstr "Antwort konnte nicht abgerufen werden"
+
+msgid "Home"
+msgstr "Startseite"
+
+# Zusätzliche Übersetzungen aus base.html
+msgid "NovaHaus – Ваш надёжный партнёр по ремонту"
+msgstr "NovaHaus - Ihr zuverlässiger Renovierungspartner"
+
+msgid "Профессиональный ремонт в Кёльне и Гамбурге с использованием экологичных материалов."
+msgstr "Professionelle Renovierung in Köln und Hamburg mit umweltfreundlichen Materialien."
+
+msgid "ремонт, Кёльн, Гамбург, экологичность, NovaHaus, ремонт квартир, ремонт офисов, эко-материалы"
+msgstr "Renovierung, Köln, Hamburg, Umweltfreundlichkeit, NovaHaus, Wohnungsrenovierung, Bürorenovierung, Öko-Materialien"
+
+msgid "NovaHaus – Эксперты по ремонту"
+msgstr "NovaHaus - Renovierungsexperten"
+
+msgid "Преображаем пространства с качеством и экологичностью в Кёльне и Гамбурге."
+msgstr "Wir verwandeln Räume mit Qualität und Umweltfreundlichkeit in Köln und Hamburg."
+
+msgid "Ремонтная компания в Кёльне и Гамбурге. Квартиры, офисы, фасады."
+msgstr "Renovierungsunternehmen in Köln und Hamburg. Wohnungen, Büros, Fassaden."
+
+msgid "Кёльн"
+msgstr "Köln"
+
+msgid "Гамбург"
+msgstr "Hamburg"
+
+msgid "Переключить тему"
+msgstr "Design wechseln"
+
+msgid "Тёмная тема"
+msgstr "Dunkles Design"
