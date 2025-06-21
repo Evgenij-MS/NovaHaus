@@ -1,356 +1,275 @@
-{% extends 'base.html' %}
+
 {% load static i18n %}
 
-{% block title %}{% trans "NovaHaus - Renovierung in Köln und Hamburg" %}{% endblock %}
-
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/global.css' %}">
-<link rel="stylesheet" href="{% static 'css/styles.css' %}">
-<link rel="stylesheet" href="{% static 'css/slider.css' %}">
-<link rel="stylesheet" href="{% static 'css/cards.css' %}">
-<link rel="stylesheet" href="{% static 'css/buttons.css' %}">
-<link rel="stylesheet" href="{% static 'css/services.css' %}">
-{% endblock %}
-
-{% block content %}
-<main class="main-content">
-    <!-- Hero Section mit Video Background -->
-    <section class="hero-section">
-        <div class="hero-video-container">
-            <video autoplay muted loop playsinline class="hero-video">
-                <source src="{% static 'media/hero-video.mp4' %}" type="video/mp4">
-                {% trans "Ihr Browser unterstützt keine Videos" %}
-            </video>
-            <div class="hero-overlay"></div>
+<header class="header">
+    <div class="header-container">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="NovaHaus Logo" style="height: 150px; width: auto;">
         </div>
+        <div class="content">
+            <h1 class="page-title">NovaHaus</h1>
+            {% if LANGUAGE_CODE == 'de' %}
+                <p class="subtitle">Zuverlässigkeit, Qualität und Termine garantiert</p>
+            {% elif LANGUAGE_CODE == 'en' %}
+                <p class="subtitle">Reliability, quality and deadlines guaranteed</p>
+            {% elif LANGUAGE_CODE == 'ru' %}
+                <p class="subtitle">Надежность, качество и сроки гарантированы</p>
+            {% elif LANGUAGE_CODE == 'tr' %}
+                <p class="subtitle">Güvenilirlik, kalite ve süreler garanti</p>
+            {% else %}
+                <p class="subtitle">Zuverlässigkeit, Qualität und Termine garantiert</p>
+            {% endif %}
 
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">{% trans "Professionelle Renovierung" %}</h1>
-                <p class="hero-subtitle">{% trans "Zuverlässigkeit, Qualität und Termine garantiert" %}</p>
-                <p class="hero-description">
-                    {% trans "Von der Wohnungsrenovierung bis zur Fassadensanierung - wir sind Ihr vertrauensvoller Partner in Köln und Hamburg." %}
-                </p>
-            </div>
-
-            <div class="hero-buttons">
-                <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">
-                    <i class="fas fa-phone"></i>
-                    {% trans "Kostenlose Beratung" %}
-                </a>
-                <a href="{% url 'calculator' %}" class="btn btn-secondary btn-lg">
-                    <i class="fas fa-calculator"></i>
-                    {% trans "Kostenrechner" %}
-                </a>
-            </div>
-
-            <!-- Statistiken -->
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">500+</span>
-                    <span class="stat-label">{% trans "Projekte" %}</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">15</span>
-                    <span class="stat-label">{% trans "Jahre Erfahrung" %}</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">98%</span>
-                    <span class="stat-label">{% trans "Zufriedene Kunden" %}</span>
-                </div>
-            </div>
+            <nav class="desktop-nav">
+                <ul>
+                    {% if LANGUAGE_CODE == 'de' %}
+                        <li><a href="{% url 'home' %}" class="nav-link">Startseite</a></li>
+                        <li><a href="{% url 'services' %}" class="nav-link">Leistungen</a></li>
+                        <li><a href="{% url 'portfolio' %}" class="nav-link">Portfolio</a></li>
+                        <li><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>
+                        <li><a href="{% url 'contact' %}" class="nav-link">Kontakt</a></li>
+                        <li><a href="{% url 'register_partner' %}" class="nav-link partner-link">Partner werden</a></li>
+                    {% elif LANGUAGE_CODE == 'en' %}
+                        <li><a href="{% url 'home' %}" class="nav-link">Home</a></li>
+                        <li><a href="{% url 'services' %}" class="nav-link">Services</a></li>
+                        <li><a href="{% url 'portfolio' %}" class="nav-link">Portfolio</a></li>
+                        <li><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>
+                        <li><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+                        <li><a href="{% url 'register_partner' %}" class="nav-link partner-link">Become Partner</a></li>
+                    {% elif LANGUAGE_CODE == 'ru' %}
+                        <li><a href="{% url 'home' %}" class="nav-link">Главная</a></li>
+                        <li><a href="{% url 'services' %}" class="nav-link">Услуги</a></li>
+                        <li><a href="{% url 'portfolio' %}" class="nav-link">Портфолио</a></li>
+                        <li><a href="{% url 'blog' %}" class="nav-link">Блог</a></li>
+                        <li><a href="{% url 'contact' %}" class="nav-link">Контакты</a></li>
+                        <li><a href="{% url 'register_partner' %}" class="nav-link partner-link">Стать партнером</a></li>
+                    {% elif LANGUAGE_CODE == 'tr' %}
+                        <li><a href="{% url 'home' %}" class="nav-link">Ana Sayfa</a></li>
+                        <li><a href="{% url 'services' %}" class="nav-link">Hizmetler</a></li>
+                        <li><a href="{% url 'portfolio' %}" class="nav-link">Portföy</a></li>
+                        <li><a href="{% url 'blog' %}" class="nav-link">Blog</a></li>
+                        <li><a href="{% url 'contact' %}" class="nav-link">İletişim</a></li>
+                        <li><a href="{% url 'register_partner' %}" class="nav-link partner-link">Ortak Ol</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
         </div>
-    </section>
-
-    <!-- Services Preview Section -->
-    <section class="services-preview">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">{% trans "Unsere Leistungen" %}</h2>
-                <p class="section-subtitle">
-                    {% trans "Professionelle Renovierungsdienstleistungen für jeden Bedarf" %}
-                </p>
-            </div>
-
-            <div class="services-grid">
-                <!-- Wohnungsrenovierung -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="service-icon">
-                        <img src="{% static 'images/icons/house.png' %}" alt="{% trans 'Wohnungsrenovierung' %}">
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-title">{% trans "Wohnungsrenovierung" %}</h3>
-                        <p class="service-description">
-                            {% trans "Komplette Renovierung Ihrer Wohnung mit hochwertigen Materialien" %}
-                        </p>
-                        <ul class="service-features">
-                            <li>{% trans "Badezimmermodernisierung" %}</li>
-                            <li>{% trans "Küchenerneuerung" %}</li>
-                            <li>{% trans "Bodenverlegung" %}</li>
-                            <li>{% trans "Malerarbeiten" %}</li>
-                        </ul>
-                        <div class="service-price">
-                            {% trans "ab" %} €45/m²
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fassadensanierung -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="200">
-                    <div class="service-icon">
-                        <img src="{% static 'images/icons/facade.png' %}" alt="{% trans 'Fassadensanierung' %}">
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-title">{% trans "Fassadensanierung" %}</h3>
-                        <p class="service-description">
-                            {% trans "Professionelle Fassadenerneuerung und Wärmedämmung" %}
-                        </p>
-                        <ul class="service-features">
-                            <li>{% trans "Wärmedämmung" %}</li>
-                            <li>{% trans "Fassadenanstrich" %}</li>
-                            <li>{% trans "Rissreparatur" %}</li>
-                            <li>{% trans "Schutzanstriche" %}</li>
-                        </ul>
-                        <div class="service-price">
-                            {% trans "ab" %} €65/m²
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Bürorenovierung -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="300">
-                    <div class="service-icon">
-                        <img src="{% static 'images/icons/office.png' %}" alt="{% trans 'Bürorenovierung' %}">
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-title">{% trans "Bürorenovierung" %}</h3>
-                        <p class="service-description">
-                            {% trans "Moderne Arbeitsplätze schaffen für maximale Produktivität" %}
-                        </p>
-                        <ul class="service-features">
-                            <li>{% trans "Büroplanung" %}</li>
-                            <li>{% trans "Akustiklösungen" %}</li>
-                            <li>{% trans "Beleuchtungssysteme" %}</li>
-                            <li>{% trans "Elektrische Anlagen" %}</li>
-                        </ul>
-                        <div class="service-price">
-                            {% trans "ab" %} €75/m²
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Lagerhausrenovierung -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="400">
-                    <div class="service-icon">
-                        <img src="{% static 'images/icons/warehouse.png' %}" alt="{% trans 'Lagerhausrenovierung' %}">
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-title">{% trans "Lagerhausrenovierung" %}</h3>
-                        <p class="service-description">
-                            {% trans "Optimierung von Lagerflächen für maximale Effizienz" %}
-                        </p>
-                        <ul class="service-features">
-                            <li>{% trans "Bodensanierung" %}</li>
-                            <li>{% trans "Beleuchtungsoptimierung" %}</li>
-                            <li>{% trans "Sicherheitssysteme" %}</li>
-                            <li>{% trans "Klimaanlagen" %}</li>
-                        </ul>
-                        <div class="service-price">
-                            {% trans "ab" %} €35/m²
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Badezimmermodernisierung -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="500">
-                    <div class="service-icon">
-                        <img src="{% static 'images/icons/repair.png' %}" alt="{% trans 'Badezimmermodernisierung' %}">
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-title">{% trans "Badezimmermodernisierung" %}</h3>
-                        <p class="service-description">
-                            {% trans "Komplette Badezimmererneuerung mit modernen Standards" %}
-                        </p>
-                        <ul class="service-features">
-                            <li>{% trans "Sanitärinstallation" %}</li>
-                            <li>{% trans "Fliesenarbeiten" %}</li>
-                            <li>{% trans "Wasserabdichtung" %}</li>
-                            <li>{% trans "Armaturen" %}</li>
-                        </ul>
-                        <div class="service-price">
-                            {% trans "ab" %} €8.500 {% trans "komplett" %}
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Entkernung -->
-                <div class="service-card" data-aos="fade-up" data-aos-delay="600">
-                    <div class="service-icon">
-                        <img src="{% static 'images/icons/insulation.png' %}" alt="{% trans 'Entkernung' %}">
-                    </div>
-                    <div class="service-content">
-                        <h3 class="service-title">{% trans "Entkernung" %}</h3>
-                        <p class="service-description">
-                            {% trans "Professionelle Entkernungsarbeiten für Neugestaltung" %}
-                        </p>
-                        <ul class="service-features">
-                            <li>{% trans "Rückbau" %}</li>
-                            <li>{% trans "Entsorgung" %}</li>
-                            <li>{% trans "Staubschutz" %}</li>
-                            <li>{% trans "Materialrecycling" %}</li>
-                        </ul>
-                        <div class="service-price">
-                            {% trans "ab" %} €25/m²
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="section-cta">
-                <a href="{% url 'services' %}" class="btn btn-outline-primary btn-lg">
-                    {% trans "Alle Leistungen anzeigen" %}
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Warum NovaHaus Section -->
-    <section class="why-us-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">{% trans "Warum NovaHaus?" %}</h2>
-                <p class="section-subtitle">
-                    {% trans "Ihre Vorteile bei der Zusammenarbeit mit uns" %}
-                </p>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-item" data-aos="fade-right">
-                    <div class="feature-icon">
-                        <img src="{% static 'images/icons/quality.png' %}" alt="{% trans 'Qualität' %}">
-                    </div>
-                    <div class="feature-content">
-                        <h3>{% trans "Höchste Qualität" %}</h3>
-                        <p>{% trans "Nur beste Materialien und erfahrene Handwerker" %}</p>
-                    </div>
-                </div>
-
-                <div class="feature-item" data-aos="fade-right" data-aos-delay="100">
-                    <div class="feature-icon">
-                        <img src="{% static 'images/icons/time.png' %}" alt="{% trans 'Pünktlichkeit' %}">
-                    </div>
-                    <div class="feature-content">
-                        <h3>{% trans "Termingerecht" %}</h3>
-                        <p>{% trans "Zuverlässige Einhaltung aller vereinbarten Termine" %}</p>
-                    </div>
-                </div>
-
-                <div class="feature-item" data-aos="fade-right" data-aos-delay="200">
-                    <div class="feature-icon">
-                        <img src="{% static 'images/icons/price.png' %}" alt="{% trans 'Faire Preise' %}">
-                    </div>
-                    <div class="feature-content">
-                        <h3>{% trans "Faire Preise" %}</h3>
-                        <p>{% trans "Transparente Kostenvoranschläge ohne versteckte Kosten" %}</p>
-                    </div>
-                </div>
-
-                <div class="feature-item" data-aos="fade-right" data-aos-delay="300">
-                    <div class="feature-icon">
-                        <img src="{% static 'images/icons/eco.png' %}" alt="{% trans 'Nachhaltigkeit' %}">
-                    </div>
-                    <div class="feature-content">
-                        <h3>{% trans "Nachhaltig" %}</h3>
-                        <p>{% trans "Umweltfreundliche Materialien und energieeffiziente Lösungen" %}</p>
-                    </div>
+        <div class="language-switcher">
+            <div class="language-dropdown">
+                <button class="language-dropdown-btn" onclick="toggleLanguageDropdown()">
+                    {% if LANGUAGE_CODE == 'de' %}
+                        🇩🇪 DE
+                    {% elif LANGUAGE_CODE == 'en' %}
+                        🇬🇧 EN
+                    {% elif LANGUAGE_CODE == 'ru' %}
+                        🇷🇺 RU
+                    {% elif LANGUAGE_CODE == 'tr' %}
+                        🇹🇷 TR
+                    {% endif %}
+                    <i class="fas fa-chevron-down dropdown-arrow"></i>
+                </button>
+                <div class="language-dropdown-menu" id="languageDropdown">
+                    <button class="dropdown-item {% if LANGUAGE_CODE == 'de' %}active{% endif %}" onclick="switchLanguage('de')">
+                        🇩🇪 Deutsch
+                    </button>
+                    <button class="dropdown-item {% if LANGUAGE_CODE == 'en' %}active{% endif %}" onclick="switchLanguage('en')">
+                        🇬🇧 English
+                    </button>
+                    <button class="dropdown-item {% if LANGUAGE_CODE == 'ru' %}active{% endif %}" onclick="switchLanguage('ru')">
+                        🇷🇺 Русский
+                    </button>
+                    <button class="dropdown-item {% if LANGUAGE_CODE == 'tr' %}active{% endif %}" onclick="switchLanguage('tr')">
+                        🇹🇷 Türkçe
+                    </button>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</header>
 
-    <!-- Portfolio Preview -->
-    <section class="portfolio-preview-section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">{% trans "Unsere Projekte" %}</h2>
-                <p class="section-subtitle">
-                    {% trans "Einige unserer erfolgreich abgeschlossenen Renovierungsprojekte" %}
-                </p>
-            </div>
+<style>
+.language-dropdown {
+    position: relative;
+    display: inline-block;
+}
 
-            <div class="portfolio-grid">
-                <div class="portfolio-item" data-aos="zoom-in">
-                    <img src="{% static 'images/portfolio/project1.jpg' %}" alt="{% trans 'Projekt 1' %}">
-                    <div class="portfolio-overlay">
-                        <h4>{% trans "Moderne Wohnungsrenovierung" %}</h4>
-                        <p>{% trans "Hamburg" %} • 85m²</p>
-                    </div>
-                </div>
+.language-dropdown-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #333;
+    min-width: 100px;
+    justify-content: space-between;
+}
 
-                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="100">
-                    <img src="{% static 'images/portfolio/project2.jpg' %}" alt="{% trans 'Projekt 2' %}">
-                    <div class="portfolio-overlay">
-                        <h4>{% trans "Büro-Komplettmodernisierung" %}</h4>
-                        <p>{% trans "Köln" %} • 250m²</p>
-                    </div>
-                </div>
+.language-dropdown-btn:hover {
+    background-color: #f8f9fa;
+    border-color: #007bff;
+}
 
-                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="200">
-                    <img src="{% static 'images/portfolio/project3.jpg' %}" alt="{% trans 'Projekt 3' %}">
-                    <div class="portfolio-overlay">
-                        <h4>{% trans "Fassadensanierung Altbau" %}</h4>
-                        <p>{% trans "Hamburg" %} • 450m²</p>
-                    </div>
-                </div>
-            </div>
+.language-dropdown-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
 
-            <div class="section-cta">
-                <a href="{% url 'portfolio' %}" class="btn btn-outline-primary btn-lg">
-                    {% trans "Alle Projekte ansehen" %}
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-        </div>
-    </section>
+.dropdown-arrow {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2 class="cta-title">{% trans "Bereit für Ihr Projekt?" %}</h2>
-                <p class="cta-subtitle">
-                    {% trans "Lassen Sie uns gemeinsam Ihre Renovierungsträume verwirklichen" %}
-                </p>
-                <div class="cta-buttons">
-                    <a href="{% url 'contact' %}" class="btn btn-primary btn-lg">
-                        <i class="fas fa-phone"></i>
-                        {% trans "Jetzt Termin vereinbaren" %}
-                    </a>
-                    <a href="{% url 'calculator' %}" class="btn btn-outline-white btn-lg">
-                        <i class="fas fa-calculator"></i>
-                        {% trans "Kosten berechnen" %}
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
+.language-dropdown.open .dropdown-arrow {
+    transform: rotate(180deg);
+}
 
-<!-- AOS Animation Library -->
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+.language-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    min-width: 140px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.language-dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    background: transparent;
+    text-align: left;
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border-radius: 0;
+}
+
+.dropdown-item:first-child {
+    border-radius: 6px 6px 0 0;
+}
+
+.dropdown-item:last-child {
+    border-radius: 0 0 6px 6px;
+}
+
+.dropdown-item:hover {
+    background-color: #f8f9fa;
+    color: #007bff;
+}
+
+.dropdown-item.active {
+    background-color: #007bff;
+    color: white;
+}
+
+.dropdown-item.active:hover {
+    background-color: #0056b3;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+    .language-dropdown-btn {
+        min-width: 80px;
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+    
+    .language-dropdown-menu {
+        min-width: 120px;
+    }
+    
+    .dropdown-item {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+}
+</style>
+
 <script>
-    AOS.init({
-        duration: 800,
-        easing: 'ease-in-out',
-        once: true,
-        offset: 100
-    });
-</script>
-{% endblock %}
+function toggleLanguageDropdown() {
+    const dropdown = document.getElementById('languageDropdown');
+    const dropdownContainer = dropdown.parentElement;
+    
+    dropdown.classList.toggle('show');
+    dropdownContainer.classList.toggle('open');
+}
 
-{% block extra_js %}
-<script src="{% static 'js/scripts.js' %}"></script>
-<script src="{% static 'js/slider.js' %}"></script>
-<script src="{% static 'js/animations.js' %}"></script>
-{% endblock %}
+function switchLanguage(targetLang) {
+    console.log('Sprachwechsel zu:', targetLang);
+
+    // Dropdown schließen
+    const dropdown = document.getElementById('languageDropdown');
+    const dropdownContainer = dropdown.parentElement;
+    dropdown.classList.remove('show');
+    dropdownContainer.classList.remove('open');
+
+    // Cookie setzen
+    document.cookie = `django_language=${targetLang}; path=/; max-age=${60*60*24*30}`;
+
+    let currentPath = window.location.pathname;
+    let newPath;
+
+    // Entferne alle Sprachpräfixe
+    if (currentPath.startsWith('/de/') || currentPath.startsWith('/en/') ||
+        currentPath.startsWith('/ru/') || currentPath.startsWith('/tr/')) {
+        currentPath = currentPath.substring(3);
+    }
+
+    // Für Deutsch (Standardsprache) - kein Präfix
+    if (targetLang === 'de') {
+        newPath = currentPath || '/';
+    } else {
+        // Für andere Sprachen - Präfix hinzufügen
+        newPath = '/' + targetLang + currentPath;
+    }
+
+    // Sicherstellen dass Pfad korrekt ist
+    if (newPath === '//') newPath = '/';
+
+    console.log('Neue URL:', newPath);
+
+    // Zur neuen URL navigieren
+    window.location.href = newPath;
+}
+
+// Dropdown schließen wenn außerhalb geklickt wird
+document.addEventListener('click', function(event) {
+    const dropdown = document.querySelector('.language-dropdown');
+    if (!dropdown.contains(event.target)) {
+        const menu = document.getElementById('languageDropdown');
+        menu.classList.remove('show');
+        dropdown.classList.remove('open');
+    }
+});
+
+// Dropdown schließen mit Escape-Taste
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        const dropdown = document.getElementById('languageDropdown');
+        const dropdownContainer = dropdown.parentElement;
+        dropdown.classList.remove('show');
+        dropdownContainer.classList.remove('open');
+    }
+});
+</script>
